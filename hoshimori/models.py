@@ -357,13 +357,15 @@ class Card(ItemModel):
     skill_name = models.CharField(_('Skill name'), max_length=100)
     japanese_skill_name = models.CharField(string_concat(_('Skill name'), ' (', t['Japanese'], ')'), max_length=100)
     skill_SP = models.PositiveIntegerField(_('Skill SP'), default=0)
-    skill_combo = models.PositiveIntegerField(_('Skill combo'), default=0)
+    skill_combo = models.PositiveIntegerField(_('Skill combo'), default=13)
     skill_hits = models.PositiveIntegerField(_('Skill hits'), default=0)
 
     skill_damage = models.CharField(_('Skill damage'), max_length=300)
     skill_range = models.CharField(_('Skill range'), max_length=300)
     skill_comment = models.CharField(_('Skill comment'), max_length=1000)
 
+    evolved_skill_combo = models.PositiveIntegerField(_('Evolved Skill combo'))
+    evolved_skill_damage = models.CharField(_('Evolved Skill damage'), max_length=300)
     max_damage = models.PositiveIntegerField(_('Max damage'), default=0)
 
     ############## EFFECTS ################
@@ -381,18 +383,11 @@ class Card(ItemModel):
     #####################
 
     # Nakayoshi
+    nakayoshi_title = models.CharField(_('Passive Skill'), max_length=100)
+    japanese_nakayoshi_title = models.CharField(string_concat(_('Passive Skill'), ' (', t['Japanese'], ')'),
+                                                max_length=100)
     nakayoshi_skills = models.ManyToManyField('Nakayoshi', related_name='card_with_nakayoshi')
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
+    evolved_nakayoshi_skills = models.ManyToManyField('Nakayoshi', related_name='card_with_nakayoshi_evolved')
 
 
 ############################################################
@@ -432,8 +427,12 @@ class WeaponUpgrade(ItemModel):
 
     level = models.PositiveIntegerField(_('Upgrade Level'), choices=UPGRADE_LEVEL_CHOICES, default=0)
 
+    @property
+    def upgrade_level(self):
+        return UPGRADE_LEVEL_CHOICES[self.level]
+
     def __unicode__(self):
-        return self.origin.name + self.level.__str__()
+        return self.origin.name + self.upgrade_level
 
     i_rarity = models.PositiveIntegerField(_('Rarity'), choices=RARITY_CHOICES, default=0)
 
@@ -506,6 +505,8 @@ class Nakayoshi(ItemModel):
     effect_level = models.PositiveIntegerField(_('Effect level'), null=True, blank=True,
                                                choices=ENGLISH_SKILL_SIZE_CHOICES, default=None)
 
+    bonus_value = models.PositiveIntegerField(_('Effect Value'), null=True)
+
     @property
     def nakayoshi_skill(self):
         if self.i_name is not None:
@@ -520,21 +521,13 @@ class Nakayoshi(ItemModel):
         else:
             return None
 
-    @property
-    def auto_bonus_value(self):
-        if self.effect_level is not None:
-            return SKILL_SIZE_VALUE_DICT[self.english_nakayoshi_skill][self.effect_level]
-        else:
-            return None
-
-    bonus_value = models.PositiveIntegerField(_('Effect Value'), null=True, default=auto_bonus_value)
 
 ############################################################
 # Stages
 class Stage(ItemModel):
     collection_name = 'stage'
 
-    name = models.CharField(_('Stage'), null=True, max_length=50)
+    name = models.CharField(_('Stage'), max_length=50)
     episode = models.PositiveIntegerField(_('Episode'), null=True)
     number = models.PositiveIntegerField(_('Stage number'), null=True)
 
@@ -552,17 +545,11 @@ class Stage(ItemModel):
     #####################
 
     # Irousu
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
+    irousu = models.CharField(_('Irousu'), max_length=200)
+
+    def __unicode__(self):
+        return '%d - %d' % (self.episode, self.number)
+
 
 ############################################################
 # Stages
@@ -571,7 +558,7 @@ class StageDifficulty(ItemModel):
     collection_plural_name = 'stage_dificulties'
 
     stage = models.ForeignKey(Stage, verbose_name=_('Stage'), related_name='difficulties', null=True,
-                               on_delete=models.SET_NULL)
+                              on_delete=models.SET_NULL)
     difficulty = models.PositiveIntegerField(_('Difficulty'), null=True, choices=DIFFICULTY_CHOICES)
     level = models.PositiveIntegerField(_('Level'), null=True)
 
@@ -581,8 +568,17 @@ class StageDifficulty(ItemModel):
 
     objectives = models.CharField(_('Objectives'), max_length=200)
 
+    def english_difficulty(self):
+        return DIFFICULTY_DICT[self.difficulty]
+
+    def __unicode__(self):
+        return '%s %s' % (self.stage.__unicode__(), self.english_difficulty)
+
+
 ############################################################
 # Materials
+class Material(ItemModel):
+    collection_name = 'material'
 
 
 ############################################################
@@ -590,8 +586,6 @@ class StageDifficulty(ItemModel):
 
 class Irousu(ItemModel):
     collection_name = 'irousu'
-
-
 
 ############################################################
 # Events

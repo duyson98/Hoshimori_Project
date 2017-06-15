@@ -2,7 +2,7 @@
 {% with student=item %}
 <br>
 <div class="well">
-  <a href="{{ student.name }}">
+  <a href="{{ student.owner.item_url }}">
     <div class="row">
       <div class="col-md-8"><h3>{{ student.name }}</h3></div>
     </div>

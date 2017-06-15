@@ -1,0 +1,11 @@
+{% load web_tags %}
+{% with card=item %}
+<br>
+<div class="well">
+  <a href="{{ card.owner.item_url }}">
+    <div class="row">
+      <div class="col-md-8"><h3>{{ card.name }}</h3></div>
+    </div>
+  </a>
+</div>
+{% endwith %}

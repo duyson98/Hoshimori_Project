@@ -74,7 +74,7 @@ OS = ['iOs', 'Android']
 OS_CHOICES = list(enumerate(OS))
 OS_DICT = dict(OS_CHOICES)
 
-PLAYERTYPE = ['Free-to-play', 'Pay-to-win']
+PLAYERTYPE = ['Free-to-play', 'Pay-to-win', 'FTP PTW Hybrid']
 PLAYERTYPE_CHOICES = list(enumerate(PLAYERTYPE))
 PLAYERTYPE_DICT = dict(PLAYERTYPE_CHOICES)
 
@@ -100,12 +100,14 @@ RARITY_N = 0
 RARITY_R = 1
 RARITY_SR = 2
 RARITY_SSR = 3
+RARITY_UR = 4
 
 RARITY_CHOICES = [
     (RARITY_N, u'★'),
     (RARITY_R, u'★★'),
     (RARITY_SR, u'★★★'),
     (RARITY_SSR, u'★★★★'),
+    (RARITY_UR, u'★★★★★'),
 ]
 RARITY_DICT = dict(RARITY_CHOICES)
 
