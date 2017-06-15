@@ -1,0 +1,11 @@
+{% load web_tags %}
+{% with student=item %}
+<br>
+<div class="well">
+  <a href="{{ student.name }}">
+    <div class="row">
+      <div class="col-md-8"><h3>{{ student.name }}</h3></div>
+    </div>
+  </a>
+</div>
+{% endwith %}
