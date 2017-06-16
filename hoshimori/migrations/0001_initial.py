@@ -52,7 +52,7 @@ class Migration(migrations.Migration):
             name='ActionSkillEffect',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('i_name', models.PositiveIntegerField(null=True, verbose_name='Action Skill Effect')),
+                ('i_name', models.CharField(max_length=100, verbose_name='Action Skill Effect')),
                 ('bonus_value', models.PositiveIntegerField(null=True, verbose_name='Effect Value')),
                 ('duration', models.PositiveIntegerField(null=True, verbose_name='Effect Duration')),
                 ('skill_affinity', models.PositiveIntegerField(default=1, null=True, verbose_name='Skill Affinity', choices=[(0, b''), (1, b'Ignore weapon affinity'), (2, b'Ignore conflicting weapon affinity')])),

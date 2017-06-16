@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e58f66a0-ce74-422f-b1f4-efc673b4cf32" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hoshimori/migrations/0002_auto_20170616_0111.py" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/admin.py" afterPath="$PROJECT_DIR$/hoshimori/admin.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/migrations/0001_initial.py" afterPath="$PROJECT_DIR$/hoshimori/migrations/0001_initial.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/model_choices.py" afterPath="$PROJECT_DIR$/hoshimori/model_choices.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/models.py" afterPath="$PROJECT_DIR$/hoshimori/models.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -94,8 +91,8 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/hoshimori/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="372">
-              <caret line="482" column="16" lean-forward="true" selection-start-line="482" selection-start-column="16" selection-end-line="482" selection-end-column="16" />
+            <state relative-caret-position="166">
+              <caret line="420" column="70" lean-forward="false" selection-start-line="420" selection-start-column="70" selection-end-line="420" selection-end-column="70" />
               <folding>
                 <element signature="e#24#55#0" expanded="true" />
               </folding>
@@ -127,8 +124,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>material</find>
-      <find>english</find>
       <find>unicode</find>
       <find>unico</find>
       <find>`</find>
@@ -157,6 +152,8 @@
       <find>foreign</find>
       <find>manytomant</find>
       <find>manytoman</find>
+      <find>rhythm</find>
+      <find>durati</find>
     </findStrings>
     <replaceStrings>
       <replace>hoshimori</replace>
@@ -584,7 +581,14 @@
       <option name="project" value="LOCAL" />
       <updated>1497547204424</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Models done">
+      <created>1497607344707</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1497607344707</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TodoView">
@@ -599,11 +603,11 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1932" height="1092" extended-state="0" />
     <layout>
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295099" sideWeight="0.49786323" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="manage.py@hoshimori_project" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32846716" sideWeight="0.46581197" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32846716" sideWeight="0.5106838" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32846716" sideWeight="0.48931623" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32846716" sideWeight="0.4871795" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295099" sideWeight="0.4957265" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="manage.py@hoshimori_project" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32846716" sideWeight="0.44871795" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32846716" sideWeight="0.5192308" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32846716" sideWeight="0.48076922" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32846716" sideWeight="0.48076922" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32846716" sideWeight="0.49786323" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2633547" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -630,7 +634,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial commit, MagiCircles2 setup, some models done, some WIP, some not yet implemented" />
     <MESSAGE value="Fix some models, work on some more models, fix some choices, add some dummy item templates" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix some models, work on some more models, fix some choices, add some dummy item templates" />
+    <MESSAGE value="Models done" />
+    <option name="LAST_COMMIT_MESSAGE" value="Models done" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -906,8 +911,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/hoshimori/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="482" column="16" lean-forward="true" selection-start-line="482" selection-start-column="16" selection-end-line="482" selection-end-column="16" />
+        <state relative-caret-position="166">
+          <caret line="420" column="70" lean-forward="false" selection-start-line="420" selection-start-column="70" selection-end-line="420" selection-end-column="70" />
           <folding>
             <element signature="e#24#55#0" expanded="true" />
           </folding>

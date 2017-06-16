@@ -418,8 +418,7 @@ class ActionSkill(ItemModel):
 class ActionSkillEffect(ItemModel):
     collection_name = 'action_skill_effect'
 
-    i_name = models.PositiveIntegerField(_('Action Skill Effect'), choices=WEAPON_EFFECT_CHOICES,
-                                         null=True)
+    i_name = models.CharField(_('Action Skill Effect'), max_length=100)
 
     bonus_value = models.PositiveIntegerField(_('Effect Value'), null=True)
     duration = models.PositiveIntegerField(_('Effect Duration'), null=True)
