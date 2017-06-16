@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.db import models, migrations
 import django.db.models.deletion
+import multiselectfield.db.fields
 from django.conf import settings
 import hoshimori.models
 
@@ -34,10 +35,38 @@ class Migration(migrations.Migration):
             bases=(models.Model,),
         ),
         migrations.CreateModel(
+            name='ActionSkill',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(max_length=100, verbose_name='Action Skill')),
+                ('japanese_name', models.CharField(max_length=100, verbose_name='Action Skill (Japanese)')),
+                ('damage', models.CharField(max_length=200, verbose_name='Skill Damage')),
+                ('combo', models.PositiveIntegerField(default=13, verbose_name='Skill Combo')),
+            ],
+            options={
+                'abstract': False,
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='ActionSkillEffect',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('i_name', models.PositiveIntegerField(null=True, verbose_name='Action Skill Effect')),
+                ('bonus_value', models.PositiveIntegerField(null=True, verbose_name='Effect Value')),
+                ('duration', models.PositiveIntegerField(null=True, verbose_name='Effect Duration')),
+                ('skill_affinity', models.PositiveIntegerField(default=1, null=True, verbose_name='Skill Affinity', choices=[(0, b''), (1, b'Ignore weapon affinity'), (2, b'Ignore conflicting weapon affinity')])),
+            ],
+            options={
+                'abstract': False,
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
             name='Card',
             fields=[
-                ('id', models.PositiveIntegerField(unique=True, serialize=False, verbose_name='ID', primary_key=True, db_index=True)),
-                ('i_rarity', models.PositiveIntegerField(verbose_name='Rarity', choices=[(0, '\u2605'), (1, '\u2605\u2605'), (2, '\u2605\u2605\u2605'), (3, '\u2605\u2605\u2605\u2605')])),
+                ('id', models.AutoField(primary_key=True, serialize=False, unique=True, verbose_name='ID', db_index=True)),
+                ('i_rarity', models.PositiveIntegerField(verbose_name='Rarity', choices=[(0, '\u2605'), (1, '\u2605\u2605'), (2, '\u2605\u2605\u2605'), (3, '\u2605\u2605\u2605\u2605'), (4, '\u2605\u2605\u2605\u2605\u2605')])),
                 ('i_weapon', models.PositiveIntegerField(verbose_name='Weapon', choices=[(0, 'Sword'), (1, 'Spear'), (2, 'Hammer'), (3, 'Gun'), (4, 'Rod'), (5, 'Gunblade'), (6, 'Twin Barrett')])),
                 ('name', models.CharField(max_length=100, verbose_name='Title')),
                 ('japanese_name', models.CharField(max_length=100, verbose_name='Title (Japanese)')),
@@ -61,13 +90,9 @@ class Migration(migrations.Migration):
                 ('skill_name', models.CharField(max_length=100, verbose_name='Skill name')),
                 ('japanese_skill_name', models.CharField(max_length=100, verbose_name='Skill name (Japanese)')),
                 ('skill_SP', models.PositiveIntegerField(default=0, verbose_name='Skill SP')),
-                ('skill_combo', models.PositiveIntegerField(default=13, verbose_name='Skill combo')),
                 ('skill_hits', models.PositiveIntegerField(default=0, verbose_name='Skill hits')),
-                ('skill_damage', models.CharField(max_length=300, verbose_name='Skill damage')),
                 ('skill_range', models.CharField(max_length=300, verbose_name='Skill range')),
                 ('skill_comment', models.CharField(max_length=1000, verbose_name='Skill comment')),
-                ('evolved_skill_combo', models.PositiveIntegerField(verbose_name='Evolved Skill combo')),
-                ('evolved_skill_damage', models.CharField(max_length=300, verbose_name='Evolved Skill damage')),
                 ('max_damage', models.PositiveIntegerField(default=0, verbose_name='Max damage')),
                 ('nakayoshi_title', models.CharField(max_length=100, verbose_name='Passive Skill')),
                 ('japanese_nakayoshi_title', models.CharField(max_length=100, verbose_name='Passive Skill (Japanese)')),
@@ -78,9 +103,43 @@ class Migration(migrations.Migration):
             bases=(models.Model,),
         ),
         migrations.CreateModel(
+            name='Event',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('image', models.ImageField(upload_to=hoshimori.models.uploadItem(b'e'), verbose_name='Image')),
+                ('name', models.CharField(unique=True, max_length=100, verbose_name='Name')),
+                ('japanese_name', models.CharField(unique=True, max_length=100, verbose_name='Name (Japanese)')),
+                ('start_date', models.DateTimeField(null=True, verbose_name='Beginning')),
+                ('end_date', models.DateTimeField(null=True, verbose_name='End')),
+                ('owner', models.ForeignKey(related_name='added_events', to=settings.AUTH_USER_MODEL)),
+            ],
+            options={
+                'abstract': False,
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
             name='Irousu',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.PositiveIntegerField(unique=True, null=True, verbose_name='Irousu type', choices=[(0, 'Gel'), (1, 'Rouga'), (2, 'Quinn'), (3, 'Eel'), (4, 'Shum'), (5, 'Draco'), (6, 'Doguu'), (7, 'Spirit'), (8, 'Saiki'), (9, 'Machinery'), (10, 'Valiant'), (11, 'Unknown')])),
+                ('weak', multiselectfield.db.fields.MultiSelectField(default=b'', max_length=100, verbose_name='Weak', choices=[(0, 'Sword'), (1, 'Spear'), (2, 'Hammer'), (3, 'Gun'), (4, 'Rod'), (5, 'Gunblade'), (6, 'Twin Barrett')])),
+                ('strong', multiselectfield.db.fields.MultiSelectField(default=b'', max_length=100, verbose_name='Strong', choices=[(0, 'Sword'), (1, 'Spear'), (2, 'Hammer'), (3, 'Gun'), (4, 'Rod'), (5, 'Gunblade'), (6, 'Twin Barrett')])),
+                ('guard', multiselectfield.db.fields.MultiSelectField(default=b'', max_length=100, verbose_name='Guard', choices=[(0, 'Sword'), (1, 'Spear'), (2, 'Hammer'), (3, 'Gun'), (4, 'Rod'), (5, 'Gunblade'), (6, 'Twin Barrett')])),
+            ],
+            options={
+                'abstract': False,
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='IrousuVariation',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(unique=True, max_length=50, verbose_name='Irousu Name')),
+                ('japanese_name', models.CharField(max_length=50, verbose_name='Irousu Name (Japanese)')),
+                ('image', models.ImageField(upload_to=hoshimori.models.uploadItem(b'i'), verbose_name='Image')),
+                ('species', models.ForeignKey(related_name='species', on_delete=django.db.models.deletion.SET_NULL, to='hoshimori.Irousu', null=True)),
             ],
             options={
                 'abstract': False,
@@ -91,6 +150,7 @@ class Migration(migrations.Migration):
             name='Material',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(unique=True, max_length=50, verbose_name='Material name')),
             ],
             options={
                 'abstract': False,
@@ -103,7 +163,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('i_name', models.PositiveIntegerField(null=True, verbose_name='Nakayoshi skill', choices=[(0, 'ATK'), (1, 'HP'), (2, 'SP'), (3, 'Damage'), (4, 'Combo Damage'), (5, 'SP Consumption'), (6, 'Skill Combo'), (7, 'Movement Rate'), (8, 'Dodge'), (9, 'Auto Reload'), (10, 'Bullet'), (11, 'Item Recovery Range'), (12, 'Item Drop Quantity'), (13, 'Coin'), (14, 'Cheerpoint'), (15, 'EXP'), (16, 'Bond Point'), (17, 'Guard Penetration'), (18, 'Received Damage'), (19, 'Null SP Damage'), (20, 'Null Slow'), (21, 'Null Paralysis'), (22, 'Null Skill Seal'), (23, 'Null Poison')])),
                 ('positive_effect', models.BooleanField(default=True, verbose_name='Positive Effect')),
-                ('effect_level', models.PositiveIntegerField(default=None, null=True, verbose_name='Effect level', blank=True, choices=[(0, b'Small'), (1, b'Medium'), (2, b'Large'), (3, b'Super')])),
+                ('effect_level', models.PositiveIntegerField(default=0, null=True, verbose_name='Effect Level', blank=True, choices=[(0, b'Small'), (1, b'Medium'), (2, b'Large'), (3, b'Super')])),
                 ('bonus_value', models.PositiveIntegerField(null=True, verbose_name='Effect Value')),
             ],
             options={
@@ -118,7 +178,8 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=50, verbose_name='Stage')),
                 ('episode', models.PositiveIntegerField(null=True, verbose_name='Episode')),
                 ('number', models.PositiveIntegerField(null=True, verbose_name='Stage number')),
-                ('irousu', models.CharField(max_length=200, verbose_name='Irousu')),
+                ('irousu', models.ManyToManyField(related_name='stage_with_irousu', null=True, to='hoshimori.IrousuVariation')),
+                ('materials', models.ManyToManyField(related_name='stage_with_drops', null=True, to='hoshimori.Material')),
             ],
             options={
                 'abstract': False,
@@ -148,6 +209,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.CharField(unique=True, max_length=100, verbose_name='Name (romaji)')),
                 ('japanese_name', models.CharField(max_length=100, verbose_name='Name (Japanese)')),
+                ('unlock', models.CharField(default=b'', max_length=100, verbose_name='Unlock at')),
                 ('description', models.CharField(max_length=100, verbose_name='Description')),
                 ('i_school_year', models.PositiveIntegerField(null=True, verbose_name='School year', choices=[(0, 'Middle School Year 1'), (1, 'Middle School Year 2'), (2, 'Middle School Year 3'), (3, 'High School Year 1'), (4, 'High School Year 2'), (5, 'High School Year 3')])),
                 ('birthday', models.DateField(null=True, verbose_name='Birthday')),
@@ -178,7 +240,7 @@ class Migration(migrations.Migration):
                 ('secret', models.CharField(max_length=5000, verbose_name='Secret')),
                 ('CV', models.CharField(help_text=b'In Japanese characters.', max_length=100, verbose_name='CV')),
                 ('romaji_CV', models.CharField(help_text=b'In romaji.', max_length=100, verbose_name='CV')),
-                ('image', models.ImageField(upload_to=hoshimori.models.uploadItem(b'i'), verbose_name='Image')),
+                ('image', models.ImageField(upload_to=hoshimori.models.uploadItem(b's'), verbose_name='Image')),
             ],
             options={
                 'abstract': False,
@@ -192,9 +254,21 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=100, verbose_name='Name')),
                 ('japanese_name', models.CharField(max_length=100, verbose_name='Name (Japanese)')),
                 ('image', models.ImageField(upload_to=hoshimori.models.uploadItem(b'w'), verbose_name='Icon')),
-                ('rhythm', models.ImageField(upload_to=hoshimori.models.uploadItem(b'w/rhythm'), verbose_name='Rhythm')),
-                ('i_weapon', models.PositiveIntegerField(verbose_name='Weapon', choices=[(0, 'Sword'), (1, 'Spear'), (2, 'Hammer'), (3, 'Gun'), (4, 'Rod'), (5, 'Gunblade'), (6, 'Twin Barrett')])),
-                ('owner', models.ForeignKey(related_name='added_weapons', to=settings.AUTH_USER_MODEL)),
+                ('i_type', models.PositiveIntegerField(verbose_name='Weapon', choices=[(0, 'Sword'), (1, 'Spear'), (2, 'Hammer'), (3, 'Gun'), (4, 'Rod'), (5, 'Gunblade'), (6, 'Twin Barrett')])),
+            ],
+            options={
+                'abstract': False,
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='WeaponEffect',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('i_name', models.PositiveIntegerField(null=True, verbose_name='Weapon Effect')),
+                ('positive_effect', models.BooleanField(default=True, verbose_name='Positive Effect')),
+                ('effect_level', models.PositiveIntegerField(null=True, verbose_name='Effect Level')),
+                ('bonus_value', models.PositiveIntegerField(null=True, verbose_name='Effect Value')),
             ],
             options={
                 'abstract': False,
@@ -205,12 +279,18 @@ class Migration(migrations.Migration):
             name='WeaponUpgrade',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('level', models.PositiveIntegerField(default=0, verbose_name='Upgrade Level', choices=[(0, b''), (1, 'Alpha'), (2, 'Beta'), (3, 'Gamma')])),
-                ('i_rarity', models.PositiveIntegerField(default=0, verbose_name='Rarity', choices=[(0, '\u2605'), (1, '\u2605\u2605'), (2, '\u2605\u2605\u2605'), (3, '\u2605\u2605\u2605\u2605')])),
+                ('rhythm', models.ImageField(upload_to=hoshimori.models.uploadItem(b'w/rhythm'), verbose_name='Rhythm')),
+                ('i_level', models.PositiveIntegerField(default=0, null=True, verbose_name='Upgrade Level', choices=[(0, b''), (1, 'Alpha'), (2, 'Beta'), (3, 'Gamma')])),
+                ('gamma_type', models.CharField(default=b'', max_length=1, verbose_name='Gamma Type')),
+                ('i_rarity', models.PositiveIntegerField(default=0, verbose_name='Rarity', choices=[(0, '\u2605'), (1, '\u2605\u2605'), (2, '\u2605\u2605\u2605'), (3, '\u2605\u2605\u2605\u2605'), (4, '\u2605\u2605\u2605\u2605\u2605')])),
                 ('atk_min', models.PositiveIntegerField(default=0, verbose_name='Weapon ATK (Minimum)')),
                 ('atk_max', models.PositiveIntegerField(default=0, verbose_name='Weapon ATK (Maximum)')),
                 ('price', models.PositiveIntegerField(default=0, verbose_name='Price')),
+                ('materials', models.ManyToManyField(related_name='weapon_with_materials_needed', null=True, to='hoshimori.Material')),
                 ('origin', models.ForeignKey(related_name='upgrade', on_delete=django.db.models.deletion.SET_NULL, verbose_name='Weapon', to='hoshimori.Weapon', null=True)),
+                ('owner', models.ForeignKey(related_name='added_weapons', to=settings.AUTH_USER_MODEL)),
+                ('subweapon_effects', models.ManyToManyField(related_name='subweapon_with_skills', null=True, to='hoshimori.WeaponEffect')),
+                ('weapon_effects', models.ManyToManyField(related_name='weapon_with_skills', null=True, to='hoshimori.WeaponEffect')),
             ],
             options={
                 'abstract': False,
@@ -219,8 +299,20 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='card',
+            name='action_skill',
+            field=models.ForeignKey(related_name='skill', on_delete=django.db.models.deletion.SET_NULL, verbose_name='Action Skill', to='hoshimori.Weapon', null=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='card',
+            name='evolved_action_skill',
+            field=models.ForeignKey(related_name='evolved skill', on_delete=django.db.models.deletion.SET_NULL, verbose_name='Evolved Action Skill', to='hoshimori.Weapon', null=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='card',
             name='evolved_nakayoshi_skills',
-            field=models.ManyToManyField(related_name='card_with_nakayoshi_evolved', to='hoshimori.Nakayoshi'),
+            field=models.ManyToManyField(default=None, related_name='card_with_nakayoshi_evolved', null=True, to='hoshimori.Nakayoshi'),
             preserve_default=True,
         ),
         migrations.AddField(
@@ -239,6 +331,12 @@ class Migration(migrations.Migration):
             model_name='card',
             name='student',
             field=models.ForeignKey(related_name='cards', on_delete=django.db.models.deletion.SET_NULL, verbose_name='Student', to='hoshimori.Student', null=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='actionskill',
+            name='effects',
+            field=models.ManyToManyField(related_name='skills_with_effect', null=True, to='hoshimori.ActionSkillEffect'),
             preserve_default=True,
         ),
     ]

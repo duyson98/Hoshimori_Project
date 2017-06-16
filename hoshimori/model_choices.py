@@ -190,6 +190,19 @@ ACCUMULATIVE_EXP = [
     200529, 207983
 ]
 
+# Skill Effect
+DOES_NOT_IGNORE_AFFINITY = 0
+IGNORE_AFFINITY = 1
+IGNORE_CONFLICTING_AFFINITY = 2
+
+SKILL_AFFINITY_CHOICES = [
+    (DOES_NOT_IGNORE_AFFINITY, ''),
+    (IGNORE_AFFINITY, 'Ignore weapon affinity'),
+    (IGNORE_CONFLICTING_AFFINITY, 'Ignore conflicting weapon affinity'),
+]
+
+SKILL_AFFINITY_DICT = dict(SKILL_AFFINITY_CHOICES)
+
 ############################################################
 # Weapons
 
@@ -239,6 +252,15 @@ UPGRADE_LEVEL_CHOICES = [
 
 UPGRADE_LEVEL_DICT = dict(UPGRADE_LEVEL_CHOICES)
 
+ENGLISH_UPGRADE_LEVEL_CHOICES = [
+    (NOT_UPGRADED, ''),
+    (ALPHA, u'α'),
+    (BETA, u'β'),
+    (GAMMA, u'γ'),
+]
+
+ENGLISH_UPGRADE_LEVEL_DICT = dict(ENGLISH_UPGRADE_LEVEL_CHOICES)
+
 ############################################################
 # Nakayoshi
 
@@ -267,7 +289,7 @@ SKILL_NULL_PARALYSIS = 21
 SKILL_NULL_SKILL_SEAL = 22
 SKILL_NULL_POISON = 23
 
-ENGLISH_NAKAYOSHI_SKILLS_CHOICES = [
+ENGLISH_NAKAYOSHI_SKILL_CHOICES = [
     (SKILL_ATK, 'ATK'),
     (SKILL_HP, 'HP'),
     (SKILL_SP, 'SP'),
@@ -294,9 +316,9 @@ ENGLISH_NAKAYOSHI_SKILLS_CHOICES = [
     (SKILL_NULL_POISON, 'Null Poison'),
 ]
 
-ENGLISH_NAKAYOSHI_SKILLS_DICT = dict(ENGLISH_NAKAYOSHI_SKILLS_CHOICES)
+ENGLISH_NAKAYOSHI_SKILL_DICT = dict(ENGLISH_NAKAYOSHI_SKILL_CHOICES)
 
-NAKAYOSHI_SKILLS_CHOICES = [
+NAKAYOSHI_SKILL_CHOICES = [
     (SKILL_ATK, _('ATK')),
     (SKILL_HP, _('HP')),
     (SKILL_SP, _('SP')),
@@ -323,7 +345,7 @@ NAKAYOSHI_SKILLS_CHOICES = [
     (SKILL_NULL_POISON, _('Null Poison')),
 ]
 
-NAKAYOSHI_SKILLS_DICT = dict(NAKAYOSHI_SKILLS_CHOICES)
+NAKAYOSHI_SKILL_DICT = dict(NAKAYOSHI_SKILL_CHOICES)
 
 SMALL = 0
 MEDIUM = 1
@@ -359,6 +381,23 @@ SKILL_SIZE_VALUE_DICT = dict(SKILL_SIZE_VALUE)
 ############################################################
 # Stages
 
+# TODO: Add weapon effects
+
+ENGLISH_WEAPON_EFFECT_CHOICES = [
+
+]
+
+ENGLISH_WEAPON_EFFECT_DICT = dict(ENGLISH_WEAPON_EFFECT_CHOICES)
+
+WEAPON_EFFECT_CHOICES = [
+
+]
+
+WEAPON_EFFECT_DICT = dict(WEAPON_EFFECT_CHOICES)
+
+############################################################
+# Stages
+
 EASY = 0
 NORMAL = 1
 HARD = 2
@@ -374,7 +413,7 @@ DIFFICULTY_DICT = dict(DIFFICULTY_CHOICES)
 ############################################################
 # Irousu
 
-IROUSU_TYPES = [
+ENGLISH_IROUSU_TYPES = [
     'Gel',
     'Rouga',
     'Quinn',
@@ -387,6 +426,23 @@ IROUSU_TYPES = [
     'Machinery',
     'Valiant',
     'Unknown',
+]
+ENGLISH_IROUSU_TYPE_CHOICES = list(enumerate(ENGLISH_IROUSU_TYPES))
+ENGLISH_IROUSU_TYPE_DICT = dict(ENGLISH_IROUSU_TYPE_CHOICES)
+
+IROUSU_TYPES = [
+    _('Gel'),
+    _('Rouga'),
+    _('Quinn'),
+    _('Eel'),
+    _('Shum'),
+    _('Draco'),
+    _('Doguu'),
+    _('Spirit'),
+    _('Saiki'),
+    _('Machinery'),
+    _('Valiant'),
+    _('Unknown'),
 ]
 IROUSU_TYPE_CHOICES = list(enumerate(IROUSU_TYPES))
 IROUSU_TYPE_DICT = dict(IROUSU_TYPE_CHOICES)

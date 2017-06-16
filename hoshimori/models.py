@@ -5,8 +5,10 @@ import os
 
 from django.conf import settings as django_settings
 from django.db import models
+from django.utils import timezone
 from django.utils.deconstruct import deconstructible
-from django.utils.translation import ugettext_lazy as _, string_concat
+from django.utils.translation import ugettext_lazy as _, string_concat, get_language
+from multiselectfield import MultiSelectField
 from web.item_model import ItemModel, get_image_url, get_http_image_url
 from web.models import User
 from web.utils import tourldash, randomString
@@ -50,11 +52,15 @@ class Student(ItemModel):
     collection_name = 'student'
 
     name = models.CharField(string_concat(_('Name'), ' (romaji)'), max_length=100, unique=True)
+    japanese_name = models.CharField(string_concat(_('Name'), ' (', t['Japanese'], ')'), max_length=100)
+    unlock = models.CharField(_('Unlock at'), max_length=100, default="")
 
     def __unicode__(self):
-        return self.name
+        if get_language() == 'ja':
+            return self.japanese_name
+        else:
+            return self.name
 
-    japanese_name = models.CharField(string_concat(_('Name'), ' (', t['Japanese'], ')'), max_length=100)
     description = models.CharField(_('Description'), max_length=100)
 
     i_school_year = models.PositiveIntegerField(_('School year'), choices=SCHOOL_YEAR_CHOICES, null=True)
@@ -122,7 +128,7 @@ class Student(ItemModel):
     romaji_CV = models.CharField(_('CV'), help_text='In romaji.', max_length=100)
 
     # Images
-    image = models.ImageField(_('Image'), upload_to=uploadItem('i'))
+    image = models.ImageField(_('Image'), upload_to=uploadItem('s'))
 
 
 ############################################################
@@ -183,7 +189,7 @@ class Account(ItemModel):
 class Card(ItemModel):
     collection_name = 'card'
 
-    id = models.PositiveIntegerField(_('ID'), unique=True, primary_key=True, db_index=True)
+    id = models.AutoField(_('ID'), unique=True, primary_key=True, db_index=True)
     owner = models.ForeignKey(User, related_name='added_cards')
     student = models.ForeignKey(Student, verbose_name=_('Student'), related_name='cards', null=True,
                                 on_delete=models.SET_NULL)
@@ -205,14 +211,24 @@ class Card(ItemModel):
         return ENGLISH_WEAPON_DICT[self.i_weapon]
 
     name = models.CharField(_('Title'), max_length=100)
+    japanese_name = models.CharField(string_concat(_('Title'), ' (', t['Japanese'], ')'), max_length=100)
 
     def __unicode__(self):
-        return self.name
-
-    japanese_name = models.CharField(string_concat(_('Title'), ' (', t['Japanese'], ')'), max_length=100)
+        if get_language() == 'ja':
+            return self.japanese_name
+        else:
+            return self.name
 
     # Images
     image = models.ImageField(_('Image'), upload_to=uploadItem('c'))
+
+    @property
+    def image_url(self):
+        return get_image_url(self.image)
+
+    @property
+    def http_image_url(self):
+        return get_http_image_url(self.image)
 
     art = models.ImageField(_('Art'), upload_to=uploadItem('c/art'))
 
@@ -357,37 +373,58 @@ class Card(ItemModel):
     skill_name = models.CharField(_('Skill name'), max_length=100)
     japanese_skill_name = models.CharField(string_concat(_('Skill name'), ' (', t['Japanese'], ')'), max_length=100)
     skill_SP = models.PositiveIntegerField(_('Skill SP'), default=0)
-    skill_combo = models.PositiveIntegerField(_('Skill combo'), default=13)
     skill_hits = models.PositiveIntegerField(_('Skill hits'), default=0)
-
-    skill_damage = models.CharField(_('Skill damage'), max_length=300)
     skill_range = models.CharField(_('Skill range'), max_length=300)
     skill_comment = models.CharField(_('Skill comment'), max_length=1000)
 
-    evolved_skill_combo = models.PositiveIntegerField(_('Evolved Skill combo'))
-    evolved_skill_damage = models.CharField(_('Evolved Skill damage'), max_length=300)
     max_damage = models.PositiveIntegerField(_('Max damage'), default=0)
 
-    ############## EFFECTS ################
-
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
+    action_skill = models.ForeignKey('Weapon', verbose_name=_('Action Skill'), related_name='skill', null=True,
+                                     on_delete=models.SET_NULL)
+    evolved_action_skill = models.ForeignKey('Weapon', verbose_name=_('Evolved Action Skill'),
+                                             related_name='evolved skill', null=True, on_delete=models.SET_NULL)
 
     # Nakayoshi
     nakayoshi_title = models.CharField(_('Passive Skill'), max_length=100)
     japanese_nakayoshi_title = models.CharField(string_concat(_('Passive Skill'), ' (', t['Japanese'], ')'),
                                                 max_length=100)
     nakayoshi_skills = models.ManyToManyField('Nakayoshi', related_name='card_with_nakayoshi')
-    evolved_nakayoshi_skills = models.ManyToManyField('Nakayoshi', related_name='card_with_nakayoshi_evolved')
+    evolved_nakayoshi_skills = models.ManyToManyField('Nakayoshi', related_name='card_with_nakayoshi_evolved',
+                                                      null=True, default=None)
+
+
+############################################################
+# Action Skill
+class ActionSkill(ItemModel):
+    collection_name = 'action_skill'
+
+    name = models.CharField(_('Action Skill'), max_length=100)
+    japanese_name = models.CharField(string_concat(_('Action Skill'), ' (', t['Japanese'], ')'), max_length=100)
+
+    def __unicode__(self):
+        if get_language() == 'ja':
+            return self.japanese_name
+        else:
+            return self.name
+
+    damage = models.CharField(_('Skill Damage'), max_length=200)
+    combo = models.PositiveIntegerField(_('Skill Combo'), default=13)
+    effects = models.ManyToManyField('ActionSkillEffect', related_name='skills_with_effect',null=True)
+
+
+############################################################
+# Action Skill Effect
+
+class ActionSkillEffect(ItemModel):
+    collection_name = 'action_skill_effect'
+
+    i_name = models.PositiveIntegerField(_('Action Skill Effect'), choices=WEAPON_EFFECT_CHOICES,
+                                         null=True)
+
+    bonus_value = models.PositiveIntegerField(_('Effect Value'), null=True)
+    duration = models.PositiveIntegerField(_('Effect Duration'), null=True)
+    skill_affinity = models.PositiveIntegerField(_('Skill Affinity'), null=True, choices=SKILL_AFFINITY_CHOICES,
+                                                 default=IGNORE_AFFINITY)
 
 
 ############################################################
@@ -396,24 +433,25 @@ class Card(ItemModel):
 class Weapon(ItemModel):
     collection_name = 'weapon'
 
-    owner = models.ForeignKey(User, related_name='added_weapons')
     name = models.CharField(_('Name'), max_length=100)
+    japanese_name = models.CharField(string_concat(_('Name'), ' (', t['Japanese'], ')'), max_length=100)
 
     def __unicode__(self):
-        return self.name
+        if get_language() == 'ja':
+            return self.japanese_name
+        else:
+            return self.name
 
-    japanese_name = models.CharField(string_concat(_('Name'), ' (', t['Japanese'], ')'), max_length=100)
     image = models.ImageField(_('Icon'), upload_to=uploadItem('w'))
-    rhythm = models.ImageField(_('Rhythm'), upload_to=uploadItem('w/rhythm'))
-    i_weapon = models.PositiveIntegerField(_('Weapon'), choices=WEAPON_CHOICES)
+    i_type = models.PositiveIntegerField(_('Weapon'), choices=WEAPON_CHOICES)
 
     @property
-    def weapon(self):
-        return WEAPON_DICT[self.i_weapon]
+    def type(self):
+        return WEAPON_DICT[self.i_type]
 
     @property
-    def english_weapon(self):
-        return ENGLISH_WEAPON_DICT[self.i_weapon]
+    def english_type(self):
+        return ENGLISH_WEAPON_DICT[self.i_type]
 
 
 ############################################################
@@ -422,17 +460,27 @@ class Weapon(ItemModel):
 class WeaponUpgrade(ItemModel):
     collection_name = 'weapon_upgrade'
 
+    owner = models.ForeignKey(User, related_name='added_weapons')
     origin = models.ForeignKey(Weapon, verbose_name=_('Weapon'), related_name='upgrade', null=True,
                                on_delete=models.SET_NULL)
 
-    level = models.PositiveIntegerField(_('Upgrade Level'), choices=UPGRADE_LEVEL_CHOICES, default=0)
+    rhythm = models.ImageField(_('Rhythm'), upload_to=uploadItem('w/rhythm'))
+    i_level = models.PositiveIntegerField(_('Upgrade Level'), choices=UPGRADE_LEVEL_CHOICES, null=True, default=0)
+    gamma_type = models.CharField(_('Gamma Type'), max_length=1, default='')
 
     @property
     def upgrade_level(self):
-        return UPGRADE_LEVEL_CHOICES[self.level]
+        return UPGRADE_LEVEL_DICT[self.i_level]
+
+    @property
+    def english_upgrade_level(self):
+        return ENGLISH_UPGRADE_LEVEL_DICT[self.i_level]
 
     def __unicode__(self):
-        return self.origin.name + self.upgrade_level
+        if get_language() == 'ja':
+            return u'{} {} {}'.format(str(self.origin.japanese_name), self.english_upgrade_level, self.gamma_type)
+        else:
+            return u'{} {} {}'.format(str(self.origin.name), self.english_upgrade_level, self.gamma_type)
 
     i_rarity = models.PositiveIntegerField(_('Rarity'), choices=RARITY_CHOICES, default=0)
 
@@ -452,43 +500,48 @@ class WeaponUpgrade(ItemModel):
     price = models.PositiveIntegerField(_('Price'), default=0)
 
     # Materials
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
+    materials = models.ManyToManyField('Material', related_name='weapon_with_materials_needed', null=True)
 
     # Skills
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
+    weapon_effects = models.ManyToManyField('WeaponEffect', related_name='weapon_with_skills', null=True)
 
     # Subskill
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
+    subweapon_effects = models.ManyToManyField('WeaponEffect', related_name='subweapon_with_skills', null=True)
+
+
+############################################################
+# Weapon skills and subweapon skills
+
+class WeaponEffect(ItemModel):
+    collection_name = 'weapon_effect'
+
+    i_name = models.PositiveIntegerField(_('Weapon Effect'), choices=WEAPON_EFFECT_CHOICES,
+                                         null=True)
+
+    # Get bonus value
+    positive_effect = models.BooleanField(_('Positive Effect'), default=True)
+    effect_level = models.PositiveIntegerField(_('Effect Level'), null=True)
+    bonus_value = models.PositiveIntegerField(_('Effect Value'), null=True)
+
+    @property
+    def weapon_effect(self):
+        if self.i_name is not None:
+            return WEAPON_EFFECT_DICT[self.i_name]
+        else:
+            return None
+
+    @property
+    def english_weapon_effect(self):
+        if self.i_name is not None:
+            return ENGLISH_WEAPON_EFFECT_DICT[self.i_name]
+        else:
+            return None
+
+    def __unicode__(self):
+        if self.positive_effect:
+            return '{} +{}'.format(self.english_weapon_effect, self.bonus_value)
+        else:
+            return '{} -{}'.format(self.english_weapon_effect, self.bonus_value)
 
 
 ############################################################
@@ -497,33 +550,40 @@ class WeaponUpgrade(ItemModel):
 class Nakayoshi(ItemModel):
     collection_name = 'nakayoshi'
 
-    i_name = models.PositiveIntegerField(_('Nakayoshi skill'), choices=NAKAYOSHI_SKILLS_CHOICES,
+    i_name = models.PositiveIntegerField(_('Nakayoshi skill'), choices=NAKAYOSHI_SKILL_CHOICES,
                                          null=True)
 
     # Get bonus value
     positive_effect = models.BooleanField(_('Positive Effect'), default=True)
-    effect_level = models.PositiveIntegerField(_('Effect level'), null=True, blank=True,
-                                               choices=ENGLISH_SKILL_SIZE_CHOICES, default=None)
+    effect_level = models.PositiveIntegerField(_('Effect Level'), null=True, blank=True,
+                                               choices=ENGLISH_SKILL_SIZE_CHOICES, default=0)
 
     bonus_value = models.PositiveIntegerField(_('Effect Value'), null=True)
 
     @property
     def nakayoshi_skill(self):
         if self.i_name is not None:
-            return NAKAYOSHI_SKILLS_DICT[self.i_name]
+            return NAKAYOSHI_SKILL_DICT[self.i_name]
         else:
             return None
 
     @property
     def english_nakayoshi_skill(self):
         if self.i_name is not None:
-            return ENGLISH_NAKAYOSHI_SKILLS_DICT[self.i_name]
+            return ENGLISH_NAKAYOSHI_SKILL_DICT[self.i_name]
         else:
             return None
+
+    def __unicode__(self):
+        if self.positive_effect:
+            return '{} +{}'.format(self.english_nakayoshi_skill, self.bonus_value)
+        else:
+            return '{} -{}'.format(self.english_nakayoshi_skill, self.bonus_value)
 
 
 ############################################################
 # Stages
+
 class Stage(ItemModel):
     collection_name = 'stage'
 
@@ -532,27 +592,18 @@ class Stage(ItemModel):
     number = models.PositiveIntegerField(_('Stage number'), null=True)
 
     # Materials
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
-    #####################
+    materials = models.ManyToManyField('Material', related_name='stage_with_drops', null=True)
 
     # Irousu
-    irousu = models.CharField(_('Irousu'), max_length=200)
+    irousu = models.ManyToManyField('IrousuVariation', related_name='stage_with_irousu', null=True)
 
     def __unicode__(self):
-        return '%d - %d' % (self.episode, self.number)
+        return '{} - {}'.format(self.episode, self.number)
 
 
 ############################################################
 # Stages
+
 class StageDifficulty(ItemModel):
     collection_name = 'stage_dificulty'
     collection_plural_name = 'stage_dificulties'
@@ -568,17 +619,16 @@ class StageDifficulty(ItemModel):
 
     objectives = models.CharField(_('Objectives'), max_length=200)
 
-    def english_difficulty(self):
-        return DIFFICULTY_DICT[self.difficulty]
-
     def __unicode__(self):
-        return '%s %s' % (self.stage.__unicode__(), self.english_difficulty)
+        return '{} - {} {}'.format(self.stage.episode, self.stage.number, DIFFICULTY_DICT[self.difficulty])
 
 
 ############################################################
 # Materials
 class Material(ItemModel):
     collection_name = 'material'
+
+    name = models.CharField(_('Material name'), unique=True, max_length=50)
 
 
 ############################################################
@@ -587,5 +637,58 @@ class Material(ItemModel):
 class Irousu(ItemModel):
     collection_name = 'irousu'
 
+    name = models.PositiveIntegerField(_('Irousu type'), choices=IROUSU_TYPE_CHOICES, null=True, unique=True)
+
+    weak = MultiSelectField(_('Weak'), choices=WEAPON_CHOICES, max_length=100, default="")
+    strong = MultiSelectField(_('Strong'), choices=WEAPON_CHOICES, max_length=100, default="")
+    guard = MultiSelectField(_('Guard'), choices=WEAPON_CHOICES, max_length=100, default="")
+
+    def __unicode__(self):
+        return IROUSU_TYPE_DICT[self.name]
+
+
 ############################################################
+# Irousu variations
+
+class IrousuVariation(ItemModel):
+    collection_name = 'irousu_variation'
+
+    name = models.CharField(_('Irousu Name'), unique=True, max_length=50)
+    japanese_name = models.CharField(string_concat(_('Irousu Name'), ' (', t['Japanese'], ')'), max_length=50)
+
+    species = models.ForeignKey(Irousu, related_name='species', null=True, on_delete=models.SET_NULL)
+    image = models.ImageField(_('Image'), upload_to=uploadItem('i'))
+
+    def __unicode__(self):
+        return '{} - {}'.format(IROUSU_TYPE_DICT[self.species.name], self.name)
+
+
+############################################################
+
 # Events
+class Event(ItemModel):
+    collection_name = 'event'
+
+    owner = models.ForeignKey(User, related_name='added_events')
+    image = models.ImageField(_('Image'), upload_to=uploadItem('e'))
+    name = models.CharField(_('Name'), max_length=100, unique=True)
+    japanese_name = models.CharField(string_concat(_('Name'), ' (', t['Japanese'], ')'), max_length=100, unique=True)
+    start_date = models.DateTimeField(_('Beginning'), null=True)
+    end_date = models.DateTimeField(_('End'), null=True)
+
+    @property
+    def status(self):
+        if not self.end_date or not self.start_date:
+            return None
+        now = timezone.now()
+        if now > self.end_date:
+            return 'ended'
+        elif now > self.start_date:
+            return 'current'
+        return 'future'
+
+    def __unicode__(self):
+        if get_language() == 'ja':
+            return self.japanese_name
+        else:
+            return self.name
