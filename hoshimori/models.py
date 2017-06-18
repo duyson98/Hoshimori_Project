@@ -53,7 +53,7 @@ class Student(ItemModel):
 
     name = models.CharField(string_concat(_('Name'), ' (romaji)'), max_length=100, unique=True)
     japanese_name = models.CharField(string_concat(_('Name'), ' (', t['Japanese'], ')'), max_length=100)
-    unlock = models.CharField(_('Unlock at'), max_length=100, default="")
+    unlock = models.CharField(_('Unlock at'), max_length=100)
 
     def __unicode__(self):
         if get_language() == 'ja':
@@ -180,7 +180,7 @@ class Account(ItemModel):
         return self.owner.http_item_url
 
     def __unicode__(self):
-        return u'#{} Level {}'.format(self.id, self.level)
+        return u'#{} {} Level {}'.format(self.id, self.owner.get_username(), self.level)
 
 
 ############################################################
@@ -425,6 +425,8 @@ class ActionSkillEffect(ItemModel):
     skill_affinity = models.PositiveIntegerField(_('Skill Affinity'), null=True, choices=SKILL_AFFINITY_CHOICES,
                                                  default=IGNORE_AFFINITY)
 
+    def __unicode__(self):
+        return '{} {}'.format(self.i_name, self.bonus_value)
 
 ############################################################
 # Weapons
@@ -629,6 +631,9 @@ class Material(ItemModel):
 
     name = models.CharField(_('Material name'), unique=True, max_length=50)
 
+    def __unicode__(self):
+        return self.name
+
 
 ############################################################
 # Irousu
@@ -643,7 +648,7 @@ class Irousu(ItemModel):
     guard = MultiSelectField(_('Guard'), choices=WEAPON_CHOICES, max_length=100, default="")
 
     def __unicode__(self):
-        return IROUSU_TYPE_DICT[self.name]
+        return ENGLISH_IROUSU_TYPE_DICT[self.name]
 
 
 ############################################################
@@ -659,7 +664,7 @@ class IrousuVariation(ItemModel):
     image = models.ImageField(_('Image'), upload_to=uploadItem('i'))
 
     def __unicode__(self):
-        return '{} - {}'.format(IROUSU_TYPE_DICT[self.species.name], self.name)
+        return '{} - {}'.format(ENGLISH_IROUSU_TYPE_DICT[self.species.name], self.name)
 
 
 ############################################################

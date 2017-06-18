@@ -1,0 +1,12 @@
+{% load web_tags %}
+{% with material=item %}
+<br>
+<div class="well">
+  <a href="{{ material.item_url }}">
+    <div class="row">
+      <div class="col-md-8"><h3>{{ material.name }}</h3>
+      </div>
+    </div>
+  </a>
+</div>
+{% endwith %}
