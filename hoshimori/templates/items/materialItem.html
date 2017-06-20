@@ -2,7 +2,8 @@
 {% with material=item %}
 <br>
 <div class="well">
-  <a href="{{ material.item_url }}">
+  <a href="{{ material.item_url }}" data-ajax-url="{{ material.ajax_item_url }}" data-ajax-title="{{ material }}" class="material">
+    <img src="{{ material.image_url }}" alt="{{ material }}">
     <div class="row">
       <div class="col-md-8"><h3>{{ material.name }}</h3>
       </div>

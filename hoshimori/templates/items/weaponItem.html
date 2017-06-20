@@ -2,9 +2,11 @@
 {% with weapon=item %}
 <br>
 <div class="well">
-  <a href="{{ weapon.item_url }}">
+  <a href="{{ weapon.item_url }}" data-ajax-url="{{ weapon.ajax_item_url }}" data-ajax-title="{{ weapon }}" class="weapon">
+    <img src="{{ weapon.image_url }}" alt="{{ weapon }}">
     <div class="row">
       <div class="col-md-8"><h3>{{ weapon.name }}</h3>
+      {{ weapon.type }}
       </div>
     </div>
   </a>

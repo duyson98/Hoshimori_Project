@@ -2,7 +2,8 @@
 {% with student=item %}
 <br>
 <div class="well">
-  <a href="{{ student.owner.item_url }}">
+  <a href="{{ student.item_url }}" data-ajax-url="{{ student.ajax_item_url }}" data-ajax-title="{{ student }}" class="student">
+    <img src="{{ student.image_url }}" alt="{{ student }}">
     <div class="row">
       <div class="col-md-8"><h3>{{ student.name }}</h3>
       {{ student.japanese_name }}
