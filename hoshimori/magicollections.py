@@ -26,16 +26,27 @@ class StudentCollection(MagiCollection):
             'description': 'id',
             'school_year': 'max-bond',
             'birthday': 'event',
+            'star_sign': 'hp',
             'blood_type': 'hp',
             'extra_activity': 'activities',
-            'food_likes': 'heart',
-            'food_dislikes': 'heart-empty',
+            'catchphrase_1': 'comments',
+            'catchphrase_2': 'comments',
+            'catchphrase_3': 'comments',
             'hobby_1': 'star',
             'hobby_2': 'star',
             'hobby_3': 'star',
+            'food_likes': 'heart',
+            'food_dislikes': 'heart-empty',
+            'family': 'users',
+            'dream': 'idolized',
             'ideal_1': 'heart',
             'ideal_2': 'heart',
             'ideal_3': 'heart',
+            'pastime': 'star',
+            'destress': 'star',
+            'fav_memory': 'event',
+            'fav_phrase': 'comments',
+            'secret': 'perfectlock',
             'CV': 'profile',
             'romaji_CV': 'profile',
         }, **kwargs)
@@ -95,6 +106,7 @@ class WeaponCollection(MagiCollection):
 
     title = _('Weapon')
     plural_title = _('Weapons')
+    icon = 'album'
 
     class ItemView(MagiCollection.ItemView):
         template = 'default'
@@ -121,6 +133,7 @@ class MaterialCollection(MagiCollection):
 
     title = _('Material')
     plural_title = _('Materials')
+    icon = 'album'
 
     class ItemView(MagiCollection.ItemView):
         template = 'default'
