@@ -9,7 +9,7 @@ from django.utils import timezone
 from django.utils.deconstruct import deconstructible
 from django.utils.translation import ugettext_lazy as _, string_concat, get_language
 from multiselectfield import MultiSelectField
-from web.item_model import ItemModel, get_image_url, get_http_image_url
+from web.item_model import ItemModel, get_image_url_from_path, get_http_image_url_from_path
 from web.models import User
 from web.utils import tourldash, randomString
 
@@ -51,9 +51,11 @@ def getAccountLeaderboard(account):
 class Student(ItemModel):
     collection_name = 'student'
 
-    name = models.CharField(string_concat(_('Name'), ' (romaji)'), max_length=100, unique=True)
+    name = models.CharField(_('Name'), max_length=100, unique=True)
     japanese_name = models.CharField(string_concat(_('Name'), ' (', t['Japanese'], ')'), max_length=100)
     unlock = models.CharField(_('Unlock at'), max_length=100)
+
+    owner = models.ForeignKey(User, related_name='added_students')
 
     def __unicode__(self):
         if get_language() == 'ja':
@@ -124,7 +126,8 @@ class Student(ItemModel):
     fav_phrase = models.CharField(_('Favorite phrase'), max_length=100)
     secret = models.CharField(_('Secret'), max_length=5000)
 
-    CV = models.CharField(_('CV'), help_text='In Japanese characters.', max_length=100)
+    CV = models.CharField(string_concat(_('CV'), ' (', t['Japanese'], ')'), help_text='In Japanese characters.',
+                          max_length=100)
     romaji_CV = models.CharField(_('CV'), help_text='In romaji.', max_length=100)
 
     # Images
@@ -224,31 +227,31 @@ class Card(ItemModel):
 
     @property
     def image_url(self):
-        return get_image_url(self.image)
+        return get_image_url_from_path(self.image)
 
     @property
     def http_image_url(self):
-        return get_http_image_url(self.image)
+        return get_http_image_url_from_path(self.image)
 
-    art = models.ImageField(_('Art'), upload_to=uploadItem('c/art'))
+    art = models.ImageField(_('Art'), upload_to=uploadItem('c/art'), null=True)
 
     @property
     def art_url(self):
-        return get_image_url(self.art)
+        return get_image_url_from_path(self.art)
 
     @property
     def http_art_url(self):
-        return get_http_image_url(self.art)
+        return get_http_image_url_from_path(self.art)
 
-    transparent = models.ImageField(_('Transparent'), upload_to=uploadItem('c/transparent'))
+    transparent = models.ImageField(_('Transparent'), upload_to=uploadItem('c/transparent'), null=True)
 
     @property
     def transparent_url(self):
-        return get_image_url(self.transparent)
+        return get_image_url_from_path(self.transparent)
 
     @property
     def http_transparent_url(self):
-        return get_http_image_url(self.transparent)
+        return get_http_image_url_from_path(self.transparent)
 
     # Sub card effect
     subcard_effect = models.BooleanField(_('Subcard Effect'), default=False)
@@ -379,9 +382,9 @@ class Card(ItemModel):
 
     max_damage = models.PositiveIntegerField(_('Max damage'), default=0)
 
-    action_skill = models.ForeignKey('Weapon', verbose_name=_('Action Skill'), related_name='skill', null=True,
+    action_skill = models.ForeignKey('ActionSkill', verbose_name=_('Action Skill'), related_name='skill', null=True,
                                      on_delete=models.SET_NULL)
-    evolved_action_skill = models.ForeignKey('Weapon', verbose_name=_('Evolved Action Skill'),
+    evolved_action_skill = models.ForeignKey('ActionSkill', verbose_name=_('Evolved Action Skill'),
                                              related_name='evolved skill', null=True, on_delete=models.SET_NULL)
 
     # Nakayoshi
@@ -409,7 +412,7 @@ class ActionSkill(ItemModel):
 
     damage = models.CharField(_('Skill Damage'), max_length=200)
     combo = models.PositiveIntegerField(_('Skill Combo'), default=13)
-    effects = models.ManyToManyField('ActionSkillEffect', related_name='skills_with_effect',null=True)
+    effects = models.ManyToManyField('ActionSkillEffect', related_name='skills_with_effect', null=True)
 
 
 ############################################################
@@ -427,6 +430,7 @@ class ActionSkillEffect(ItemModel):
 
     def __unicode__(self):
         return '{} {}'.format(self.i_name, self.bonus_value)
+
 
 ############################################################
 # Weapons
