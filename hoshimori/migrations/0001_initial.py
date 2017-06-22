@@ -2,8 +2,8 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-import django.db.models.deletion
 import multiselectfield.db.fields
+import django.db.models.deletion
 from django.conf import settings
 import hoshimori.models
 
@@ -66,13 +66,13 @@ class Migration(migrations.Migration):
             name='Card',
             fields=[
                 ('id', models.AutoField(primary_key=True, serialize=False, unique=True, verbose_name='ID', db_index=True)),
-                ('i_rarity', models.PositiveIntegerField(verbose_name='Rarity', choices=[(0, '\u2605'), (1, '\u2605\u2605'), (2, '\u2605\u2605\u2605'), (3, '\u2605\u2605\u2605\u2605'), (4, '\u2605\u2605\u2605\u2605\u2605')])),
+                ('i_rarity', models.PositiveIntegerField(verbose_name='Rarity', choices=[(0, '\u2605'), (1, '\u2605\u2605'), (2, '\u2605\u2605\u2605'), (3, '\u2605\u2605\u2605\u2605')])),
                 ('i_weapon', models.PositiveIntegerField(verbose_name='Weapon', choices=[(0, 'Sword'), (1, 'Spear'), (2, 'Hammer'), (3, 'Gun'), (4, 'Rod'), (5, 'Gunblade'), (6, 'Twin Barrett')])),
                 ('name', models.CharField(max_length=100, verbose_name='Title')),
                 ('japanese_name', models.CharField(max_length=100, verbose_name='Title (Japanese)')),
                 ('image', models.ImageField(upload_to=hoshimori.models.uploadItem(b'c'), verbose_name='Image')),
-                ('art', models.ImageField(upload_to=hoshimori.models.uploadItem(b'c/art'), verbose_name='Art')),
-                ('transparent', models.ImageField(upload_to=hoshimori.models.uploadItem(b'c/transparent'), verbose_name='Transparent')),
+                ('art', models.ImageField(upload_to=hoshimori.models.uploadItem(b'c/art'), null=True, verbose_name='Art')),
+                ('transparent', models.ImageField(upload_to=hoshimori.models.uploadItem(b'c/transparent'), null=True, verbose_name='Transparent')),
                 ('subcard_effect', models.BooleanField(default=False, verbose_name='Subcard Effect')),
                 ('card_type', models.PositiveIntegerField(verbose_name='Card Type', choices=[(0, 'Normal'), (1, 'Extra'), (2, 'Subcard')])),
                 ('hp_1', models.PositiveIntegerField(default=0, verbose_name='HP (Level 1)')),
@@ -96,6 +96,8 @@ class Migration(migrations.Migration):
                 ('max_damage', models.PositiveIntegerField(default=0, verbose_name='Max damage')),
                 ('nakayoshi_title', models.CharField(max_length=100, verbose_name='Passive Skill')),
                 ('japanese_nakayoshi_title', models.CharField(max_length=100, verbose_name='Passive Skill (Japanese)')),
+                ('action_skill', models.ForeignKey(related_name='skill', on_delete=django.db.models.deletion.SET_NULL, verbose_name='Action Skill', to='hoshimori.ActionSkill', null=True)),
+                ('evolved_action_skill', models.ForeignKey(related_name='evolved skill', on_delete=django.db.models.deletion.SET_NULL, verbose_name='Evolved Action Skill', to='hoshimori.ActionSkill', null=True)),
             ],
             options={
                 'abstract': False,
@@ -207,14 +209,14 @@ class Migration(migrations.Migration):
             name='Student',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('name', models.CharField(unique=True, max_length=100, verbose_name='Name (romaji)')),
+                ('name', models.CharField(unique=True, max_length=100, verbose_name='Name')),
                 ('japanese_name', models.CharField(max_length=100, verbose_name='Name (Japanese)')),
-                ('unlock', models.CharField(default=b'', max_length=100, verbose_name='Unlock at')),
+                ('unlock', models.CharField(max_length=100, verbose_name='Unlock at')),
                 ('description', models.CharField(max_length=100, verbose_name='Description')),
                 ('i_school_year', models.PositiveIntegerField(null=True, verbose_name='School year', choices=[(0, 'Middle School Year 1'), (1, 'Middle School Year 2'), (2, 'Middle School Year 3'), (3, 'High School Year 1'), (4, 'High School Year 2'), (5, 'High School Year 3')])),
                 ('birthday', models.DateField(null=True, verbose_name='Birthday')),
-                ('i_star_sign', models.PositiveIntegerField(null=True, verbose_name='Star sign', choices=[(0, 'Leo'), (1, 'Aries'), (2, 'Libra'), (3, 'Virgo'), (4, 'Scorpio'), (5, 'Capricorn'), (6, 'Pisces'), (7, 'Gemini'), (8, 'Cancer'), (9, 'Sagittarius'), (10, 'Aquarius'), (11, 'Taurus')])),
-                ('i_blood_type', models.PositiveIntegerField(null=True, verbose_name='Blood type', choices=[(0, b'O'), (1, b'A'), (2, b'B'), (3, b'AB')])),
+                ('i_star_sign', models.PositiveIntegerField(null=True, verbose_name='Star sign', choices=[(0, 'Capricorn'), (1, 'Aquarius'), (2, 'Pisces'), (3, 'Aries'), (4, 'Taurus'), (5, 'Gemini'), (6, 'Cancer'), (7, 'Leo'), (8, 'Virgo'), (9, 'Libra'), (10, 'Scorpio'), (11, 'Sagittarius')])),
+                ('i_blood_type', models.PositiveIntegerField(null=True, verbose_name='Blood type', choices=[(0, b'O'), (1, b'A'), (2, b'B'), (3, b'AB'), (4, b'?')])),
                 ('extra_activity', models.CharField(max_length=100, verbose_name='Extracurricular activity')),
                 ('catchphrase_1', models.CharField(max_length=100, verbose_name='Catchphrase 1')),
                 ('catchphrase_2', models.CharField(max_length=100, verbose_name='Catchphrase 2')),
@@ -238,9 +240,11 @@ class Migration(migrations.Migration):
                 ('fav_memory', models.CharField(max_length=100, verbose_name='Favorite memory')),
                 ('fav_phrase', models.CharField(max_length=100, verbose_name='Favorite phrase')),
                 ('secret', models.CharField(max_length=5000, verbose_name='Secret')),
-                ('CV', models.CharField(help_text=b'In Japanese characters.', max_length=100, verbose_name='CV')),
+                ('CV', models.CharField(help_text=b'In Japanese characters.', max_length=100, verbose_name='CV (Japanese)')),
                 ('romaji_CV', models.CharField(help_text=b'In romaji.', max_length=100, verbose_name='CV')),
                 ('image', models.ImageField(upload_to=hoshimori.models.uploadItem(b's'), verbose_name='Image')),
+                ('full_image', models.ImageField(upload_to=hoshimori.models.uploadItem(b's/full'), verbose_name='Full Body Image')),
+                ('owner', models.ForeignKey(related_name='added_students', to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'abstract': False,
@@ -265,7 +269,7 @@ class Migration(migrations.Migration):
             name='WeaponEffect',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('i_name', models.PositiveIntegerField(null=True, verbose_name='Weapon Effect')),
+                ('i_name', models.PositiveIntegerField(null=True, verbose_name='Weapon Effect', choices=[(0, b'GAY')])),
                 ('positive_effect', models.BooleanField(default=True, verbose_name='Positive Effect')),
                 ('effect_level', models.PositiveIntegerField(null=True, verbose_name='Effect Level')),
                 ('bonus_value', models.PositiveIntegerField(null=True, verbose_name='Effect Value')),
@@ -282,7 +286,7 @@ class Migration(migrations.Migration):
                 ('rhythm', models.ImageField(upload_to=hoshimori.models.uploadItem(b'w/rhythm'), verbose_name='Rhythm')),
                 ('i_level', models.PositiveIntegerField(default=0, null=True, verbose_name='Upgrade Level', choices=[(0, b''), (1, 'Alpha'), (2, 'Beta'), (3, 'Gamma')])),
                 ('gamma_type', models.CharField(default=b'', max_length=1, verbose_name='Gamma Type')),
-                ('i_rarity', models.PositiveIntegerField(default=0, verbose_name='Rarity', choices=[(0, '\u2605'), (1, '\u2605\u2605'), (2, '\u2605\u2605\u2605'), (3, '\u2605\u2605\u2605\u2605'), (4, '\u2605\u2605\u2605\u2605\u2605')])),
+                ('i_rarity', models.PositiveIntegerField(default=0, verbose_name='Rarity', choices=[(0, '\u2605'), (1, '\u2605\u2605'), (2, '\u2605\u2605\u2605'), (3, '\u2605\u2605\u2605\u2605')])),
                 ('atk_min', models.PositiveIntegerField(default=0, verbose_name='Weapon ATK (Minimum)')),
                 ('atk_max', models.PositiveIntegerField(default=0, verbose_name='Weapon ATK (Maximum)')),
                 ('price', models.PositiveIntegerField(default=0, verbose_name='Price')),
@@ -296,18 +300,6 @@ class Migration(migrations.Migration):
                 'abstract': False,
             },
             bases=(models.Model,),
-        ),
-        migrations.AddField(
-            model_name='card',
-            name='action_skill',
-            field=models.ForeignKey(related_name='skill', on_delete=django.db.models.deletion.SET_NULL, verbose_name='Action Skill', to='hoshimori.Weapon', null=True),
-            preserve_default=True,
-        ),
-        migrations.AddField(
-            model_name='card',
-            name='evolved_action_skill',
-            field=models.ForeignKey(related_name='evolved skill', on_delete=django.db.models.deletion.SET_NULL, verbose_name='Evolved Action Skill', to='hoshimori.Weapon', null=True),
-            preserve_default=True,
         ),
         migrations.AddField(
             model_name='card',

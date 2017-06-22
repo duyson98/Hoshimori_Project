@@ -5,35 +5,35 @@ from django.utils.translation import ugettext_lazy as _
 # Members
 
 ENGLISH_STAR_SIGNS = [
-    'Leo',
-    'Aries',
-    'Libra',
-    'Virgo',
-    'Scorpio',
     'Capricorn',
+    'Aquarius',
     'Pisces',
+    'Aries',
+    'Taurus',
     'Gemini',
     'Cancer',
+    'Leo',
+    'Virgo',
+    'Libra',
+    'Scorpio',
     'Sagittarius',
-    'Aquarius',
-    'Taurus',
 ]
 ENGLISH_STAR_SIGN_CHOICES = list(enumerate(ENGLISH_STAR_SIGNS))
 ENGLISH_STAR_SIGN_DICT = dict(ENGLISH_STAR_SIGN_CHOICES)
 STAR_SIGN_REVERSE_DICT = {value: key for (key, value) in list(enumerate(ENGLISH_STAR_SIGNS))}
 STAR_SIGNS = [
-    _('Leo'),
-    _('Aries'),
-    _('Libra'),
-    _('Virgo'),
-    _('Scorpio'),
     _('Capricorn'),
+    _('Aquarius'),
     _('Pisces'),
+    _('Aries'),
+    _('Taurus'),
     _('Gemini'),
     _('Cancer'),
+    _('Leo'),
+    _('Virgo'),
+    _('Libra'),
+    _('Scorpio'),
     _('Sagittarius'),
-    _('Aquarius'),
-    _('Taurus'),
 ]
 STAR_SIGN_CHOICES = list(enumerate(STAR_SIGNS))
 STAR_SIGN_DICT = dict(STAR_SIGN_CHOICES)
@@ -62,7 +62,7 @@ SCHOOL_YEAR_DICT = dict(SCHOOL_YEAR_CHOICES)
 ENGLISH_SCHOOL_YEAR_CHOICES = list(enumerate(ENGLISH_SCHOOL_YEARS))
 ENGLISH_SCHOOL_YEAR_DICT = dict(ENGLISH_SCHOOL_YEAR_CHOICES)
 
-BLOOD_TYPES = ['O', 'A', 'B', 'AB']
+BLOOD_TYPES = ['O', 'A', 'B', 'AB', '?']
 BLOOD_TYPE_CHOICES = list(enumerate(BLOOD_TYPES))
 BLOOD_TYPE_DICT = dict(BLOOD_TYPE_CHOICES)
 BLOOD_TYPE_REVERSE_DICT = {value: key for (key, value) in BLOOD_TYPE_CHOICES}
@@ -100,14 +100,12 @@ RARITY_N = 0
 RARITY_R = 1
 RARITY_SR = 2
 RARITY_SSR = 3
-RARITY_UR = 4
 
 RARITY_CHOICES = [
     (RARITY_N, u'★'),
     (RARITY_R, u'★★'),
     (RARITY_SR, u'★★★'),
     (RARITY_SSR, u'★★★★'),
-    (RARITY_UR, u'★★★★★'),
 ]
 RARITY_DICT = dict(RARITY_CHOICES)
 

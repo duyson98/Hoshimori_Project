@@ -4,6 +4,7 @@ from __future__ import division
 import os
 
 from django.conf import settings as django_settings
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils import timezone
 from django.utils.deconstruct import deconstructible
@@ -133,6 +134,25 @@ class Student(ItemModel):
     # Images
     image = models.ImageField(_('Image'), upload_to=uploadItem('s'))
 
+    @property
+    def image_url(self):
+        return get_image_url_from_path(self.image)
+
+    @property
+    def http_image_url(self):
+        return get_http_image_url_from_path(self.image)
+
+    # Full body images
+    full_image = models.ImageField(_('Full Body Image'), upload_to=uploadItem('s/full'))
+
+    @property
+    def full_image_url(self):
+        return get_image_url_from_path(self.full_image)
+
+    @property
+    def full_http_image_url(self):
+        return get_http_image_url_from_path(self.full_image)
+
 
 ############################################################
 # Account
@@ -183,7 +203,7 @@ class Account(ItemModel):
         return self.owner.http_item_url
 
     def __unicode__(self):
-        return u'#{} {} Level {}'.format(self.id, self.owner.get_username(), self.level)
+        return u'#{} {} - {}'.format(self.id, self.owner.get_username(), self.nickname)
 
 
 ############################################################
@@ -257,7 +277,7 @@ class Card(ItemModel):
     subcard_effect = models.BooleanField(_('Subcard Effect'), default=False)
 
     # Card type
-    card_type = models.PositiveIntegerField(_('Card Type'), choices=CARDTYPE_CHOICES)
+    card_type = models.PositiveIntegerField(_('Card Type'), choices=CARDTYPE_CHOICES, default=0)
 
     @property
     def is_subcard(self):
@@ -561,7 +581,7 @@ class Nakayoshi(ItemModel):
     # Get bonus value
     positive_effect = models.BooleanField(_('Positive Effect'), default=True)
     effect_level = models.PositiveIntegerField(_('Effect Level'), null=True, blank=True,
-                                               choices=ENGLISH_SKILL_SIZE_CHOICES, default=0)
+                                               choices=ENGLISH_SKILL_SIZE_CHOICES)
 
     bonus_value = models.PositiveIntegerField(_('Effect Value'), null=True)
 
@@ -700,3 +720,47 @@ class Event(ItemModel):
             return self.japanese_name
         else:
             return self.name
+
+
+############################################################
+# Owned Card
+
+class OwnedCard(ItemModel):
+    collection_name = 'ownedcard'
+
+    account = models.ForeignKey(Account, related_name='ownedcards', on_delete=models.CASCADE)
+    card = models.ForeignKey(Card, related_name='owned', on_delete=models.CASCADE)
+    evolved = models.BooleanField(_('Evolved'), default=False)
+    level = models.PositiveIntegerField(_('Level'), default=70, validators=[
+        MinValueValidator(1),
+        MaxValueValidator(70),
+    ])
+
+    obtained_date = models.DateField(_('Obtained Date'), null=True, blank=True)
+
+    @property
+    def owner(self):
+        return self.account.owner
+
+    @property
+    def owner_id(self):
+        return self.account.owner.id
+
+    def __unicode__(self):
+        return u'#{} {} {}'.format(self.id, self.card.name, u'({})'.format(_('Evolved')) if self.evolved else '')
+
+
+############################################################
+# Favorite Card
+
+class FavoriteCard(ItemModel):
+    collection_name = 'favoritecard'
+
+    owner = models.ForeignKey(User, related_name='favoritecards')
+    card = models.ForeignKey(Card, related_name='fans', on_delete=models.CASCADE)
+
+    def __unicode__(self):
+        return u'#{}'.format(self.card.id)
+
+    class Meta:
+        unique_together = (('owner', 'card'),)

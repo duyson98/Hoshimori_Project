@@ -1,6 +1,7 @@
 from django.conf import settings as django_settings
+from web.default_settings import DEFAULT_NAVBAR_ORDERING
+
 from hoshimori import models
-from web.default_settings import DEFAULT_ENABLED_PAGES, DEFAULT_NAVBAR_ORDERING
 
 SITE_NAME = 'Sample Website'
 SITE_URL = 'http://sample.com/'

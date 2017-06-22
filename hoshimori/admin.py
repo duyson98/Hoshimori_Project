@@ -27,6 +27,8 @@ class IrousuAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Account)
+admin.site.register(OwnedCard)
+admin.site.register(FavoriteCard)
 admin.site.register(Student)
 admin.site.register(Card)
 admin.site.register(ActionSkillEffect)
