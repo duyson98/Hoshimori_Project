@@ -1,0 +1,34 @@
+{% load web_tags %}
+{% with irousuvariation=item %}
+    <br>
+    <div class="well">
+        <img src="{{ irousuvariation.image_url }}" alt="{{ irousuvariation }}">
+        <div>
+            <div><h3>Irousu name: {{ irousuvariation.name }}</h3>
+                Japanese name: {{ irousuvariation.japanese_name }}
+            </div>
+            <div>
+                {% if irousuvariation.species.name != 11 %}
+                    <h3>Is a
+                        {% if irousuvariation.isLargeIrousu %}
+                            large
+                        {% else %}
+                            small
+                        {% endif %}
+                        variation of the
+                        <a href={{ irousuvariation.species.item_url }}>
+                            {{ irousuvariation.species.english_name }}</a> species</h3>
+                {% else %}
+                    <h3><a href={{ irousuvariation.species.item_url }}>
+                        Unknown</a> species</h3>
+                {% endif %}
+            </div>
+            <div><h4>Appears in stage:</h4>
+                {% for stage in irousuvariation.get_stages %}
+                    <br>
+                    {{ stage }}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endwith %}

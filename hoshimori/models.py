@@ -701,8 +701,11 @@ class Irousu(ItemModel):
     strong = MultiSelectField(_('Strong'), choices=WEAPON_CHOICES, max_length=100, default="")
     guard = MultiSelectField(_('Guard'), choices=WEAPON_CHOICES, max_length=100, default="")
 
-    def __unicode__(self):
+    def english_name(self):
         return ENGLISH_IROUSU_TYPE_DICT[self.name]
+
+    def __unicode__(self):
+        return self.english_name()
 
 
 ############################################################
@@ -716,9 +719,22 @@ class IrousuVariation(ItemModel):
 
     species = models.ForeignKey(Irousu, related_name='species', null=True, on_delete=models.SET_NULL)
     image = models.ImageField(_('Image'), upload_to=uploadItem('i'))
+    isLargeIrousu = models.NullBooleanField(_('Large Irousu'))
+
+    def owner(self):
+        return self.species
+
+    def owner_id(self):
+        return self.species_id
 
     def __unicode__(self):
         return '{} - {}'.format(ENGLISH_IROUSU_TYPE_DICT[self.species.name], self.name)
+
+    def get_stages(self):
+        if self.isLargeIrousu:
+            return Stage.objects.filter(large_irousu=self.id)
+        else:
+            return Stage.objects.filter(small_irousu=self.id)
 
 
 ############################################################

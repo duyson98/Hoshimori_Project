@@ -107,4 +107,4 @@ class IrousuVariationFilterForm(MagiFiltersForm):
 
     class Meta:
         model = models.IrousuVariation
-        fields = ('search', 'species')
+        fields = ('search', 'species', 'isLargeIrousu')

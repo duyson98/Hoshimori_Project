@@ -1,17 +1,16 @@
-from collections import OrderedDict
-
-from django.utils.translation import ugettext_lazy as _, string_concat
+from django.template import context
+from django.utils.translation import ugettext_lazy as _
 from web.magicollections import MagiCollection
 
 from hoshimori import forms
-from hoshimori import models
+from hoshimori.models import *
 
 
 ############################################################
 # Student
 
 class StudentCollection(MagiCollection):
-    queryset = models.Student.objects.all()
+    queryset = Student.objects.all()
 
     title = _('Student')
     plural_title = _('Students')
@@ -76,7 +75,7 @@ class StudentCollection(MagiCollection):
 # Card
 
 class CardCollection(MagiCollection):
-    queryset = models.Card.objects.all()
+    queryset = Card.objects.all()
 
     title = _('Card')
     plural_title = _('Cards')
@@ -107,7 +106,7 @@ class CardCollection(MagiCollection):
 # Weapon
 
 class WeaponCollection(MagiCollection):
-    queryset = models.Weapon.objects.all()
+    queryset = Weapon.objects.all()
 
     title = _('Weapon')
     plural_title = _('Weapons')
@@ -135,7 +134,7 @@ class WeaponCollection(MagiCollection):
 
 
 # class MaterialCollection(MagiCollection):
-#     queryset = models.Material.objects.all()
+#     queryset = Material.objects.all()
 #
 #     title = _('Material')
 #     plural_title = _('Materials')
@@ -165,7 +164,7 @@ class WeaponCollection(MagiCollection):
 # Owned card
 
 class OwnedCardCollection(MagiCollection):
-    queryset = models.OwnedCard.objects.select_related('card')
+    queryset = OwnedCard.objects.select_related('card')
 
     title = _('Card')
     plural_title = _('Cards')
@@ -187,11 +186,12 @@ class OwnedCardCollection(MagiCollection):
         staff_required = True
         multipart = True
 
+
 ############################################################
 # Stage
 
 class StageCollection(MagiCollection):
-    queryset = models.Stage.objects.all()
+    queryset = Stage.objects.all()
 
     title = _('Stage')
     plural_title = _('Stages')
@@ -217,20 +217,22 @@ class StageCollection(MagiCollection):
         staff_required = True
         multipart = True
 
+
 ############################################################
 # Irousu
 
 class IrousuVariationCollection(MagiCollection):
-    queryset = models.IrousuVariation.objects.all()
+    queryset = IrousuVariation.objects.all()
 
     title = _('Irousu Variation')
     plural_title = _('Irousu Variations')
     icon = 'deck'
 
     class ItemView(MagiCollection.ItemView):
-        enabled = False
+        template = 'irousuvariation'
 
     class ListView(MagiCollection.ListView):
+        template = 'default'
         filter_form = forms.IrousuVariationFilterForm
         staff_required = False
         default_ordering = 'id'
@@ -247,6 +249,3 @@ class IrousuVariationCollection(MagiCollection):
     class EditView(MagiCollection.EditView):
         staff_required = True
         multipart = True
-
-
-
