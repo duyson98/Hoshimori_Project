@@ -8,6 +8,25 @@
                 Japanese name: {{ irousuvariation.japanese_name }}
             </div>
             <div>
+                <h4>Weapon affinity</h4>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Weak against</th>
+                        <th>Strong against</th>
+                        <th>Guard against</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>{{ irousuvariation.species.weak }}</td>
+                        <td>{{ irousuvariation.species.strong }}</td>
+                        <td>{{ irousuvariation.species.guard }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div>
                 {% if irousuvariation.species.name != 11 %}
                     <h3>Is a
                         {% if irousuvariation.isLargeIrousu %}
