@@ -198,7 +198,7 @@ class StageCollection(MagiCollection):
     icon = 'deck'
 
     class ItemView(MagiCollection.ItemView):
-        template = 'default'
+        template = 'stage'
 
     class ListView(MagiCollection.ListView):
         filter_form = forms.StageFilterForm

@@ -638,9 +638,18 @@ class Stage(ItemModel):
     # Materials
     materials = models.CharField('Material', null=True, max_length=100)
 
+    def get_drops(self):
+        return self.materials.split(chr(10))
+
     # Irousu
     small_irousu = models.ManyToManyField('IrousuVariation', related_name='stage_with_small_irousu', null=True)
     large_irousu = models.ManyToManyField('IrousuVariation', related_name='stage_with_large_irousu', null=True)
+
+    def get_small_irousu(self):
+        return IrousuVariation.objects.filter(stage_with_small_irousu=self.id)
+
+    def get_large_irousu(self):
+        return IrousuVariation.objects.filter(stage_with_large_irousu=self.id)
 
     easy_stage = models.ForeignKey('StageDifficulty', related_name='easy_difficulty')
     normal_stage = models.ForeignKey('StageDifficulty', related_name='normal_difficulty')
@@ -666,6 +675,9 @@ class StageDifficulty(ItemModel):
     cheerpoints = models.PositiveIntegerField(_('Cheerpoints'), null=True)
 
     objectives = models.CharField(_('Objectives'), max_length=200)
+
+    def get_objectives(self):
+        return self.objectives.split(chr(10))
 
     def owner(self):
         return self.stage

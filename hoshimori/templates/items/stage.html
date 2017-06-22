@@ -1,0 +1,88 @@
+{% load web_tags %}
+{% with stage=item %}
+    <br>
+    <div class="well">
+        <div>
+            <div><h2>Part {{ stage.part }} - Episode {{ stage.episode }}</h2>
+                <h3>{{ stage.name }}</h3>
+            </div>
+            <div>
+                <table class="table table-striped">
+                    <tbody>
+                    <tr>
+                        <th>Difficulty</th>
+                        <td>Easy</td>
+                        <td>Normal</td>
+                        <td>Hard</td>
+                    </tr>
+                    <tr>
+                        <th>Level</th>
+                        <td>{{ stage.easy_stage.level }}</td>
+                        <td>{{ stage.normal_stage.level }}</td>
+                        <td>{{ stage.hard_stage.level }}</td>
+                    </tr>
+                    <tr>
+                        <th>EXP</th>
+                        <td>{{ stage.easy_stage.exp }}</td>
+                        <td>{{ stage.normal_stage.exp }}</td>
+                        <td>{{ stage.hard_stage.exp }}</td>
+                    </tr>
+                    <tr>
+                        <th>Coins</th>
+                        <td>{{ stage.easy_stage.coins }}</td>
+                        <td>{{ stage.normal_stage.coins }}</td>
+                        <td>{{ stage.hard_stage.coins }}</td>
+                    </tr>
+                    <tr>
+                        <th>Cheerpoints</th>
+                        <td>{{ stage.easy_stage.cheerpoints }}</td>
+                        <td>{{ stage.normal_stage.cheerpoints }}</td>
+                        <td>{{ stage.hard_stage.cheerpoints }}</td>
+                    </tr>
+                    <tr>
+                        <th>Objectives</th>
+                        <td>{% for objective in stage.easy_stage.get_objectives %}
+                            {{ objective }}
+                            <br>
+                        {% endfor %}</td>
+                        <td>{% for objective in stage.normal_stage.get_objectives %}
+                            {{ objective }}
+                            <br>
+                        {% endfor %}</td>
+                        <td>{% for objective in stage.hard_stage.get_objectives %}
+                            {{ objective }}
+                            <br>
+                        {% endfor %}</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div>
+                <h3>Item drops: </h3>
+                {% for drop in stage.get_drops %}
+                    <br>
+                    {{ drop }}
+                {% endfor %}
+            </div>
+            <div>
+                <h3>Small Irousu's:</h3>
+                {% for small_irousu in stage.get_small_irousu %}
+                    <a href= {{ small_irousu.item_url }}>
+                        <img src="{{ small_irousu.image_url }}" alt="{{ small_irousu }}" height="100px">
+                        {{ small_irousu }}
+                    </a>
+                    <br>
+                {% endfor %}
+                <h3>Large Irousu's:</h3>
+                {% for large_irousu in stage.get_large_irousu %}
+                    <a href= {{ large_irousu.item_url }}>
+                        <img src="{{ large_irousu.image_url }}" alt="{{ large_irousu }}" height="100px">
+                        {{ large_irousu }}
+                    </a>
+                    <br>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endwith %}
