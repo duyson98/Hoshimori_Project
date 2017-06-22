@@ -399,6 +399,15 @@ class Card(ItemModel):
     skill_hits = models.PositiveIntegerField(_('Skill hits'), default=0)
     skill_range = models.CharField(_('Skill range'), max_length=300)
     skill_comment = models.CharField(_('Skill comment'), max_length=1000)
+    skill_preview = models.ImageField(_('Skill preview'), upload_to=uploadItem('c/skill'), null=True)
+
+    @property
+    def skill_preview_url(self):
+        return get_image_url_from_path(self.skill_preview)
+
+    @property
+    def http_skill_preview_url(self):
+        return get_http_image_url_from_path(self.skill_preview)
 
     max_damage = models.PositiveIntegerField(_('Max damage'), default=0)
 
@@ -414,6 +423,13 @@ class Card(ItemModel):
     nakayoshi_skills = models.ManyToManyField('Nakayoshi', related_name='card_with_nakayoshi')
     evolved_nakayoshi_skills = models.ManyToManyField('Nakayoshi', related_name='card_with_nakayoshi_evolved',
                                                       null=True, default=None)
+
+    # Charge attack
+    charge_name = models.CharField(_('Charge name'), max_length=100, null=True)
+    charge_hit = models.PositiveIntegerField(_('Charge hits'), null=True)
+    charge_damage = models.CharField(_('Charge Damage'), max_length=200, null=True)
+    charge_range = models.CharField(_('Charge range'), max_length=300, null=True)
+    charge_comment = models.CharField(_('Charge comment'), max_length=1000, null=True)
 
 
 ############################################################
@@ -525,7 +541,7 @@ class WeaponUpgrade(ItemModel):
     price = models.PositiveIntegerField(_('Price'), default=0)
 
     # Materials
-    materials = models.ManyToManyField('Material', related_name='weapon_with_materials_needed', null=True)
+    materials = models.CharField('Material', null=True, max_length=100)
 
     # Skills
     weapon_effects = models.ManyToManyField('WeaponEffect', related_name='weapon_with_skills', null=True)
@@ -612,15 +628,23 @@ class Nakayoshi(ItemModel):
 class Stage(ItemModel):
     collection_name = 'stage'
 
+    owner = models.ForeignKey(User, related_name='added_stages')
+
     name = models.CharField(_('Stage'), max_length=50)
+    part = models.CharField(_('Part'), null=True, max_length=50)
     episode = models.PositiveIntegerField(_('Episode'), null=True)
     number = models.PositiveIntegerField(_('Stage number'), null=True)
 
     # Materials
-    materials = models.ManyToManyField('Material', related_name='stage_with_drops', null=True)
+    materials = models.CharField('Material', null=True, max_length=100)
 
     # Irousu
-    irousu = models.ManyToManyField('IrousuVariation', related_name='stage_with_irousu', null=True)
+    small_irousu = models.ManyToManyField('IrousuVariation', related_name='stage_with_small_irousu', null=True)
+    large_irousu = models.ManyToManyField('IrousuVariation', related_name='stage_with_large_irousu', null=True)
+
+    easy_stage = models.ForeignKey('StageDifficulty', related_name='easy_difficulty')
+    normal_stage = models.ForeignKey('StageDifficulty', related_name='normal_difficulty')
+    hard_stage = models.ForeignKey('StageDifficulty', related_name='hard_difficulty')
 
     def __unicode__(self):
         return '{} - {}'.format(self.episode, self.number)
@@ -633,8 +657,7 @@ class StageDifficulty(ItemModel):
     collection_name = 'stage_dificulty'
     collection_plural_name = 'stage_dificulties'
 
-    stage = models.ForeignKey(Stage, verbose_name=_('Stage'), related_name='difficulties', null=True,
-                              on_delete=models.SET_NULL)
+    stage = models.ForeignKey(Stage, related_name='stage', on_delete=models.CASCADE)
     difficulty = models.PositiveIntegerField(_('Difficulty'), null=True, choices=DIFFICULTY_CHOICES)
     level = models.PositiveIntegerField(_('Level'), null=True)
 
@@ -644,19 +667,26 @@ class StageDifficulty(ItemModel):
 
     objectives = models.CharField(_('Objectives'), max_length=200)
 
+    def owner(self):
+        return self.stage
+
+    def owner_id(self):
+        return self.stage.id
+
     def __unicode__(self):
         return '{} - {} {}'.format(self.stage.episode, self.stage.number, DIFFICULTY_DICT[self.difficulty])
 
 
-############################################################
-# Materials
-class Material(ItemModel):
-    collection_name = 'material'
-
-    name = models.CharField(_('Material name'), unique=True, max_length=50)
-
-    def __unicode__(self):
-        return self.name
+#
+# ############################################################
+# # Materials
+# class Material(ItemModel):
+#     collection_name = 'material'
+#
+#     name = models.CharField(_('Material name'), unique=True, max_length=50)
+#
+#     def __unicode__(self):
+#         return self.name
 
 
 ############################################################
@@ -679,7 +709,7 @@ class Irousu(ItemModel):
 # Irousu variations
 
 class IrousuVariation(ItemModel):
-    collection_name = 'irousu_variation'
+    collection_name = 'irousuvariation'
 
     name = models.CharField(_('Irousu Name'), unique=True, max_length=50)
     japanese_name = models.CharField(string_concat(_('Irousu Name'), ' (', t['Japanese'], ')'), max_length=50)

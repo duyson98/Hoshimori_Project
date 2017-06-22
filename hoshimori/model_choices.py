@@ -377,7 +377,7 @@ SKILL_SIZE_VALUE = [
 SKILL_SIZE_VALUE_DICT = dict(SKILL_SIZE_VALUE)
 
 ############################################################
-# Stages
+# Weapon effects
 
 # TODO: Add weapon effects
 
@@ -414,15 +414,15 @@ DIFFICULTY_DICT = dict(DIFFICULTY_CHOICES)
 ENGLISH_IROUSU_TYPES = [
     'Gel',
     'Rouga',
-    'Quinn',
+    'Quin',
     'Eel',
     'Shum',
-    'Draco',
+    'Drako',
     'Doguu',
-    'Spirit',
-    'Saiki',
-    'Machinery',
-    'Valiant',
+    'Ray',
+    'Psyche',
+    'Drone',
+    'Variant',
     'Unknown',
 ]
 ENGLISH_IROUSU_TYPE_CHOICES = list(enumerate(ENGLISH_IROUSU_TYPES))
@@ -431,15 +431,15 @@ ENGLISH_IROUSU_TYPE_DICT = dict(ENGLISH_IROUSU_TYPE_CHOICES)
 IROUSU_TYPES = [
     _('Gel'),
     _('Rouga'),
-    _('Quinn'),
+    _('Quin'),
     _('Eel'),
     _('Shum'),
-    _('Draco'),
+    _('Drako'),
     _('Doguu'),
-    _('Spirit'),
-    _('Saiki'),
-    _('Machinery'),
-    _('Valiant'),
+    _('Ray'),
+    _('Psyche'),
+    _('Drone'),
+    _('Variant'),
     _('Unknown'),
 ]
 IROUSU_TYPE_CHOICES = list(enumerate(IROUSU_TYPES))

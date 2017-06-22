@@ -186,3 +186,67 @@ class OwnedCardCollection(MagiCollection):
     class EditView(MagiCollection.EditView):
         staff_required = True
         multipart = True
+
+############################################################
+# Stage
+
+class StageCollection(MagiCollection):
+    queryset = models.Stage.objects.all()
+
+    title = _('Stage')
+    plural_title = _('Stages')
+    icon = 'deck'
+
+    class ItemView(MagiCollection.ItemView):
+        template = 'default'
+
+    class ListView(MagiCollection.ListView):
+        filter_form = forms.StageFilterForm
+        staff_required = False
+
+        def check_permissions(self, request, context):
+            super(StageCollection.ListView, self).check_permissions(request, context)
+            if request.user.username == 'bad_staff':
+                raise StageCollection()
+
+    class AddView(MagiCollection.AddView):
+        staff_required = True
+        multipart = True
+
+    class EditView(MagiCollection.EditView):
+        staff_required = True
+        multipart = True
+
+############################################################
+# Irousu
+
+class IrousuVariationCollection(MagiCollection):
+    queryset = models.IrousuVariation.objects.all()
+
+    title = _('Irousu Variation')
+    plural_title = _('Irousu Variations')
+    icon = 'deck'
+
+    class ItemView(MagiCollection.ItemView):
+        enabled = False
+
+    class ListView(MagiCollection.ListView):
+        filter_form = forms.IrousuVariationFilterForm
+        staff_required = False
+        default_ordering = 'id'
+
+        def check_permissions(self, request, context):
+            super(IrousuVariationCollection.ListView, self).check_permissions(request, context)
+            if request.user.username == 'bad_staff':
+                raise IrousuVariationCollection()
+
+    class AddView(MagiCollection.AddView):
+        staff_required = True
+        multipart = True
+
+    class EditView(MagiCollection.EditView):
+        staff_required = True
+        multipart = True
+
+
+

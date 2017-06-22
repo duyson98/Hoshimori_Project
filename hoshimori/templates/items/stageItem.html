@@ -1,0 +1,12 @@
+{% load web_tags %}
+{% with stage=item %}
+<br>
+<div class="well">
+  <a href="{{ stage.item_url }}" data-ajax-url="{{ stage.ajax_item_url }}" data-ajax-title="{{ stage }}" class="stage">
+    <div class="row">
+      <div class="col-md-8"><h3>{{ stage.name }}</h3>
+      </div>
+    </div>
+  </a>
+</div>
+{% endwith %}

@@ -62,13 +62,49 @@ class WeaponFilterForm(MagiFiltersForm):
 ############################################################
 # Material
 
-class MaterialFilterForm(MagiFiltersForm):
-    search_fields = ['name']
+# class MaterialFilterForm(MagiFiltersForm):
+#     search_fields = ['name']
+#
+#     ordering_fields = [
+#         ('name', _('Name')),
+#     ]
+#
+#     class Meta:
+#         model = models.Material
+#         fields = ('search',)
 
-    ordering_fields = [
-        ('name', _('Name')),
-    ]
+############################################################
+# Stage
+
+class StageFilterForm(MagiFiltersForm):
+    search_fields = ['name', 'materials']
+
+    # ordering_fields = [
+    #     ('easy_level', _('Easy Level')),
+    #     ('easy_exp', _('Easy EXP')),
+    #     ('easy_coins', _('Easy Coins')),
+    #     ('easy_cheerpoint', _('Easy Cheerpoints')),
+    #     ('normal_level', _('Normal Level')),
+    #     ('normal_exp', _('Normal EXP')),
+    #     ('normal_coins', _('Normal Coins')),
+    #     ('normal_cheerpoint', _('Normal Cheerpoints')),
+    #     ('hard_level', _('Hard Level')),
+    #     ('hard_exp', _('Hard EXP')),
+    #     ('hard_coins', _('Hard Coins')),
+    #     ('hard_cheerpoint', _('Hard Cheerpoints')),
+    # ]
 
     class Meta:
-        model = models.Material
-        fields = ('search',)
+        model = models.Stage
+        fields = ('search', 'part')
+
+
+############################################################
+# Irousu Variation
+
+class IrousuVariationFilterForm(MagiFiltersForm):
+    search_fields = ['name', 'japanese_name']
+
+    class Meta:
+        model = models.IrousuVariation
+        fields = ('search', 'species')
