@@ -1,7 +1,10 @@
+from django import forms
+from django.db.models import BLANK_CHOICE_DASH
 from django.utils.translation import ugettext_lazy as _, string_concat
-from web.forms import MagiFiltersForm
+from web.forms import MagiFiltersForm, AutoForm, MagiFilter
 
 from hoshimori import models
+from hoshimori.model_choices import *
 from hoshimori.django_translated import t
 
 
@@ -30,17 +33,51 @@ class StudentFilterForm(MagiFiltersForm):
 ############################################################
 # Card
 
-class CardFilterForm(MagiFiltersForm):
-    search_fields = ['name', 'japanese_name']
+class CardForm(AutoForm):
+    def __init__(self, *args, **kwargs):
+        super(CardForm, self).__init__(*args, **kwargs)
+        self.previous_student_id = None if self.is_creating else self.instance.student_id
+        self.fields['skill_comment'].label = 'Skill comment'
 
+    def save(self, commit=False):
+        instance = super(CardForm, self).save(commit=False)
+        if self.previous_student_id != instance.student_id:
+            instance.update_cache_student()
+        if commit:
+            instance.save()
+        return instance
+
+
+class CardFilterForm(MagiFiltersForm):
+    search_fields = ['_cache_student_name', '_cache_student_japanese_name', 'name', 'japanese_name', 'skill_name',
+                     'japanese_skill_name']
     ordering_fields = [
-        ('name', _('Name')),
-        ('japanese_name', string_concat(_('Name'), ' (', t['Japanese'], ')')),
+        ('id', _('ID')),
+        ('_cache_student_name', string_concat(_('Student'), ' - ', _('Name'))),
+        ('_cache_student_japanese_name', string_concat(_('Student'), ' - ', _('Name'), ' (', t['Japanese'], ')')),
+        ('i_rarity', _('Rarity')),
+        ('i_weapon', _('Weapon')),
+        ('hp_50', string_concat(_('HP'), ' (', _('Level 50'), ')')),
+        ('sp_50', string_concat(_('SP'), ' (', _('Level 50'), ')')),
+        ('atk_50', string_concat(_('ATK'), ' (', _('Level 50'), ')')),
+        ('def_50', string_concat(_('DEF'), ' (', _('Level 50'), ')')),
     ]
+
+    def _evolvable_to_queryset(form, queryset, request, value):
+        if value == '2':
+            return queryset.filter(i_rarity__in=EVOLVABLE_RARITIES,card_type=0)
+        elif value == '3':
+            return queryset.exclude(i_rarity__in=EVOLVABLE_RARITIES,card_type=0)
+        return queryset
+
+    evolvable = forms.NullBooleanField(initial=None, required=False, label=_('Evolvable'))
+    evolvable_filter = MagiFilter(to_queryset=_evolvable_to_queryset)
+
+    card_type = forms.ChoiceField(choices=BLANK_CHOICE_DASH + CARDTYPE_CHOICES)
 
     class Meta:
         model = models.Card
-        fields = ('search', 'i_rarity', 'i_weapon', 'card_type')
+        fields = ('search', 'student', 'card_type', 'i_rarity', 'i_weapon', 'evolvable', 'ordering', 'reverse_order')
 
 
 ############################################################
@@ -79,20 +116,21 @@ class WeaponFilterForm(MagiFiltersForm):
 class StageFilterForm(MagiFiltersForm):
     search_fields = ['name', 'materials']
 
-    # ordering_fields = [
-    #     ('easy_level', _('Easy Level')),
-    #     ('easy_exp', _('Easy EXP')),
-    #     ('easy_coins', _('Easy Coins')),
-    #     ('easy_cheerpoint', _('Easy Cheerpoints')),
-    #     ('normal_level', _('Normal Level')),
-    #     ('normal_exp', _('Normal EXP')),
-    #     ('normal_coins', _('Normal Coins')),
-    #     ('normal_cheerpoint', _('Normal Cheerpoints')),
-    #     ('hard_level', _('Hard Level')),
-    #     ('hard_exp', _('Hard EXP')),
-    #     ('hard_coins', _('Hard Coins')),
-    #     ('hard_cheerpoint', _('Hard Cheerpoints')),
-    # ]
+    ordering_fields = [
+        ('episode', _('Episode')),
+        #     ('easy_level', _('Easy Level')),
+        #     ('easy_exp', _('Easy EXP')),
+        #     ('easy_coins', _('Easy Coins')),
+        #     ('easy_cheerpoint', _('Easy Cheerpoints')),
+        #     ('normal_level', _('Normal Level')),
+        #     ('normal_exp', _('Normal EXP')),
+        #     ('normal_coins', _('Normal Coins')),
+        #     ('normal_cheerpoint', _('Normal Cheerpoints')),
+        #     ('hard_level', _('Hard Level')),
+        #     ('hard_exp', _('Hard EXP')),
+        #     ('hard_coins', _('Hard Coins')),
+        #     ('hard_cheerpoint', _('Hard Cheerpoints')),
+    ]
 
     class Meta:
         model = models.Stage
@@ -107,4 +145,4 @@ class IrousuVariationFilterForm(MagiFiltersForm):
 
     class Meta:
         model = models.IrousuVariation
-        fields = ('search', 'species', 'isLargeIrousu')
+        fields = ('search', 'species', "is_large_irousu")

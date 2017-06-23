@@ -151,3 +151,7 @@ LOCALE_PATHS.append(os.path.join(BASE_DIR, SITE, 'locale'))
 
 if STATIC_UPLOADED_FILES_PREFIX is None:
     STATIC_UPLOADED_FILES_PREFIX = SITE + '/static/uploaded/' if DEBUG else 'u/'
+
+CORS_ORIGIN_WHITELIST=(
+    '127.0.0.1',
+)

@@ -81,12 +81,15 @@ class CardCollection(MagiCollection):
     plural_title = _('Cards')
     icon = 'deck'
 
+    reportable = False
+
     class ItemView(MagiCollection.ItemView):
         template = 'default'
 
     class ListView(MagiCollection.ListView):
         filter_form = forms.CardFilterForm
         staff_required = False
+        default_ordering='card_type,student,i_rarity'
 
         def check_permissions(self, request, context):
             super(CardCollection.ListView, self).check_permissions(request, context)

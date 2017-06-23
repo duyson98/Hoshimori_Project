@@ -1,7 +1,11 @@
 import csv
+import re
 
 from hoshimori.models import *
 
+
+###########################################################
+# Student
 
 def character_import_data():
     with open('database\characters.csv') as f:
@@ -54,6 +58,9 @@ def character_import_data():
 character_import_data()
 
 
+###########################################################
+# Irousu
+
 def irousu_species_import_data():
     with open('database\irousu_species.csv') as f:
         reader = csv.reader(f)
@@ -92,6 +99,9 @@ def irousu_import_data():
 irousu_import_data()
 
 
+###########################################################
+# Stage
+
 def stage_import_data():
     with open('database\stage_database.csv') as f:
         reader = csv.reader(f)
@@ -99,127 +109,159 @@ def stage_import_data():
         for row in reader:
             if row[0] != 'stage_name':  # ignore header row
                 id += 1
-                # Add stage
-                _, created = Stage.objects.get_or_create(
-                    id=id,
-                    owner_id=1,
-                    name=row[0],
-                    part=row[1],
-                    episode=row[2],
-                    number=row[3],
-                    materials=row[21],
-                    easy_stage_id=id * 3 - 2,
-                    normal_stage_id=id * 3 - 1,
-                    hard_stage_id=id * 3,
-                )
+                # Add stage if not added
+                if Stage.objects.filter(name=row[0]).__len__() == 0:
+                    _, created = Stage.objects.get_or_create(
+                        id=id,
+                        owner_id=1,
+                        name=row[0],
+                        part=row[1],
+                        episode=row[2],
+                        number=row[3],
+                        materials=row[21],
+                        easy_stage_id=id * 3 - 2,
+                        normal_stage_id=id * 3 - 1,
+                        hard_stage_id=id * 3,
+                    )
 
-                # Add difficulty
-                # Easy
-                _, created = StageDifficulty.objects.get_or_create(
-                    id=id * 3 - 2,
-                    stage_id=id,
-                    difficulty=EASY,
-                    level=row[4],
-                    exp=row[5],
-                    coins=row[6],
-                    cheerpoints=row[7],
-                    objectives=row[8],
-                )
-                # Normal
-                _, created = StageDifficulty.objects.get_or_create(
-                    id=id * 3 - 1,
-                    stage_id=id,
-                    difficulty=NORMAL,
-                    level=row[9],
-                    exp=row[10],
-                    coins=row[11],
-                    cheerpoints=row[12],
-                    objectives=row[13]
-                )
-                # Hard
-                _, created = StageDifficulty.objects.get_or_create(
-                    id=id * 3,
-                    stage_id=id,
-                    difficulty=HARD,
-                    level=row[14],
-                    exp=row[15],
-                    coins=row[16],
-                    cheerpoints=row[17],
-                    objectives=row[18]
-                )
+                    # Add difficulty
+                    # Easy
+                    _, created = StageDifficulty.objects.get_or_create(
+                        id=id * 3 - 2,
+                        difficulty=EASY,
+                        level=row[4],
+                        exp=row[5],
+                        coins=row[6],
+                        cheerpoints=row[7],
+                        objectives=row[8],
+                    )
+                    # Normal
+                    _, created = StageDifficulty.objects.get_or_create(
+                        id=id * 3 - 1,
+                        difficulty=NORMAL,
+                        level=row[9],
+                        exp=row[10],
+                        coins=row[11],
+                        cheerpoints=row[12],
+                        objectives=row[13]
+                    )
+                    # Hard
+                    _, created = StageDifficulty.objects.get_or_create(
+                        id=id * 3,
+                        difficulty=HARD,
+                        level=row[14],
+                        exp=row[15],
+                        coins=row[16],
+                        cheerpoints=row[17],
+                        objectives=row[18]
+                    )
 
-                # Add Irousus
-                small_irousus = row[19]
-                large_irousus = row[20]
+                    # Add Irousus
+                    small_irousus = row[19]
+                    large_irousus = row[20]
 
-                # Split 'em up and add small irousus
-                for irousu in small_irousus.split(','):
-                    if irousu != "":
-                        _, created = Stage.small_irousu.through.objects.get_or_create(
-                            stage_id=id,
-                            irousuvariation_id=irousu,
-                        )
+                    # Split 'em up and add small irousus
+                    for irousu in small_irousus.split(','):
+                        if irousu != "":
+                            _, created = Stage.small_irousu.through.objects.get_or_create(
+                                stage_id=id,
+                                irousuvariation_id=irousu,
+                            )
 
-                # Split 'em up and add big irousus
-                for irousu in large_irousus.split(','):
-                    if irousu != "":
-                        _, created = Stage.large_irousu.through.objects.get_or_create(
-                            stage_id=id,
-                            irousuvariation_id=irousu,
-                        )
+                    # Split 'em up and add big irousus
+                    for irousu in large_irousus.split(','):
+                        if irousu != "":
+                            _, created = Stage.large_irousu.through.objects.get_or_create(
+                                stage_id=id,
+                                irousuvariation_id=irousu,
+                            )
 
 
 stage_import_data()
 
 
+###########################################################
+# Card
+
+def extract_number(str):
+    return re.findall("[-+]?\d+[\.]?\d*[eE]?[-+]?\d*", str)
+
+
+def return_number_or_none(str):
+    if str.isdigit():
+        return str
+    else:
+        return None
+
+
 # TODO
 def card_import_data():
-    with open('C:\Users\kokon\PycharmProjects\hoshimori_scrapy\hoshimori\results\normal_database.csv') as f:
+    with open('database\card_database.csv') as f:
         reader = csv.reader(f)
+        id = 0
         for row in reader:
-            if row[0] != 'name':  # ignore header row
-                _, created = Card.objects.get_or_create(
-                    card_type=row[0],
-                    character=row[1],
-                    event=row[2],
-                    card_name=row[3],
-                    card_image=row[4],
-                    weapon_type=row[5],
-                    weapon_image=row[6],
-                    rarity=row[7],
-                    stat1_hp=row[8],
-                    stat1_sp=row[9],
-                    stat1_atk=row[10],
-                    stat1_def=row[11],
-                    stat50_hp=row[12],
-                    stat50_sp=row[13],
-                    stat50_atk=row[14],
-                    stat50_def=row[15],
-                    stat70_hp=row[16],
-                    stat70_sp=row[17],
-                    stat70_atk=row[18],
-                    stat70_def=row[19],
-                    skill_name=row[20],
-                    skill_sp=row[21],
-                    skill_combo=row[22],
-                    skill_hit=row[23],
-                    skill_damage=row[24],
-                    skill_range=row[25],
-                    skill_effect=row[26],
-                    skill_comment=row[27],
-                    skill_preview=row[28],
-                    charge_name=row[29],
-                    charge_hit=row[30],
-                    charge_damage=row[31],
-                    charge_range=row[32],
-                    charge_comment=row[33],
-                    nakayoshi_title=row[34],
-                    # japanese_nakayoshi_title=row[34],
-                    # nakayoshi_target_noevol=row[35],
-                    # nakayoshi_effect_noevol=row[36],
-                    # nakayoshi_target_evol=row[37],
-                    # nakayoshi_effect_evol=row[38],
-                )
+            try:
+                if row[0] != 'card_type':  # ignore header row
+                    id += 1
+                    if Card.objects.filter(name=row[3]).__len__() == 0:
+                        _, created = Card.objects.get_or_create(
+                            id=id,
+                            i_rarity=row[7],
+                            i_weapon=row[5],
+                            name=row[3],
+                            japanese_name=row[3],
+                            image=row[4],
+                            art=row[4],
+                            transparent=row[4],
+                            subcard_effect=0,
+                            card_type=row[0],
+                            hp_1=row[8],
+                            sp_1=row[9],
+                            atk_1=row[10],
+                            def_1=row[11],
+                            hp_50=row[12],
+                            sp_50=row[13],
+                            atk_50=row[14],
+                            def_50=row[15],
+                            hp_70=return_number_or_none(row[16]),
+                            sp_70=return_number_or_none(row[17]),
+                            atk_70=return_number_or_none(row[18]),
+                            def_70=return_number_or_none(row[19]),
+                            skill_name=row[20],
+                            japanese_skill_name=row[20],
+                            skill_SP=return_number_or_none(row[21]),
+                            skill_hits=return_number_or_none(row[23]),
+                            skill_range=row[25],
+                            skill_comment=row[27],
+                            skill_preview=row[28],
+                            max_damage=0,
+                            action_skill_damage=row[24],
+                            action_skill_combo=row[22] if row[22].isdigit() else None if row[22] == "" else
+                            extract_number(row[22])[0],
+                            action_skill_effects=row[26],
+                            evolved_action_skill_damage=row[24],
+                            evolved_action_skill_combo=row[22] if row[22].isdigit() else None if row[22] == "" else
+                            extract_number(row[22])[1],
+                            evolved_action_skill_effects=row[26],
+                            nakayoshi_title=row[34],
+                            japanese_nakayoshi_title=row[34],
+                            nakayoshi_skill_effect=row[36],
+                            nakayoshi_skill_target=row[35],
+                            evolved_nakayoshi_skill_effect=row[38],
+                            evolved_nakayoshi_skill_target=row[37],
+                            charge_name=row[29],
+                            charge_hit=None if row[30] == '' else row[30],
+                            charge_damage=row[31],
+                            charge_range=row[32],
+                            charge_comment=row[33],
+                            owner_id=1,
+                            student_id=return_number_or_none(row[1]),
+                        )
+            except Exception, e:
+                print str(e)
+                print id
+                print row[3]
+                break
 
 
 card_import_data()

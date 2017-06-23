@@ -3,7 +3,9 @@ from __future__ import division
 
 import os
 
+import datetime
 from django.conf import settings as django_settings
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils import timezone
@@ -12,7 +14,7 @@ from django.utils.translation import ugettext_lazy as _, string_concat, get_lang
 from multiselectfield import MultiSelectField
 from web.item_model import ItemModel, get_image_url_from_path, get_http_image_url_from_path
 from web.models import User
-from web.utils import tourldash, randomString
+from web.utils import tourldash, randomString, AttrDict
 
 from hoshimori.django_translated import t
 from hoshimori.model_choices import *
@@ -153,6 +155,10 @@ class Student(ItemModel):
     def full_http_image_url(self):
         return get_http_image_url_from_path(self.full_image)
 
+    # Get all cards of student
+    def get_cards(self):
+        return self.cards.all()
+
 
 ############################################################
 # Account
@@ -289,17 +295,17 @@ class Card(ItemModel):
 
     # Parameter
     hp_1 = models.PositiveIntegerField(string_concat(_('HP'), ' (', _('Level 1'), ')'), default=0)
-    hp_50 = models.PositiveIntegerField(string_concat(_('HP'), ' (', _('Level 50'), ')'), default=0)
-    hp_70 = models.PositiveIntegerField(string_concat(_('HP'), ' (', _('Level 70'), ')'), default=0)
     sp_1 = models.PositiveIntegerField(string_concat(_('SP'), ' (', _('Level 1'), ')'), default=0)
-    sp_50 = models.PositiveIntegerField(string_concat(_('SP'), ' (', _('Level 50'), ')'), default=0)
-    sp_70 = models.PositiveIntegerField(string_concat(_('SP'), ' (', _('Level 70'), ')'), default=0)
     atk_1 = models.PositiveIntegerField(string_concat(_('ATK'), ' (', _('Level 1'), ')'), default=0)
-    atk_50 = models.PositiveIntegerField(string_concat(_('ATK'), ' (', _('Level 50'), ')'), default=0)
-    atk_70 = models.PositiveIntegerField(string_concat(_('ATK'), ' (', _('Level 70'), ')'), default=0)
     def_1 = models.PositiveIntegerField(string_concat(_('DEF'), ' (', _('Level 1'), ')'), default=0)
+    hp_50 = models.PositiveIntegerField(string_concat(_('HP'), ' (', _('Level 50'), ')'), default=0)
+    sp_50 = models.PositiveIntegerField(string_concat(_('SP'), ' (', _('Level 50'), ')'), default=0)
+    atk_50 = models.PositiveIntegerField(string_concat(_('ATK'), ' (', _('Level 50'), ')'), default=0)
     def_50 = models.PositiveIntegerField(string_concat(_('DEF'), ' (', _('Level 50'), ')'), default=0)
-    def_70 = models.PositiveIntegerField(string_concat(_('DEF'), ' (', _('Level 70'), ')'), default=0)
+    hp_70 = models.PositiveIntegerField(string_concat(_('HP'), ' (', _('Level 70'), ')'), default=0, null=True)
+    sp_70 = models.PositiveIntegerField(string_concat(_('SP'), ' (', _('Level 70'), ')'), default=0, null=True)
+    atk_70 = models.PositiveIntegerField(string_concat(_('ATK'), ' (', _('Level 70'), ')'), default=0, null=True)
+    def_70 = models.PositiveIntegerField(string_concat(_('DEF'), ' (', _('Level 70'), ')'), default=0, null=True)
 
     def _exp_at_level(self, level=1):
         return int(EXP_TO_NEXT_LEVEL[level - 1] * (1 + self.i_rarity) / 5)
@@ -395,8 +401,8 @@ class Card(ItemModel):
     # Action skill
     skill_name = models.CharField(_('Skill name'), max_length=100)
     japanese_skill_name = models.CharField(string_concat(_('Skill name'), ' (', t['Japanese'], ')'), max_length=100)
-    skill_SP = models.PositiveIntegerField(_('Skill SP'), default=0)
-    skill_hits = models.PositiveIntegerField(_('Skill hits'), default=0)
+    skill_SP = models.PositiveIntegerField(_('Skill SP'), default=0, null=True)
+    skill_hits = models.PositiveIntegerField(_('Skill hits'), default=0, null=True)
     skill_range = models.CharField(_('Skill range'), max_length=300)
     skill_comment = models.CharField(_('Skill comment'), max_length=1000)
     skill_preview = models.ImageField(_('Skill preview'), upload_to=uploadItem('c/skill'), null=True)
@@ -411,25 +417,80 @@ class Card(ItemModel):
 
     max_damage = models.PositiveIntegerField(_('Max damage'), default=0)
 
-    action_skill = models.ForeignKey('ActionSkill', verbose_name=_('Action Skill'), related_name='skill', null=True,
-                                     on_delete=models.SET_NULL)
-    evolved_action_skill = models.ForeignKey('ActionSkill', verbose_name=_('Evolved Action Skill'),
-                                             related_name='evolved skill', null=True, on_delete=models.SET_NULL)
+    # TODO: Use String until properly import
+    # action_skill = models.OneToOne('ActionSkill', verbose_name=_('Action Skill'), related_name='skill', null=True,
+    #                                  on_delete=models.SET_NULL)
+    # evolved_action_skill = models.OneToOne('ActionSkill', verbose_name=_('Evolved Action Skill'),
+    #                                          related_name='evolved skill', null=True, on_delete=models.SET_NULL)
+    action_skill_damage = models.CharField(_('Skill Damage'), max_length=200)
+    action_skill_combo = models.PositiveIntegerField(_('Skill Combo'), default=13, null=True)
+    action_skill_effects = models.CharField(_('Skill Effect'), max_length=200)
+    evolved_action_skill_damage = models.CharField(string_concat(_('Skill Damage'), ' (', _('Evolved'), ')'),
+                                                   max_length=200)
+    evolved_action_skill_combo = models.PositiveIntegerField(string_concat(_('Skill Combo'), ' (', _('Evolved'), ')'),
+                                                             default=13, null=True)
+    evolved_action_skill_effects = models.CharField(string_concat(_('Skill Effect'), ' (', _('Evolved'), ')'),
+                                                    max_length=200)
 
     # Nakayoshi
     nakayoshi_title = models.CharField(_('Passive Skill'), max_length=100)
     japanese_nakayoshi_title = models.CharField(string_concat(_('Passive Skill'), ' (', t['Japanese'], ')'),
                                                 max_length=100)
-    nakayoshi_skills = models.ManyToManyField('Nakayoshi', related_name='card_with_nakayoshi')
-    evolved_nakayoshi_skills = models.ManyToManyField('Nakayoshi', related_name='card_with_nakayoshi_evolved',
-                                                      null=True, default=None)
+
+    # TODO: Use String until properly import
+    # nakayoshi_skills = models.ManyToManyField('Nakayoshi', related_name='card_with_nakayoshi')
+    # evolved_nakayoshi_skills = models.ManyToManyField('Nakayoshi', related_name='card_with_nakayoshi_evolved',
+    #                                                   null=True, default=None)
+
+    nakayoshi_skill_effect = models.CharField(_('Passive Skill Effect'), max_length=200)
+    nakayoshi_skill_target = models.CharField(_('Passive Skill Target'), max_length=200)
+    evolved_nakayoshi_skill_effect = models.CharField(string_concat(_('Passive Skill Effect'), ' (', _('Evolved'), ')'),
+                                                      max_length=200)
+    evolved_nakayoshi_skill_target = models.CharField(string_concat(_('Passive Skill Target'), ' (', _('Evolved'), ')'),
+                                                      max_length=200)
 
     # Charge attack
-    charge_name = models.CharField(_('Charge name'), max_length=100, null=True)
+    charge_name = models.CharField(_('Charge name'), max_length=100)
     charge_hit = models.PositiveIntegerField(_('Charge hits'), null=True)
-    charge_damage = models.CharField(_('Charge Damage'), max_length=200, null=True)
-    charge_range = models.CharField(_('Charge range'), max_length=300, null=True)
-    charge_comment = models.CharField(_('Charge comment'), max_length=1000, null=True)
+    charge_damage = models.CharField(_('Charge damage'), max_length=200)
+    charge_range = models.CharField(_('Charge range'), max_length=300)
+    charge_comment = models.CharField(_('Charge comment'), max_length=1000)
+    
+    # Cache student
+
+    _cache_student_days = 20
+    _cache_student_last_update = models.DateTimeField(null=True)
+    _cache_student_name = models.CharField(max_length=100, null=True)
+    _cache_student_japanese_name = models.CharField(max_length=100, null=True)
+    _cache_student_image = models.ImageField(upload_to=uploadItem('cache_student'), null=True)
+
+    def update_cache_student(self):
+        self._cache_student_last_update = timezone.now()
+        self._cache_student_name = self.student.name
+        self._cache_student_japanese_name = self.student.japanese_name
+        self._cache_student_image = self.student.image
+
+    def force_cache_student(self):
+        self.update_cache_student()
+        self.save()
+
+    @property
+    def cached_student(self):
+        if not self._cache_student_last_update or self._cache_student_last_update < timezone.now() - datetime.timedelta(
+                days=self._cache_student_days):
+            self.force_cache_student()
+        return AttrDict({
+            'pk': self.student_id,
+            'id': self.student_id,
+            'unicode': self._cache_student_name if get_language() != 'ja' else self._cache_student_japanese_name,
+            'name': self._cache_student_name,
+            'japanese_name': self._cache_student_japanese_name,
+            'image': self._cache_student_image,
+            'image_url': get_image_url_from_path(self._cache_student_image),
+            'http_image_url': get_http_image_url_from_path(self._cache_student_image),
+            'item_url': u'/student/{}/{}/'.format(self.student_id, tourldash(self._cache_student_name)),
+            'ajax_item_url': u'/ajax/student/{}/'.format(self.student_id),
+        })
 
 
 ############################################################
@@ -494,6 +555,9 @@ class Weapon(ItemModel):
     def english_type(self):
         return ENGLISH_WEAPON_DICT[self.i_type]
 
+    def get_upgrades(self):
+        return self.weapon_with_upgrades.all()
+
 
 ############################################################
 # Weapon variations
@@ -501,9 +565,14 @@ class Weapon(ItemModel):
 class WeaponUpgrade(ItemModel):
     collection_name = 'weapon_upgrade'
 
-    owner = models.ForeignKey(User, related_name='added_weapons')
-    origin = models.ForeignKey(Weapon, verbose_name=_('Weapon'), related_name='upgrade', null=True,
+    origin = models.ForeignKey(Weapon, verbose_name=_('Weapon'), related_name='weapon_with_upgrades', null=True,
                                on_delete=models.SET_NULL)
+
+    def owner(self):
+        return self.origin
+
+    def owner_id(self):
+        return self.origin_id
 
     rhythm = models.ImageField(_('Rhythm'), upload_to=uploadItem('w/rhythm'))
     i_level = models.PositiveIntegerField(_('Upgrade Level'), choices=UPGRADE_LEVEL_CHOICES, null=True, default=0)
@@ -523,11 +592,11 @@ class WeaponUpgrade(ItemModel):
         else:
             return u'{} {} {}'.format(str(self.origin.name), self.english_upgrade_level, self.gamma_type)
 
-    i_rarity = models.PositiveIntegerField(_('Rarity'), choices=RARITY_CHOICES, default=0)
+    i_rarity = models.PositiveIntegerField(_('Rarity'), choices=WEAPON_RARITY_CHOICES, default=0)
 
     @property
     def rarity(self):
-        return RARITY_DICT[self.i_rarity]
+        return WEAPON_RARITY_DICT[self.i_rarity]
 
     atk_min = models.PositiveIntegerField(string_concat(_('Weapon ATK'), ' (', _('Minimum'), ')'), default=0)
     atk_max = models.PositiveIntegerField(string_concat(_('Weapon ATK'), ' (', _('Maximum'), ')'), default=0)
@@ -541,13 +610,17 @@ class WeaponUpgrade(ItemModel):
     price = models.PositiveIntegerField(_('Price'), default=0)
 
     # Materials
-    materials = models.CharField('Material', null=True, max_length=100)
+    materials = models.CharField(_('Material'), null=True, max_length=100)
 
     # Skills
-    weapon_effects = models.ManyToManyField('WeaponEffect', related_name='weapon_with_skills', null=True)
+    # TODO
+    # weapon_effects = models.ManyToManyField('WeaponEffect', related_name='weapon_with_skills', null=True)
+    weapon_effects = models.CharField(_('Weapon Effects'), max_length=100)
 
     # Subskill
-    subweapon_effects = models.ManyToManyField('WeaponEffect', related_name='subweapon_with_skills', null=True)
+    # TODO
+    # subweapon_effects = models.ManyToManyField('WeaponEffect', related_name='subweapon_with_skills', null=True)
+    subweapon_effects = models.CharField(_('Subweapon Effects'), max_length=100)
 
 
 ############################################################
@@ -591,8 +664,8 @@ class WeaponEffect(ItemModel):
 class Nakayoshi(ItemModel):
     collection_name = 'nakayoshi'
 
-    i_name = models.PositiveIntegerField(_('Nakayoshi skill'), choices=NAKAYOSHI_SKILL_CHOICES,
-                                         null=True)
+    effect_name = models.PositiveIntegerField(_('Nakayoshi skill'), choices=NAKAYOSHI_SKILL_CHOICES,
+                                              null=True)
 
     # Get bonus value
     positive_effect = models.BooleanField(_('Positive Effect'), default=True)
@@ -602,24 +675,24 @@ class Nakayoshi(ItemModel):
     bonus_value = models.PositiveIntegerField(_('Effect Value'), null=True)
 
     @property
-    def nakayoshi_skill(self):
-        if self.i_name is not None:
-            return NAKAYOSHI_SKILL_DICT[self.i_name]
+    def nakayoshi_skill_name(self):
+        if self.effect_name is not None:
+            return NAKAYOSHI_SKILL_DICT[self.effect_name]
         else:
             return None
 
     @property
-    def english_nakayoshi_skill(self):
-        if self.i_name is not None:
-            return ENGLISH_NAKAYOSHI_SKILL_DICT[self.i_name]
+    def english_nakayoshi_skill_name(self):
+        if self.effect_name is not None:
+            return ENGLISH_NAKAYOSHI_SKILL_DICT[self.effect_name]
         else:
             return None
 
     def __unicode__(self):
         if self.positive_effect:
-            return '{} +{}'.format(self.english_nakayoshi_skill, self.bonus_value)
+            return '{} +{}'.format(self.english_nakayoshi_skill_name, self.bonus_value)
         else:
-            return '{} -{}'.format(self.english_nakayoshi_skill, self.bonus_value)
+            return '{} -{}'.format(self.english_nakayoshi_skill_name, self.bonus_value)
 
 
 ############################################################
@@ -646,17 +719,39 @@ class Stage(ItemModel):
     large_irousu = models.ManyToManyField('IrousuVariation', related_name='stage_with_large_irousu', null=True)
 
     def get_small_irousu(self):
-        return IrousuVariation.objects.filter(stage_with_small_irousu=self.id)
+        return self.small_irousu.all()
 
     def get_large_irousu(self):
-        return IrousuVariation.objects.filter(stage_with_large_irousu=self.id)
+        return self.large_irousu.all()
 
-    easy_stage = models.ForeignKey('StageDifficulty', related_name='easy_difficulty')
-    normal_stage = models.ForeignKey('StageDifficulty', related_name='normal_difficulty')
-    hard_stage = models.ForeignKey('StageDifficulty', related_name='hard_difficulty')
+    easy_stage = models.OneToOneField('StageDifficulty', related_name='easy_difficulty')
+    normal_stage = models.OneToOneField('StageDifficulty', related_name='normal_difficulty')
+    hard_stage = models.OneToOneField('StageDifficulty', related_name='hard_difficulty')
 
     def __unicode__(self):
         return '{} - {}'.format(self.episode, self.number)
+
+    @property
+    def next_stage(self):
+        # If last stage
+        try:
+            if self.number == 4:
+                return Stage.objects.get(episode=self.episode + 1, number=1)
+            else:
+                return Stage.objects.get(episode=self.episode, number=self.number + 1)
+        except ObjectDoesNotExist:
+            return None
+
+    @property
+    def prev_stage(self):
+        try:
+            # If first stage
+            if self.number == 1:
+                return Stage.objects.get(episode=self.episode - 1, number=4)
+            else:
+                return Stage.objects.get(episode=self.episode, number=self.number - 1)
+        except ObjectDoesNotExist:
+            return None
 
 
 ############################################################
@@ -666,7 +761,6 @@ class StageDifficulty(ItemModel):
     collection_name = 'stage_dificulty'
     collection_plural_name = 'stage_dificulties'
 
-    stage = models.ForeignKey(Stage, related_name='stage', on_delete=models.CASCADE)
     difficulty = models.PositiveIntegerField(_('Difficulty'), null=True, choices=DIFFICULTY_CHOICES)
     level = models.PositiveIntegerField(_('Level'), null=True)
 
@@ -679,14 +773,21 @@ class StageDifficulty(ItemModel):
     def get_objectives(self):
         return self.objectives.split(chr(10))
 
-    def owner(self):
-        return self.stage
-
-    def owner_id(self):
-        return self.stage.id
+    # def stage(self):
+    #     if self.easy_difficulty is not None:
+    #         return self.easy_difficulty
+    #     if self.difficulty == NORMAL and self.normal_difficulty is not None:
+    #         return self.normal_difficulty
+    #     if self.difficulty == HARD and self.hard_difficulty is not None:
+    #         return self.hard_difficulty
+    #     else:
+    #         return None
 
     def __unicode__(self):
-        return '{} - {} {}'.format(self.stage.episode, self.stage.number, DIFFICULTY_DICT[self.difficulty])
+        # if self.stage():
+        #     return '{} - {} {}'.format(self.stage().episode, self.stage().number, DIFFICULTY_DICT[self.difficulty])
+        # else:
+        return '#{} {}'.format(self.id, DIFFICULTY_DICT[self.difficulty])
 
 
 #
@@ -731,7 +832,7 @@ class IrousuVariation(ItemModel):
 
     species = models.ForeignKey(Irousu, related_name='species', null=True, on_delete=models.SET_NULL)
     image = models.ImageField(_('Image'), upload_to=uploadItem('i'))
-    isLargeIrousu = models.NullBooleanField(_('Large Irousu'))
+    is_large_irousu = models.NullBooleanField(_('Large Irousu'))
 
     def owner(self):
         return self.species
@@ -743,7 +844,7 @@ class IrousuVariation(ItemModel):
         return '{} - {}'.format(ENGLISH_IROUSU_TYPE_DICT[self.species.name], self.name)
 
     def get_stages(self):
-        if self.isLargeIrousu:
+        if self.is_large_irousu:
             return Stage.objects.filter(large_irousu=self.id)
         else:
             return Stage.objects.filter(small_irousu=self.id)
@@ -802,7 +903,7 @@ class OwnedCard(ItemModel):
 
     @property
     def owner_id(self):
-        return self.account.owner.id
+        return self.account.owner_id
 
     def __unicode__(self):
         return u'#{} {} {}'.format(self.id, self.card.name, u'({})'.format(_('Evolved')) if self.evolved else '')
@@ -815,7 +916,7 @@ class FavoriteCard(ItemModel):
     collection_name = 'favoritecard'
 
     owner = models.ForeignKey(User, related_name='favoritecards')
-    card = models.ForeignKey(Card, related_name='fans', on_delete=models.CASCADE)
+    card = models.ForeignKey(Card, related_name='senseis', on_delete=models.CASCADE)
 
     def __unicode__(self):
         return u'#{}'.format(self.card.id)
