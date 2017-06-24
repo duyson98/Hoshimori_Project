@@ -10,8 +10,8 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
@@ -25,7 +25,6 @@ DEBUG = True
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -41,7 +40,7 @@ INSTALLED_APPS = (
     'bootstrap_form_horizontal',
     'rest_framework',
     'storages',
-    'web',
+    'magi',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -55,14 +54,13 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.locale.LocaleMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'web.middleware.languageFromPreferences.LanguageFromPreferenceMiddleWare',
-    'web.middleware.httpredirect.HttpRedirectMiddleware',
+    'magi.middleware.languageFromPreferences.LanguageFromPreferenceMiddleWare',
+    'magi.middleware.httpredirect.HttpRedirectMiddleware',
 )
 
 ROOT_URLCONF = 'hoshimori_project.urls'
 
 WSGI_APPLICATION = 'hoshimori_project.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
@@ -77,8 +75,6 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
@@ -86,7 +82,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
@@ -96,7 +91,7 @@ STATIC_URL = '/static/'
 
 SITE = 'hoshimori'
 
-AUTHENTICATION_BACKENDS = ('web.backends.AuthenticationBackend',)
+AUTHENTICATION_BACKENDS = ('magi.backends.AuthenticationBackend',)
 
 DEBUG_PORT = 8000
 
@@ -114,7 +109,7 @@ LANGUAGES = (
 LANGUAGE_CODE = 'en'
 
 LOCALE_PATHS = [
-  os.path.join(BASE_DIR, 'web/locale'),
+    os.path.join(BASE_DIR, 'hoshimori/locale'),
 ]
 
 STATIC_UPLOADED_FILES_PREFIX = None
@@ -152,6 +147,6 @@ LOCALE_PATHS.append(os.path.join(BASE_DIR, SITE, 'locale'))
 if STATIC_UPLOADED_FILES_PREFIX is None:
     STATIC_UPLOADED_FILES_PREFIX = SITE + '/static/uploaded/' if DEBUG else 'u/'
 
-CORS_ORIGIN_WHITELIST=(
+CORS_ORIGIN_WHITELIST = (
     '127.0.0.1',
 )
