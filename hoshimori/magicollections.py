@@ -1,6 +1,5 @@
-from django.template import context
 from django.utils.translation import ugettext_lazy as _
-from web.magicollections import MagiCollection
+from magi.magicollections import MagiCollection
 
 from hoshimori import forms
 from hoshimori.models import *

@@ -12,9 +12,9 @@ from django.utils import timezone
 from django.utils.deconstruct import deconstructible
 from django.utils.translation import ugettext_lazy as _, string_concat, get_language
 from multiselectfield import MultiSelectField
-from web.item_model import ItemModel, get_image_url_from_path, get_http_image_url_from_path
-from web.models import User
-from web.utils import tourldash, randomString, AttrDict
+from magi.item_model import MagiModel, get_image_url_from_path, get_http_image_url_from_path
+from magi.models import User
+from magi.utils import tourldash, randomString, AttrDict
 
 from hoshimori.django_translated import t
 from hoshimori.model_choices import *
@@ -51,7 +51,7 @@ def getAccountLeaderboard(account):
 ############################################################
 # Student
 
-class Student(ItemModel):
+class Student(MagiModel):
     collection_name = 'student'
 
     name = models.CharField(_('Name'), max_length=100, unique=True)
@@ -163,7 +163,7 @@ class Student(ItemModel):
 ############################################################
 # Account
 
-class Account(ItemModel):
+class Account(MagiModel):
     collection_name = 'account'
 
     owner = models.ForeignKey(User, related_name='accounts')
@@ -215,7 +215,7 @@ class Account(ItemModel):
 ############################################################
 # Card
 
-class Card(ItemModel):
+class Card(MagiModel):
     collection_name = 'card'
 
     id = models.AutoField(_('ID'), unique=True, primary_key=True, db_index=True)
@@ -495,7 +495,7 @@ class Card(ItemModel):
 
 ############################################################
 # Action Skill
-class ActionSkill(ItemModel):
+class ActionSkill(MagiModel):
     collection_name = 'action_skill'
 
     name = models.CharField(_('Action Skill'), max_length=100)
@@ -515,7 +515,7 @@ class ActionSkill(ItemModel):
 ############################################################
 # Action Skill Effect
 
-class ActionSkillEffect(ItemModel):
+class ActionSkillEffect(MagiModel):
     collection_name = 'action_skill_effect'
 
     i_name = models.CharField(_('Action Skill Effect'), max_length=100)
@@ -532,7 +532,7 @@ class ActionSkillEffect(ItemModel):
 ############################################################
 # Weapons
 
-class Weapon(ItemModel):
+class Weapon(MagiModel):
     collection_name = 'weapon'
 
     name = models.CharField(_('Name'), max_length=100)
@@ -562,7 +562,7 @@ class Weapon(ItemModel):
 ############################################################
 # Weapon variations
 
-class WeaponUpgrade(ItemModel):
+class WeaponUpgrade(MagiModel):
     collection_name = 'weapon_upgrade'
 
     origin = models.ForeignKey(Weapon, verbose_name=_('Weapon'), related_name='weapon_with_upgrades', null=True,
@@ -626,7 +626,7 @@ class WeaponUpgrade(ItemModel):
 ############################################################
 # Weapon skills and subweapon skills
 
-class WeaponEffect(ItemModel):
+class WeaponEffect(MagiModel):
     collection_name = 'weapon_effect'
 
     i_name = models.PositiveIntegerField(_('Weapon Effect'), choices=WEAPON_EFFECT_CHOICES,
@@ -661,7 +661,7 @@ class WeaponEffect(ItemModel):
 ############################################################
 # Nakayoshi
 
-class Nakayoshi(ItemModel):
+class Nakayoshi(MagiModel):
     collection_name = 'nakayoshi'
 
     effect_name = models.PositiveIntegerField(_('Nakayoshi skill'), choices=NAKAYOSHI_SKILL_CHOICES,
@@ -698,7 +698,7 @@ class Nakayoshi(ItemModel):
 ############################################################
 # Stages
 
-class Stage(ItemModel):
+class Stage(MagiModel):
     collection_name = 'stage'
 
     owner = models.ForeignKey(User, related_name='added_stages')
@@ -757,7 +757,7 @@ class Stage(ItemModel):
 ############################################################
 # Stages
 
-class StageDifficulty(ItemModel):
+class StageDifficulty(MagiModel):
     collection_name = 'stage_dificulty'
     collection_plural_name = 'stage_dificulties'
 
@@ -793,7 +793,7 @@ class StageDifficulty(ItemModel):
 #
 # ############################################################
 # # Materials
-# class Material(ItemModel):
+# class Material(MagiModel):
 #     collection_name = 'material'
 #
 #     name = models.CharField(_('Material name'), unique=True, max_length=50)
@@ -805,7 +805,7 @@ class StageDifficulty(ItemModel):
 ############################################################
 # Irousu
 
-class Irousu(ItemModel):
+class Irousu(MagiModel):
     collection_name = 'irousu'
 
     name = models.PositiveIntegerField(_('Irousu type'), choices=IROUSU_TYPE_CHOICES, null=True, unique=True)
@@ -824,7 +824,7 @@ class Irousu(ItemModel):
 ############################################################
 # Irousu variations
 
-class IrousuVariation(ItemModel):
+class IrousuVariation(MagiModel):
     collection_name = 'irousuvariation'
 
     name = models.CharField(_('Irousu Name'), unique=True, max_length=50)
@@ -853,7 +853,7 @@ class IrousuVariation(ItemModel):
 ############################################################
 
 # Events
-class Event(ItemModel):
+class Event(MagiModel):
     collection_name = 'event'
 
     owner = models.ForeignKey(User, related_name='added_events')
@@ -884,7 +884,7 @@ class Event(ItemModel):
 ############################################################
 # Owned Card
 
-class OwnedCard(ItemModel):
+class OwnedCard(MagiModel):
     collection_name = 'ownedcard'
 
     account = models.ForeignKey(Account, related_name='ownedcards', on_delete=models.CASCADE)
@@ -912,7 +912,7 @@ class OwnedCard(ItemModel):
 ############################################################
 # Favorite Card
 
-class FavoriteCard(ItemModel):
+class FavoriteCard(MagiModel):
     collection_name = 'favoritecard'
 
     owner = models.ForeignKey(User, related_name='favoritecards')

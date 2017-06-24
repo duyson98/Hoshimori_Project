@@ -1,5 +1,5 @@
 from django.conf import settings as django_settings
-from web.default_settings import DEFAULT_NAVBAR_ORDERING, DEFAULT_ENABLED_PAGES
+from magi.default_settings import DEFAULT_NAVBAR_ORDERING, DEFAULT_ENABLED_PAGES
 
 from hoshimori import models
 

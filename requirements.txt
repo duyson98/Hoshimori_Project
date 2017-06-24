@@ -1,1 +1,2 @@
 git+https://github.com/SchoolIdolTomodachi/MagiCircles.git@MagiCircles2
+django-multiselectfield==0.1.7

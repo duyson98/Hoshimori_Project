@@ -1,7 +1,7 @@
 from django import forms
 from django.db.models import BLANK_CHOICE_DASH
 from django.utils.translation import ugettext_lazy as _, string_concat
-from web.forms import MagiFiltersForm, AutoForm, MagiFilter
+from magi.forms import MagiFiltersForm, AutoForm, MagiFilter
 
 from hoshimori import models
 from hoshimori.model_choices import *
