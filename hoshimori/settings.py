@@ -1,5 +1,5 @@
 from django.conf import settings as django_settings
-from web.default_settings import DEFAULT_NAVBAR_ORDERING
+from web.default_settings import DEFAULT_NAVBAR_ORDERING, DEFAULT_ENABLED_PAGES
 
 from hoshimori import models
 
@@ -15,3 +15,13 @@ COLOR = '#4a86e8'
 SITE_NAV_LOGO = 'logo.png'
 
 NAVBAR_ORDERING = ['student_list', 'card_list', 'weapon_list', 'material_list'] + DEFAULT_NAVBAR_ORDERING
+
+ENABLED_PAGES = DEFAULT_ENABLED_PAGES
+
+ENABLED_PAGES['addcard'] = {
+    'ajax': True,
+    'navbar_link': False,
+    'url_variables':  [
+        ('card', '\d+'),
+    ],
+}

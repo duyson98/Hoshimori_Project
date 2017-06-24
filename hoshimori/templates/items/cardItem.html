@@ -1,14 +1,25 @@
+{% load i18n %}
 {% load web_tags %}
 {% with card=item %}
-<br>
-<div class="well">
-  <a href="{{ card.item_url }}" data-ajax-url="{{ card.ajax_item_url }}" data-ajax-title="{{ card }}" class="card">
-    <img src="{{ card.image_url }}" alt="{{ card }}">
-    <div class="row">
-      <div class="col-md-8"><h3>{{ card.name }}</h3>
-      {{ card.japanese_name }}
-      </div>
+    <br>
+    <div class="container-fluid">
+        <div class="well">
+            <a href="{{ card.item_url }}" data-ajax-url="{{ card.ajax_item_url }}" data-ajax-title="{{ card }}"
+               class="card">
+                <img src="{{ card.image_url }}" alt="{{ card }}">
+            </a>
+            <div class="row">
+                <h3>{{ card.name }}</h3>
+                {{ card.japanese_name }}
+                {% if user.is_authenticated and user.all_accounts|length != 0 %}
+                    <div class="addcard-btn">
+                        <form action="/ajax/addcard/{{ card.id }}" method="POST">
+                            {% csrf_token %}
+                            <button name="addcard" value="addcard">Add card</button>
+                        </form>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
     </div>
-  </a>
-</div>
 {% endwith %}

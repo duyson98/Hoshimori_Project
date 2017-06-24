@@ -14,7 +14,7 @@ class StudentCollection(MagiCollection):
 
     title = _('Student')
     plural_title = _('Students')
-    icon = 'id'
+    icon = 'idolized'
 
     def to_fields(self, item, *args, **kwargs):
         fields = super(StudentCollection, self).to_fields(item, *args, icons={
@@ -54,8 +54,10 @@ class StudentCollection(MagiCollection):
         template = 'default'
 
     class ListView(MagiCollection.ListView):
-        filter_form = forms.StudentFilterForm
+        filter_form = forms.StudentFilterForm # filter_queryset inside
         staff_required = False
+        per_line = 4
+        ajax_pagination_callback = 'ajaxModals'
 
         def check_permissions(self, request, context):
             super(StudentCollection.ListView, self).check_permissions(request, context)

@@ -59,7 +59,7 @@ h1, h2, h3, h4, h5, h6, .title, .navbar-brand, .btn-lg, .btn-xl {
         font-weight: normal;
     }
     &.japanese {
-	    font-weight: bold;
+        font-weight: bold;
     }
 }
 
@@ -81,7 +81,7 @@ h1, h2, h3, h4, h5, h6, .title, .navbar-brand, .btn-lg, .btn-xl {
     padding: 5px 5px;
     border-radius: @border-radius;
     border: 1.5px solid;
-    height: @card-height + 13px;
+    height: auto;
     position: relative;
     text-align: center;
     max-width: @card-width;
@@ -102,4 +102,10 @@ h1, h2, h3, h4, h5, h6, .title, .navbar-brand, .btn-lg, .btn-xl {
             border-bottom-left-radius: @border-radius;
         }
     }
+}
+
+div.well {
+    background: radial-gradient(#ffffff 40%, rgba(255, 255, 255, 0));
+    box-sizing: border-box;
+    text-align: center;
 }
