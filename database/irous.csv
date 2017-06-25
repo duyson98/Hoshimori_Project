@@ -1,0 +1,64 @@
+species,japanese_name,name,image,is_large_irous
+1,ゲル,Gel,hoshimori/static/uploaded/i/00.png,0
+1,フレイムゲル,Flame Gel,hoshimori/static/uploaded/i/01.png,0
+1,サンダーゲル,Thunder Gel,hoshimori/static/uploaded/i/02.png,0
+1,アクアゲル,Aqua Gel,hoshimori/static/uploaded/i/03.png,0
+2,ロウガ,Rouga,hoshimori/static/uploaded/i/04.png,0
+2,ブル・ロウガ,Bull Rouga,hoshimori/static/uploaded/i/05.png,0
+2,ウォルフ,Wolf,hoshimori/static/uploaded/i/06.png,1
+2,ワイルド・ウォルフ,Wild Wolf,hoshimori/static/uploaded/i/07.png,1
+2,ヴァルガンド,Valgund,hoshimori/static/uploaded/i/08.png,1
+2,タイタン・ヴァルガンド,Titan Valgund,hoshimori/static/uploaded/i/09.png,1
+2,ブル・ヴァルガンド,Bull Valgund,hoshimori/static/uploaded/i/10.png,1
+2,レイジ・ウォルフ,Rage Wolf,hoshimori/static/uploaded/i/ragewolf.jpg,1
+2,エクス・ヴァルガンド,Ex Valgund,hoshimori/static/uploaded/i/x_valgund.jpg,1
+3,クィン,Quin,hoshimori/static/uploaded/i/11.png,0
+3,スカイ・クィン,Sky Quin,hoshimori/static/uploaded/i/12.png,0
+3,ラプター,Raptor,hoshimori/static/uploaded/i/13.png,1
+3,ウィング・ラプター,Wing Raptor,hoshimori/static/uploaded/i/14.png,1
+3,キュクヌス,Cuknus,hoshimori/static/uploaded/i/15.png,1
+3,ゲイル・キュクヌス,Gale Cuknus,hoshimori/static/uploaded/i/16.png,1
+3,エクス・キュクヌス ,Ex Cuknus,hoshimori/static/uploaded/i/x_cuknus.jpg,1
+4,イール,Eel,hoshimori/static/uploaded/i/17.png,0
+4,リプル・イール,Ripple Eel,hoshimori/static/uploaded/i/18.png,0
+4,アンギラ,Anguilla,hoshimori/static/uploaded/i/19.png,1
+4,ウェーブ・アンギラ,Wave Anguilla,hoshimori/static/uploaded/i/20.png,1
+5,シュム,Shum,hoshimori/static/uploaded/i/21.png,0
+5,スプラウト・シュム,Sprout Shum,hoshimori/static/uploaded/i/22.png,0
+5,ズングラ,Zungura,hoshimori/static/uploaded/i/23.png,1
+5,ディープ・ズングラ,Deep Zungura,hoshimori/static/uploaded/i/24.png,1
+6,ドラコ,Drako,hoshimori/static/uploaded/i/25.png,0
+6,フレイム・ドラコ,Flame Drako,hoshimori/static/uploaded/i/26.png,0
+6,ドラケイン,Dracaine,hoshimori/static/uploaded/i/27.png,1
+6,エルダー・ドラケイン,Elder Dracain,hoshimori/static/uploaded/i/28.png,1
+6,ガル・ドラケイン,Garu Dracain,hoshimori/static/uploaded/i/29.png,1
+6,エクス・ドラケイン,Ex Dracain,hoshimori/static/uploaded/i/x_dracain.jpg,1
+7,ドグー,Doguu,hoshimori/static/uploaded/i/30.png,0
+7,マグラ・ドグー,Magula Doguu,hoshimori/static/uploaded/i/31.png,0
+7,アダマー,Adamar,hoshimori/static/uploaded/i/32.png,1
+7,ギガント・アダマー,Gigant Adamar,hoshimori/static/uploaded/i/33.png,1
+8,レイ,Ray,hoshimori/static/uploaded/i/34.png,0
+8,イービル・レイ,Evil Ray,hoshimori/static/uploaded/i/35.png,0
+8,ガイスト,Geist,hoshimori/static/uploaded/i/36.png,1
+8,ヴィシャス・ガイスト,Vicious Geist,hoshimori/static/uploaded/i/37.png,1
+9,サイキア,Psyche,hoshimori/static/uploaded/i/38.png,0
+11,ブレードロン,Blade Ron,hoshimori/static/uploaded/i/39.png,0
+11,アームズ・レイ,Arms Ray,hoshimori/static/uploaded/i/40.png,1
+10,スパイ・フリッカ,Spy Flicker,hoshimori/static/uploaded/i/41.png,0
+10,マルチプル・クローラ,Multiple Crawler,hoshimori/static/uploaded/i/43.png,0
+10,バトル・フリッカ,Battle Flicker,hoshimori/static/uploaded/i/42.png,1
+10,ジェノサイド・クローラ,Genocide Crawler,hoshimori/static/uploaded/i/44.png,1
+12,サドネ,Sadone,hoshimori/static/uploaded/i/45.png,1
+12,デウス・ヴェルテクス,Deus Vertex,hoshimori/static/uploaded/i/deus_vertex.jpg,1
+12,デウス・アルレカン,Deus Arlecan,hoshimori/static/uploaded/i/deus_arlecan.jpg,1
+12,？？？（偽みき）,??? (Fake Miki),hoshimori/static/uploaded/i/fakemiki.jpg,1
+12,封印のバラ（封）,Sealing Rose (Seal),hoshimori/static/uploaded/i/rose_huu.jpg,0
+12,封印のバラ（遅）,Sealing Rose (Slow),hoshimori/static/uploaded/i/rose_late.jpg,0
+12,封印のバラ（毒）,Sealing Rose (Poison),hoshimori/static/uploaded/i/rose_poison.jpg,0
+12,御剣先生（二日酔い）,Mitsurugi-sensei (Hungover),hoshimori/static/uploaded/i/mitsurugi_yoi.jpg,1
+12,？？？（4章ボス）,??? (Part 4 Boss),hoshimori/static/uploaded/i/unknown_boss.jpg,1
+12,エヴィーナ,Evina,hoshimori/static/uploaded/i/evina.jpg,1
+12,国枝詩穂,Kunieda Shiho,hoshimori/static/uploaded/i/yamishiho.jpg,1
+12,謎の人型,Mysterious Humanoid,hoshimori/static/uploaded/i/unknown.jpg,1
+12,謎の人型(ロッド) ,Mysterious Humanoid (Rod),hoshimori/static/uploaded/i/unknown_lod.jpg,1
+12,謎の人型（ブレイドカノン） ,Mysterious Humanoid (Bladegun),hoshimori/static/uploaded/i/unknown_bk.jpg,1

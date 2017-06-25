@@ -420,9 +420,9 @@ DIFFICULTY_CHOICES = [
 DIFFICULTY_DICT = dict(DIFFICULTY_CHOICES)
 
 ############################################################
-# Irousu
+# Irous
 
-ENGLISH_IROUSU_TYPES = [
+ENGLISH_IROUS_TYPES = [
     'Gel',
     'Rouga',
     'Quin',
@@ -436,10 +436,10 @@ ENGLISH_IROUSU_TYPES = [
     'Variant',
     'Unknown',
 ]
-ENGLISH_IROUSU_TYPE_CHOICES = list(enumerate(ENGLISH_IROUSU_TYPES))
-ENGLISH_IROUSU_TYPE_DICT = dict(ENGLISH_IROUSU_TYPE_CHOICES)
+ENGLISH_IROUS_TYPE_CHOICES = list(enumerate(ENGLISH_IROUS_TYPES))
+ENGLISH_IROUS_TYPE_DICT = dict(ENGLISH_IROUS_TYPE_CHOICES)
 
-IROUSU_TYPES = [
+IROUS_TYPES = [
     _('Gel'),
     _('Rouga'),
     _('Quin'),
@@ -453,5 +453,5 @@ IROUSU_TYPES = [
     _('Variant'),
     _('Unknown'),
 ]
-IROUSU_TYPE_CHOICES = list(enumerate(IROUSU_TYPES))
-IROUSU_TYPE_DICT = dict(IROUSU_TYPE_CHOICES)
+IROUS_TYPE_CHOICES = list(enumerate(IROUS_TYPES))
+IROUS_TYPE_DICT = dict(IROUS_TYPE_CHOICES)

@@ -51,6 +51,11 @@ def character_import_data():
                     romaji_CV=row[32],
                     image=row[33],
                     full_image=row[34],
+                    signature=row[35],
+                    phrase_1=row[36],
+                    phrase_2=row[37],
+                    introduction_1=row[38],
+                    introduction_2=row[39],
                     owner_id=1,
                 )
 
@@ -59,16 +64,16 @@ character_import_data()
 
 
 ###########################################################
-# Irousu
+# Irous
 
-def irousu_species_import_data():
-    with open('database\irousu_species.csv') as f:
+def irous_species_import_data():
+    with open('database\irous_species.csv') as f:
         reader = csv.reader(f)
         id = 0
         for row in reader:
             if row[0] != 'name':  # ignore header row
                 id += 1
-                _, created = Irousu.objects.get_or_create(
+                _, created = Irous.objects.get_or_create(
                     id=id,
                     name=row[0],
                     weak=row[1],
@@ -77,26 +82,27 @@ def irousu_species_import_data():
                 )
 
 
-irousu_species_import_data()
+irous_species_import_data()
 
 
-def irousu_import_data():
-    with open('database\irousu.csv') as f:
+def irous_import_data():
+    with open('database\irous.csv') as f:
         reader = csv.reader(f)
         id = 0
         for row in reader:
             if row[0] != 'species':  # ignore header row
                 id += 1
-                _, created = IrousuVariation.objects.get_or_create(
+                _, created = IrousVariation.objects.get_or_create(
                     id=id,
                     species_id=row[0],
                     japanese_name=row[1],
                     name=row[2],
                     image=row[3],
+                    is_large_irous=True if row[4] == "1" else False,
                 )
 
 
-irousu_import_data()
+irous_import_data()
 
 
 ###########################################################
@@ -156,24 +162,24 @@ def stage_import_data():
                         objectives=row[18]
                     )
 
-                    # Add Irousus
-                    small_irousus = row[19]
-                    large_irousus = row[20]
+                    # Add Irouss
+                    small_irous = row[19]
+                    large_irous = row[20]
 
-                    # Split 'em up and add small irousus
-                    for irousu in small_irousus.split(','):
-                        if irousu != "":
-                            _, created = Stage.small_irousu.through.objects.get_or_create(
+                    # Split 'em up and add small irouss
+                    for irous in small_irous.split(','):
+                        if irous != "":
+                            _, created = Stage.small_irous.through.objects.get_or_create(
                                 stage_id=id,
-                                irousuvariation_id=irousu,
+                                irousvariation_id=irous,
                             )
 
-                    # Split 'em up and add big irousus
-                    for irousu in large_irousus.split(','):
-                        if irousu != "":
-                            _, created = Stage.large_irousu.through.objects.get_or_create(
+                    # Split 'em up and add big irouss
+                    for irous in large_irous.split(','):
+                        if irous != "":
+                            _, created = Stage.large_irous.through.objects.get_or_create(
                                 stage_id=id,
-                                irousuvariation_id=irousu,
+                                irousvariation_id=irous,
                             )
 
 

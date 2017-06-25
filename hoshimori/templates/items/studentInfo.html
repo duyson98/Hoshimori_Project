@@ -1,0 +1,285 @@
+{% load i18n %}
+{% load tools %}
+{% with student=item %}
+    <div class="student-info">
+        <br><br>
+        <p class="text-center">
+            <img src="{{ student.full_image_url }}" alt="{{ student.name }}" class="student-image">
+            {% if student.description %}
+                <h4 class="text-center fontx2">{{ student.description }}</h4>
+            {% endif %}
+        </p>
+        {% if current == 'student_item' %}
+            <h3 class="text-center fontx2">{{ student.name }}</h3>
+        {% endif %}
+        <br>
+        <table class="table about-table a-main">
+            {% if student.introduction_1 and student.introduction_2 %}
+                <tr>
+                    <td><i class="flaticon-comments"></i></td>
+                    <th>{% trans 'Introductions' %}</th>
+                    <td>
+                        {% if student.introduction_1 %}
+                            <audio controls>
+                                <source src="{{ student.introduction_1_url }}" type="audio/mpeg">
+                            </audio>
+                        {% endif %}
+                        {% if student.introduction_2 %}
+                            <audio controls>
+                                <source src="{{ student.introduction_2_url }}" type="audio/mpeg">
+                            </audio>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endif %}
+            {% if student.japanese_name %}
+                <tr>
+                    <td><i class="flaticon-JP"></i></td>
+                    <th>{% trans 'Name' %} ({% t 'Japanese' %})</th>
+                    <td>{{ student.japanese_name }}</td>
+                </tr>
+            {% endif %}
+            {% if student.cached_total_cards %}
+                <tr>
+                    <td><i class="flaticon-cards"></i></td>
+                    <th>{% trans 'Cards' %}</th>
+                    <td>
+                        {{ student.cached_total_cards }}
+                        {% trans 'Cards' %}<br>
+                        <a href="/cards/?student={{ student.id }}" target="_blank">
+                            {% trans 'View all' %}
+                            <i class="flaticon-link fontx0-8"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% endif %}
+            {% if student.i_school_year %}
+                <tr>
+                    <td><i class="flaticon-scoreup"></i></td>
+                    <th>{% trans 'School Year' %}</th>
+                    <td>{{ student.school_year }}</td>
+                </tr>
+            {% endif %}
+            {% if student.i_star_sign %}
+                <td><i class="flaticon-star"></i></td>
+                <th>{% trans 'Star Sign' %}</th>
+                <td>{{ student.star_sign }}</td>
+            {% endif %}
+            {% if student.birthday %}
+                <tr>
+                    <td><i class="flaticon-event"></i></td>
+                    <th>{% trans 'Birthday' %}</th>
+                    <td>{{ student.birthday|date:"F d" }}</td>
+                </tr>
+            {% endif %}
+            {% if student.height %}
+                <tr>
+                    <td><i class="flaticon-scoreup"></i></td>
+                    <th>{% trans 'Height' %}</th>
+                    <td>{{ student.height }} cm</td>
+                </tr>
+            {% endif %}
+            {% if student.weight %}
+                <tr>
+                    <td><i class="flaticon-scoreup"></i></td>
+                    <th>{% trans 'Weight' %}</th>
+                    <td>{{ student.weight }} kg</td>
+                </tr>
+            {% endif %}
+            {% if student.i_blood_type %}
+                <tr>
+                    <td><i class="flaticon-hp"></i></td>
+                    <th>{% trans 'Blood Type' %}</th>
+                    <td>{{ student.blood_type }}</td>
+                </tr>
+            {% endif %}
+            {% if student.bust %}
+                <tr>
+                    <td><i class="flaticon-id"></i></td>
+                    <th>{% trans 'Bust' %}</th>
+                    <td>{{ student.bust }} cm</td>
+                </tr>
+            {% endif %}
+            {% if student.waist %}
+                <tr>
+                    <td><i class="flaticon-id"></i></td>
+                    <th>{% trans 'Waist' %}</th>
+                    <td>{{ student.waist }} cm</td>
+                </tr>
+            {% endif %}
+            {% if student.hip %}
+                <tr>
+                    <td><i class="flaticon-id"></i></td>
+                    <th>{% trans 'Hip' %}</th>
+                    <td>{{ student.hip }} cm</td>
+                </tr>
+            {% endif %}
+            {% if student.extra_activity %}
+                <tr>
+                    <td><i class="flaticon-star"></i></td>
+                    <th>{% trans 'Extracurricular activity' %}</th>
+                    <td>{{ student.extra_activity }}</td>
+                </tr>
+            {% endif %}
+            {% if student.phrase_1 or student.phrase_1 %}
+                <tr>
+                    <td><i class="flaticon-comments"></i></td>
+                    <th>{% trans 'Catch phrases' %}</th>
+                    <td>
+                        {% if student.phrase_1 %}
+                            <audio controls>
+                                <source src="{{ student.phrase_1_url }}" type="audio/mpeg">
+                            </audio>
+                        {% endif %}
+                        <br>
+                        {% if student.catchphrase_1 %} {{ student.catchphrase_1 }} {% endif %}
+                        <br>
+                        {% if student.phrase_2 %}
+                            <audio controls>
+                                <source src="{{ student.phrase_2_url }}" type="audio/mpeg">
+                            </audio>
+                        {% endif %}
+                        <br>
+                        {% if student.catchphrase_2 %} {{ student.catchphrase_2 }} {% endif %}
+                    </td>
+                </tr>
+            {% endif %}
+            {% if student.hobby_1 or student.hobby_2 or student.hobby_3 %}
+                <tr>
+                    <td><i class="flaticon-heart"></i></td>
+                    <th>{% trans 'Hobbies' %}</th>
+                    <td>
+                        {% if student.hobby_1 %} {{ student.hobby_1 }} <br> {% endif %}
+                        {% if student.hobby_2 %} {{ student.hobby_2 }} <br> {% endif %}
+                        {% if student.hobby_3 %} {{ student.hobby_3 }} <br> {% endif %}
+                    </td>
+                </tr>
+            {% endif %}
+            {% if student.food_likes %}
+                <tr>
+                    <td><i class="flaticon-star"></i></td>
+                    <th>{% trans 'Favorite food' %}</th>
+                    <td>{{ student.food_likes }}</td>
+                </tr>
+            {% endif %}
+            {% if student.food_dislikes %}
+                <tr>
+                    <td><i class="flaticon-star-empty"></i></td>
+                    <th>{% trans 'Disliked food' %}</th>
+                    <td>{{ student.food_dislikes }}</td>
+                </tr>
+            {% endif %}
+            {% if student.family %}
+                <tr>
+                    <td><i class="flaticon-album"></i></td>
+                    <th>{% trans 'Family' %}</th>
+                    <td>{{ student.family }}</td>
+                </tr>
+            {% endif %}
+            {% if student.dream %}
+                <tr>
+                    <td><i class="flaticon-star"></i></td>
+                    <th>{% trans 'Dream' %}</th>
+                    <td>{{ student.dream }}</td>
+                </tr>
+            {% endif %}
+            {% if student.ideal_1 or student.ideal_2 or student.ideal_3 %}
+                <tr>
+                    <td><i class="flaticon-star"></i></td>
+                    <th>{% trans 'Ideal model' %}</th>
+                    <td>
+                        {% if student.ideal_1 %} {{ student.ideal_1 }} <br> {% endif %}
+                        {% if student.ideal_2 %} {{ student.ideal_2 }} <br> {% endif %}
+                        {% if student.ideal_3 %} {{ student.ideal_3 }} <br> {% endif %}
+                    </td>
+                </tr>
+            {% endif %}
+            {% if student.pastime %}
+                <tr>
+                    <td><i class="flaticon-star"></i></td>
+                    <th>{% trans 'Pastime' %}</th>
+                    <td>{{ student.pastime }}</td>
+                </tr>
+            {% endif %}
+            {% if student.destress %}
+                <tr>
+                    <td><i class="flaticon-star"></i></td>
+                    <th>{% trans 'De-stress' %}</th>
+                    <td>{{ student.destress }}</td>
+                </tr>
+            {% endif %}
+            {% if student.fav_memory %}
+                <tr>
+                    <td><i class="flaticon-achievement"></i></td>
+                    <th>{% trans 'Favorite memory' %}</th>
+                    <td>{{ student.fav_memory }}</td>
+                </tr>
+            {% endif %}
+            {% if student.fav_phrase %}
+                <tr>
+                    <td><i class="flaticon-comments"></i></td>
+                    <th>{% trans 'Favorite saying' %}</th>
+                    <td>{{ student.fav_phrase }}</td>
+                </tr>
+            {% endif %}
+            {% if student.secret %}
+                <tr>
+                    <td><i class="flaticon-max-bond"></i></td>
+                    <th>{% trans 'A secret she would never tell anyone' %}</th>
+                    <td>{{ student.secret }}</td>
+                </tr>
+            {% endif %}
+            {% if student.CV %}
+                <tr>
+                    <td><i class="flaticon-profile"></i></td>
+                    <th>{% trans 'CV' %}</th>
+                    <td>
+                        {% if student.romaji_CV %}{{ student.romaji_CV }}<br>{% endif %}
+                        {{ student.CV }}
+                    </td>
+                </tr>
+            {% endif %}
+            {% if student.signature %}
+                <tr>
+                    <td><i class="flaticon-edit"></i></td>
+                    <th>{% trans 'Signature' %}</th>
+                    <td>
+                        <a href="{{ student.signature_url }}" target="_blank">
+                            <img src="{{ student.signature_url }}" alt="{% trans 'Signature' %}">
+                        </a>
+                    </td>
+                </tr>
+            {% endif %}
+            <tr>
+                <td><i class="flaticon-comments"></i></td>
+                <th>{% trans 'Comments' %}</th>
+                <td>
+                    <a href="{{ student.item_url }}#disqus_thread"
+                       class="btn btn-lg btn-{{ student.english_type|default_if_none:'main' }}"
+                            {% if current != 'student_item' %} target="_blank"{% endif %}>
+                        {% trans 'Comments' %}
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td><i class="flaticon-link"></i></td>
+                <th>{% trans 'Share' %}</th>
+                <td>
+	<span class="btn-group">
+	  {% include 'include/share.html' with share_url=student.http_item_url share_btn_class=student.english_type|add:" btn-lg" share_sentence=student %}
+	</span>
+                </td>
+            </tr>
+            {% if user.is_staff %}
+                <tr>
+                    <td><i class="flaticon-edit"></i></td>
+                    <th>{% trans 'Edit' %}</th>
+                    <td>
+                        <a href="/students/edit/{{ student.id }}/"
+                           class="btn btn-lg btn-main"><i class="flaticon-edit"></i></a>
+                    </td>
+                </tr>
+            {% endif %}
+        </table>
+    </div>
+{% endwith %}

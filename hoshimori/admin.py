@@ -4,7 +4,7 @@ from django import forms
 from hoshimori.models import *
 
 
-class IrousuAdminForm(forms.ModelForm):
+class IrousAdminForm(forms.ModelForm):
 
     weak = forms.MultipleChoiceField(choices=WEAPON_CHOICES, widget=forms.CheckboxSelectMultiple())
 
@@ -22,13 +22,13 @@ class IrousuAdminForm(forms.ModelForm):
         return self.cleaned_data["guard"]
 
 
-class IrousuAdmin(admin.ModelAdmin):
-    form = IrousuAdminForm
+class IrousAdmin(admin.ModelAdmin):
+    form = IrousAdminForm
 
 
 admin.site.register(Account)
-admin.site.register(OwnedCard)
-admin.site.register(FavoriteCard)
+admin.site.register(OwnedCard) # Will removed later
+admin.site.register(FavoriteCard) # Will removed later
 admin.site.register(Student)
 admin.site.register(Card)
 # admin.site.register(ActionSkillEffect)
@@ -39,5 +39,5 @@ admin.site.register(WeaponUpgrade)
 admin.site.register(Stage)
 admin.site.register(StageDifficulty)
 # admin.site.register(Nakayoshi)
-admin.site.register(Irousu, IrousuAdmin)
-admin.site.register(IrousuVariation)
+admin.site.register(Irous, IrousAdmin)
+admin.site.register(IrousVariation)

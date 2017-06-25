@@ -1,0 +1,49 @@
+{% load i18n %}
+{% with oc=item %}
+    <div class="ownedcard" data-ownedcard-id="{{ oc.id }}" id="ownedcard{{ oc.id }}"
+         data-ownedcard-account-id="{{ oc.account_id }}" data-card-title="{{ oc.card }}">
+        <div class="hidden">
+            <table class='table'>
+                <tr>
+                    <th>{% trans 'Evolved' %}</th>
+                    <td>
+                        <i class='flaticon-{% if oc.evolved %}checked text-success{% else %}delete text-danger{% endif %}'></i>
+                    </td>
+                </tr>
+                {% if oc.level %}
+                    <tr>
+                        <th>{% trans 'Level' %}</th>
+                        <td>{{ oc.level }}</td>
+                    </tr>
+                {% endif %}
+                {% if oc.obtained_date %}
+                    <tr>
+                        <th>{% trans 'Obtained Date' %}</th>
+                        <td>{{ oc.obtained_date }}</td>
+                    </tr>
+                {% endif %}
+            </table>
+            <div class="text-center">
+                {% if oc.is_mine %}
+                    <a href="/ownedcards/edit/{{ oc.id }}/"
+                       data-ajax-title="{% trans 'Edit' %} {% trans 'Card' %}"
+                       data-ajax-url="/ajax/ownedcards/edit/{{ oc.id }}/{% if collection %}?collection{% endif %}"
+                       data-ajax-handle-form="true" data-ajax-modal-size="md"
+                       data-ajax-modal-after-form-size="lg"
+                       class="btn btn-{{ oc.card.english_type }}">
+                        <i class="flaticon-edit"></i>
+                        {% trans 'Edit' %} {% trans 'Card' %}
+                    </a>
+                {% endif %}
+                <a href="{{ oc.card.item_url }}"
+                   data-ajax-url="{{ oc.card.ajax_item_url }}" data-ajax-title="{{ oc.card }}"
+                   class="btn btn-{{ oc.card.english_type }}">
+                    <i class="flaticon-about"></i>
+                    {% trans 'About' %}
+                </a>
+            </div>
+        </div>
+        <img src="{{ oc.card.icon_url }}" alt="{{ oc.card }}">
+    </div>
+    <br>
+{% endwith %}

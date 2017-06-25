@@ -1,7 +1,7 @@
 from django.conf import settings as django_settings
 from magi.default_settings import DEFAULT_NAVBAR_ORDERING, DEFAULT_ENABLED_PAGES
 
-from hoshimori import models
+from hoshimori import models, utils
 
 SITE_NAME = 'Sample Website'
 SITE_URL = 'http://sample.com/'
@@ -25,3 +25,14 @@ ENABLED_PAGES['addcard'] = {
         ('card', '\d+'),
     ],
 }
+
+ENABLED_PAGES['cardcollection'] = {
+    'ajax': True,
+    'navbar_link': False,
+    'url_variables':  [
+        ('card', '\d+'),
+    ],
+}
+
+ON_USER_EDITED = utils.onUserEdited
+ON_PREFERENCES_EDITED = utils.onPreferencesEdited

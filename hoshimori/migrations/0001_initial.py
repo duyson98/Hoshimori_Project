@@ -28,35 +28,11 @@ class Migration(migrations.Migration):
                 ('device', models.CharField(max_length=150, verbose_name='Device')),
                 ('i_os', models.PositiveIntegerField(default=0, verbose_name='Operating System', choices=[(0, b'iOs'), (1, b'Android')])),
                 ('i_player_type', models.PositiveIntegerField(default=0, verbose_name='Player type', choices=[(0, b'Free-to-play'), (1, b'Pay-to-win'), (2, b'FTP PTW Hybrid')])),
+                ('_cache_owner_last_update', models.DateTimeField(null=True)),
+                ('_cache_owner_username', models.CharField(max_length=32, null=True)),
+                ('_cache_owner_email', models.EmailField(max_length=75, null=True)),
+                ('_cache_owner_preferences_twitter', models.CharField(max_length=32, null=True)),
                 ('owner', models.ForeignKey(related_name='accounts', to=settings.AUTH_USER_MODEL)),
-            ],
-            options={
-                'abstract': False,
-            },
-            bases=(models.Model,),
-        ),
-        migrations.CreateModel(
-            name='ActionSkill',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('name', models.CharField(max_length=100, verbose_name='Action Skill')),
-                ('japanese_name', models.CharField(max_length=100, verbose_name='Action Skill (Japanese)')),
-                ('damage', models.CharField(max_length=200, verbose_name='Skill Damage')),
-                ('combo', models.PositiveIntegerField(default=13, verbose_name='Skill Combo')),
-            ],
-            options={
-                'abstract': False,
-            },
-            bases=(models.Model,),
-        ),
-        migrations.CreateModel(
-            name='ActionSkillEffect',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('i_name', models.CharField(max_length=100, verbose_name='Action Skill Effect')),
-                ('bonus_value', models.PositiveIntegerField(null=True, verbose_name='Effect Value')),
-                ('duration', models.PositiveIntegerField(null=True, verbose_name='Effect Duration')),
-                ('skill_affinity', models.PositiveIntegerField(default=1, null=True, verbose_name='Skill Affinity', choices=[(0, b''), (1, b'Ignore weapon affinity'), (2, b'Ignore conflicting weapon affinity')])),
             ],
             options={
                 'abstract': False,
@@ -117,6 +93,8 @@ class Migration(migrations.Migration):
                 ('_cache_student_name', models.CharField(max_length=100, null=True)),
                 ('_cache_student_japanese_name', models.CharField(max_length=100, null=True)),
                 ('_cache_student_image', models.ImageField(null=True, upload_to=hoshimori.models.uploadItem(b'cache_student'))),
+                ('_cache_totals_last_update', models.DateTimeField(null=True)),
+                ('_cache_total_owners', models.PositiveIntegerField(null=True)),
                 ('owner', models.ForeignKey(related_name='added_cards', to=settings.AUTH_USER_MODEL)),
             ],
             options={
@@ -152,10 +130,10 @@ class Migration(migrations.Migration):
             bases=(models.Model,),
         ),
         migrations.CreateModel(
-            name='Irousu',
+            name='Irous',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('name', models.PositiveIntegerField(unique=True, null=True, verbose_name='Irousu type', choices=[(0, 'Gel'), (1, 'Rouga'), (2, 'Quin'), (3, 'Eel'), (4, 'Shum'), (5, 'Drako'), (6, 'Doguu'), (7, 'Ray'), (8, 'Psyche'), (9, 'Drone'), (10, 'Variant'), (11, 'Unknown')])),
+                ('name', models.PositiveIntegerField(unique=True, null=True, verbose_name='Irous type', choices=[(0, 'Gel'), (1, 'Rouga'), (2, 'Quin'), (3, 'Eel'), (4, 'Shum'), (5, 'Drako'), (6, 'Doguu'), (7, 'Ray'), (8, 'Psyche'), (9, 'Drone'), (10, 'Variant'), (11, 'Unknown')])),
                 ('weak', multiselectfield.db.fields.MultiSelectField(default=b'', max_length=100, verbose_name='Weak', choices=[(0, 'Sword'), (1, 'Spear'), (2, 'Hammer'), (3, 'Gun'), (4, 'Rod'), (5, 'Gunblade'), (6, 'Twin Barrett')])),
                 ('strong', multiselectfield.db.fields.MultiSelectField(default=b'', max_length=100, verbose_name='Strong', choices=[(0, 'Sword'), (1, 'Spear'), (2, 'Hammer'), (3, 'Gun'), (4, 'Rod'), (5, 'Gunblade'), (6, 'Twin Barrett')])),
                 ('guard', multiselectfield.db.fields.MultiSelectField(default=b'', max_length=100, verbose_name='Guard', choices=[(0, 'Sword'), (1, 'Spear'), (2, 'Hammer'), (3, 'Gun'), (4, 'Rod'), (5, 'Gunblade'), (6, 'Twin Barrett')])),
@@ -166,28 +144,14 @@ class Migration(migrations.Migration):
             bases=(models.Model,),
         ),
         migrations.CreateModel(
-            name='IrousuVariation',
+            name='IrousVariation',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('name', models.CharField(unique=True, max_length=50, verbose_name='Irousu Name')),
-                ('japanese_name', models.CharField(max_length=50, verbose_name='Irousu Name (Japanese)')),
+                ('name', models.CharField(unique=True, max_length=50, verbose_name='Irous Name')),
+                ('japanese_name', models.CharField(max_length=50, verbose_name='Irous Name (Japanese)')),
                 ('image', models.ImageField(upload_to=hoshimori.models.uploadItem(b'i'), verbose_name='Image')),
-                ('is_large_irousu', models.NullBooleanField(verbose_name='Large Irousu')),
-                ('species', models.ForeignKey(related_name='species', on_delete=django.db.models.deletion.SET_NULL, to='hoshimori.Irousu', null=True)),
-            ],
-            options={
-                'abstract': False,
-            },
-            bases=(models.Model,),
-        ),
-        migrations.CreateModel(
-            name='Nakayoshi',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('effect_name', models.PositiveIntegerField(null=True, verbose_name='Nakayoshi skill', choices=[(0, 'ATK'), (1, 'HP'), (2, 'SP'), (3, 'Damage'), (4, 'Combo Damage'), (5, 'SP Consumption'), (6, 'Skill Combo'), (7, 'Movement Rate'), (8, 'Dodge'), (9, 'Auto Reload'), (10, 'Bullet'), (11, 'Item Recovery Range'), (12, 'Item Drop Quantity'), (13, 'Coin'), (14, 'Cheerpoint'), (15, 'EXP'), (16, 'Bond Point'), (17, 'Guard Penetration'), (18, 'Received Damage'), (19, 'Null SP Damage'), (20, 'Null Slow'), (21, 'Null Paralysis'), (22, 'Null Skill Seal'), (23, 'Null Poison')])),
-                ('positive_effect', models.BooleanField(default=True, verbose_name='Positive Effect')),
-                ('effect_level', models.PositiveIntegerField(blank=True, null=True, verbose_name='Effect Level', choices=[(0, b'Small'), (1, b'Medium'), (2, b'Large'), (3, b'Super')])),
-                ('bonus_value', models.PositiveIntegerField(null=True, verbose_name='Effect Value')),
+                ('is_large_irous', models.NullBooleanField(verbose_name='Large Irous')),
+                ('species', models.ForeignKey(related_name='species', on_delete=django.db.models.deletion.SET_NULL, to='hoshimori.Irous', null=True)),
             ],
             options={
                 'abstract': False,
@@ -201,6 +165,8 @@ class Migration(migrations.Migration):
                 ('evolved', models.BooleanField(default=False, verbose_name='Evolved')),
                 ('level', models.PositiveIntegerField(default=70, verbose_name='Level', validators=[django.core.validators.MinValueValidator(1), django.core.validators.MaxValueValidator(70)])),
                 ('obtained_date', models.DateField(null=True, verbose_name='Obtained Date', blank=True)),
+                ('_cache_account_last_update', models.DateTimeField(null=True)),
+                ('_cache_account_owner_id', models.PositiveIntegerField(null=True)),
                 ('account', models.ForeignKey(related_name='ownedcards', to='hoshimori.Account')),
                 ('card', models.ForeignKey(related_name='owned', to='hoshimori.Card')),
             ],
@@ -267,9 +233,9 @@ class Migration(migrations.Migration):
                 ('food_dislikes', models.CharField(max_length=100, verbose_name='Disliked food')),
                 ('family', models.CharField(max_length=100, verbose_name='Family members')),
                 ('dream', models.CharField(max_length=100, verbose_name='Dream job')),
-                ('ideal_1', models.CharField(max_length=100, verbose_name='Ideal person 1')),
-                ('ideal_2', models.CharField(max_length=100, verbose_name='Ideal person 2')),
-                ('ideal_3', models.CharField(max_length=100, verbose_name='Ideal person 3')),
+                ('ideal_1', models.CharField(max_length=100, verbose_name='Ideal model 1')),
+                ('ideal_2', models.CharField(max_length=100, verbose_name='Ideal model 2')),
+                ('ideal_3', models.CharField(max_length=100, verbose_name='Ideal model 3')),
                 ('pastime', models.CharField(max_length=100, verbose_name='Pastime')),
                 ('destress', models.CharField(max_length=100, verbose_name='Destress')),
                 ('fav_memory', models.CharField(max_length=100, verbose_name='Favorite memory')),
@@ -279,6 +245,10 @@ class Migration(migrations.Migration):
                 ('romaji_CV', models.CharField(help_text=b'In romaji.', max_length=100, verbose_name='CV')),
                 ('image', models.ImageField(upload_to=hoshimori.models.uploadItem(b's'), verbose_name='Image')),
                 ('full_image', models.ImageField(upload_to=hoshimori.models.uploadItem(b's/full'), verbose_name='Full Body Image')),
+                ('signature', models.ImageField(upload_to=hoshimori.models.uploadItem(b's/sign'), verbose_name='Signature')),
+                ('_cache_totals_last_update', models.DateTimeField(null=True)),
+                ('_cache_total_cards', models.PositiveIntegerField(null=True)),
+                ('_cache_total_events', models.PositiveIntegerField(null=True)),
                 ('owner', models.ForeignKey(related_name='added_students', to=settings.AUTH_USER_MODEL)),
             ],
             options={
@@ -294,20 +264,6 @@ class Migration(migrations.Migration):
                 ('japanese_name', models.CharField(max_length=100, verbose_name='Name (Japanese)')),
                 ('image', models.ImageField(upload_to=hoshimori.models.uploadItem(b'w'), verbose_name='Icon')),
                 ('i_type', models.PositiveIntegerField(verbose_name='Weapon', choices=[(0, 'Sword'), (1, 'Spear'), (2, 'Hammer'), (3, 'Gun'), (4, 'Rod'), (5, 'Gunblade'), (6, 'Twin Barrett')])),
-            ],
-            options={
-                'abstract': False,
-            },
-            bases=(models.Model,),
-        ),
-        migrations.CreateModel(
-            name='WeaponEffect',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('i_name', models.PositiveIntegerField(null=True, verbose_name='Weapon Effect', choices=[(0, b'GAY')])),
-                ('positive_effect', models.BooleanField(default=True, verbose_name='Positive Effect')),
-                ('effect_level', models.PositiveIntegerField(null=True, verbose_name='Effect Level')),
-                ('bonus_value', models.PositiveIntegerField(null=True, verbose_name='Effect Value')),
             ],
             options={
                 'abstract': False,
@@ -349,8 +305,8 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='stage',
-            name='large_irousu',
-            field=models.ManyToManyField(related_name='stage_with_large_irousu', null=True, to='hoshimori.IrousuVariation'),
+            name='large_irous',
+            field=models.ManyToManyField(related_name='stage_with_large_irous', null=True, to='hoshimori.IrousVariation'),
             preserve_default=True,
         ),
         migrations.AddField(
@@ -367,8 +323,8 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='stage',
-            name='small_irousu',
-            field=models.ManyToManyField(related_name='stage_with_small_irousu', null=True, to='hoshimori.IrousuVariation'),
+            name='small_irous',
+            field=models.ManyToManyField(related_name='stage_with_small_irous', null=True, to='hoshimori.IrousVariation'),
             preserve_default=True,
         ),
         migrations.AlterUniqueTogether(
@@ -379,12 +335,6 @@ class Migration(migrations.Migration):
             model_name='card',
             name='student',
             field=models.ForeignKey(related_name='cards', on_delete=django.db.models.deletion.SET_NULL, verbose_name='Student', to='hoshimori.Student', null=True),
-            preserve_default=True,
-        ),
-        migrations.AddField(
-            model_name='actionskill',
-            name='effects',
-            field=models.ManyToManyField(related_name='skills_with_effect', null=True, to='hoshimori.ActionSkillEffect'),
             preserve_default=True,
         ),
     ]

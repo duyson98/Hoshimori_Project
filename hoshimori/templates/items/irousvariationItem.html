@@ -1,0 +1,14 @@
+{% load magi_tags %}
+{% with irousvariation=item %}
+<br>
+<div class="well">
+  <a href="{{ irousvariation.item_url }}" data-ajax-url="{{ irousvariation.ajax_item_url }}" data-ajax-title="{{ irousvariation }}" class="irousvariation">
+    <img src="{{ irousvariation.image_url }}" alt="{{ irousvariation }}">
+    <div class="row">
+      <div class="col-md-8"><h3>{{ irousvariation.name }}</h3>
+      {{ irousvariation.japanese_name }}
+      </div>
+    </div>
+  </a>
+</div>
+{% endwith %}

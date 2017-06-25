@@ -1,14 +1,63 @@
-{% load magi_tags %}
+{% load i18n %}
 {% with student=item %}
-<br>
-<div class="well">
-  <a href="{{ student.item_url }}" data-ajax-url="{{ student.ajax_item_url }}" data-ajax-title="{{ student }}" class="student">
-    <img src="{{ student.image_url }}" alt="{{ student }}">
-    <div class="row">
-      <div class="col-md-8"><h3>{{ student.name }}</h3>
-      {{ student.japanese_name }}
-      </div>
+    <div class="student">
+        <a href="{{ student.item_url }}" class="a-nodifference" data-ajax-url="{{ student.ajax_item_url }}"
+           data-ajax-title="<h3>
+      {{ student }}
+    </h3>">
+            <img src="{{ student.image_url }}" alt="{{ student }}" class="student-img">
+        </a>
+        <a href="{{ student.item_url }}" data-ajax-url="{{ student.ajax_item_url }}">
+            <h3>
+                {{ student }}
+            </h3>
+        </a>
+        {% if user.staff %}
+            <a href="/students/t/{{ student.id }}/">{% trans 'Edit' %} {% trans 'student' %}</a>
+        {% endif %}
+        {% if ordering %}
+            <table class="table">
+                {% if ordering == 'birthday' %}
+                    <tr>
+                        <td><i class="flaticon-event"></i></td>
+                        <th>{% trans 'Birthday' %}</th>
+                        <td>{% if student.birthday %}{{ student.birthday|date:"F d" }}{% else %}??{% endif %}</td>
+                    </tr>
+                {% elif ordering == 'height' %}
+                    <tr>
+                        <td><i class="flaticon-scoreup"></i></td>
+                        <th>{% trans 'Height' %}</th>
+                        <td>{{ student.height|default_if_none:'??' }} cm</td>
+                    </tr>
+                {% elif ordering == 'weight' %}
+                    <tr>
+                        <td><i class="flaticon-scoreup"></i></td>
+                        <th>{% trans 'Weight' %}</th>
+                        <td>{{ student.weight|default_if_none:'??' }} kg</td>
+                    </tr>
+                {% elif ordering == 'bust' %}
+                    <tr>
+                        <td><i class="flaticon-id"></i></td>
+                        <th>{% trans 'Bust' %}</th>
+                        <td>{{ student.bust|default_if_none:'??' }} cm</td>
+                    </tr>
+                {% elif ordering == 'waist' %}
+                    <tr>
+                        <td><i class="flaticon-id"></i></td>
+                        <th>{% trans 'Waist' %}</th>
+                        <td>{{ student.waist|default_if_none:'??' }} cm</td>
+                    </tr>
+                {% elif ordering == 'hip' %}
+                    <tr>
+                        <td><i class="flaticon-id"></i></td>
+                        <th>{% trans 'Hip' %}</th>
+                        <td>{{ student.hip|default_if_none:'??' }} cm</td>
+                    </tr>
+                {% endif %}
+            </table>
+        {% endif %}
+        {% if user.is_staff %}
+            <a href="/students/edit/{{ student.id }}/"><i class="flaticon-edit"></i></a>
+        {% endif %}
     </div>
-  </a>
-</div>
 {% endwith %}
