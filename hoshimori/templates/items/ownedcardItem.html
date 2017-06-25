@@ -1,0 +1,16 @@
+{% load i18n %}
+{% load magi_tags %}
+{% with ownedcard=item %}
+    <br>
+    <div class="ownedcard" data-ownedcard-id="{{ ownedcard.id }}" id="ownedcard{{ ownedcard.id }}" data-ownedcard-account-id="{{ ownedcard.account_id }}"
+     data-card-title="{{ ownedcard.card }}">
+        <a href="{{ ownedcard.card.item_url }}" data-ajax-url="{{ ownedcard.card.ajax_item_url }}" data-ajax-title="{{ ownedcard.card }}"
+        class="card">
+            <img src="{{ ownedcard.card.image_url }}" alt="{{ ownedcard.card }}">
+        </a>
+        <div class="row">
+            <h3>{{ ownedcard.card.name }}</h3>
+            {{ ownedcard.card.japanese_name }}
+        </div>
+    </div>
+{% endwith %}

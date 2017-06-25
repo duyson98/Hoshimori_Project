@@ -15,6 +15,7 @@ class StudentFilterForm(MagiFiltersForm):
     search_fields = ['name', 'japanese_name', 'birthday', 'description']
 
     ordering_fields = [
+        ('', _('None')),
         ('name', _('Name')),
         ('japanese_name', string_concat(_('Name'), ' (', t['Japanese'], ')')),
         ('birthday', _('Birthday')),
@@ -52,6 +53,7 @@ class CardFilterForm(MagiFiltersForm):
     search_fields = ['_cache_student_name', '_cache_student_japanese_name', 'name', 'japanese_name', 'skill_name',
                      'japanese_skill_name']
     ordering_fields = [
+        ('', _('None')),
         ('id', _('ID')),
         ('_cache_student_name', string_concat(_('Student'), ' - ', _('Name'))),
         ('_cache_student_japanese_name', string_concat(_('Student'), ' - ', _('Name'), ' (', t['Japanese'], ')')),
@@ -87,6 +89,7 @@ class WeaponFilterForm(MagiFiltersForm):
     search_fields = ['name', 'japanese_name']
 
     ordering_fields = [
+        ('', _('None')),
         ('name', _('Name')),
         ('japanese_name', string_concat(_('Name'), ' (', t['Japanese'], ')')),
     ]
@@ -117,6 +120,7 @@ class StageFilterForm(MagiFiltersForm):
     search_fields = ['name', 'materials']
 
     ordering_fields = [
+        ('', _('None')),
         ('episode', _('Episode')),
         #     ('easy_level', _('Easy Level')),
         #     ('easy_exp', _('Easy EXP')),
