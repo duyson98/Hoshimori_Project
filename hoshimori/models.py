@@ -310,6 +310,9 @@ class Account(MagiModel):
     def __unicode__(self):
         return u'#{} {} - {}'.format(self.id, self.cached_owner.username, self.nickname)
 
+    def get_cards(self):
+        return OwnedCard.objects.filter(account_id=self.id)
+
 
 ############################################################
 # Card
@@ -958,7 +961,7 @@ class IrousVariation(MagiModel):
 
     species = models.ForeignKey(Irous, related_name='species', null=True, on_delete=models.SET_NULL)
     image = models.ImageField(_('Image'), upload_to=uploadItem('i'))
-    is_large_irous = models.BooleanField(_('Large Irous'))
+    is_large_irous = models.BooleanField(_('Large Irous'), default = True)
 
     def owner(self):
         return self.species
