@@ -1,3 +1,13 @@
-{% for item in profile_user.all_accounts %}
-{% include 'items/accountItem.html' %}
+{% for account in profile_user.all_accounts %}
+<div class="well">
+  <a href="{{ account.owner.item_url }}">
+    <div class="row">
+      <div class="col-md-2">{% include 'include/avatar.html' with av_user=account.owner av_size=30 av_image_size=100 %}</div>
+      <div class="col-md-8"><h3>{{ account.nickname }}</h3></div>
+      <div class="col-md-2"><h3 class="text-right"><span class="prefix">PLv.</span>&nbsp;{{ account.level|default_if_none:"??" }}</h3></div>
+    </div>
+    <br>
+    <a href="/ownedcards/" target="_blank"><button>{{ account.nickname }} 's Card Collection</button></a>
+  </a>
+</div>
 {% endfor %}
