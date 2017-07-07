@@ -1,7 +1,4 @@
 // Your functions or code that should load on all pages goes here.
-$(document).ready(function () {
-    $('input[type=checkbox]').removeAttr('checked');
-});
 
 function updateOwnedCards() {
     $('.ownedcard').each(function () {

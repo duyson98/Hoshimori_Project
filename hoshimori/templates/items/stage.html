@@ -75,18 +75,30 @@
                 <tr>
                     <td style="vertical-align:top; text-align: left">
                         {% for small_irous in stage.get_small_irous %}
-                            <a href= "{{ small_irous.item_url }}">
-                                <img src="{{ small_irous.image_url }}" alt="{{ small_irous }}" height="100px">
-                                {{ small_irous }}
+                            <a href="{{ small_irous.item_url }}">
+                                <table style="width: 100%">
+                                    <tr>
+                                        <td>{{ small_irous }}</td>
+                                        <td style="text-align: right"><img src="{{ small_irous.image_url }}" alt="{{ small_irous }}"
+                                                 height="100px">
+                                        </td>
+                                    </tr>
+                                </table>
                             </a>
                             <br>
                         {% endfor %}
                     </td>
                     <td style="vertical-align:top; text-align: right">
                         {% for large_irous in stage.get_large_irous %}
-                            <a href= "{{ large_irous.item_url }}">
-                                {{ large_irous }}
-                                <img src="{{ large_irous.image_url }}" alt="{{ large_irous }}" height="100px">
+                            <a href="{{ large_irous.item_url }}">
+                                <table style="width: 100%">
+                                    <tr>
+                                        <td><img src="{{ large_irous.image_url }}" alt="{{ large_irous }}"
+                                                 height="100px">
+                                        </td>
+                                        <td style="text-align: right">{{ large_irous }}</td>
+                                    </tr>
+                                </table>
                             </a>
                             <br>
                         {% endfor %}

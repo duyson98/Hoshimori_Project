@@ -2,10 +2,30 @@
 
 from django.db.models import Prefetch
 from django.utils.translation import ugettext_lazy as _
+from magi.magicollections import AccountCollection as _AccountCollection
 from magi.magicollections import MagiCollection
+from magi.magicollections import UserCollection as _UserCollection
 
-from hoshimori import forms
+from hoshimori import forms, raw
 from hoshimori.models import *
+
+############################################################
+# Account
+# Override
+
+class AccountCollection(_AccountCollection):
+    class ListView(_AccountCollection.ListView):
+        distinct = True
+        default_ordering = '-id'
+        filter_form = forms.AccountFilterForm
+
+    class AddView(_AccountCollection.AddView):
+        back_to_list_button = False
+
+        js_files = getattr(_AccountCollection.AddView, 'js_files', []) + ['mod_account']
+
+    class EditView(_AccountCollection.EditView):
+        js_files = getattr(_AccountCollection.AddView, 'js_files', []) + ['mod_account']
 
 
 ############################################################
@@ -36,6 +56,7 @@ class StudentCollection(MagiCollection):
             request = context['request']
             if 'ordering' in request.GET:
                 context['ordering'] = request.GET['ordering']
+            return context
 
         def check_permissions(self, request, context):
             super(StudentCollection.ListView, self).check_permissions(request, context)
@@ -50,6 +71,7 @@ class StudentCollection(MagiCollection):
     class EditView(MagiCollection.EditView):
         staff_required = True
         multipart = True
+        allow_delete = True
         form_class = forms.StudentForm
 
 
@@ -68,7 +90,7 @@ class CardCollection(MagiCollection):
     class ItemView(MagiCollection.ItemView):
         template = 'default'
         # ajax_callback = 'updateCardsAndOwnedCards'
-        # js_files = ['cards', 'collection']
+        js_files = ['cards', 'collection']
 
         def extra_context(self, context):
             request = context['request']
@@ -83,9 +105,10 @@ class CardCollection(MagiCollection):
                     # Set values to avoid using select_related since we already have them
                     for account in request.user.all_accounts:
                         account.owner = request.user
-                        for oc in account.all_owned:
+                        for oc in account.get_cards():
                             oc.card = context['item']
                             oc.is_mine = True
+            return context
 
     class ListView(MagiCollection.ListView):
         filter_form = forms.CardFilterForm
@@ -107,6 +130,7 @@ class CardCollection(MagiCollection):
                 context['share_sentence'] = _('Check out my collection of cards!')
             if 'student' in request.GET and request.GET['student']:
                 context['student'] = Student.objects.get(id=request.GET['student'])
+            return context
 
         def check_permissions(self, request, context):
             super(CardCollection.ListView, self).check_permissions(request, context)
@@ -121,6 +145,7 @@ class CardCollection(MagiCollection):
     class EditView(MagiCollection.EditView):
         staff_required = True
         multipart = True
+        allow_delete = True
         form_class = forms.CardForm
 
 
@@ -272,6 +297,7 @@ class StageCollection(MagiCollection):
     class EditView(MagiCollection.EditView):
         staff_required = True
         multipart = True
+        allow_delete = True
 
 
 ############################################################
@@ -283,6 +309,7 @@ class IrousVariationCollection(MagiCollection):
     title = _('Irous Variation')
     plural_title = _('Irous Variations')
     icon = 'deck'
+    navbar_link = False
 
     class ItemView(MagiCollection.ItemView):
         template = 'irousvariation'
@@ -304,3 +331,4 @@ class IrousVariationCollection(MagiCollection):
     class EditView(MagiCollection.EditView):
         staff_required = True
         multipart = True
+        allow_delete = True

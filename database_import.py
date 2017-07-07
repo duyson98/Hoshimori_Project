@@ -236,11 +236,9 @@ def card_import_data():
                             skill_name=row[20],
                             japanese_skill_name=row[20],
                             skill_SP=return_number_or_none(row[21]),
-                            skill_hits=return_number_or_none(row[23]),
                             skill_range=row[25],
                             skill_comment=row[27],
                             skill_preview=row[28],
-                            max_damage=0,
                             action_skill_damage=row[24],
                             action_skill_combo=row[22] if row[22].isdigit() else None if row[22] == "" else
                             extract_number(row[22])[0],

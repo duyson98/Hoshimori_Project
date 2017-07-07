@@ -1,0 +1,9 @@
+<script>
+{% if form.i_os %}
+  var oss = {
+  {% for value, name in form.i_os.field.choices %}
+    '{{ value }}': '<i class="flaticon-{{ name }}"></i>',
+  {% endfor %}
+  };
+{% endif %}
+</script>

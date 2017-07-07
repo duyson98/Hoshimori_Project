@@ -1,21 +1,53 @@
+{% load i18n %}
+<script>
+  var ownedcards_to_reload = [];
+</script>
 {% for account in profile_user.all_accounts %}
-    <div class="well">
-        <a href="{{ account.owner.item_url }}">
-            <div class="row">
-                <div class="col-md-2">{% include 'include/avatar.html' with av_user=account.owner av_size=30 av_image_size=100 %}</div>
-                <div class="col-md-8"><h3>{{ account.nickname }}</h3></div>
-                <div class="col-md-2"><h3 class="text-right"><span
-                        class="prefix">PLv.</span>&nbsp;{{ account.level|default_if_none:"??" }}</h3></div>
-            </div>
-            <br>
-            <a href="/ownedcards/" target="_blank">
-                <button>{{ account.nickname }} 's Card Collection</button>
-            </a>
-            <div class="fuckme">
-                {% for ownedcard in account.get_cards %}
-                    <img src="{{ ownedcard.card.image_url }}" width="15%">
-                {% endfor %}
-            </div>
-        </a>
+<div class="profile-account {% if account.center_id %}{{ account.cached_center.card.english_type }}{% else %}None{% endif %}" data-account-id="{{ account.id }}">
+  <div class="profile-header" style="background-image: url('{% if account.center_id and account.cached_center.card.art %}{{ account.cached_center.card.art_url }}{% else %}{{ static_url }}img/backgrounds/background1.png{% endif %}');">
+    <div class="profile-header-character" style="background-image: {% if account.center_id and not account.cached_center.card.art %}url('{{ account.cached_center.card.transparent_url }}'){% else %}none{% endif %};"><div class="profile-level">
+      <span class="level"><span class="prefix">Lv.&nbsp;</span>{{ account.level|default_if_none:'??' }}</span>
+      {% if account.cached_leaderboard %}
+      <span class="leaderboard">
+	<a href="/accounts/" target="_blank">
+	  #{{ account.cached_leaderboard }}
+	  <i class="flaticon-link"></i>
+	</a>
+      </span>
+      {% endif %}
+    </div><div class="profile-info">
+      {% if account.nickname %}
+      <span class="nickname">{{ account.nickname }}</span>
+      {% endif %}
+      {% if account.game_id %}
+      <span class="game-id">{{ account.game_id }}</span>
+      {% endif %}
+      {% if account.owner_id == user.id %}
+      <a href="/accounts/edit/{{ account.id }}/" class="btn btn-inherit">
+	<i class="flaticon-edit"></i> {% trans 'Edit' %} {% trans 'Account' %}
+      </a>
+      {% else %}
+      <a href="/reports/add/account/?id={{ account.id }}" class="a-nodifference">
+	<i class="flaticon-fingers"></i> {% trans 'Report' %}
+      </a>
+      {% endif %}
     </div>
+    <ul class="nav nav-tabs">
+      {% for name, localized, icon in account_tabs %}
+      <li{% if account.show == name %} class="active"{% endif %}><a href="#account{{ account.id }}{{ name }}" data-toggle="tab">
+	  <i class="flaticon-{{ icon }}"></i>
+	  <span class="hidden-xs">{% trans localized %}</span>
+      </a></li>
+      {% endfor %}
+    </ul>
+  </div>
+  </div>
+  <div class="tab-content">
+    <h4>{{ account.nickname }} 's Card Collection</h4>
+            <br>
+            {% for ownedcard in account.get_cards %}
+                <img src="{{ ownedcard.card.image_url }}" width="15%">
+            {% endfor %}
+  </div>
+</div>
 {% endfor %}

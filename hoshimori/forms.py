@@ -1,4 +1,5 @@
 import datetime
+
 from django import forms
 from django.db.models import BLANK_CHOICE_DASH
 from django.utils.translation import ugettext_lazy as _, string_concat
@@ -8,37 +9,7 @@ from hoshimori import models
 from hoshimori.django_translated import t
 from hoshimori.model_choices import *
 
-
-class FormWithRequest(AutoForm):
-    def __init__(self, *args, **kwargs):
-        self.request = kwargs.pop('request', None)
-        super(FormWithRequest, self).__init__(*args, **kwargs)
-        self.is_creating = not hasattr(self, 'instance') or not self.instance.pk
-        # Fix optional fields
-        if hasattr(self.Meta, 'optional_fields'):
-            for field in self.Meta.optional_fields:
-                if field in self.fields:
-                    self.fields[field].required = False
-        # Fix dates inputs
-        if hasattr(self.Meta, 'date_fields'):
-            for field in self.Meta.date_fields:
-                if field in self.fields:
-                    self.fields[field] = date_input(self.fields[field])
-
-    def save(self, commit=True):
-        instance = super(FormWithRequest, self).save(commit=False)
-        # Fix empty strings to None
-        for field in self.fields.keys():
-            if (hasattr(instance, field)
-                and (type(getattr(instance, field)) == unicode or type(getattr(instance, field)) == str)
-                and getattr(instance, field) == ''):
-                setattr(instance, field, None)
-        if commit:
-            instance.save()
-        return instance
-
-
-class FormSaveOwnerOnCreation(FormWithRequest):
+class FormSaveOwnerOnCreation(AutoForm):
     def save(self, commit=True):
         instance = super(FormSaveOwnerOnCreation, self).save(commit=False)
         if self.is_creating:
@@ -47,19 +18,19 @@ class FormSaveOwnerOnCreation(FormWithRequest):
             instance.save()
         return instance
 
+############################################################
+# Account
 
-class DateInput(forms.DateInput):
-    input_type = 'date'
+class AccountFilterForm(MagiFiltersForm):
+    search_fields = ['owner', 'nickname', 'game_id', 'device']
+
+    os = forms.ChoiceField(choices=BLANK_CHOICE_DASH + OS_CHOICES, label=_('Operating System'))
+    player_type = forms.ChoiceField(choices=BLANK_CHOICE_DASH + PLAYERTYPE_CHOICES, label=_('Player Type'))
 
 
-def date_input(field):
-    field.widget = DateInput()
-    field.widget.attrs.update({
-        'class': 'calendar-widget',
-        'data-role': 'data',
-    })
-    return field
-
+    class Meta:
+        model = models.Account
+        fields = ('search', 'os', 'player_type')
 
 ############################################################
 # Student
@@ -68,13 +39,13 @@ class StudentForm(FormSaveOwnerOnCreation):
     class Meta:
         model = models.Student
         fields = (
-            'name', 'japanese_name', 'i_school_year', 'birthday', 'height', 'weight', 'i_blood_type', 'bust', 'waist',
-            'hip', 'i_star_sign', 'extra_activity', 'catchphrase_1', 'catchphrase_2', 'height', 'weight', 'bust',
-            'waist', 'hip', 'hobby_1', 'hobby_2', 'hobby_3', 'food_likes', 'food_dislikes', 'family', 'dream',
+            'name', 'japanese_name', 'i_school_year', 'unlock', 'birthday', 'height', 'weight', 'i_blood_type', 'bust',
+            'waist', 'hip', 'i_star_sign', 'extra_activity', 'catchphrase_1', 'catchphrase_2', 'height', 'weight',
+            'bust', 'waist', 'hip', 'hobby_1', 'hobby_2', 'hobby_3', 'food_likes', 'food_dislikes', 'family', 'dream',
             'ideal_1', 'ideal_2', 'ideal_3', 'pastime', 'destress', 'fav_memory', 'fav_phrase', 'secret', 'CV',
             'romaji_CV', 'image', 'full_image')
         optional_fields = (
-            'japanese_name', 'i_school_year', 'birthday', 'height', 'weight', 'i_blood_type', 'bust', 'waist',
+            'japanese_name', 'i_school_year', 'unlock', 'birthday', 'height', 'weight', 'i_blood_type', 'bust', 'waist',
             'hip', 'i_star_sign', 'extra_activity', 'catchphrase_1', 'catchphrase_2', 'height', 'weight', 'bust',
             'waist', 'hip', 'hobby_1', 'hobby_2', 'hobby_3', 'food_likes', 'food_dislikes', 'family', 'dream',
             'ideal_1', 'ideal_2', 'ideal_3', 'pastime', 'destress', 'fav_memory', 'fav_phrase', 'secret', 'CV',
@@ -98,6 +69,8 @@ class StudentFilterForm(MagiFiltersForm):
 
     def __init__(self, *args, **kwargs):
         super(StudentFilterForm, self).__init__(*args, **kwargs)
+        self.fields['reverse_order'].initial = False
+
 
     class Meta:
         model = models.Student
@@ -126,8 +99,8 @@ class CardForm(FormSaveOwnerOnCreation):
         model = models.Card
         fields = ('id', 'student', 'i_rarity', 'i_weapon', 'name', 'japanese_name', 'image', 'art', 'transparent',
                   'subcard_effect', 'card_type', 'hp_1', 'sp_1', 'atk_1', 'def_1', 'hp_50', 'sp_50', 'atk_50', 'def_50',
-                  'hp_70', 'sp_70', 'atk_70', 'def_70', 'skill_name', 'japanese_skill_name', 'skill_SP', 'skill_hits',
-                  'skill_range', 'skill_comment', 'skill_preview', 'max_damage', 'action_skill_damage',
+                  'hp_70', 'sp_70', 'atk_70', 'def_70', 'skill_name', 'japanese_skill_name', 'skill_SP',
+                  'skill_range', 'skill_comment', 'skill_preview', 'action_skill_damage',
                   'action_skill_combo', 'action_skill_effects', 'evolved_action_skill_damage',
                   'evolved_action_skill_combo', 'evolved_action_skill_effects', 'nakayoshi_title',
                   'japanese_nakayoshi_title', 'nakayoshi_skill_effect', 'nakayoshi_skill_target',
@@ -135,15 +108,13 @@ class CardForm(FormSaveOwnerOnCreation):
                   'charge_damage', 'charge_range', 'charge_comment',)
         optional_fields = (
             'name', 'japanese_name', 'art', 'transparent', 'subcard_effect', 'card_type', 'hp_1', 'sp_1', 'atk_1',
-            'def_1',
-            'hp_50', 'sp_50', 'atk_50', 'def_50', 'hp_70', 'sp_70', 'atk_70', 'def_70', 'skill_name',
-            'japanese_skill_name',
-            'skill_SP', 'skill_hits', 'skill_range', 'skill_comment', 'skill_preview', 'max_damage',
-            'action_skill_damage',
-            'action_skill_combo', 'action_skill_effects', 'evolved_action_skill_damage', 'evolved_action_skill_combo',
-            'evolved_action_skill_effects', 'nakayoshi_title', 'japanese_nakayoshi_title', 'nakayoshi_skill_effect',
-            'nakayoshi_skill_target', 'evolved_nakayoshi_skill_effect', 'evolved_nakayoshi_skill_target', 'charge_name',
-            'charge_hit', 'charge_damage', 'charge_range', 'charge_comment',)
+            'def_1', 'hp_50', 'sp_50', 'atk_50', 'def_50', 'hp_70', 'sp_70', 'atk_70', 'def_70', 'skill_name',
+            'japanese_skill_name', 'skill_SP', 'skill_range', 'skill_comment', 'skill_preview',
+            'action_skill_damage', 'action_skill_combo', 'action_skill_effects',
+            'evolved_action_skill_damage', 'evolved_action_skill_combo', 'evolved_action_skill_effects',
+            'nakayoshi_title', 'japanese_nakayoshi_title', 'nakayoshi_skill_effect', 'nakayoshi_skill_target',
+            'evolved_nakayoshi_skill_effect', 'evolved_nakayoshi_skill_target', 'charge_name', 'charge_hit',
+            'charge_damage', 'charge_range', 'charge_comment',)
 
 
 class CardFilterForm(MagiFiltersForm):
@@ -177,6 +148,10 @@ class CardFilterForm(MagiFiltersForm):
 
     card_type = forms.ChoiceField(choices=BLANK_CHOICE_DASH + CARDTYPE_CHOICES)
 
+    def __init__(self, *args, **kwargs):
+        super(CardFilterForm, self).__init__(*args, **kwargs)
+        self.fields['reverse_order'].initial = False
+
     class Meta:
         model = models.Card
         fields = ('search', 'student', 'card_type', 'i_rarity', 'i_weapon', 'evolvable', 'ordering', 'reverse_order')
@@ -193,7 +168,7 @@ class OwnedCardFilterForm(MagiFiltersForm):
         fields = ('search', 'i_rarity', 'i_weapon')
         optional_fields = ('i_rarity')
 
-class OwnedCardEditForm(FormWithRequest):
+class OwnedCardEditForm(AutoForm):
     def __init__(self, *args, **kwargs):
         super(OwnedCardEditForm, self).__init__(*args, **kwargs)
         self.card = self.instance.card
@@ -272,6 +247,11 @@ class StageFilterForm(MagiFiltersForm):
         ('hard_stage__coins', _('Hard Coins')),
         ('hard_stage__cheerpoint', _('Hard Cheerpoints')),
     ]
+
+
+    def __init__(self, *args, **kwargs):
+        super(StageFilterForm, self).__init__(*args, **kwargs)
+        self.fields['reverse_order'].initial = False
 
     class Meta:
         model = models.Stage

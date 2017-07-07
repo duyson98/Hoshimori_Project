@@ -88,6 +88,10 @@ ENV/
 # Rope project settings
 .ropeproject
 
+# Pycharm
+.idea/
+node_modules/
+
 # MagiCircles
 env/
 hoshimori_project/local_settings.py
@@ -98,3 +102,4 @@ hoshimori/templates/pages/map.html
 collected/
 db.sqlite3
 hoshimori/static/uploaded/
+

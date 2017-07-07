@@ -344,8 +344,8 @@ class Card(MagiModel):
     name = models.CharField(_('Title'), max_length=100)
     japanese_name = models.CharField(string_concat(_('Title'), ' (', t['Japanese'], ')'), max_length=100)
 
-    # Images
-    image = models.ImageField(_('Image'), upload_to=uploadItem('c'))
+    # Icon
+    image = models.ImageField(_('Icon'), upload_to=uploadItem('c'))
 
     @property
     def image_url(self):
@@ -354,6 +354,18 @@ class Card(MagiModel):
     @property
     def http_image_url(self):
         return get_http_image_url_from_path(self.image)
+
+    special_icon = models.CharField(_('Special Icon'), max_length=50)
+
+    @property
+    def special_icon_url(self):
+        return get_image_url_from_path('hoshimori/static/uploaded/c/special/{}'.format(self.special_icon))
+
+    @property
+    def http_special_icon_url(self):
+        return get_http_image_url_from_path('hoshimori/static/uploaded/c/special/{}'.format(self.special_icon))
+
+    # Art
 
     art = models.ImageField(_('Art'), upload_to=uploadItem('c/art'), null=True)
 
@@ -364,6 +376,68 @@ class Card(MagiModel):
     @property
     def http_art_url(self):
         return get_http_image_url_from_path(self.art)
+
+    special_front = models.CharField(_('Special Front'), max_length=50)
+
+    @property
+    def special_front_url(self):
+        return get_image_url_from_path('hoshimori/static/uploaded/c/art/special/{}'.format(self.special_front))
+
+    @property
+    def http_special_front_url(self):
+        return get_http_image_url_from_path('hoshimori/static/uploaded/c/art/special/{}'.format(self.special_front))
+
+    front_top = models.CharField(_('Front Top'), max_length=50)
+
+    @property
+    def front_top_url(self):
+        return get_image_url_from_path('hoshimori/static/uploaded/c/art/special/{}'.format(self.front_top))
+
+    @property
+    def http_front_top_url(self):
+        return get_http_image_url_from_path('hoshimori/static/uploaded/c/art/special/{}'.format(self.front_top))
+
+    front_bottom = models.CharField(_('Front Bottom'), max_length=50)
+
+    @property
+    def front_bottom_url(self):
+        return get_image_url_from_path('hoshimori/static/uploaded/c/art/special/{}'.format(self.front_bottom))
+
+    @property
+    def http_front_bottom_url(self):
+        return get_http_image_url_from_path('hoshimori/static/uploaded/c/art/special/{}'.format(self.front_bottom))
+
+    front_name = models.CharField(_('Front Name'), max_length=50)
+
+    @property
+    def front_name_url(self):
+        return get_image_url_from_path('hoshimori/static/uploaded/c/art/special/{}'.format(self.front_name))
+
+    @property
+    def http_front_name_url(self):
+        return get_http_image_url_from_path('hoshimori/static/uploaded/c/art/special/{}'.format(self.front_name))
+
+    front_rarity = models.CharField(_('Front Rarity'), max_length=50)
+
+    @property
+    def front_rarity_url(self):
+        return get_image_url_from_path('hoshimori/static/uploaded/c/art/special/{}'.format(self.front_rarity))
+
+    @property
+    def http_front_rarity_url(self):
+        return get_http_image_url_from_path('hoshimori/static/uploaded/c/art/special/{}'.format(self.front_rarity))
+
+    front_weapon = models.CharField(_('Front Weapon'), max_length=50)
+
+    @property
+    def front_weapon_url(self):
+        return get_image_url_from_path('hoshimori/static/uploaded/c/art/special/{}'.format(self.front_weapon))
+
+    @property
+    def http_front_weapon_url(self):
+        return get_http_image_url_from_path('hoshimori/static/uploaded/c/art/special/{}'.format(self.front_weapon))
+
+    # Transparent
 
     transparent = models.ImageField(_('Transparent'), upload_to=uploadItem('c/transparent'), null=True, blank=True)
 
@@ -495,10 +569,9 @@ class Card(MagiModel):
         return getattr(self, fieldname + '_50') - 50 * self._para_second_slope(fieldname, False)
 
     # Action skill
-    skill_name = models.CharField(_('Skill name'), max_length=100)
+    skill_name = models.CharField(_('Skill name'), max_length=100, null=True)
     japanese_skill_name = models.CharField(string_concat(_('Skill name'), ' (', t['Japanese'], ')'), max_length=100)
     skill_SP = models.PositiveIntegerField(_('Skill SP'), default=0, null=True)
-    skill_hits = models.PositiveIntegerField(_('Skill hits'), default=0, null=True)
     skill_range = models.CharField(_('Skill range'), max_length=300)
     skill_comment = models.CharField(_('Skill comment'), max_length=1000)
     skill_preview = models.ImageField(_('Skill preview'), upload_to=uploadItem('c/skill'), null=True)
@@ -510,8 +583,6 @@ class Card(MagiModel):
     @property
     def http_skill_preview_url(self):
         return get_http_image_url_from_path(self.skill_preview)
-
-    max_damage = models.PositiveIntegerField(_('Max damage'), default=0)
 
     # TODO: Use String until properly import
     # action_skill = models.OneToOne('ActionSkill', verbose_name=_('Action Skill'), related_name='skill', null=True,
