@@ -200,72 +200,69 @@ def return_number_or_none(str):
         return None
 
 
-# TODO
 def card_import_data():
-    with open('database\card_database.csv') as f:
+    with open('database/revamped_card_database.csv') as f:
         reader = csv.reader(f)
-        id = 0
         for row in reader:
-            try:
-                if row[0] != 'card_type':  # ignore header row
-                    id += 1
-                    if Card.objects.filter(name=row[3]).__len__() == 0:
-                        _, created = Card.objects.get_or_create(
-                            id=id,
-                            i_rarity=row[7],
-                            i_weapon=row[5],
-                            name=row[3],
-                            japanese_name=row[3],
-                            image=row[4],
-                            art=row[4],
-                            transparent=row[4],
-                            subcard_effect=0,
-                            card_type=row[0],
-                            hp_1=row[8],
-                            sp_1=row[9],
-                            atk_1=row[10],
-                            def_1=row[11],
-                            hp_50=row[12],
-                            sp_50=row[13],
-                            atk_50=row[14],
-                            def_50=row[15],
-                            hp_70=return_number_or_none(row[16]),
-                            sp_70=return_number_or_none(row[17]),
-                            atk_70=return_number_or_none(row[18]),
-                            def_70=return_number_or_none(row[19]),
-                            skill_name=row[20],
-                            japanese_skill_name=row[20],
-                            skill_SP=return_number_or_none(row[21]),
-                            skill_range=row[25],
-                            skill_comment=row[27],
-                            skill_preview=row[28],
-                            action_skill_damage=row[24],
-                            action_skill_combo=row[22] if row[22].isdigit() else None if row[22] == "" else
-                            extract_number(row[22])[0],
-                            action_skill_effects=row[26],
-                            evolved_action_skill_damage=row[24],
-                            evolved_action_skill_combo=row[22] if row[22].isdigit() else None if row[22] == "" else
-                            extract_number(row[22])[1],
-                            evolved_action_skill_effects=row[26],
-                            nakayoshi_title=row[34],
-                            japanese_nakayoshi_title=row[34],
-                            nakayoshi_skill_effect=row[36],
-                            nakayoshi_skill_target=row[35],
-                            evolved_nakayoshi_skill_effect=row[38],
-                            evolved_nakayoshi_skill_target=row[37],
-                            charge_name=row[29],
-                            charge_hit=None if row[30] == '' else row[30],
-                            charge_damage=row[31],
-                            charge_range=row[32],
-                            charge_comment=row[33],
-                            owner_id=1,
-                            student_id=return_number_or_none(row[1]),
-                        )
-            except Exception, e:
-                print str(e)
-                print id
-                print row[3]
-                break
+            if row[0] != 'id':  # ignore header row
+                if Card.objects.filter(name=row[3]).__len__() == 0:
+                    _, created = Card.objects.get_or_create(
+                        id=row[0],
+                        owner_id=row[1],
+                        i_card_type=row[3],
+                        name=row[4],
+                        japanese_name=row[5],
+                        student_id=row[7],
+                        i_rarity=row[9],
+                        i_weapon=row[11],
+                        obtain_method=row[12],
+                        image=row[13],
+                        special_icon=row[14],
+                        art=row[15],
+                        special_front=row[16],
+                        front_top=row[17],
+                        front_bottom=row[18],
+                        front_name=row[19],
+                        front_rarity=row[20],
+                        front_weapon=row[21],
+                        transparent=row[22],
+                        subcard_effect=True if row[23] == "true" else False,
+                        hp_1=row[24],
+                        sp_1=row[25],
+                        atk_1=row[26],
+                        def_1=row[27],
+                        hp_50=row[28],
+                        sp_50=row[29],
+                        atk_50=row[30],
+                        def_50=row[31],
+                        hp_70=return_number_or_none(row[32]),
+                        sp_70=return_number_or_none(row[33]),
+                        atk_70=return_number_or_none(row[34]),
+                        def_70=return_number_or_none(row[35]),
+                        skill_name=row[36],
+                        japanese_skill_name=row[37],
+                        skill_SP=return_number_or_none(row[38]),
+                        skill_range=row[39],
+                        i_skill_affinity=row[41],
+                        action_skill_effects=row[42],
+                        skill_comment=row[43],
+                        skill_preview=row[44],
+                        action_skill_combo=return_number_or_none(row[45]),
+                        evolved_action_skill_combo=return_number_or_none(row[46]),
+                        action_skill_damage=row[47],
+                        evolved_action_skill_damage=row[48],
+                        nakayoshi_title=row[49],
+                        japanese_nakayoshi_title=row[50],
+                        nakayoshi_skill_effect=row[51],
+                        nakayoshi_skill_target=row[52],
+                        evolved_nakayoshi_skill_effect=row[53],
+                        evolved_nakayoshi_skill_target=row[54],
+                        charge_comment=row[55],
+                        charge_damage=row[56],
+                        charge_hit=row[57],
+                        charge_name=row[58],
+                        charge_range=row[59],
+                    )
 
 
 card_import_data()

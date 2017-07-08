@@ -47,6 +47,7 @@ def getAccountLeaderboard(account):
         return None
     return Account.objects.filter(level__gt=account.level).values('level').distinct().count() + 1
 
+
 ############################################################
 # Student
 
@@ -202,7 +203,6 @@ class Student(MagiModel):
     _cache_totals_days = 2
     _cache_totals_last_update = models.DateTimeField(null=True)
     _cache_total_cards = models.PositiveIntegerField(null=True)
-    _cache_total_events = models.PositiveIntegerField(null=True)
 
     def update_cache_totals(self):
         self._cache_totals_last_update = timezone.now()
@@ -344,8 +344,10 @@ class Card(MagiModel):
     name = models.CharField(_('Title'), max_length=100)
     japanese_name = models.CharField(string_concat(_('Title'), ' (', t['Japanese'], ')'), max_length=100)
 
+    obtain_method = models.CharField(_('Obtain Method'), max_length=100)
+
     # Icon
-    image = models.ImageField(_('Icon'), upload_to=uploadItem('c'))
+    image = models.ImageField(_('Icon'), upload_to=uploadItem('c/icon'))
 
     @property
     def image_url(self):
@@ -355,15 +357,15 @@ class Card(MagiModel):
     def http_image_url(self):
         return get_http_image_url_from_path(self.image)
 
-    special_icon = models.CharField(_('Special Icon'), max_length=50)
+    special_icon = models.ImageField(_('Special Icon'), upload_to=uploadItem('c/icon/special'))
 
     @property
     def special_icon_url(self):
-        return get_image_url_from_path('hoshimori/static/uploaded/c/special/{}'.format(self.special_icon))
+        return get_image_url_from_path(self.special_icon)
 
     @property
     def http_special_icon_url(self):
-        return get_http_image_url_from_path('hoshimori/static/uploaded/c/special/{}'.format(self.special_icon))
+        return get_http_image_url_from_path(self.special_icon)
 
     # Art
 
@@ -377,65 +379,65 @@ class Card(MagiModel):
     def http_art_url(self):
         return get_http_image_url_from_path(self.art)
 
-    special_front = models.CharField(_('Special Front'), max_length=50)
+    special_front = models.ImageField(_('Special Front'), upload_to=uploadItem('c/art/special'), null=True)
 
     @property
     def special_front_url(self):
-        return get_image_url_from_path('hoshimori/static/uploaded/c/art/special/{}'.format(self.special_front))
+        return get_image_url_from_path(self.special_front)
 
     @property
     def http_special_front_url(self):
-        return get_http_image_url_from_path('hoshimori/static/uploaded/c/art/special/{}'.format(self.special_front))
+        return get_http_image_url_from_path(self.special_front)
 
-    front_top = models.CharField(_('Front Top'), max_length=50)
+    front_top = models.ImageField(_('Front Top'), upload_to=uploadItem('c/art/front_top'), null=True)
 
     @property
     def front_top_url(self):
-        return get_image_url_from_path('hoshimori/static/uploaded/c/art/special/{}'.format(self.front_top))
+        return get_image_url_from_path(self.front_top)
 
     @property
     def http_front_top_url(self):
-        return get_http_image_url_from_path('hoshimori/static/uploaded/c/art/special/{}'.format(self.front_top))
+        return get_http_image_url_from_path(self.front_top)
 
-    front_bottom = models.CharField(_('Front Bottom'), max_length=50)
+    front_bottom = models.ImageField(_('Front Bottom'), upload_to=uploadItem('c/art/front_bottom'), null=True)
 
     @property
     def front_bottom_url(self):
-        return get_image_url_from_path('hoshimori/static/uploaded/c/art/special/{}'.format(self.front_bottom))
+        return get_image_url_from_path(self.front_bottom)
 
     @property
     def http_front_bottom_url(self):
-        return get_http_image_url_from_path('hoshimori/static/uploaded/c/art/special/{}'.format(self.front_bottom))
+        return get_http_image_url_from_path(self.front_bottom)
 
-    front_name = models.CharField(_('Front Name'), max_length=50)
+    front_name = models.ImageField(_('Front Name'), upload_to=uploadItem('c/art/front_name'), null=True)
 
     @property
     def front_name_url(self):
-        return get_image_url_from_path('hoshimori/static/uploaded/c/art/special/{}'.format(self.front_name))
+        return get_image_url_from_path(self.front_name)
 
     @property
     def http_front_name_url(self):
-        return get_http_image_url_from_path('hoshimori/static/uploaded/c/art/special/{}'.format(self.front_name))
+        return get_http_image_url_from_path(self.front_name)
 
-    front_rarity = models.CharField(_('Front Rarity'), max_length=50)
+    front_rarity = models.ImageField(_('Front Rarity'), upload_to=uploadItem('c/art/front_rarity'), null=True)
 
     @property
     def front_rarity_url(self):
-        return get_image_url_from_path('hoshimori/static/uploaded/c/art/special/{}'.format(self.front_rarity))
+        return get_image_url_from_path(self.front_rarity)
 
     @property
     def http_front_rarity_url(self):
-        return get_http_image_url_from_path('hoshimori/static/uploaded/c/art/special/{}'.format(self.front_rarity))
+        return get_http_image_url_from_path(self.front_rarity)
 
-    front_weapon = models.CharField(_('Front Weapon'), max_length=50)
+    front_weapon = models.ImageField(_('Front Weapon'), upload_to=uploadItem('c/art/front_weapon'), null=True)
 
     @property
     def front_weapon_url(self):
-        return get_image_url_from_path('hoshimori/static/uploaded/c/art/special/{}'.format(self.front_weapon))
+        return get_image_url_from_path(self.front_weapon)
 
     @property
     def http_front_weapon_url(self):
-        return get_http_image_url_from_path('hoshimori/static/uploaded/c/art/special/{}'.format(self.front_weapon))
+        return get_http_image_url_from_path(self.front_weapon)
 
     # Transparent
 
@@ -453,7 +455,14 @@ class Card(MagiModel):
     subcard_effect = models.BooleanField(_('Subcard Effect'), default=False)
 
     # Card type
-    card_type = models.PositiveIntegerField(_('Card Type'), choices=CARDTYPE_CHOICES, default=0)
+    i_card_type = models.PositiveIntegerField(_('Card Type'), choices=CARDTYPE_CHOICES, default=0)
+
+    @property
+    def card_type(self):
+        if self.i_card_type is not None:
+            return CARDTYPE_DICT[self.i_card_type]
+        else:
+            return None
 
     @property
     def is_subcard(self):
@@ -575,6 +584,19 @@ class Card(MagiModel):
     skill_range = models.CharField(_('Skill range'), max_length=300)
     skill_comment = models.CharField(_('Skill comment'), max_length=1000)
     skill_preview = models.ImageField(_('Skill preview'), upload_to=uploadItem('c/skill'), null=True)
+    action_skill_effects = models.CharField(_('Skill Effect'), max_length=200)
+    i_skill_affinity = models.PositiveIntegerField(_('Skill Affinity'), null=True, choices=SKILL_AFFINITY_CHOICES,
+                                                 default=IGNORE_AFFINITY)
+    @property
+    def skill_affinity(self):
+        if self.i_skill_affinity is not None:
+            return SKILL_AFFINITY_DICT[self.i_skill_affinity]
+        else:
+            return None
+
+    @property
+    def has_action_skill(self):
+        return self.skill_SP is not None
 
     @property
     def skill_preview_url(self):
@@ -591,13 +613,10 @@ class Card(MagiModel):
     #                                          related_name='evolved skill', null=True, on_delete=models.SET_NULL)
     action_skill_damage = models.CharField(_('Skill Damage'), max_length=200)
     action_skill_combo = models.PositiveIntegerField(_('Skill Combo'), default=13, null=True)
-    action_skill_effects = models.CharField(_('Skill Effect'), max_length=200)
     evolved_action_skill_damage = models.CharField(string_concat(_('Skill Damage'), ' (', _('Evolved'), ')'),
                                                    max_length=200)
     evolved_action_skill_combo = models.PositiveIntegerField(string_concat(_('Skill Combo'), ' (', _('Evolved'), ')'),
                                                              default=13, null=True)
-    evolved_action_skill_effects = models.CharField(string_concat(_('Skill Effect'), ' (', _('Evolved'), ')'),
-                                                    max_length=200)
 
     # Nakayoshi
     nakayoshi_title = models.CharField(_('Passive Skill'), max_length=100)
@@ -618,7 +637,7 @@ class Card(MagiModel):
 
     # Charge attack
     charge_name = models.CharField(_('Charge name'), max_length=100)
-    charge_hit = models.PositiveIntegerField(_('Charge hits'), null=True)
+    charge_hit = models.CharField(_('Charge hits'), max_length=50)
     charge_damage = models.CharField(_('Charge damage'), max_length=200)
     charge_range = models.CharField(_('Charge range'), max_length=300)
     charge_comment = models.CharField(_('Charge comment'), max_length=1000)
@@ -1032,7 +1051,7 @@ class IrousVariation(MagiModel):
 
     species = models.ForeignKey(Irous, related_name='species', null=True, on_delete=models.SET_NULL)
     image = models.ImageField(_('Image'), upload_to=uploadItem('i'))
-    is_large_irous = models.BooleanField(_('Large Irous'), default = True)
+    is_large_irous = models.BooleanField(_('Large Irous'), default=True)
 
     def owner(self):
         return self.species

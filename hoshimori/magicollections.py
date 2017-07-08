@@ -88,8 +88,8 @@ class CardCollection(MagiCollection):
     reportable = False
 
     class ItemView(MagiCollection.ItemView):
-        template = 'default'
-        # ajax_callback = 'updateCardsAndOwnedCards'
+        template = 'cardInfo'
+        ajax_callback = 'updateCardsAndOwnedCards'
         js_files = ['cards', 'collection']
 
         def extra_context(self, context):
@@ -113,7 +113,7 @@ class CardCollection(MagiCollection):
     class ListView(MagiCollection.ListView):
         filter_form = forms.CardFilterForm
         staff_required = False
-        default_ordering = 'card_type,student,i_rarity'
+        default_ordering = 'i_card_type,student,i_rarity'
         full_width = True
         ajax_pagination_callback = 'updateCards'
         js_files = ['cards']

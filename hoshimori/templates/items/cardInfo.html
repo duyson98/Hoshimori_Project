@@ -1,0 +1,71 @@
+{% load i18n %}
+{% load tools %}
+{% with card=item %}
+    <div class="card-info">
+        <br><br>
+        <p class="text-center">
+        <div class="card-art" style="position:relative; width:300px; height:394px; margin:0 auto;">
+            <div class="main-art" style="top:-10px; left:-10px; z-index:200;">
+                <img src="{{ card.art_url }}" alt="{{ card.name }}" class="card-image"></div>
+            {% if card.special_front %}
+                <div class="special-front" style="position:absolute; top:0px; left:0px; z-index:10;">
+                    <img src="{{ card.special_front_url }}" alt="{{ card.name }}">
+                </div>
+            {% endif %}
+            {% if card.front_top %}
+                <div class="front-top" style="position:absolute; top:0px; left:0px; z-index:20;">
+                    <img src="{{ card.front_top_url }}" alt="{{ card.name }}">
+                </div>
+            {% endif %}
+            {% if card.front_bottom %}
+                <div class="front-bottom" style="position:absolute; left:0px; bottom:0px; z-index:20;">
+                    <img src="{{ card.front_bottom_url }}" alt="{{ card.name }}">
+                </div>
+            {% endif %}
+            {% if card.front_name %}
+                <div class="front-name" style="position:absolute; bottom:0px; right:0px; z-index:30;">
+                    <img src="{{ card.front_name_url }}" alt="{{ card.name }}">
+                </div>
+            {% endif %}
+            {% if card.front_rarity %}
+                <div class="front-rarity" style="position:absolute; top:0px; left:0px; z-index:40;">
+                    <img src="{{ card.front_rarity_url }}" alt="{{ card.name }}">
+                </div>
+            {% endif %}
+            {% if card.front_weapon %}
+                <div class="special-front" style="position:absolute; left:0px; bottom:0px; z-index:40;">
+                    <img src="{{ card.front_weapon_url }}" alt="{{ card.name }}">
+                </div>
+            {% endif %}
+        </div>
+        </p>
+        {% if current == 'card_item' %}
+            <h3 class="text-center fontx2">{{ card.name }}</h3>
+        {% endif %}
+        <br>
+        <table class="table about-table a-main">
+            {% if card.japanese_name %}
+                <tr>
+                    <td><i class="flaticon-JP"></i></td>
+                    <th>{% trans 'Name' %} ({% t 'Japanese' %})</th>
+                    <td>{{ card.japanese_name }}</td>
+                </tr>
+            {% endif %}
+            <span class="btn-group">
+	  {% include 'include/share.html' with share_url=card.http_item_url share_btn_class=card.english_type|add:" btn-lg" share_sentence=card %}
+	</span>
+            </td>
+            </tr>
+            {% if user.is_staff %}
+                <tr>
+                    <td><i class="flaticon-edit"></i></td>
+                    <th>{% trans 'Edit' %}</th>
+                    <td>
+                        <a href="/cards/edit/{{ card.id }}/"
+                           class="btn btn-lg btn-main"><i class="flaticon-edit"></i></a>
+                    </td>
+                </tr>
+            {% endif %}
+        </table>
+    </div>
+{% endwith %}

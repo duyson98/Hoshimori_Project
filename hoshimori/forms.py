@@ -9,6 +9,7 @@ from hoshimori import models
 from hoshimori.django_translated import t
 from hoshimori.model_choices import *
 
+
 class FormSaveOwnerOnCreation(AutoForm):
     def save(self, commit=True):
         instance = super(FormSaveOwnerOnCreation, self).save(commit=False)
@@ -17,6 +18,7 @@ class FormSaveOwnerOnCreation(AutoForm):
         if commit:
             instance.save()
         return instance
+
 
 ############################################################
 # Account
@@ -27,10 +29,10 @@ class AccountFilterForm(MagiFiltersForm):
     os = forms.ChoiceField(choices=BLANK_CHOICE_DASH + OS_CHOICES, label=_('Operating System'))
     player_type = forms.ChoiceField(choices=BLANK_CHOICE_DASH + PLAYERTYPE_CHOICES, label=_('Player Type'))
 
-
     class Meta:
         model = models.Account
         fields = ('search', 'os', 'player_type')
+
 
 ############################################################
 # Student
@@ -71,7 +73,6 @@ class StudentFilterForm(MagiFiltersForm):
         super(StudentFilterForm, self).__init__(*args, **kwargs)
         self.fields['reverse_order'].initial = False
 
-
     class Meta:
         model = models.Student
         fields = ('search', 'i_school_year', 'i_blood_type', 'i_star_sign', 'ordering', 'reverse_order')
@@ -97,24 +98,26 @@ class CardForm(FormSaveOwnerOnCreation):
 
     class Meta:
         model = models.Card
-        fields = ('id', 'student', 'i_rarity', 'i_weapon', 'name', 'japanese_name', 'image', 'art', 'transparent',
-                  'subcard_effect', 'card_type', 'hp_1', 'sp_1', 'atk_1', 'def_1', 'hp_50', 'sp_50', 'atk_50', 'def_50',
-                  'hp_70', 'sp_70', 'atk_70', 'def_70', 'skill_name', 'japanese_skill_name', 'skill_SP',
-                  'skill_range', 'skill_comment', 'skill_preview', 'action_skill_damage',
-                  'action_skill_combo', 'action_skill_effects', 'evolved_action_skill_damage',
-                  'evolved_action_skill_combo', 'evolved_action_skill_effects', 'nakayoshi_title',
-                  'japanese_nakayoshi_title', 'nakayoshi_skill_effect', 'nakayoshi_skill_target',
-                  'evolved_nakayoshi_skill_effect', 'evolved_nakayoshi_skill_target', 'charge_name', 'charge_hit',
-                  'charge_damage', 'charge_range', 'charge_comment',)
+        fields = ("id", "i_card_type", "name", "japanese_name", "student", "i_rarity", "i_weapon", "obtain_method",
+                  "image", "special_icon", "art", "special_front", "front_top", "front_bottom", "front_name",
+                  "front_rarity", "front_weapon", "transparent", "subcard_effect", "hp_1", "sp_1", "atk_1", "def_1",
+                  "hp_50", "sp_50", "atk_50", "def_50", "hp_70", "sp_70", "atk_70", "def_70", "skill_name",
+                  "japanese_skill_name", "skill_SP", "skill_range", "i_skill_affinity", "action_skill_effects",
+                  "skill_comment", "skill_preview", "action_skill_combo", "evolved_action_skill_combo",
+                  "action_skill_damage", "evolved_action_skill_damage", "nakayoshi_title", "japanese_nakayoshi_title",
+                  "nakayoshi_skill_effect", "nakayoshi_skill_target", "evolved_nakayoshi_skill_effect",
+                  "evolved_nakayoshi_skill_target", "charge_comment", "charge_damage", "charge_hit", "charge_name",
+                  "charge_range",
+                  )
         optional_fields = (
-            'name', 'japanese_name', 'art', 'transparent', 'subcard_effect', 'card_type', 'hp_1', 'sp_1', 'atk_1',
-            'def_1', 'hp_50', 'sp_50', 'atk_50', 'def_50', 'hp_70', 'sp_70', 'atk_70', 'def_70', 'skill_name',
-            'japanese_skill_name', 'skill_SP', 'skill_range', 'skill_comment', 'skill_preview',
-            'action_skill_damage', 'action_skill_combo', 'action_skill_effects',
-            'evolved_action_skill_damage', 'evolved_action_skill_combo', 'evolved_action_skill_effects',
-            'nakayoshi_title', 'japanese_nakayoshi_title', 'nakayoshi_skill_effect', 'nakayoshi_skill_target',
-            'evolved_nakayoshi_skill_effect', 'evolved_nakayoshi_skill_target', 'charge_name', 'charge_hit',
-            'charge_damage', 'charge_range', 'charge_comment',)
+        "i_card_type", "name", "japanese_name", "student", "obtain_method", "special_icon", "special_front",
+        "front_top", "front_bottom", "front_name", "front_rarity", "front_weapon", "transparent", "subcard_effect",
+        "hp_1", "sp_1", "atk_1", "def_1", "hp_50", "sp_50", "atk_50", "def_50", "hp_70", "sp_70", "atk_70", "def_70",
+        "skill_name", "japanese_skill_name", "skill_SP", "skill_range", "i_skill_affinity", "action_skill_effects",
+        "skill_comment", "skill_preview", "action_skill_combo", "evolved_action_skill_combo", "action_skill_damage",
+        "evolved_action_skill_damage", "nakayoshi_title", "japanese_nakayoshi_title", "nakayoshi_skill_effect",
+        "nakayoshi_skill_target", "evolved_nakayoshi_skill_effect", "evolved_nakayoshi_skill_target", "charge_comment",
+        "charge_damage", "charge_hit", "charge_name", "charge_range")
 
 
 class CardFilterForm(MagiFiltersForm):
@@ -138,15 +141,15 @@ class CardFilterForm(MagiFiltersForm):
 
     def _evolvable_to_queryset(form, queryset, request, value):
         if value == '2':
-            return queryset.filter(i_rarity__in=EVOLVABLE_RARITIES, card_type=0)
+            return queryset.filter(i_rarity__in=EVOLVABLE_RARITIES, i_card_type=0)
         elif value == '3':
-            return queryset.exclude(i_rarity__in=EVOLVABLE_RARITIES, card_type=0)
+            return queryset.exclude(i_rarity__in=EVOLVABLE_RARITIES, i_card_type=0)
         return queryset
 
-    evolvable = forms.NullBooleanField(initial=None, required=False, label=_('Evolvable'))
+    evolvable = forms.ChoiceField(initial=None, required=False, label=_('Evolvable'))
     evolvable_filter = MagiFilter(to_queryset=_evolvable_to_queryset)
 
-    card_type = forms.ChoiceField(choices=BLANK_CHOICE_DASH + CARDTYPE_CHOICES)
+    i_card_type = forms.ChoiceField(label="Card Type", choices=BLANK_CHOICE_DASH + CARDTYPE_CHOICES)
 
     def __init__(self, *args, **kwargs):
         super(CardFilterForm, self).__init__(*args, **kwargs)
@@ -154,7 +157,7 @@ class CardFilterForm(MagiFiltersForm):
 
     class Meta:
         model = models.Card
-        fields = ('search', 'student', 'card_type', 'i_rarity', 'i_weapon', 'evolvable', 'ordering', 'reverse_order')
+        fields = ('search', 'student', 'i_card_type', 'i_rarity', 'i_weapon', 'evolvable', 'ordering', 'reverse_order')
 
 
 ############################################################
@@ -167,6 +170,7 @@ class OwnedCardFilterForm(MagiFiltersForm):
         model = models.Card
         fields = ('search', 'i_rarity', 'i_weapon')
         optional_fields = ('i_rarity')
+
 
 class OwnedCardEditForm(AutoForm):
     def __init__(self, *args, **kwargs):
@@ -195,6 +199,7 @@ class OwnedCardEditForm(AutoForm):
         fields = ('evolved', 'level', 'obtained_date')
         optional_fields = ('evolved', 'level', 'obtained_date')
         date_fields = ('obtained_date',)
+
 
 ############################################################
 # Weapon
@@ -247,7 +252,6 @@ class StageFilterForm(MagiFiltersForm):
         ('hard_stage__coins', _('Hard Coins')),
         ('hard_stage__cheerpoint', _('Hard Cheerpoints')),
     ]
-
 
     def __init__(self, *args, **kwargs):
         super(StageFilterForm, self).__init__(*args, **kwargs)
