@@ -43,6 +43,134 @@
             <h3 class="text-center fontx2">{{ card.name }}</h3>
         {% endif %}
         <br>
+        <div class="card-statistics">
+             <div class="tab">
+              <button class="tablinks" onclick="openTab(event, 'Lv1')">Lv. 1</button>
+              <button class="tablinks" onclick="openTab(event, 'Lv50')">Lv. 50</button>
+              <button class="tablinks" onclick="openTab(event, 'Lv70')" id="defaultOpen">Lv. 70</button>
+            </div>
+
+            <div id="Lv1" class="tabcontent">
+                <div class="row">
+                    <div class="progress-label">HP</div>
+                    <div class="progress-value">{{ card.hp_1 }}</div>
+                    <div class="progress-bar">
+                      <div class="stats hp" style="width: calc({{ card.hp_1}}% / 99.99); background-color: #4CAF50;"></div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="progress-label">SP</div>
+                    <div class="progress-value">{{ card.sp_1 }}</div>
+                    <div class="progress-bar">
+                      <div class="stats sp" style="width: calc({{ card.sp_1}}% / 99.99); background-color: #2196F3;"></div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="progress-label">ATK</div>
+                    <div class="progress-value">{{ card.atk_1 }}</div>
+                    <div class="progress-bar">
+                      <div class="stats atk" style="width: calc({{ card.atk_1}}% / 99.99); background-color: #f44336;"></div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="progress-label">DEF</div>
+                    <div class="progress-value">{{ card.def_1 }}</div>
+                    <div class="progress-bar">
+                      <div class="stats def" style="width: calc({{ card.def_1}}% / 99.99); background-color: #808080;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="Lv50" class="tabcontent">
+                <div class="row">
+                    <div class="progress-label">HP</div>
+                    <div class="progress-value">{{ card.hp_50 }}</div>
+                    <div class="progress-bar">
+                      <div class="stats hp" style="width: calc({{ card.hp_50}}% / 99.99); background-color: #4CAF50;"></div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="progress-label">SP</div>
+                    <div class="progress-value">{{ card.sp_50 }}</div>
+                    <div class="progress-bar">
+                      <div class="stats sp" style="width: calc({{ card.sp_50}}% / 99.99); background-color: #2196F3;"></div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="progress-label">ATK</div>
+                    <div class="progress-value">{{ card.atk_50 }}</div>
+                    <div class="progress-bar">
+                      <div class="stats atk" style="width: calc({{ card.atk_50}}% / 99.99); background-color: #f44336;"></div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="progress-label">DEF</div>
+                    <div class="progress-value">{{ card.def_50 }}</div>
+                    <div class="progress-bar">
+                      <div class="stats def" style="width: calc({{ card.def_50}}% / 99.99); background-color: #808080;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="Lv70" class="tabcontent">
+                <div class="row">
+                    <div class="progress-label">HP</div>
+                    <div class="progress-value">{{ card.hp_70 }}</div>
+                    <div class="progress-bar">
+                      <div class="stats hp" style="width: calc({{ card.hp_70}}% / 99.99); background-color: #4CAF50;"></div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="progress-label">SP</div>
+                    <div class="progress-value">{{ card.sp_70 }}</div>
+                    <div class="progress-bar">
+                      <div class="stats sp" style="width: calc({{ card.sp_70}}% / 99.99); background-color: #2196F3;"></div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="progress-label">ATK</div>
+                    <div class="progress-value">{{ card.atk_70 }}</div>
+                    <div class="progress-bar">
+                      <div class="stats atk" style="width: calc({{ card.atk_70}}% / 99.99); background-color: #f44336;"></div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="progress-label">DEF</div>
+                    <div class="progress-value">{{ card.def_70 }}</div>
+                    <div class="progress-bar">
+                      <div class="stats def" style="width: calc({{ card.def_70}}% / 99.99); background-color: #808080;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+            function openTab(evt, tabName) {
+                var i, tabcontent, tablinks;
+                tabcontent = document.getElementsByClassName("tabcontent");
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+                tablinks = document.getElementsByClassName("tablinks");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+                document.getElementById(tabName).style.display = "block";
+                evt.currentTarget.className += " active";
+            }
+            // Get the element with id="defaultOpen" and click on it
+            document.getElementById("defaultOpen").click();
+            </script>
+        </div>
+        <br>
         <table class="table about-table a-main">
             {% if card.japanese_name %}
                 <tr>
@@ -54,8 +182,133 @@
             <span class="btn-group">
 	  {% include 'include/share.html' with share_url=card.http_item_url share_btn_class=card.english_type|add:" btn-lg" share_sentence=card %}
 	</span>
-            </td>
-            </tr>
+            {% if card.obtain_method %}
+                <tr>
+                    <td><i class="flaticon-perfectlock"></i></td>
+                    <th>{% trans 'Obtain Method' %}</th>
+                    <td>{{ card.obtain_method }}</td>
+                </tr>
+            {% endif %}
+            {% if card.art_url %}
+                <tr>
+                    <td><i class="flaticon-pictures"></i></td>
+                    <th>{% trans 'Art' %}</th>
+                    <td>
+                        <a href="{{ card.art_url }}" target="_blank">
+                            <img src="{{ card.art_url }}" alt="{% trans 'art' %}">
+                        </a>
+                    </td>
+                </tr>
+            {% endif %}
+            {% if card.front_top_url %}
+                <tr>
+                    <td><i class="flaticon-pictures"></i></td>
+                    <th>{% trans 'Front Top' %}</th>
+                    <td>
+                        <a href="{{ card.front_top_url }}" target="_blank">
+                            <img src="{{ card.front_top_url }}" alt="{% trans 'front_top' %}">
+                        </a>
+                    </td>
+                </tr>
+            {% endif %}
+            {% if card.front_bottom_url %}
+                <tr>
+                    <td><i class="flaticon-pictures"></i></td>
+                    <th>{% trans 'Front Bottom' %}</th>
+                    <td>
+                        <a href="{{ card.front_bottom_url }}" target="_blank">
+                            <img src="{{ card.front_bottom_url }}" alt="{% trans 'front_bottom' %}">
+                        </a>
+                    </td>
+                </tr>
+            {% endif %}
+            {% if card.front_name_url %}
+                <tr>
+                    <td><i class="flaticon-pictures"></i></td>
+                    <th>{% trans 'Front Name' %}</th>
+                    <td>
+                        <a href="{{ card.front_name_url }}" target="_blank">
+                            <img src="{{ card.front_name_url }}" alt="{% trans 'front_name' %}">
+                        </a>
+                    </td>
+                </tr>
+            {% endif %}
+            {% if card.front_rarity_url %}
+                <tr>
+                    <td><i class="flaticon-pictures"></i></td>
+                    <th>{% trans 'Front Rarity' %}</th>
+                    <td>
+                        <a href="{{ card.front_rarity_url }}" target="_blank">
+                            <img src="{{ card.front_rarity_url }}" alt="{% trans 'front_rarity' %}">
+                        </a>
+                    </td>
+                </tr>
+            {% endif %}
+            {% if card.front_weapon_url %}
+                <tr>
+                    <td><i class="flaticon-pictures"></i></td>
+                    <th>{% trans 'Front Weapon' %}</th>
+                    <td>
+                        <a href="{{ card.front_weapon_url }}" target="_blank">
+                            <img src="{{ card.front_weapon_url }}" alt="{% trans 'front_weapon' %}">
+                        </a>
+                    </td>
+                </tr>
+            {% endif %}
+            {% if card.skill_name %}
+                <tr>
+                    <td><i class="flaticon-skill"></i></td>
+                    <th>{% trans 'Skill Name' %}</th>
+                    <td>{{ card.skill_name }}</td>
+                </tr>
+            {% endif %}
+            {% if card.japanese_skill_name %}
+                <tr>
+                    <td><i class="flaticon-skill"></i></td>
+                    <th>{% trans 'Skill Name' %} ({% t 'Japanese' %})</th>
+                    <td>{{ card.japanese_skill_name }}</td>
+                </tr>
+            {% endif %}
+            {% if card.skill_SP %}
+                <tr>
+                    <td><i class="flaticon-skill"></i></td>
+                    <th>{% trans 'Skill SP' %}</th>
+                    <td>{{ card.skill_SP }}</td>
+                </tr>
+            {% endif %}
+            {% if range.skill_range %}
+                <tr>
+                    <td><i class="flaticon-skill"></i></td>
+                    <th>{% trans 'Skill Range' %}</th>
+                    <td>{{ range.skill_range }}</td>
+                </tr>
+            {% endif %}
+            {% if card.skill_comment %}
+                <tr>
+                    <td><i class="flaticon-skill"></i></td>
+                    <th>{% trans 'Skill Comment' %}</th>
+                    <td>{{ card.skill_comment }}</td>
+                </tr>
+            {% endif %}
+            {% if card.skill_preview_url %}
+                <tr>
+                    <td><i class="flaticon-skill"></i></td>
+                    <th>{% trans 'Skill Preview' %}</th>
+                    <td>
+                        <a href="{{ card.skill_preview_url }}" target="_blank">
+                            <img src="{{ card.skill_preview_url }}" alt="{% trans 'skill_preview' %}">
+                        </a>
+                    </td>
+                </tr>
+            {% endif %}
+            {% if card.action_skill_effects %}
+                <tr>
+                    <td><i class="flaticon-skill"></i></td>
+                    <th>{% trans 'Action Skill Effects' %}</th>
+                    <td>{{ card.action_skill_effects }}</td>
+                </tr>
+            {% endif %}
+
             {% if user.is_staff %}
                 <tr>
                     <td><i class="flaticon-edit"></i></td>

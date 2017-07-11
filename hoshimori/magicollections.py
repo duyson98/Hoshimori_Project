@@ -5,6 +5,8 @@ from django.utils.translation import ugettext_lazy as _
 from magi.magicollections import AccountCollection as _AccountCollection
 from magi.magicollections import MagiCollection
 from magi.magicollections import UserCollection as _UserCollection
+from magi.utils import cuteFormFieldsForContext, CuteFormType
+from magi.default_settings import RAW_CONTEXT
 
 from hoshimori import forms, raw
 from hoshimori.models import *
@@ -37,6 +39,13 @@ class StudentCollection(MagiCollection):
     title = _('Student')
     plural_title = _('Students')
     icon = 'idolized'
+
+    filter_cuteform = {
+        'i_blood_type': {
+            'type': CuteFormType.HTML,
+        },
+        'i_star_sign': {}
+    }
 
     class ItemView(MagiCollection.ItemView):
         template = 'studentInfo'
@@ -86,6 +95,16 @@ class CardCollection(MagiCollection):
     icon = 'cards'
 
     reportable = False
+
+    filter_cuteform = {
+        'i_card_type': {
+            'type':  CuteFormType.HTML,
+        },
+        'i_rarity': {
+            'type': CuteFormType.HTML,
+        },
+        'i_weapon': {}
+    }
 
     class ItemView(MagiCollection.ItemView):
         template = 'cardInfo'

@@ -3,16 +3,17 @@ from magi.default_settings import DEFAULT_NAVBAR_ORDERING, DEFAULT_ENABLED_PAGES
 
 from hoshimori import models, utils
 
-SITE_NAME = 'Sample Website'
+SITE_NAME = 'Hoshimori Gakuen'
 SITE_URL = 'http://sample.com/'
 SITE_IMAGE = 'hoshimori.png'
 SITE_STATIC_URL = '//localhost:{}/'.format(django_settings.DEBUG_PORT) if django_settings.DEBUG else '//i.sample.com/'
-GAME_NAME = 'Sample Game'
+SITE_DESCRIPTION = "The Battle Girl Highschool Database & Community"
+GAME_NAME = 'Battle Girl Highschool'
 DISQUS_SHORTNAME = 'sample'
 ACCOUNT_MODEL = models.Account
 COLOR = '#4a86e8'
 
-SITE_NAV_LOGO = 'logo.png'
+# SITE_NAV_LOGO = 'logo.png'
 
 NAVBAR_ORDERING = ['student_list', 'card_list', 'weapon_list', 'material_list'] + DEFAULT_NAVBAR_ORDERING
 
