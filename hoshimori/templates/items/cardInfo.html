@@ -182,6 +182,40 @@
             <span class="btn-group">
 	  {% include 'include/share.html' with share_url=card.http_item_url share_btn_class=card.english_type|add:" btn-lg" share_sentence=card %}
 	</span>
+            {% if card.i_rarity %}
+                <tr>
+                    <td><i class="flaticon-star-empty"></i></td>
+                    <th>{% trans 'Rarity' %}</th>
+                    <td>{{ card.rarity }}</td>
+                </tr>
+            {% endif %}
+            {% if card.i_weapon %}
+                <tr>
+                    <td><i class="flaticon-skill"></i></td>
+                    <th>{% trans 'Weapon' %}</th>
+                    <td>{{ card.weapon }}</td>
+                </tr>
+            {% endif %}
+            {% if card.i_card_type %}
+                <tr>
+                    <td><i class="flaticon-album"></i></td>
+                    <th>{% trans 'Card Type' %}</th>
+                    <td>{{ card.card_type }}</td>
+                </tr>
+            {% endif %}
+            {% if card.subcard_effect == 0 %}
+                <tr>
+                    <td><i class="flaticon-about"></i></td>
+                    <th>{% trans 'Subcard Effect' %}</th>
+                    <td><i class="flaticon-delete"></i></td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td><i class="flaticon-about"></i></td>
+                    <th>{% trans 'Subcard Effect' %}</th>
+                    <td><i class="flaticon-checked"></i></td>
+                </tr>
+            {% endif %}
             {% if card.obtain_method %}
                 <tr>
                     <td><i class="flaticon-perfectlock"></i></td>
@@ -255,6 +289,17 @@
                     </td>
                 </tr>
             {% endif %}
+            {% if card.transparent_url %}
+                <tr>
+                    <td><i class="flaticon-pictures"></i></td>
+                    <th>{% trans 'Transparent' %}</th>
+                    <td>
+                        <a href="{{ card.transparent_url }}" target="_blank">
+                            <img src="{{ card.transparent_url }}" alt="{% trans 'transparent' %}">
+                        </a>
+                    </td>
+                </tr>
+            {% endif %}
             {% if card.skill_name %}
                 <tr>
                     <td><i class="flaticon-skill"></i></td>
@@ -308,7 +353,118 @@
                     <td>{{ card.action_skill_effects }}</td>
                 </tr>
             {% endif %}
-
+            {% if card.i_skill_affinity %}
+                <tr>
+                    <td><i class="flaticon-skill"></i></td>
+                    <th>{% trans 'Skill Affinity' %}</th>
+                    <td>{{ card.skill_affinity }}</td>
+                </tr>
+            {% endif %}
+            {% if card.action_skill_damage %}
+                <tr>
+                    <td><i class="flaticon-skill"></i></td>
+                    <th>{% trans 'Action Skill Damage' %}</th>
+                    <td>{{ card.action_skill_damage }}</td>
+                </tr>
+            {% endif %}
+            {% if card.evolved_action_skill_damage %}
+                <tr>
+                    <td><i class="flaticon-skill"></i></td>
+                    <th>{% trans 'Action Skill Damage' %} ({% t 'Evolved' %})</th>
+                    <td>{{ card.evolved_action_skill_damage }}</td>
+                </tr>
+            {% endif %}
+            {% if card.action_skill_combo %}
+                <tr>
+                    <td><i class="flaticon-skill"></i></td>
+                    <th>{% trans 'Action Skill Combo' %}</th>
+                    <td>{{ card.action_skill_combo }}</td>
+                </tr>
+            {% endif %}
+            {% if card.evolved_action_skill_combo %}
+                <tr>
+                    <td><i class="flaticon-skill"></i></td>
+                    <th>{% trans 'Action Skill combo' %} ({% t 'Evolved' %})</th>
+                    <td>{{ card.evolved_action_skill_combo }}</td>
+                </tr>
+            {% endif %}
+            {% if card.nakayoshi_title %}
+                <tr>
+                    <td><i class="flaticon-max-bond"></i></td>
+                    <th>{% trans 'Nakayoshi Title' %}</th>
+                    <td>{{ card.nakayoshi_title }}</td>
+                </tr>
+            {% endif %}
+            {% if card.japanese_nakayoshi_title %}
+                <tr>
+                    <td><i class="flaticon-max-bond"></i></td>
+                    <th>{% trans 'Nakayoshi Title' %} ({% t 'Japanese' %})</th>
+                    <td>{{ card.japanese_nakayoshi_title }}</td>
+                </tr>
+            {% endif %}
+            {% if card.nakayoshi_skill_effect %}
+                <tr>
+                    <td><i class="flaticon-max-bond"></i></td>
+                    <th>{% trans 'Nakayoshi Skill Effect' %}</th>
+                    <td>{{ card.nakayoshi_skill_effect }}</td>
+                </tr>
+            {% endif %}
+            {% if card.evolved_nakayoshi_skill_effect %}
+                <tr>
+                    <td><i class="flaticon-max-bond"></i></td>
+                    <th>{% trans 'Nakayoshi Skill Effect' %} ({% t 'Evolved' %})</th>
+                    <td>{{ card.evolved_nakayoshi_skill_effect }}</td>
+                </tr>
+            {% endif %}
+            {% if card.nakayoshi_skill_target %}
+                <tr>
+                    <td><i class="flaticon-max-bond"></i></td>
+                    <th>{% trans 'Nakayoshi Skill Target' %}</th>
+                    <td>{{ card.nakayoshi_skill_target }}</td>
+                </tr>
+            {% endif %}
+            {% if card.evolved_nakayoshi_skill_target %}
+                <tr>
+                    <td><i class="flaticon-max-bond"></i></td>
+                    <th>{% trans 'Nakayoshi Skill Target' %} ({% t 'Evolved' %})</th>
+                    <td>{{ card.evolved_nakayoshi_skill_target }}</td>
+                </tr>
+            {% endif %}
+            {% if card.charge_name %}
+                <tr>
+                    <td><i class="flaticon-times"></i></td>
+                    <th>{% trans 'Charge Name' %}</th>
+                    <td>{{ card.charge_name }}</td>
+                </tr>
+            {% endif %}
+            {% if card.charge_hit %}
+                <tr>
+                    <td><i class="flaticon-times"></i></td>
+                    <th>{% trans 'Charge Hit' %}</th>
+                    <td>{{ card.charge_hit }}</td>
+                </tr>
+            {% endif %}
+            {% if card.charge_damage %}
+                <tr>
+                    <td><i class="flaticon-times"></i></td>
+                    <th>{% trans 'Charge Damage' %}</th>
+                    <td>{{ card.charge_damage }}</td>
+                </tr>
+            {% endif %}
+            {% if card.charge_range %}
+                <tr>
+                    <td><i class="flaticon-times"></i></td>
+                    <th>{% trans 'Charge Range' %}</th>
+                    <td>{{ card.charge_range }}</td>
+                </tr>
+            {% endif %}
+            {% if card.charge_comment %}
+                <tr>
+                    <td><i class="flaticon-times"></i></td>
+                    <th>{% trans 'Charge Comment' %}</th>
+                    <td>{{ card.charge_comment }}</td>
+                </tr>
+            {% endif %}
             {% if user.is_staff %}
                 <tr>
                     <td><i class="flaticon-edit"></i></td>
