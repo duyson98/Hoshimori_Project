@@ -43,11 +43,13 @@
   </div>
   </div>
   <div class="tab-content">
-    <h4>{{ account.nickname }} 's Card Collection</h4>
-            <br>
-            {% for ownedcard in account.get_cards %}
-                <img src="{{ ownedcard.card.image_url }}" width="15%">
-            {% endfor %}
+    {% for name, _ in account_tabs %}
+    <div class="tab-pane{% if name == account.show %} active{% endif %}" id="account{{ account.id }}{{ name }}">{% if name != 'About' and name != 'Cards' %}
+      <a href="https://twitter.com/cinderella__pro" target="_blank">
+	<h1 class="padding50">{% trans 'Coming soon' %}</h1>
+      </a>
+      {% endif %}</div>
+    {% endfor %}
   </div>
 </div>
 {% endfor %}

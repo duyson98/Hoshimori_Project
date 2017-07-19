@@ -1,19 +1,172 @@
 # Shit tons of codes copied from Cinderella Producers
-
+from django.core.exceptions import PermissionDenied
 from django.db.models import Prefetch
 from django.utils.translation import ugettext_lazy as _
 from magi.magicollections import AccountCollection as _AccountCollection
 from magi.magicollections import MagiCollection
 from magi.magicollections import UserCollection as _UserCollection
-from magi.utils import cuteFormFieldsForContext, CuteFormType
-from magi.default_settings import RAW_CONTEXT
+from magi.utils import CuteFormType, getMagiCollection, ordinalNumber
 
 from hoshimori import forms, raw
 from hoshimori.models import *
 
+
+############################################################
+# User
+# Override
+class UserCollection(_UserCollection):
+    icon = 'heart'
+
+    class ItemView(MagiCollection.ItemView):
+        js_files = ['profile', 'profile_account_tabs', 'cards']
+        template = 'profile'
+        comments_enabled = False
+        show_edit_button = False
+        ajax = False
+        shortcut_urls = [
+            ('me', 'me'),
+        ]
+
+        def get_item(self, request, pk):
+            if pk == 'me':
+                if request.user.is_authenticated():
+                    pk = request.user.id
+                else:
+                    from magi.middleware.httpredirect import HttpRedirectException
+                    raise HttpRedirectException('/signup/')
+            return {'pk': pk}
+
+        def reverse_url(self, text):
+            return {
+                'username': text,
+            }
+
+        def get_queryset(self, queryset, parameters, request):
+            if request.user.is_authenticated():
+                queryset = queryset.extra(select={
+                    'followed': 'SELECT COUNT(*) FROM magi_userpreferences_following WHERE userpreferences_id = {} AND user_id = auth_user.id'.format(
+                        request.user.preferences.id),
+                })
+                queryset = queryset.extra(select={
+                    'is_followed_by': 'SELECT COUNT(*) FROM magi_userpreferences_following WHERE userpreferences_id = (SELECT id FROM magi_userpreferences WHERE user_id = auth_user.id) AND user_id = {}'.format(
+                        request.user.id),
+                })
+            queryset = queryset.extra(select={
+                'total_following': 'SELECT COUNT(*) FROM magi_userpreferences_following WHERE userpreferences_id = (SELECT id FROM magi_userpreferences WHERE user_id = auth_user.id)',
+                'total_followers': 'SELECT COUNT(*) FROM magi_userpreferences_following WHERE user_id = auth_user.id',
+            })
+            queryset = queryset.select_related('preferences', 'favorite_character1', 'favorite_character2',
+                                               'favorite_character3')
+            from django.db.models import Prefetch
+            from magi.models import UserLink
+            queryset = queryset.prefetch_related(Prefetch('accounts', to_attr='all_accounts'),
+                                                 Prefetch('links', queryset=UserLink.objects.order_by('-i_relevance'),
+                                                          to_attr='all_links'))
+            return queryset
+
+        def extra_context(self, context):
+            user = context['item']
+            request = context['request']
+            context['is_me'] = user.id == request.user.id
+
+            # Badges
+            if 'badge' in context['all_enabled']:
+                context['item'].latest_badges = list(
+                    context['item'].badges.filter(show_on_top_profile=True).order_by('-date', '-id')[:6])
+                if len(context['item'].latest_badges) == 6:
+                    context['more_badges'] = True
+                context['item'].latest_badges = context['item'].latest_badges[:5]
+
+            # Profile tabs
+            from magi.settings import SHOW_TOTAL_ACCOUNTS
+            context['show_total_accounts'] = SHOW_TOTAL_ACCOUNTS
+            from magi.settings import PROFILE_TABS
+            context['profile_tabs'] = PROFILE_TABS
+            context['profile_tabs_size'] = 100 / len(context['profile_tabs'])
+            context['opened_tab'] = context['profile_tabs'].keys()[0]
+            if 'open' in request.GET and request.GET['open'] in context['profile_tabs']:
+                context['opened_tab'] = request.GET['open']
+
+            # Links
+            context['item'].all_links = list(context['item'].all_links)
+            meta_links = []
+            from magi.settings import FAVORITE_CHARACTERS
+            if FAVORITE_CHARACTERS:
+                for i in range(1, 4):
+                    if getattr(user.preferences, 'favorite_character{}'.format(i)):
+                        from magi.settings import FAVORITE_CHARACTER_NAME
+                        link = AttrDict({
+                            'type': (_(FAVORITE_CHARACTER_NAME) if FAVORITE_CHARACTER_NAME else _(
+                                '{nth} Favorite Character')).format(nth=_(ordinalNumber(i))),
+                            # May be used by FAVORITE_CHARACTER_TO_URL
+                            'raw_value': getattr(user.preferences, 'favorite_character{}'.format(i)),
+                            'value': user.preferences.localized_favorite_character(i),
+                            'translate_type': False,
+                            'image_url': user.preferences.favorite_character_image(i),
+                        })
+                        from magi.settings import FAVORITE_CHARACTER_TO_URL
+                        link.url = FAVORITE_CHARACTER_TO_URL(link)
+                        meta_links.append(AttrDict(link))
+            if user.preferences.location:
+                latlong = '{},{}'.format(user.preferences.latitude,
+                                         user.preferences.longitude) if user.preferences.latitude else None
+                link = AttrDict({
+                    'type': 'Location',
+                    'value': user.preferences.location,
+                    'translate_type': True,
+                    'flaticon': 'world',
+                    'url': u'/map/?center={}&zoom=10'.format(latlong) if 'map' in context[
+                        'all_enabled'] and latlong else u'https://www.google.com/maps?q={}'.format(
+                        user.preferences.location),
+                })
+                meta_links.append(link)
+            if user.preferences.birthdate:
+                today = datetime.date.today()
+                birthday = user.preferences.birthdate.replace(year=today.year)
+                if birthday < today:
+                    birthday = birthday.replace(year=today.year + 1)
+                from django.utils import dateformat
+                meta_links.append(AttrDict({
+                    'type': 'Birthdate',
+                    'value': u'{} ({})'.format(user.preferences.birthdate,
+                                               _(u'{age} years old').format(age=user.preferences.age)),
+                    'translate_type': True,
+                    'flaticon': 'event',
+                    'url': 'https://www.timeanddate.com/countdown/birthday?iso={date}T00&msg={username}%27s+birthday'.format(
+                        date=dateformat.format(birthday, "Ymd"), username=user.username),
+                }))
+            context['item'].all_links = meta_links + context['item'].all_links
+            num_links = len(context['item'].all_links)
+            best_links_on_last_line = 0
+            for i in range(4, 7):
+                links_on_last_line = num_links % i
+                if links_on_last_line == 0:
+                    context['per_line'] = i
+                    break
+                if links_on_last_line > best_links_on_last_line:
+                    best_links_on_last_line = links_on_last_line
+                    context['per_line'] = i
+
+            # Javascript sentences
+            context['add_activity_sentence'] = _('Share your adventures!')
+            activity_collection = getMagiCollection('activity')
+            if 'activity' in context['all_enabled']:
+                context['add_activity_sentence'] = activity_collection.list_view.add_button_subtitle
+            context['share_sentence'] = _('Check out {username}\'s awesome collection!').format(
+                username=context['item'].username)
+            context['share_url'] = context['item'].http_item_url
+
+            for account in context['item'].all_accounts:
+                show = request.GET.get('account{}'.format(account.id), 'Cards')
+                account.show = show if show in raw.ACCOUNT_TABS_LIST else 'Cards'
+            context['account_tabs'] = raw.ACCOUNT_TABS
+            return context
+
+
 ############################################################
 # Account
 # Override
+
 
 class AccountCollection(_AccountCollection):
     class ListView(_AccountCollection.ListView):
@@ -59,7 +212,7 @@ class StudentCollection(MagiCollection):
         default_ordering = 'id'
         show_relevant_fields_on_ordering = False
         ajax_pagination_callback = 'ajaxModals'
-        no_result_template = 'my404card'
+        no_result_template = 'empty_query'
 
         def extra_context(self, context):
             request = context['request']
@@ -70,7 +223,7 @@ class StudentCollection(MagiCollection):
         def check_permissions(self, request, context):
             super(StudentCollection.ListView, self).check_permissions(request, context)
             if request.user.username == 'bad_staff':
-                raise StudentCollection()
+                raise PermissionDenied()
 
     class AddView(MagiCollection.AddView):
         staff_required = True
@@ -98,7 +251,7 @@ class CardCollection(MagiCollection):
 
     filter_cuteform = {
         'i_card_type': {
-            'type':  CuteFormType.HTML,
+            'type': CuteFormType.HTML,
         },
         'i_rarity': {
             'type': CuteFormType.HTML,
@@ -118,13 +271,12 @@ class CardCollection(MagiCollection):
                 if context['collection']:
                     request.user.all_accounts = request.user.accounts.all().prefetch_related(
                         Prefetch('ownedcards',
-                                 queryset=OwnedCard.objects.filter(card_id=context['item'].id).order_by(
-                                     '-card__i_rarity', '-evolved', 'card__student_id'), to_attr='all_owned'),
+                                 queryset=OwnedCard.objects.filter(card_id=context['item'].id).order_by('-card__i_rarity', 'card__student_id'), to_attr='all_owned'),
                     )
                     # Set values to avoid using select_related since we already have them
                     for account in request.user.all_accounts:
                         account.owner = request.user
-                        for oc in account.get_cards():
+                        for oc in account.all_owned:
                             oc.card = context['item']
                             oc.is_mine = True
             return context
@@ -136,6 +288,7 @@ class CardCollection(MagiCollection):
         full_width = True
         ajax_pagination_callback = 'updateCards'
         js_files = ['cards']
+        no_result_template = 'empty_query'
 
         def get_queryset(self, queryset, parameters, request):
             from hoshimori.utils import filterCards
@@ -154,7 +307,7 @@ class CardCollection(MagiCollection):
         def check_permissions(self, request, context):
             super(CardCollection.ListView, self).check_permissions(request, context)
             if request.user.username == 'bad_staff':
-                raise CardCollection()
+                raise PermissionDenied()
 
     class AddView(MagiCollection.AddView):
         staff_required = True
@@ -192,14 +345,15 @@ class OwnedCardCollection(MagiCollection):
         filter_form = forms.OwnedCardFilterForm
         js_files = ['ownedcards']
         ajax_pagination_callback = 'updateOwnedCards'
+        no_result_template = 'empty_query'
 
-        def foreach_item(selfindex, item, context):
+        def foreach_item(self, index, item, context):
             item.is_mine = context['request'].user.id == item.cached_account.owner.id
 
         def check_permissions(self, request, context):
             super(OwnedCardCollection.ListView, self).check_permissions(request, context)
             if request.user.username == 'bad_staff':
-                raise OwnedCardCollection()
+                raise PermissionDenied()
 
     class EditView(MagiCollection.EditView):
         form_class = forms.OwnedCardEditForm
@@ -242,11 +396,12 @@ class WeaponCollection(MagiCollection):
     class ListView(MagiCollection.ListView):
         filter_form = forms.WeaponFilterForm
         staff_required = False
+        no_result_template = 'empty_query'
 
         def check_permissions(self, request, context):
             super(WeaponCollection.ListView, self).check_permissions(request, context)
             if request.user.username == 'bad_staff':
-                raise WeaponCollection()
+                raise PermissionDenied()
 
     class AddView(MagiCollection.AddView):
         staff_required = True
@@ -274,7 +429,7 @@ class WeaponCollection(MagiCollection):
 #         def check_permissions(self, request, context):
 #             super(MaterialCollection.ListView, self).check_permissions(request, context)
 #             if request.user.username == 'bad_staff':
-#                 raise MaterialCollection()
+#                 raise PermissionDenied()
 #
 #     class AddView(MagiCollection.AddView):
 #         staff_required = True
@@ -303,11 +458,12 @@ class StageCollection(MagiCollection):
         per_line = 4
         page_size = 20
         staff_required = False
+        no_result_template = 'empty_query'
 
         def check_permissions(self, request, context):
             super(StageCollection.ListView, self).check_permissions(request, context)
             if request.user.username == 'bad_staff':
-                raise StageCollection()
+                raise PermissionDenied()
 
     class AddView(MagiCollection.AddView):
         staff_required = True
@@ -337,11 +493,12 @@ class IrousVariationCollection(MagiCollection):
         filter_form = forms.IrousVariationFilterForm
         staff_required = False
         default_ordering = 'id'
+        no_result_template = 'empty_query'
 
         def check_permissions(self, request, context):
             super(IrousVariationCollection.ListView, self).check_permissions(request, context)
             if request.user.username == 'bad_staff':
-                raise IrousVariationCollection()
+                raise PermissionDenied()
 
     class AddView(MagiCollection.AddView):
         staff_required = True

@@ -1,2 +1,2 @@
-git+https://github.com/SchoolIdolTomodachi/MagiCircles.git@MagiCircles2
+git+https://github.com/SchoolIdolTomodachi/MagiCircles.git@449f5bbd2914e63a65f0849c2664a80916f7f961
 django-multiselectfield==0.1.7

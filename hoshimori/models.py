@@ -6,7 +6,6 @@ import os
 
 from django.conf import settings as django_settings
 from django.core.exceptions import ObjectDoesNotExist
-from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils import timezone
 from django.utils.deconstruct import deconstructible
@@ -55,12 +54,12 @@ class Student(MagiModel):
     collection_name = 'student'
 
     name = models.CharField(_('Name'), max_length=100, unique=True)
-    japanese_name = models.CharField(string_concat(_('Name'), ' (', t['Japanese'], ')'), max_length=100)
-    unlock = models.CharField(_('Unlock at'), max_length=100)
+    japanese_name = models.CharField(string_concat(_('Name'), ' (', t['Japanese'], ')'), max_length=100, unique=True)
+    unlock = models.CharField(_('Unlock at'), max_length=100, null=True)
 
     owner = models.ForeignKey(User, related_name='added_students')
 
-    description = models.CharField(_('Description'), max_length=100)
+    description = models.CharField(_('Description'), max_length=100, null=True)
 
     i_school_year = models.PositiveIntegerField(_('School year'), choices=SCHOOL_YEAR_CHOICES, null=True)
 
@@ -99,33 +98,33 @@ class Student(MagiModel):
         else:
             return None
 
-    extra_activity = models.CharField(_('Extracurricular activity'), max_length=100)
-    catchphrase_1 = models.CharField(_('Catchphrase 1'), max_length=100)
-    catchphrase_2 = models.CharField(_('Catchphrase 2'), max_length=100)
+    extra_activity = models.CharField(_('Extracurricular activity'), max_length=100, null=True)
+    catchphrase_1 = models.CharField(_('Catchphrase 1'), max_length=100, null=True)
+    catchphrase_2 = models.CharField(_('Catchphrase 2'), max_length=100, null=True)
     height = models.PositiveIntegerField(_('Height'), null=True, help_text='in cm')
     weight = models.PositiveIntegerField(_('Weight'), null=True, help_text='in kg')
     bust = models.PositiveIntegerField(_('Bust'), null=True, help_text='in cm')
     waist = models.PositiveIntegerField(_('Waist'), null=True, help_text='in cm')
     hip = models.PositiveIntegerField(_('Hip'), null=True, help_text='in cm')
-    hobby_1 = models.CharField(_('Hobby 1'), max_length=100)
-    hobby_2 = models.CharField(_('Hobby 2'), max_length=100)
-    hobby_3 = models.CharField(_('Hobby 3'), max_length=100)
-    food_likes = models.CharField(_('Liked food'), max_length=100)
-    food_dislikes = models.CharField(_('Disliked food'), max_length=100)
-    family = models.CharField(_('Family members'), max_length=100)
-    dream = models.CharField(_('Dream job'), max_length=100)
-    ideal_1 = models.CharField(_('Ideal model 1'), max_length=100)
-    ideal_2 = models.CharField(_('Ideal model 2'), max_length=100)
-    ideal_3 = models.CharField(_('Ideal model 3'), max_length=100)
-    pastime = models.CharField(_('Pastime'), max_length=100)
-    destress = models.CharField(_('Destress'), max_length=100)
-    fav_memory = models.CharField(_('Favorite memory'), max_length=100)
-    fav_phrase = models.CharField(_('Favorite phrase'), max_length=100)
-    secret = models.CharField(_('Secret'), max_length=5000)
+    hobby_1 = models.CharField(_('Hobby 1'), max_length=100, null=True)
+    hobby_2 = models.CharField(_('Hobby 2'), max_length=100, null=True)
+    hobby_3 = models.CharField(_('Hobby 3'), max_length=100, null=True)
+    food_likes = models.CharField(_('Liked food'), max_length=100, null=True)
+    food_dislikes = models.CharField(_('Disliked food'), max_length=100, null=True)
+    family = models.CharField(_('Family members'), max_length=100, null=True)
+    dream = models.CharField(_('Dream job'), max_length=100, null=True)
+    ideal_1 = models.CharField(_('Ideal model 1'), max_length=100, null=True)
+    ideal_2 = models.CharField(_('Ideal model 2'), max_length=100, null=True)
+    ideal_3 = models.CharField(_('Ideal model 3'), max_length=100, null=True)
+    pastime = models.CharField(_('Pastime'), max_length=100, null=True)
+    destress = models.CharField(_('Destress'), max_length=100, null=True)
+    fav_memory = models.CharField(_('Favorite memory'), max_length=100, null=True)
+    fav_phrase = models.CharField(_('Favorite phrase'), max_length=100, null=True)
+    secret = models.CharField(_('Secret'), max_length=5000, null=True)
 
     CV = models.CharField(string_concat(_('CV'), ' (', t['Japanese'], ')'), help_text='In Japanese characters.',
-                          max_length=100)
-    romaji_CV = models.CharField(_('CV'), help_text='In romaji.', max_length=100)
+                          max_length=100, null=True)
+    romaji_CV = models.CharField(_('CV'), help_text='In romaji.', max_length=100, null=True)
 
     # Images
     image = models.ImageField(_('Image'), upload_to=uploadItem('s'))
@@ -139,7 +138,7 @@ class Student(MagiModel):
         return get_http_image_url_from_path(self.image)
 
     # Full body images
-    full_image = models.ImageField(_('Full Body Image'), upload_to=uploadItem('s/full'))
+    full_image = models.ImageField(_('Full Body Image'), upload_to=uploadItem('s/full'), null=True)
 
     @property
     def full_image_url(self):
@@ -150,7 +149,7 @@ class Student(MagiModel):
         return get_http_image_url_from_path(self.full_image)
 
     # Full body images
-    signature = models.ImageField(_('Signature'), upload_to=uploadItem('s/sign'))
+    signature = models.ImageField(_('Signature'), upload_to=uploadItem('s/sign'), null=True)
 
     @property
     def signature_url(self):
@@ -161,10 +160,10 @@ class Student(MagiModel):
         return get_http_image_url_from_path(self.signature)
 
     # Voices
-    phrase_1 = models.FileField(_('Phrase 1'), upload_to=uploadItem('s/voices'))
-    phrase_2 = models.FileField(_('Phrase 2'), upload_to=uploadItem('s/voices'))
-    introduction_1 = models.FileField(_('Introduction 1'), upload_to=uploadItem('s/voices'))
-    introduction_2 = models.FileField(_('Introduction 1'), upload_to=uploadItem('s/voices'))
+    phrase_1 = models.FileField(_('Phrase 1'), upload_to=uploadItem('s/voices'), null=True)
+    phrase_2 = models.FileField(_('Phrase 2'), upload_to=uploadItem('s/voices'), null=True)
+    introduction_1 = models.FileField(_('Introduction 1'), upload_to=uploadItem('s/voices'), null=True)
+    introduction_2 = models.FileField(_('Introduction 1'), upload_to=uploadItem('s/voices'), null=True)
 
     # Actually not images but still can use
     @property
@@ -310,9 +309,6 @@ class Account(MagiModel):
     def __unicode__(self):
         return u'#{} {} - {}'.format(self.id, self.cached_owner.username, self.nickname)
 
-    def get_cards(self):
-        return OwnedCard.objects.filter(account_id=self.id)
-
 
 ############################################################
 # Card
@@ -341,10 +337,10 @@ class Card(MagiModel):
     def english_weapon(self):
         return ENGLISH_WEAPON_DICT[self.i_weapon]
 
-    name = models.CharField(_('Title'), max_length=100)
+    name = models.CharField(_('Title'), max_length=100, null=True)
     japanese_name = models.CharField(string_concat(_('Title'), ' (', t['Japanese'], ')'), max_length=100)
 
-    obtain_method = models.CharField(_('Obtain Method'), max_length=100)
+    obtain_method = models.CharField(_('Obtain Method'), max_length=100, null=True)
 
     # Icon
     image = models.ImageField(_('Icon'), upload_to=uploadItem('c/icon'))
@@ -357,7 +353,7 @@ class Card(MagiModel):
     def http_image_url(self):
         return get_http_image_url_from_path(self.image)
 
-    special_icon = models.ImageField(_('Special Icon'), upload_to=uploadItem('c/icon/special'))
+    special_icon = models.ImageField(_('Special Icon'), upload_to=uploadItem('c/icon/special'), null=True)
 
     @property
     def special_icon_url(self):
@@ -473,14 +469,14 @@ class Card(MagiModel):
         return (False, True)
 
     # Parameter
-    hp_1 = models.PositiveIntegerField(string_concat(_('HP'), ' (', _('Level 1'), ')'), default=0)
-    sp_1 = models.PositiveIntegerField(string_concat(_('SP'), ' (', _('Level 1'), ')'), default=0)
-    atk_1 = models.PositiveIntegerField(string_concat(_('ATK'), ' (', _('Level 1'), ')'), default=0)
-    def_1 = models.PositiveIntegerField(string_concat(_('DEF'), ' (', _('Level 1'), ')'), default=0)
-    hp_50 = models.PositiveIntegerField(string_concat(_('HP'), ' (', _('Level 50'), ')'), default=0)
-    sp_50 = models.PositiveIntegerField(string_concat(_('SP'), ' (', _('Level 50'), ')'), default=0)
-    atk_50 = models.PositiveIntegerField(string_concat(_('ATK'), ' (', _('Level 50'), ')'), default=0)
-    def_50 = models.PositiveIntegerField(string_concat(_('DEF'), ' (', _('Level 50'), ')'), default=0)
+    hp_1 = models.PositiveIntegerField(string_concat(_('HP'), ' (', _('Level 1'), ')'), default=0, null=True)
+    sp_1 = models.PositiveIntegerField(string_concat(_('SP'), ' (', _('Level 1'), ')'), default=0, null=True)
+    atk_1 = models.PositiveIntegerField(string_concat(_('ATK'), ' (', _('Level 1'), ')'), default=0, null=True)
+    def_1 = models.PositiveIntegerField(string_concat(_('DEF'), ' (', _('Level 1'), ')'), default=0, null=True)
+    hp_50 = models.PositiveIntegerField(string_concat(_('HP'), ' (', _('Level 50'), ')'), default=0, null=True)
+    sp_50 = models.PositiveIntegerField(string_concat(_('SP'), ' (', _('Level 50'), ')'), default=0, null=True)
+    atk_50 = models.PositiveIntegerField(string_concat(_('ATK'), ' (', _('Level 50'), ')'), default=0, null=True)
+    def_50 = models.PositiveIntegerField(string_concat(_('DEF'), ' (', _('Level 50'), ')'), default=0, null=True)
     hp_70 = models.PositiveIntegerField(string_concat(_('HP'), ' (', _('Level 70'), ')'), default=0, null=True)
     sp_70 = models.PositiveIntegerField(string_concat(_('SP'), ' (', _('Level 70'), ')'), default=0, null=True)
     atk_70 = models.PositiveIntegerField(string_concat(_('ATK'), ' (', _('Level 70'), ')'), default=0, null=True)
@@ -579,14 +575,15 @@ class Card(MagiModel):
 
     # Action skill
     skill_name = models.CharField(_('Skill name'), max_length=100, null=True)
-    japanese_skill_name = models.CharField(string_concat(_('Skill name'), ' (', t['Japanese'], ')'), max_length=100)
+    japanese_skill_name = models.CharField(string_concat(_('Skill name'), ' (', t['Japanese'], ')'), max_length=100, null=True)
     skill_SP = models.PositiveIntegerField(_('Skill SP'), default=0, null=True)
-    skill_range = models.CharField(_('Skill range'), max_length=300)
-    skill_comment = models.CharField(_('Skill comment'), max_length=1000)
+    skill_range = models.CharField(_('Skill range'), max_length=300, null=True)
+    skill_comment = models.CharField(_('Skill comment'), max_length=1000, null=True)
     skill_preview = models.ImageField(_('Skill preview'), upload_to=uploadItem('c/skill'), null=True)
-    action_skill_effects = models.CharField(_('Skill Effect'), max_length=200)
+    action_skill_effects = models.CharField(_('Skill Effect'), max_length=200, null=True)
     i_skill_affinity = models.PositiveIntegerField(_('Skill Affinity'), null=True, choices=SKILL_AFFINITY_CHOICES,
-                                                 default=IGNORE_AFFINITY)
+                                                   default=IGNORE_AFFINITY)
+
     @property
     def skill_affinity(self):
         if self.i_skill_affinity is not None:
@@ -611,36 +608,36 @@ class Card(MagiModel):
     #                                  on_delete=models.SET_NULL)
     # evolved_action_skill = models.OneToOne('ActionSkill', verbose_name=_('Evolved Action Skill'),
     #                                          related_name='evolved skill', null=True, on_delete=models.SET_NULL)
-    action_skill_damage = models.CharField(_('Skill Damage'), max_length=200)
+    action_skill_damage = models.CharField(_('Skill Damage'), max_length=200, null=True)
     action_skill_combo = models.PositiveIntegerField(_('Skill Combo'), default=13, null=True)
     evolved_action_skill_damage = models.CharField(string_concat(_('Skill Damage'), ' (', _('Evolved'), ')'),
-                                                   max_length=200)
+                                                   max_length=200, null=True)
     evolved_action_skill_combo = models.PositiveIntegerField(string_concat(_('Skill Combo'), ' (', _('Evolved'), ')'),
                                                              default=13, null=True)
 
     # Nakayoshi
-    nakayoshi_title = models.CharField(_('Passive Skill'), max_length=100)
+    nakayoshi_title = models.CharField(_('Passive Skill'), max_length=100, null=True)
     japanese_nakayoshi_title = models.CharField(string_concat(_('Passive Skill'), ' (', t['Japanese'], ')'),
-                                                max_length=100)
+                                                max_length=100, null=True)
 
     # TODO: Use String until properly import
     # nakayoshi_skills = models.ManyToManyField('Nakayoshi', related_name='card_with_nakayoshi')
     # evolved_nakayoshi_skills = models.ManyToManyField('Nakayoshi', related_name='card_with_nakayoshi_evolved',
     #                                                   null=True, default=None)
 
-    nakayoshi_skill_effect = models.CharField(_('Passive Skill Effect'), max_length=200)
-    nakayoshi_skill_target = models.CharField(_('Passive Skill Target'), max_length=200)
+    nakayoshi_skill_effect = models.CharField(_('Passive Skill Effect'), max_length=200, null=True)
+    nakayoshi_skill_target = models.CharField(_('Passive Skill Target'), max_length=200, null=True)
     evolved_nakayoshi_skill_effect = models.CharField(string_concat(_('Passive Skill Effect'), ' (', _('Evolved'), ')'),
-                                                      max_length=200)
+                                                      max_length=200, null=True)
     evolved_nakayoshi_skill_target = models.CharField(string_concat(_('Passive Skill Target'), ' (', _('Evolved'), ')'),
-                                                      max_length=200)
+                                                      max_length=200, null=True)
 
     # Charge attack
-    charge_name = models.CharField(_('Charge name'), max_length=100)
-    charge_hit = models.CharField(_('Charge hits'), max_length=50)
-    charge_damage = models.CharField(_('Charge damage'), max_length=200)
-    charge_range = models.CharField(_('Charge range'), max_length=300)
-    charge_comment = models.CharField(_('Charge comment'), max_length=1000)
+    charge_name = models.CharField(_('Charge name'), max_length=100, null=True)
+    charge_hit = models.CharField(_('Charge hits'), max_length=50, null=True)
+    charge_damage = models.CharField(_('Charge damage'), max_length=200, null=True)
+    charge_range = models.CharField(_('Charge range'), max_length=300, null=True)
+    charge_comment = models.CharField(_('Charge comment'), max_length=1000, null=True)
 
     # Cache student
 
@@ -748,7 +745,7 @@ class Card(MagiModel):
 class Weapon(MagiModel):
     collection_name = 'weapon'
 
-    name = models.CharField(_('Name'), max_length=100)
+    name = models.CharField(_('Name'), max_length=100, null=True)
     japanese_name = models.CharField(string_concat(_('Name'), ' (', t['Japanese'], ')'), max_length=100)
 
     def __unicode__(self):
@@ -757,7 +754,6 @@ class Weapon(MagiModel):
         else:
             return self.name
 
-    image = models.ImageField(_('Icon'), upload_to=uploadItem('w'))
     i_type = models.PositiveIntegerField(_('Weapon'), choices=WEAPON_CHOICES)
 
     @property
@@ -787,9 +783,13 @@ class WeaponUpgrade(MagiModel):
     def owner_id(self):
         return self.origin_id
 
-    rhythm = models.ImageField(_('Rhythm'), upload_to=uploadItem('w/rhythm'))
+    image = models.ImageField(_('Icon'), upload_to=uploadItem('w'))
+
+    rhythm_1 = models.PositiveIntegerField(_('1 Beat'), null=True)
+    rhythm_2 = models.PositiveIntegerField(_('2 Beat'), null=True)
+    rhythm_3 = models.PositiveIntegerField(_('3 Beat'), null=True)
     i_level = models.PositiveIntegerField(_('Upgrade Level'), choices=UPGRADE_LEVEL_CHOICES, null=True, default=0)
-    gamma_type = models.CharField(_('Gamma Type'), max_length=1, default='')
+    gamma_type = models.CharField(_('Gamma Type'), max_length=1, default='', null=True)
 
     @property
     def upgrade_level(self):
@@ -805,14 +805,14 @@ class WeaponUpgrade(MagiModel):
         else:
             return u'{} {} {}'.format(str(self.origin.name), self.english_upgrade_level, self.gamma_type)
 
-    i_rarity = models.PositiveIntegerField(_('Rarity'), choices=WEAPON_RARITY_CHOICES, default=0)
+    i_rarity = models.PositiveIntegerField(_('Rarity'), choices=WEAPON_RARITY_CHOICES, default=0, null=True)
 
     @property
     def rarity(self):
         return WEAPON_RARITY_DICT[self.i_rarity]
 
-    atk_min = models.PositiveIntegerField(string_concat(_('Weapon ATK'), ' (', _('Minimum'), ')'), default=0)
-    atk_max = models.PositiveIntegerField(string_concat(_('Weapon ATK'), ' (', _('Maximum'), ')'), default=0)
+    atk_min = models.PositiveIntegerField(string_concat(_('Weapon ATK'), ' (', _('Minimum'), ')'), default=0, null=True)
+    atk_max = models.PositiveIntegerField(string_concat(_('Weapon ATK'), ' (', _('Maximum'), ')'), default=0, null=True)
 
     def _atk_at_level(self, level=1, to_string=True):
         atk_value = self.atk_min + (level - 1) * (self.atk_max - self.atk_min) / 49
@@ -820,7 +820,7 @@ class WeaponUpgrade(MagiModel):
             return int(atk_value).__str__()
         return atk_value
 
-    price = models.PositiveIntegerField(_('Price'), default=0)
+    price = models.PositiveIntegerField(_('Price'), default=0, null=True)
 
     # Materials
     materials = models.CharField(_('Material'), null=True, max_length=100)
@@ -828,12 +828,12 @@ class WeaponUpgrade(MagiModel):
     # Skills
     # TODO
     # weapon_effects = models.ManyToManyField('WeaponEffect', related_name='weapon_with_skills', null=True)
-    weapon_effects = models.CharField(_('Weapon Effects'), max_length=100)
+    weapon_effects = models.CharField(_('Weapon Effects'), max_length=100, null=True)
 
     # Subskill
     # TODO
     # subweapon_effects = models.ManyToManyField('WeaponEffect', related_name='subweapon_with_skills', null=True)
-    subweapon_effects = models.CharField(_('Subweapon Effects'), max_length=100)
+    subweapon_effects = models.CharField(_('Subweapon Effects'), max_length=100, null=True)
 
 
 ############################################################
@@ -937,9 +937,9 @@ class Stage(MagiModel):
     def get_large_irous(self):
         return self.large_irous.all()
 
-    easy_stage = models.OneToOneField('StageDifficulty', related_name='easy_difficulty')
-    normal_stage = models.OneToOneField('StageDifficulty', related_name='normal_difficulty')
-    hard_stage = models.OneToOneField('StageDifficulty', related_name='hard_difficulty')
+    easy_stage = models.OneToOneField('StageDifficulty', related_name='easy_difficulty', null=True)
+    normal_stage = models.OneToOneField('StageDifficulty', related_name='normal_difficulty', null=True)
+    hard_stage = models.OneToOneField('StageDifficulty', related_name='hard_difficulty', null=True)
 
     def __unicode__(self):
         return '{} - {}'.format(self.episode, self.number)
@@ -981,7 +981,7 @@ class StageDifficulty(MagiModel):
     coins = models.PositiveIntegerField(_('Coins'), null=True)
     cheerpoints = models.PositiveIntegerField(_('Cheerpoints'), null=True)
 
-    objectives = models.CharField(_('Objectives'), max_length=200)
+    objectives = models.CharField(_('Objectives'), max_length=200, null=True)
 
     def get_objectives(self):
         return self.objectives.split(chr(10))
@@ -1004,18 +1004,6 @@ class StageDifficulty(MagiModel):
 
 
 ############################################################
-# Materials
-
-# class Material(MagiModel):
-#     collection_name = 'material'
-#
-#     name = models.CharField(_('Material name'), unique=True, max_length=50)
-#
-#     def __unicode__(self):
-#         return self.name
-
-
-############################################################
 # Irous
 
 class Irous(MagiModel):
@@ -1023,9 +1011,9 @@ class Irous(MagiModel):
 
     name = models.PositiveIntegerField(_('Irous type'), choices=IROUS_TYPE_CHOICES, null=True, unique=True)
 
-    weak = MultiSelectField(_('Weak'), choices=WEAPON_CHOICES, max_length=100, default="")
-    strong = MultiSelectField(_('Strong'), choices=WEAPON_CHOICES, max_length=100, default="")
-    guard = MultiSelectField(_('Guard'), choices=WEAPON_CHOICES, max_length=100, default="")
+    weak = MultiSelectField(_('Weak'), choices=WEAPON_CHOICES, max_length=100, default="", null=True)
+    strong = MultiSelectField(_('Strong'), choices=WEAPON_CHOICES, max_length=100, default="", null=True)
+    guard = MultiSelectField(_('Guard'), choices=WEAPON_CHOICES, max_length=100, default="", null=True)
 
     def english_name(self):
         return ENGLISH_IROUS_TYPE_DICT[self.name]
@@ -1046,11 +1034,11 @@ class Irous(MagiModel):
 class IrousVariation(MagiModel):
     collection_name = 'irousvariation'
 
-    name = models.CharField(_('Irous Name'), unique=True, max_length=50)
+    name = models.CharField(_('Irous Name'), unique=True, max_length=50, null=True)
     japanese_name = models.CharField(string_concat(_('Irous Name'), ' (', t['Japanese'], ')'), max_length=50)
 
     species = models.ForeignKey(Irous, related_name='species', null=True, on_delete=models.SET_NULL)
-    image = models.ImageField(_('Image'), upload_to=uploadItem('i'))
+    image = models.ImageField(_('Image'), upload_to=uploadItem('i'), null=True)
     is_large_irous = models.BooleanField(_('Large Irous'), default=True)
 
     def owner(self):
@@ -1070,37 +1058,6 @@ class IrousVariation(MagiModel):
 
 
 ############################################################
-# Events
-
-class Event(MagiModel):
-    collection_name = 'event'
-
-    owner = models.ForeignKey(User, related_name='added_events')
-    image = models.ImageField(_('Image'), upload_to=uploadItem('e'))
-    name = models.CharField(_('Name'), max_length=100, unique=True)
-    japanese_name = models.CharField(string_concat(_('Name'), ' (', t['Japanese'], ')'), max_length=100, unique=True)
-    start_date = models.DateTimeField(_('Beginning'), null=True)
-    end_date = models.DateTimeField(_('End'), null=True)
-
-    @property
-    def status(self):
-        if not self.end_date or not self.start_date:
-            return None
-        now = timezone.now()
-        if now > self.end_date:
-            return 'ended'
-        elif now > self.start_date:
-            return 'current'
-        return 'future'
-
-    def __unicode__(self):
-        if get_language() == 'ja':
-            return self.japanese_name
-        else:
-            return self.name
-
-
-############################################################
 # Owned Card
 
 class OwnedCard(MagiModel):
@@ -1108,13 +1065,8 @@ class OwnedCard(MagiModel):
 
     account = models.ForeignKey(Account, related_name='ownedcards', on_delete=models.CASCADE)
     card = models.ForeignKey(Card, related_name='owned', on_delete=models.CASCADE)
-    evolved = models.BooleanField(_('Evolved'), default=False)
-    level = models.PositiveIntegerField(_('Level'), default=70, validators=[
-        MinValueValidator(1),
-        MaxValueValidator(70),
-    ])
 
-    obtained_date = models.DateField(_('Obtained Date'), null=True, blank=True)
+    evolved = models.BooleanField(_('Evolved'), default=False)
 
     # Cache account + owner
     _cache_account_days = 200
@@ -1152,20 +1104,4 @@ class OwnedCard(MagiModel):
         return self.cached_account.owner.id
 
     def __unicode__(self):
-        return u'#{} {} {}'.format(self.id, self.card.name, u'({})'.format(_('Evolved')) if self.evolved else '')
-
-
-############################################################
-# Favorite Card
-
-class FavoriteCard(MagiModel):
-    collection_name = 'favoritecard'
-
-    owner = models.ForeignKey(User, related_name='favoritecards')
-    card = models.ForeignKey(Card, related_name='senseis', on_delete=models.CASCADE)
-
-    def __unicode__(self):
-        return u'#{}'.format(self.card.id)
-
-    class Meta:
-        unique_together = (('owner', 'card'),)
+        return u'#{} {}'.format(self.id, self.card.name)

@@ -21,10 +21,7 @@
             </div>
         </div>
         <div class="card-buttons">
-            <a href="{% if current == 'card_item' and not collection %}#cardstat{{ card.id }}{% else %}{{ card.item_url }}{% endif %}"
-               data-toggle="tooltip" data-trigger="hover" title="{% trans 'Card Info' %}" data-placement="bottom"
-               data-delay="0" {% if current != 'card_item' %}data-ajax-url="/ajax/card/{{ card.id }}/"{% endif %}
-               {% if current == 'card_item' %}class="page-scroll"{% endif %}><i class="flaticon-about"></i></a>
+            <a href="{% if current == 'card_item' and not collection %}#cardstat{{ card.id }}{% else %}{{ card.item_url }}{% endif %}" data-toggle="tooltip" data-trigger="hover" title="{% trans 'Card Info' %}" data-placement="bottom" data-delay="0" {% if current != 'card_item' %}data-info-ajax="/ajax/cardstat/{{ card.id }}/"{% endif %} {% if current == 'card_item' %}class="page-scroll"{% endif %}><i class="flaticon-about"></i></a>
             <a href="#" class="info-loader" style="display: none;"><i class="flaticon-loading"></i></a>
             <a href="{{ card.item_url }}?collection"
                {% if current != 'card_item' %}data-ajax-url="/ajax/cardcollection/{{ card.id }}/"
@@ -32,13 +29,18 @@
                data-toggle="tooltip" data-trigger="hover"
                title="{% trans 'Your cards' %}" data-placement="bottom" class="total-button-wrapper"><span
                     class="edit-total-button"><i class="flaticon-add"></i></span></a>
+            {% if user.is_staff %}
+                <a href="/cards/edit/{{ card.id }}/" data-toggle="tooltip" data-trigger="hover"
+                   title="Staff - {% trans 'Edit' %} {% trans 'Card' %}" data-placement="bottom"><i
+                        class="flaticon-edit"></i></a>
+            {% endif %}
         </div>
     </div>
-{#    {% if current != 'card_list' and current != 'card_list_ajax' and current != 'addcard_ajax' and current != 'favoritecard_ajax' %}#}
-{#        {% if collection %}#}
-{#            {% include 'include/cards-collection.html' %}#}
-{#        {% else %}#}
-{#            {% include 'include/cards-stats.html' %}#}
-{#        {% endif %}#}
-{#    {% endif %}#}
+    {% if current != 'card_list' and current != 'card_list_ajax' and current != 'addcard_ajax' and current != 'favoritecard_ajax' %}
+        {% if collection %}
+            {% include 'include/cards-collection.html' %}
+        {% else %}
+            {% include 'include/cards-stats.html' %}
+        {% endif %}
+    {% endif %}
 {% endwith %}

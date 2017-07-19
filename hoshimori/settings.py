@@ -19,10 +19,18 @@ NAVBAR_ORDERING = ['student_list', 'card_list', 'weapon_list', 'material_list'] 
 
 ENABLED_PAGES = DEFAULT_ENABLED_PAGES
 
+ENABLED_PAGES['cardstat'] = {
+    'ajax': True,
+    'navbar_link': False,
+    'url_variables': [
+        ('card', '\d+'),
+    ],
+}
+
 ENABLED_PAGES['addcard'] = {
     'ajax': True,
     'navbar_link': False,
-    'url_variables':  [
+    'url_variables': [
         ('card', '\d+'),
     ],
 }
@@ -30,8 +38,16 @@ ENABLED_PAGES['addcard'] = {
 ENABLED_PAGES['cardcollection'] = {
     'ajax': True,
     'navbar_link': False,
-    'url_variables':  [
+    'url_variables': [
         ('card', '\d+'),
+    ],
+}
+
+ENABLED_PAGES['account_about'] = {
+    'ajax': True,
+    'navbar_link': False,
+    'url_variables': [
+        ('account', '\d+'),
     ],
 }
 

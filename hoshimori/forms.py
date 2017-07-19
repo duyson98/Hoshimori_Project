@@ -47,11 +47,11 @@ class StudentForm(FormSaveOwnerOnCreation):
             'ideal_1', 'ideal_2', 'ideal_3', 'pastime', 'destress', 'fav_memory', 'fav_phrase', 'secret', 'CV',
             'romaji_CV', 'image', 'full_image')
         optional_fields = (
-            'japanese_name', 'i_school_year', 'unlock', 'birthday', 'height', 'weight', 'i_blood_type', 'bust', 'waist',
-            'hip', 'i_star_sign', 'extra_activity', 'catchphrase_1', 'catchphrase_2', 'height', 'weight', 'bust',
-            'waist', 'hip', 'hobby_1', 'hobby_2', 'hobby_3', 'food_likes', 'food_dislikes', 'family', 'dream',
-            'ideal_1', 'ideal_2', 'ideal_3', 'pastime', 'destress', 'fav_memory', 'fav_phrase', 'secret', 'CV',
-            'romaji_CV', 'full_image')
+            'i_school_year', 'unlock', 'birthday', 'height', 'weight', 'i_blood_type', 'bust', 'waist', 'hip',
+            'i_star_sign', 'extra_activity', 'catchphrase_1', 'catchphrase_2', 'height', 'weight', 'bust', 'waist',
+            'hip', 'hobby_1', 'hobby_2', 'hobby_3', 'food_likes', 'food_dislikes', 'family', 'dream', 'ideal_1',
+            'ideal_2', 'ideal_3', 'pastime', 'destress', 'fav_memory', 'fav_phrase', 'secret', 'CV', 'romaji_CV',
+            'full_image')
         date_fields = ('birthday',)
 
 
@@ -166,10 +166,17 @@ class CardFilterForm(MagiFiltersForm):
 class OwnedCardFilterForm(MagiFiltersForm):
     search_fields = CardFilterForm.search_fields
 
+    account = forms.IntegerField(widget=forms.HiddenInput, min_value=0, required=True)
+
+    def __init__(self, *args, **kwargs):
+        super(OwnedCardFilterForm, self).__init__(*args, **kwargs)
+        self.fields['account'].initial = self.request.GET.get('account', 1)
+
     class Meta:
         model = models.Card
         fields = ('search', 'i_rarity', 'i_weapon')
         optional_fields = ('i_rarity')
+
 
 
 class OwnedCardEditForm(AutoForm):
@@ -179,26 +186,13 @@ class OwnedCardEditForm(AutoForm):
 
     def save(self, commit=False):
         instance = super(OwnedCardEditForm, self).save(commit=False)
-        if self.card.i_rarity == models.RARITY_N and instance.level > 50:
-            instance.star_rank = 50
         if commit:
             instance.save()
         return instance
 
-    def clean_obtained_date(self):
-        if 'obtained_date' in self.cleaned_data:
-            if self.cleaned_data['obtained_date']:
-                if self.cleaned_data['obtained_date'] < datetime.date(2015, 4, 16):
-                    raise forms.ValidationError(_('The game didn\'t even exist at that time.'))
-                if self.cleaned_data['obtained_date'] > datetime.date.today():
-                    raise forms.ValidationError(_('This date cannot be in the future.'))
-        return self.cleaned_data['obtained_date']
-
     class Meta:
         model = models.OwnedCard
-        fields = ('evolved', 'level', 'obtained_date')
-        optional_fields = ('evolved', 'level', 'obtained_date')
-        date_fields = ('obtained_date',)
+        fields = ('evolved',)
 
 
 ############################################################
@@ -242,15 +236,15 @@ class StageFilterForm(MagiFiltersForm):
         ('easy_stage__level', _('Easy Level')),
         ('easy_stage__exp', _('Easy EXP')),
         ('easy_stage__coins', _('Easy Coins')),
-        ('easy_stage__cheerpoint', _('Easy Cheerpoints')),
+        ('easy_stage__cheerpoints', _('Easy Cheerpoints')),
         ('normal_stage__level', _('Normal Level')),
         ('normal_stage__exp', _('Normal EXP')),
         ('normal_stage__coins', _('Normal Coins')),
-        ('normal_stage__cheerpoint', _('Normal Cheerpoints')),
+        ('normal_stage__cheerpoints', _('Normal Cheerpoints')),
         ('hard_stage__level', _('Hard Level')),
         ('hard_stage__exp', _('Hard EXP')),
         ('hard_stage__coins', _('Hard Coins')),
-        ('hard_stage__cheerpoint', _('Hard Cheerpoints')),
+        ('hard_stage__cheerpoints', _('Hard Cheerpoints')),
     ]
 
     def __init__(self, *args, **kwargs):

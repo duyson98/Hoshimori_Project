@@ -6,12 +6,12 @@
     <table class="card-basic-info">
       <tr>
 	<td>
-	  <a href="{{ card.cached_student.item_url }}" data-ajax-url="{{ card.cached_student.ajax_item_url }}" data-ajax-title="{{ card.cached_student.name }}" target="_blank">
-	    <img src="{{ card.cached_student.image_url }}" alt="{{ card.cached_student.name }}" class="student-image">
+	  <a href="{{ card.cached_idol.item_url }}" data-ajax-url="{{ card.cached_idol.ajax_item_url }}" data-ajax-title="{{ card.cached_idol.name }}" target="_blank">
+	    <img src="{{ card.cached_idol.image_url }}" alt="{{ card.cached_idol.name }}" class="idol-image">
 	  </a>
 	  <h4>{% trans 'Idol' %}</h4>
-	  <a href="{{ card.cached_student.item_url }}" data-ajax-url="{{ card.cached_student.ajax_item_url }}" data-ajax-title="{{ card.cached_student.name }}" target="_blank">
-	    {{ card.cached_student.name }}
+	  <a href="{{ card.cached_idol.item_url }}" data-ajax-url="{{ card.cached_idol.ajax_item_url }}" data-ajax-title="{{ card.cached_idol.name }}" target="_blank">
+	    {{ card.cached_idol.name }}
 	  </a>
 	</td>
 	<td>
@@ -180,4 +180,3 @@
     </div>
     {% endfor %}
   </div>
-</div>

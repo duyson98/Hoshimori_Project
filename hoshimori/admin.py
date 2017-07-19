@@ -28,7 +28,6 @@ class IrousAdmin(admin.ModelAdmin):
 
 admin.site.register(Account)
 admin.site.register(OwnedCard) # Will removed later
-admin.site.register(FavoriteCard) # Will removed later
 admin.site.register(Student)
 admin.site.register(Card)
 # admin.site.register(ActionSkillEffect)
