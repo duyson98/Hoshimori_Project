@@ -103,3 +103,4 @@ collected/
 db.sqlite3
 hoshimori/static/uploaded/
 
+/virtual_env/
