@@ -174,6 +174,11 @@ class AccountCollection(_AccountCollection):
         default_ordering = '-id'
         filter_form = forms.AccountFilterForm
 
+        def get_queryset(self, queryset, parameters, request):
+            if 'own_card' in parameters and parameters['own_card']:
+                queryset = queryset.filter(ownedcards__card__id=parameters['own_card'])
+            return queryset
+
     class AddView(_AccountCollection.AddView):
         back_to_list_button = False
 

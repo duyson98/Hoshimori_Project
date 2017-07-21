@@ -482,17 +482,10 @@ class Card(MagiModel):
     atk_70 = models.PositiveIntegerField(string_concat(_('ATK'), ' (', _('Level 70'), ')'), default=0, null=True)
     def_70 = models.PositiveIntegerField(string_concat(_('DEF'), ' (', _('Level 70'), ')'), default=0, null=True)
 
-    def _exp_at_level(self, level=1):
-        return int(EXP_TO_NEXT_LEVEL[level - 1] * (1 + self.i_rarity) / 5)
-
-    def _total_exp_needed(self, level):
-        return int(ACCUMULATIVE_EXP[level - 1] * (1 + self.i_rarity) / 5)
-
-    @property
-    def overall_max(self):
-        return self.hp_70 + self.sp_70 + self.atk_70 + self.def_70
-
     def _value_at_level(self, fieldname, level=1, is_evolved=False, to_string=True):
+        if not self.evolvable:
+            is_evolved = False
+
         parameter = 0
         if level <= 50:
             parameter = self._para_first_intercept(fieldname, is_evolved) + level * self._para_first_slope(fieldname,
@@ -503,6 +496,30 @@ class Card(MagiModel):
         if to_string:
             return int(parameter).__str__()
         return parameter
+
+    _local_stats = None
+
+    @property
+    def stats_percent(self):
+        if not self._local_stats:
+            self._local_stats = [(evolved, [{
+                'stat': field,
+                'name': name,
+                'value_max_level': self._value_at_level(field, level=self.max_level, is_evolved=evolved),
+                'percent_max_level': 100,
+                'javascript_levels': str({str(level): {
+                    'value': self._value_at_level(field, level=level, is_evolved=evolved),
+                    'percent': self._value_at_level(field, level=level, is_evolved=evolved, to_string=False) / 100,
+                } for level in range(1, self.max_level + 1)}).replace(
+                    '\'', '"'),
+            } for (field, name) in [
+                ('hp', string_concat(_('HP'),' ', _('evolved') if evolved else '')),
+                ('sp', string_concat(_('SP'),' ', _('evolved') if evolved else '')),
+                ('atk', string_concat(_('ATK'),' ', _('evolved') if evolved else '')),
+                ('def', string_concat(_('DEF'),' ', _('evolved') if evolved else '')),
+            ]
+            ]) for evolved in (False, True)]
+        return self._local_stats
 
     # Raw values
     @property
@@ -575,7 +592,8 @@ class Card(MagiModel):
 
     # Action skill
     skill_name = models.CharField(_('Skill name'), max_length=100, null=True)
-    japanese_skill_name = models.CharField(string_concat(_('Skill name'), ' (', t['Japanese'], ')'), max_length=100, null=True)
+    japanese_skill_name = models.CharField(string_concat(_('Skill name'), ' (', t['Japanese'], ')'), max_length=100,
+                                           null=True)
     skill_SP = models.PositiveIntegerField(_('Skill SP'), default=0, null=True)
     skill_range = models.CharField(_('Skill range'), max_length=300, null=True)
     skill_comment = models.CharField(_('Skill comment'), max_length=1000, null=True)

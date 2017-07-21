@@ -26,12 +26,12 @@ class FormSaveOwnerOnCreation(AutoForm):
 class AccountFilterForm(MagiFiltersForm):
     search_fields = ['owner', 'nickname', 'game_id', 'device']
 
-    os = forms.ChoiceField(choices=BLANK_CHOICE_DASH + OS_CHOICES, label=_('Operating System'))
-    player_type = forms.ChoiceField(choices=BLANK_CHOICE_DASH + PLAYERTYPE_CHOICES, label=_('Player Type'))
+    i_os = forms.ChoiceField(choices=BLANK_CHOICE_DASH + OS_CHOICES, label=_('Operating System'))
+    i_player_type = forms.ChoiceField(choices=BLANK_CHOICE_DASH + PLAYERTYPE_CHOICES, label=_('Player Type'))
 
     class Meta:
         model = models.Account
-        fields = ('search', 'os', 'player_type')
+        fields = ('search', 'i_os', 'i_player_type')
 
 
 ############################################################

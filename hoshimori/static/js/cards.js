@@ -47,6 +47,8 @@ function handleClickAddCard() {
 //     });
 // }
 
+// Something must be wrong here
+// TODO
 function handleClickInfo() {
     $('.card [data-info-ajax]').unbind('click');
     $('.card [data-info-ajax]').click(function (e) {
@@ -94,40 +96,15 @@ function updateCardsAndOwnedCards() {
     updateOwnedCards();
 }
 
-function changeSkillLevel(e) {
-    e.preventDefault();
-    var button = $(this);
-    var skill = button.closest('.card-skills');
-    var level_span = skill.find('.skill-level');
-    var max_level = parseInt(level_span.data('max-level'));
-    var skill_details = skill.data('levels');
-    var current_level = parseInt(level_span.text());
-    var new_level;
-    if (button.attr('href').indexOf('+') >= 0) {
-        new_level = current_level + 1;
-    } else {
-        new_level = current_level - 1;
-    }
-    if (new_level > max_level) {
-        new_level = max_level;
-    }
-    if (new_level < 1) {
-        new_level = 1;
-    }
-    if (new_level == max_level) {
-        skill.find('[href="#changeSkillLevel+"]').addClass('disabled');
-    } else {
-        skill.find('[href="#changeSkillLevel+"]').removeClass('disabled');
-    }
-    if (new_level == 1) {
-        skill.find('[href="#changeSkillLevel-"]').addClass('disabled');
-    } else {
-        skill.find('[href="#changeSkillLevel-"]').removeClass('disabled');
-    }
-    level_span.text(new_level);
-    skill.find('.skill-details').first().text(skill_details['english'][new_level]);
-    skill.find('.skill-details-jp').first().text(skill_details['japanese'][new_level]);
-    return false;
+function changeStats(stats, level) {
+    stats.find('[data-levels]').each(function() {
+	var stat = $(this);
+	var levels = stat.data('levels');
+	if (typeof levels[level] != 'undefined') {
+	    stat.find('.stat-value').text(levels[level]['value']);
+	    stat.find('.progress-bar').css('width', levels[level]['percent'] + '%');
+	}
+    });
 }
 
 function handleLevels() {
@@ -146,10 +123,6 @@ function handleLevels() {
         var stats = $(this).closest('.card-stats');
         changeStats(stats, level);
     });
-    $('[href="#changeSkillLevel+"]').unbind('click');
-    $('[href="#changeSkillLevel+"]').click(changeSkillLevel);
-    $('[href="#changeSkillLevel-"]').unbind('click');
-    $('[href="#changeSkillLevel-"]').click(changeSkillLevel);
 }
 
 $(document).ready(function () {
