@@ -199,6 +199,14 @@ class StudentCollection(MagiCollection):
     icon = 'idolized'
 
     filter_cuteform = {
+        'i_school_year': {
+            'image_folder': 'i_school_year',
+            'to_cuteform': 'value',
+            'extra_settings': {
+                'modal': 'true',
+                'modal-text': 'true',
+            },
+        },
         'i_blood_type': {
             'type': CuteFormType.HTML,
         },
