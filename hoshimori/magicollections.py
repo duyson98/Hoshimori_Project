@@ -291,7 +291,7 @@ class CardCollection(MagiCollection):
     }
 
     class ItemView(MagiCollection.ItemView):
-        template = 'cardInfo'
+        # template = 'cardInfo'
         ajax_callback = 'updateCardsAndOwnedCards'
         js_files = ['cards', 'collection']
 
