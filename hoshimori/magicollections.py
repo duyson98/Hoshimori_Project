@@ -174,6 +174,12 @@ class AccountCollection(_AccountCollection):
         default_ordering = '-id'
         filter_form = forms.AccountFilterForm
 
+        filter_cuteform = {
+            'i_os': {
+                'image_folder': 'os_logos'
+            },
+        }
+
         def get_queryset(self, queryset, parameters, request):
             if 'own_card' in parameters and parameters['own_card']:
                 queryset = queryset.filter(ownedcards__card__id=parameters['own_card'])
@@ -210,7 +216,9 @@ class StudentCollection(MagiCollection):
         'i_blood_type': {
             'type': CuteFormType.HTML,
         },
-        'i_star_sign': {}
+        'i_star_sign': {
+            'image_folder': 'i_star_sign'
+        }
     }
 
     class ItemView(MagiCollection.ItemView):
@@ -263,13 +271,23 @@ class CardCollection(MagiCollection):
     reportable = False
 
     filter_cuteform = {
+        'student': {
+            'image_folder': 'thumb_students',
+            'to_cuteform': 'value',
+            'extra_settings': {
+                'modal': 'true',
+                'modal-text': 'true',
+            },
+        },
         'i_card_type': {
             'type': CuteFormType.HTML,
         },
         'i_rarity': {
             'type': CuteFormType.HTML,
         },
-        'i_weapon': {}
+        'i_weapon': {
+            'image_folder': 'i_weapon'
+        }
     }
 
     class ItemView(MagiCollection.ItemView):
@@ -402,6 +420,12 @@ class WeaponCollection(MagiCollection):
     title = _('Weapon')
     plural_title = _('Weapons')
     icon = 'album'
+
+    filter_cuteform = {
+        'i_type': {
+            'image_folder': 'i_weapon'
+        }
+    }
 
     class ItemView(MagiCollection.ItemView):
         template = 'default'
