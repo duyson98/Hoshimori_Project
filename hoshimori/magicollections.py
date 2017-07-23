@@ -205,14 +205,14 @@ class StudentCollection(MagiCollection):
     icon = 'idolized'
 
     filter_cuteform = {
-        'i_school_year': {
-            'image_folder': 'i_school_year',
-            'to_cuteform': 'value',
-            'extra_settings': {
-                'modal': 'true',
-                'modal-text': 'true',
-            },
-        },
+        # 'i_school_year': {
+        #     'image_folder': 'i_school_year',
+        #     'to_cuteform': 'value',
+        #     'extra_settings': {
+        #         'modal': 'true',
+        #         'modal-text': 'true',
+        #     },
+        # },
         'i_blood_type': {
             'type': CuteFormType.HTML,
         },
@@ -271,14 +271,14 @@ class CardCollection(MagiCollection):
     reportable = False
 
     filter_cuteform = {
-        'student': {
-            'image_folder': 'thumb_students',
-            'to_cuteform': 'value',
-            'extra_settings': {
-                'modal': 'true',
-                'modal-text': 'true',
-            },
-        },
+        # 'student': {
+        #     'image_folder': 'thumb_students',
+        #     'to_cuteform': 'value',
+        #     'extra_settings': {
+        #         'modal': 'true',
+        #         'modal-text': 'true',
+        #     },
+        # },
         'i_card_type': {
             'type': CuteFormType.HTML,
         },

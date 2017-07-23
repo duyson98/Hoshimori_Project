@@ -6,36 +6,36 @@
   <br><br>
         <p class="text-center">
         <div class="card-art" style="position:relative; width:300px; height:394px; margin:0 auto;">
-            <div class="main-art" style="top:-10px; left:-10px; z-index:200;">
-                <img src="{{ card.art_url }}" alt="{{ card.name }}" class="card-image"></div>
+            <div class="main-art" style="top:-10px; left:-10px; z-index:200; width:300px; height:395px">
+                <img src="{{ card.art_url }}" alt="{{ card.name }}" class="card-image" width="300" height="395"></div>
             {% if card.special_front %}
                 <div class="special-front" style="position:absolute; top:0px; left:0px; z-index:10;">
-                    <img src="{{ card.special_front_url }}" alt="{{ card.name }}">
+                    <img src="{{ card.special_front_url }}" alt="{{ card.name }}" width="300" height="395">
                 </div>
             {% endif %}
             {% if card.front_top %}
                 <div class="front-top" style="position:absolute; top:0px; left:0px; z-index:20;">
-                    <img src="{{ card.front_top_url }}" alt="{{ card.name }}">
+                    <img src="{{ card.front_top_url }}" alt="{{ card.name }}" width="187" height="84">
                 </div>
             {% endif %}
             {% if card.front_bottom %}
                 <div class="front-bottom" style="position:absolute; left:0px; bottom:0px; z-index:20;">
-                    <img src="{{ card.front_bottom_url }}" alt="{{ card.name }}">
+                    <img src="{{ card.front_bottom_url }}" alt="{{ card.name }}" width="300" height="127">
                 </div>
             {% endif %}
             {% if card.front_name %}
                 <div class="front-name" style="position:absolute; bottom:0px; right:0px; z-index:30;">
-                    <img src="{{ card.front_name_url }}" alt="{{ card.name }}">
+                    <img src="{{ card.front_name_url }}" alt="{{ card.name }}" width="234" height="117">
                 </div>
             {% endif %}
             {% if card.front_rarity %}
                 <div class="front-rarity" style="position:absolute; top:0px; left:0px; z-index:40;">
-                    <img src="{{ card.front_rarity_url }}" alt="{{ card.name }}">
+                    <img src="{{ card.front_rarity_url }}" alt="{{ card.name }}" width="140" height="70">
                 </div>
             {% endif %}
             {% if card.front_weapon %}
                 <div class="special-front" style="position:absolute; left:0px; bottom:0px; z-index:40;">
-                    <img src="{{ card.front_weapon_url }}" alt="{{ card.name }}">
+                    <img src="{{ card.front_weapon_url }}" alt="{{ card.name }}" width="46" height="46">
                 </div>
             {% endif %}
         </div>
