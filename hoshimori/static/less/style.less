@@ -60,15 +60,17 @@ html {
     }
 
     .home-about-game-button {
-        font-family: 'Electrolize', monospace;
+        font-family: 'Electrolize', monospace !important;
         font-style: italic;
         font-size: 20px;
+        color: black !important;
     }
 
     .home-about-site-button {
-        font-family: 'Electrolize', monospace;
+        font-family: 'Electrolize', monospace !important;
         font-style: italic;
         font-size: 20px;
+        color: black !important;
     }
 
     .padding50.no-result-wrapper {
@@ -599,6 +601,10 @@ div.tab button.active {
     background-repeat: no-repeat;
     background-size: cover;
 
+    div.text-right {
+        display: none;
+    }
+
     .item-container {
         background-color: white;
 
@@ -623,6 +629,10 @@ div.tab button.active {
         li a {
             color: @darkColor;
         }
+    }
+
+    div.col-xs-2 {
+        margin-right: 25px;
     }
 }
 
@@ -691,6 +701,14 @@ div.tab button.active {
 }
 
 .current-card_list {
+    #id_i_rarity + .cuteform {
+        .cuteform-elt:not([data-cuteform-val=""]) {
+            border-radius: 8px;
+            padding: 3px;
+            width: 60px;
+            height: 30px;
+        }
+    }
     #id_i_weapon + .cuteform {
         .cuteform-elt:not([data-cuteform-val=""]) {
             background-color: fade(white, 80%);

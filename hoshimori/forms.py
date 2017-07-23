@@ -146,7 +146,8 @@ class CardFilterForm(MagiFiltersForm):
             return queryset.exclude(i_rarity__in=EVOLVABLE_RARITIES, i_card_type=0)
         return queryset
 
-    evolvable = forms.ChoiceField(initial=None, required=False, label=_('Evolvable'))
+    # evolvable = forms.ChoiceField(initial=None, required=False, label=_('Evolvable'))
+    evolvable = forms.ChoiceField(choices=BLANK_CHOICE_DASH + list(enumerate([True, False])))
     evolvable_filter = MagiFilter(to_queryset=_evolvable_to_queryset)
 
     i_card_type = forms.ChoiceField(label="Card Type", choices=BLANK_CHOICE_DASH + CARDTYPE_CHOICES)

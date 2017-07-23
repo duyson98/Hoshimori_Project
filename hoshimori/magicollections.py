@@ -283,7 +283,7 @@ class CardCollection(MagiCollection):
             'type': CuteFormType.HTML,
         },
         'i_rarity': {
-            'type': CuteFormType.HTML,
+            'image_folder': 'i_rarity'
         },
         'i_weapon': {
             'image_folder': 'i_weapon'
