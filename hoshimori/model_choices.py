@@ -196,6 +196,7 @@ WEAPON_GUN = 3
 WEAPON_ROD = 4
 WEAPON_GUNBLADE = 5
 WEAPON_TWINBARRETT = 6
+WEAPON_CLAWFANG = 7
 
 WEAPON_CHOICES = [
     (WEAPON_SWORD, _('Sword')),
@@ -205,6 +206,7 @@ WEAPON_CHOICES = [
     (WEAPON_ROD, _('Rod')),
     (WEAPON_GUNBLADE, _('Gunblade')),
     (WEAPON_TWINBARRETT, _('Twin Barrett')),
+    (WEAPON_CLAWFANG, _('Claw Fang')),
 ]
 
 WEAPON_DICT = dict(WEAPON_CHOICES)
@@ -217,6 +219,7 @@ ENGLISH_WEAPON_CHOICES = [
     (WEAPON_ROD, 'Rod'),
     (WEAPON_GUNBLADE, 'Gunblade'),
     (WEAPON_TWINBARRETT, 'Twin Barrett'),
+    (WEAPON_CLAWFANG, 'Claw Fang'),
 ]
 
 ENGLISH_WEAPON_DICT = dict(ENGLISH_WEAPON_CHOICES)
@@ -256,150 +259,18 @@ ENGLISH_UPGRADE_LEVEL_CHOICES = [
 ENGLISH_UPGRADE_LEVEL_DICT = dict(ENGLISH_UPGRADE_LEVEL_CHOICES)
 
 ############################################################
-# Nakayoshi
-
-SKILL_ATK = 0
-SKILL_HP = 1
-SKILL_SP = 2
-SKILL_DAMAGE = 3
-SKILL_COMBO_DAMAGE = 4
-SKILL_SP_CONSUMPTION = 5
-SKILL_SKILL_COMBO = 6
-SKILL_MOVEMENT_RATE = 7
-SKILL_DODGE = 8
-SKILL_AUTO_RELOAD = 9
-SKILL_BULLET = 10
-SKILL_ITEM_RANGE = 11
-SKILL_DROP_QUANTITY = 12
-SKILL_COIN = 13
-SKILL_CHEERPOINT = 14
-SKILL_EXP = 15
-SKILL_BOND_POINT = 16
-SKILL_GUARD_PENETRATION = 17
-SKILL_RECEIVED_DAMAGE = 18
-SKILL_NULL_SP = 19
-SKILL_NULL_SLOW = 20
-SKILL_NULL_PARALYSIS = 21
-SKILL_NULL_SKILL_SEAL = 22
-SKILL_NULL_POISON = 23
-
-ENGLISH_NAKAYOSHI_SKILL_CHOICES = [
-    (SKILL_ATK, 'ATK'),
-    (SKILL_HP, 'HP'),
-    (SKILL_SP, 'SP'),
-    (SKILL_DAMAGE, 'Damage'),
-    (SKILL_COMBO_DAMAGE, 'Combo Damage'),
-    (SKILL_SP_CONSUMPTION, 'SP Consumption'),
-    (SKILL_SKILL_COMBO, 'Skill Combo'),
-    (SKILL_MOVEMENT_RATE, 'Movement Rate'),
-    (SKILL_DODGE, 'Dodge'),
-    (SKILL_AUTO_RELOAD, 'Auto Reload'),
-    (SKILL_BULLET, 'Bullet'),
-    (SKILL_ITEM_RANGE, 'Item Recovery Range'),
-    (SKILL_DROP_QUANTITY, 'Item Drop Quantity'),
-    (SKILL_COIN, 'Coin'),
-    (SKILL_CHEERPOINT, 'Cheerpoint'),
-    (SKILL_EXP, 'EXP'),
-    (SKILL_BOND_POINT, 'Bond Point'),
-    (SKILL_GUARD_PENETRATION, 'Guard Penetration'),
-    (SKILL_RECEIVED_DAMAGE, 'Received Damage'),
-    (SKILL_NULL_SP, 'Null SP Damage'),
-    (SKILL_NULL_SLOW, 'Null Slow'),
-    (SKILL_NULL_PARALYSIS, 'Null Paralysis'),
-    (SKILL_NULL_SKILL_SEAL, 'Null Skill Seal'),
-    (SKILL_NULL_POISON, 'Null Poison'),
-]
-
-ENGLISH_NAKAYOSHI_SKILL_DICT = dict(ENGLISH_NAKAYOSHI_SKILL_CHOICES)
-
-NAKAYOSHI_SKILL_CHOICES = [
-    (SKILL_ATK, _('ATK')),
-    (SKILL_HP, _('HP')),
-    (SKILL_SP, _('SP')),
-    (SKILL_DAMAGE, _('Damage')),
-    (SKILL_COMBO_DAMAGE, _('Combo Damage')),
-    (SKILL_SP_CONSUMPTION, _('SP Consumption')),
-    (SKILL_SKILL_COMBO, _('Skill Combo')),
-    (SKILL_MOVEMENT_RATE, _('Movement Rate')),
-    (SKILL_DODGE, _('Dodge')),
-    (SKILL_AUTO_RELOAD, _('Auto Reload')),
-    (SKILL_BULLET, _('Bullet')),
-    (SKILL_ITEM_RANGE, _('Item Recovery Range')),
-    (SKILL_DROP_QUANTITY, _('Item Drop Quantity')),
-    (SKILL_COIN, _('Coin')),
-    (SKILL_CHEERPOINT, _('Cheerpoint')),
-    (SKILL_EXP, _('EXP')),
-    (SKILL_BOND_POINT, _('Bond Point')),
-    (SKILL_GUARD_PENETRATION, _('Guard Penetration')),
-    (SKILL_RECEIVED_DAMAGE, _('Received Damage')),
-    (SKILL_NULL_SP, _('Null SP Damage')),
-    (SKILL_NULL_SLOW, _('Null Slow')),
-    (SKILL_NULL_PARALYSIS, _('Null Paralysis')),
-    (SKILL_NULL_SKILL_SEAL, _('Null Skill Seal')),
-    (SKILL_NULL_POISON, _('Null Poison')),
-]
-
-NAKAYOSHI_SKILL_DICT = dict(NAKAYOSHI_SKILL_CHOICES)
-
-SMALL = 0
-MEDIUM = 1
-LARGE = 2
-SUPER = 3
-
-SKILL_SIZE_CHOICES = [
-    (SMALL, _('Small')),
-    (MEDIUM, _('Medium')),
-    (LARGE, _('Large')),
-    (SUPER, _('Super')),
-]
-SKILL_SIZE_DICT = dict(SKILL_SIZE_CHOICES)
-
-ENGLISH_SKILL_SIZE_CHOICES = [
-    (SMALL, 'Small'),
-    (MEDIUM, 'Medium'),
-    (LARGE, 'Large'),
-    (SUPER, 'Super'),
-]
-ENGLISH_SKILL_SIZE_DICT = dict(ENGLISH_SKILL_SIZE_CHOICES)
-
-SKILL_SIZE_VALUE = [
-    ("Combo Damage", [10, 15, 20, 30]),
-    ("Damage", [6, 8, 10, 15]),
-    ("SP Consumption", [5, 10, 15, 25]),
-    ("Coin", [50, 100]),
-    ("Cheerpoint", [50, 100]),
-    ("EXP", [50, 100]),
-]
-SKILL_SIZE_VALUE_DICT = dict(SKILL_SIZE_VALUE)
-
-############################################################
-# Weapon effects
-
-# TODO: Add weapon effects
-
-ENGLISH_WEAPON_EFFECT_CHOICES = [
-    (0, 'GAY')
-]
-
-ENGLISH_WEAPON_EFFECT_DICT = dict(ENGLISH_WEAPON_EFFECT_CHOICES)
-
-WEAPON_EFFECT_CHOICES = [
-    (0, 'GAY')
-]
-
-WEAPON_EFFECT_DICT = dict(WEAPON_EFFECT_CHOICES)
-
-############################################################
 # Stages
 
 EASY = 0
 NORMAL = 1
 HARD = 2
+EX = 3
 
 DIFFICULTY_CHOICES = [
     (EASY, "Easy"),
     (NORMAL, "Normal"),
     (HARD, "Hard"),
+    (EX, "EX"),
 ]
 
 DIFFICULTY_DICT = dict(DIFFICULTY_CHOICES)

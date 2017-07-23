@@ -513,10 +513,10 @@ class Card(MagiModel):
                 } for level in range(1, self.max_level + 1)}).replace(
                     '\'', '"'),
             } for (field, name) in [
-                ('hp', string_concat(_('HP'),' ', _('evolved') if evolved else '')),
-                ('sp', string_concat(_('SP'),' ', _('evolved') if evolved else '')),
-                ('atk', string_concat(_('ATK'),' ', _('evolved') if evolved else '')),
-                ('def', string_concat(_('DEF'),' ', _('evolved') if evolved else '')),
+                ('hp', string_concat(_('HP'), ' ', _('evolved') if evolved else '')),
+                ('sp', string_concat(_('SP'), ' ', _('evolved') if evolved else '')),
+                ('atk', string_concat(_('ATK'), ' ', _('evolved') if evolved else '')),
+                ('def', string_concat(_('DEF'), ' ', _('evolved') if evolved else '')),
             ]
             ]) for evolved in (False, True)]
         return self._local_stats
@@ -643,8 +643,11 @@ class Card(MagiModel):
     # evolved_nakayoshi_skills = models.ManyToManyField('Nakayoshi', related_name='card_with_nakayoshi_evolved',
     #                                                   null=True, default=None)
 
+    nakayoshi_skill_requirement = models.CharField(_('Passive Skill Requirement'), max_length=200, null=True)
     nakayoshi_skill_effect = models.CharField(_('Passive Skill Effect'), max_length=200, null=True)
     nakayoshi_skill_target = models.CharField(_('Passive Skill Target'), max_length=200, null=True)
+    evolved_nakayoshi_skill_requirement = models.CharField(
+        string_concat(_('Passive Skill Requirement'), ' (', _('Evolved'), ')'), max_length=200, null=True)
     evolved_nakayoshi_skill_effect = models.CharField(string_concat(_('Passive Skill Effect'), ' (', _('Evolved'), ')'),
                                                       max_length=200, null=True)
     evolved_nakayoshi_skill_target = models.CharField(string_concat(_('Passive Skill Target'), ' (', _('Evolved'), ')'),

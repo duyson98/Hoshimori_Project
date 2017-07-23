@@ -5,6 +5,20 @@ from hoshimori.models import *
 
 
 ###########################################################
+# Utils
+
+def extract_number(str):
+    return re.findall("[-+]?\d+[\.]?\d*[eE]?[-+]?\d*", str)
+
+
+def return_number_or_none(str):
+    if str.isdigit():
+        return str
+    else:
+        return None
+
+
+###########################################################
 # Student
 
 def character_import_data():
@@ -13,9 +27,7 @@ def character_import_data():
         id = 0
         for row in reader:
             if row[0] != 'name':  # ignore header row
-                id += 1
                 _, created = Student.objects.get_or_create(
-                    id=id,
                     name=row[0],
                     japanese_name=row[1],
                     unlock=row[2],
@@ -27,11 +39,11 @@ def character_import_data():
                     extra_activity=row[8],
                     catchphrase_1=row[9],
                     catchphrase_2=row[10],
-                    height=row[11],
-                    weight=row[12],
-                    bust=row[13],
-                    waist=row[14],
-                    hip=row[15],
+                    height=return_number_or_none(row[11]),
+                    weight=return_number_or_none(row[12]),
+                    bust=return_number_or_none(row[13]),
+                    waist=return_number_or_none(row[14]),
+                    hip=return_number_or_none(row[15]),
                     hobby_1=row[16],
                     hobby_2=row[17],
                     hobby_3=row[18],
@@ -57,6 +69,7 @@ def character_import_data():
                     introduction_1=row[38],
                     introduction_2=row[39],
                     owner_id=1,
+                    id=row[41],
                 )
 
 
@@ -189,17 +202,6 @@ stage_import_data()
 ###########################################################
 # Card
 
-def extract_number(str):
-    return re.findall("[-+]?\d+[\.]?\d*[eE]?[-+]?\d*", str)
-
-
-def return_number_or_none(str):
-    if str.isdigit():
-        return str
-    else:
-        return None
-
-
 def card_import_data():
     with open('database/revamped_card_database.csv') as f:
         reader = csv.reader(f)
@@ -253,15 +255,17 @@ def card_import_data():
                         evolved_action_skill_damage=row[48],
                         nakayoshi_title=row[49],
                         japanese_nakayoshi_title=row[50],
-                        nakayoshi_skill_effect=row[51],
-                        nakayoshi_skill_target=row[52],
-                        evolved_nakayoshi_skill_effect=row[53],
-                        evolved_nakayoshi_skill_target=row[54],
-                        charge_comment=row[55],
-                        charge_damage=row[56],
-                        charge_hit=row[57],
-                        charge_name=row[58],
-                        charge_range=row[59],
+                        nakayoshi_skill_requirement=row[51],
+                        nakayoshi_skill_effect=row[52],
+                        nakayoshi_skill_target=row[53],
+                        evolved_nakayoshi_skill_requirement=row[54],
+                        evolved_nakayoshi_skill_effect=row[55],
+                        evolved_nakayoshi_skill_target=row[56],
+                        charge_comment=row[57],
+                        charge_damage=row[58],
+                        charge_hit=row[59],
+                        charge_name=row[60],
+                        charge_range=row[61],
                     )
 
 
