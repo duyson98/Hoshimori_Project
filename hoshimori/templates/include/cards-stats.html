@@ -40,16 +40,12 @@
             {% endif %}
         </div>
         </p>
-        {% if current == 'card_item' %}
             <h3 class="text-center fontx2">{{ card.name }}</h3>
-        {% endif %}
         <br>
         <div class="card-statistics">
              {% for evolved, stats in card.stats_percent %}
-                <div class="card-art{% if evolved %}-evolved{% endif %}" style="background-image: url('{% if evolved %}{% if card.art_evolved %}{{ card.art_evolved_url }}{% else %}{{ static_url }}img/backgrounds/background1.png{% endif %}{% else %}{% if card.art %}{{ card.art_url }}{% else %}{{ static_url }}img/backgrounds/background0.png{% endif %}{% endif %}');">
-                <div class="cards-stats-inner-inner"{% if evolved and not card.art_evolved %} style="background-image: url('{{ card.transparent_evolved_url }}');"{% elif not evolved and not card.art %} style="background-image: url('{{ card.transparent_url }}');"{% endif %}>
-                  <div class="card-stats-inner">
-                  <div class="card-stats" style="background-image: url('{% if evolved %}{{ card.puchi_evolved_url }}{% else %}{{ card.puchi_url }}{% endif %}');">
+              <div class="card-stats-inner">
+              <div class="card-stats" style="background-image: url('{% if evolved %}{{ card.puchi_evolved_url }}{% else %}{{ card.puchi_url }}{% endif %}');">
                 <div class="btn-group btn-group-justified" data-toggle="buttons">
                   <label class="btn btn-inherit changeLevel">
                     <input type="radio" name="options" autocomplete="off"> {% trans 'Level' %} <span class="level">1</span>
@@ -77,10 +73,8 @@
                 </div>
                 <br>
                 {% endfor %}
-                  </div>
-                </div>
-                </div>
-                </div>
+              </div>
+              </div>
                 <br>
                 {% endfor %}
         </div>
@@ -311,36 +305,36 @@
                 </tr>
             {% endif %}
         </table>
-    <table class="card-basic-info">
+    <table class="card-basic-info" width="100%">
       <tr>
-
-	<td>
-	  <h4>{% trans 'Belongs to' %}</h4>
-    {% if card.cached_total_owners %}
-	  {% with total=card.cached_total_owners %}
-	  {% blocktrans count counter=total %}{{ total }} sensei{% plural %}{{ total }} sensei's{% endblocktrans %}
-	  {% endwith %}<br>
-	  <a href="/accounts/?own_card={{ card.id }}" target="_blank">
-	    {% trans 'View all' %}
-	    <i class="flaticon-link fontx0-8"></i>
-	  </a>
-        {% else %}
-        0 sensei's :(
-    {% endif %}
-	</td>
-
-	<td>
-	  <h4>{% trans 'Comments' %}</h4>
-      <a href="{{ card.item_url }}#disqus_thread" class="btn btn-{{ card.english_type }} btn-lg"{% if current != 'current-card_item' %} target="_blank"{% endif %}>
-	<i class="flaticon-comments"></i> {% trans 'Comments' %}
-      </a>
-	</td>
-	<td>
-	  <h4>{% trans 'Share' %}</h4>
-	  <span class="btn-grouph">
+          <td>
+              <h4>{% trans 'Belongs to' %}</h4>
+              {% if card.cached_total_owners %}
+                  {% with total=card.cached_total_owners %}
+                      {% blocktrans count counter=total %}{{ total }} sensei{% plural %}{{ total }} sensei's
+                      {% endblocktrans %}
+                  {% endwith %}<br>
+                  <a href="/accounts/?own_card={{ card.id }}" target="_blank">
+                      {% trans 'View all' %}
+                      <i class="flaticon-link fontx0-8"></i>
+                  </a>
+              {% else %}
+                  0 sensei's :(
+              {% endif %}
+          </td>
+          <td>
+              <h4>{% trans 'Comments' %}</h4>
+              <a href="{{ card.item_url }}#disqus_thread" class="btn btn-{{ card.english_type }} btn-lg"
+                      {% if current != 'current-card_item' %} target="_blank"{% endif %}>
+                  <i class="flaticon-comments"></i> {% trans 'Comments' %}
+              </a>
+          </td>
+          <td>
+              <h4>{% trans 'Share' %}</h4>
+              <span class="btn-grouph">
 	    {% include 'include/share.html' with share_url=card.http_item_url share_btn_class=card.english_type|add:' btn-lg' share_sentence=card %}
 	  </span>
-	</td>
+          </td>
       </tr>
     </table>
   </div>

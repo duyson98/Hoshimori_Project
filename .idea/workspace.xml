@@ -2,15 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b42e218c-a55e-4bf5-9a85-f6d35961b77b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hoshimori/static/img/light_orbs/big.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hoshimori/static/img/light_orbs/normal.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hoshimori/static/img/subcard_effect/0.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hoshimori/static/img/subcard_effect/1.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/static/favicon.ico" afterPath="$PROJECT_DIR$/hoshimori/static/favicon.ico" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/static/img/avatar.png" afterPath="$PROJECT_DIR$/hoshimori/static/img/avatar.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/static/img/favicon.ico" afterPath="$PROJECT_DIR$/hoshimori/static/img/favicon.ico" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/static/img/i_weapon/0.png" afterPath="$PROJECT_DIR$/hoshimori/static/img/i_weapon/0.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/static/img/i_weapon/1.png" afterPath="$PROJECT_DIR$/hoshimori/static/img/i_weapon/1.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/static/img/i_weapon/2.png" afterPath="$PROJECT_DIR$/hoshimori/static/img/i_weapon/2.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/static/img/i_weapon/3.png" afterPath="$PROJECT_DIR$/hoshimori/static/img/i_weapon/3.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/static/img/i_weapon/4.png" afterPath="$PROJECT_DIR$/hoshimori/static/img/i_weapon/4.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/static/img/i_weapon/5.png" afterPath="$PROJECT_DIR$/hoshimori/static/img/i_weapon/5.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/static/img/i_weapon/6.png" afterPath="$PROJECT_DIR$/hoshimori/static/img/i_weapon/6.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/static/img/i_weapon/7.png" afterPath="$PROJECT_DIR$/hoshimori/static/img/i_weapon/7.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/characters.csv" afterPath="$PROJECT_DIR$/database/characters.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/models.py" afterPath="$PROJECT_DIR$/hoshimori/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/forms.py" afterPath="$PROJECT_DIR$/hoshimori/forms.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/magicollections.py" afterPath="$PROJECT_DIR$/hoshimori/magicollections.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/static/js/main.js" afterPath="$PROJECT_DIR$/hoshimori/static/js/main.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/static/less/style.less" afterPath="$PROJECT_DIR$/hoshimori/static/less/style.less" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/templates/include/cards-stats.html" afterPath="$PROJECT_DIR$/hoshimori/templates/include/cards-stats.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/templates/items/cardItem.html" afterPath="$PROJECT_DIR$/hoshimori/templates/items/cardItem.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/templates/items/studentItem.html" afterPath="$PROJECT_DIR$/hoshimori/templates/items/studentItem.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -58,39 +69,23 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="magicollections.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/hoshimori/magicollections.py">
+      <file leaf-file-name="cardItem.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hoshimori/templates/items/cardItem.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="380" column="44" lean-forward="false" selection-start-line="380" selection-start-column="44" selection-end-line="380" selection-end-column="44" />
+            <state relative-caret-position="132">
+              <caret line="11" column="27" lean-forward="false" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
               <folding>
-                <element signature="e#54#105#0" expanded="true" />
-                <marker date="1500875615096" expanded="true" signature="1610:1718" ph="SELECT COUNT... magi_userpreferences_following" />
-                <marker date="1500875615096" expanded="true" signature="1891:2051" ph="SELECT COUNT... magi_userpreferences_following" />
-                <marker date="1500875615096" expanded="true" signature="1971:2035" ph="SELECT id FR... magi_userpreferences" />
-                <marker date="1500875615096" expanded="true" signature="2207:2352" ph="SELECT COUNT... magi_userpreferences_following" />
-                <marker date="1500875615096" expanded="true" signature="2287:2351" ph="SELECT id FR... magi_userpreferences" />
-                <marker date="1500875615096" expanded="true" signature="2391:2471" ph="SELECT COUNT... magi_userpreferences_following" />
+                <element signature="n#style#0;n#a#1;n#div#1;n#div#1;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="profile_account_tabs.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/hoshimori/static/js/profile_account_tabs.js">
+      <file leaf-file-name="style.less" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/hoshimori/static/less/style.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="271">
-              <caret line="61" column="16" lean-forward="false" selection-start-line="61" selection-start-column="16" selection-end-line="61" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="forms.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/hoshimori/forms.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="164">
-              <caret line="186" column="0" lean-forward="true" selection-start-line="186" selection-start-column="0" selection-end-line="186" selection-end-column="0" />
+            <state relative-caret-position="568">
+              <caret line="406" column="21" lean-forward="false" selection-start-line="406" selection-start-column="21" selection-end-line="406" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -108,36 +103,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
+      <find>subcard_ef</find>
+      <find>subcard_eff</find>
+      <find>subcard_effec</find>
       <find>cute</find>
-      <find>\n             \{\% for awakened\, stats in card\.stats_percent \%\}\n                \&lt;div class\=\&quot;card\-art\{\% if awakened \%\}\-awakened\{\% endif \%\}\&quot; style\=\&quot;background\-image\: url\(\'\{\% if awakened \%\}\{\% if card\.art_awakened \%\}\{\{ card\.art_awakened_url \}\}\{\% else \%\}\{\{ static_url \}\}img\/backgrounds\/background1\.png\{\% endif \%\}\{\% else \%\}\{\% if card\.art \%\}\{\{ card\.art_url \}\}\{\% else \%\}\{\{ static_url \}\}img\/backgrounds\/background0\.png\{\% endif \%\}\{\% endif \%\}\'\)\;\&quot;\&gt;\n                \&lt;div class\=\&quot;cards\-stats\-inner\-inner\&quot;\{\% if awakened and not card\.art_awakened \%\} style\=\&quot;background\-image\: url\(\'\{\{ card\.transparent_awakened_url \}\}\'\)\;\&quot;\{\% elif not awakened and not card\.art \%\} style\=\&quot;background\-image\: url\(\'\{\{ card\.transparent_url \}\}\'\)\;\&quot;\{\% endif \%\}\&gt;\n                  \&lt;div class\=\&quot;card\-stats\-inner\&quot;\&gt;\n                  \&lt;div class\=\&quot;card\-stats\&quot; style\=\&quot;background\-image\: url\(\'\{\% if awakened \%\}\{\{ card\.puchi_awakened_url \}\}\{\% else \%\}\{\{ card\.puchi_url \}\}\{\% endif \%\}\'\)\;\&quot;\&gt;\n                \&lt;div class\=\&quot;btn\-group btn\-group\-justified\&quot; data\-toggle\=\&quot;buttons\&quot;\&gt;\n                  \&lt;label class\=\&quot;btn btn\-inherit changeLevel\&quot;\&gt;\n                    \&lt;input type\=\&quot;radio\&quot; name\=\&quot;options\&quot; autocomplete\=\&quot;off\&quot;\&gt; \{\% trans \'Level\' \%\} \&lt;span class\=\&quot;level\&quot;\&gt;1\&lt;\/span\&gt;\n                  \&lt;\/label\&gt;\n                  \&lt;div class\=\&quot;btn btn\-inherit\&quot;\&gt;\n                    \{\% trans \'Level\' \%\} \&lt;input type\=\&quot;number\&quot; name\=\&quot;changeLevelNumber\&quot; placeholder\=\&quot;\?\?\&quot; min\=\&quot;2\&quot; max\=\&quot;\{\% if awakened \%\}\{\{ card\.max_level_awakened\|add\:\-1 \}\}\{\% else \%\}\{\{ card\.max_level\|add\:\-1 \}\}\{\% endif \%\}\&quot;\&gt;\n                  \&lt;\/div\&gt;\n                  \&lt;label class\=\&quot;btn btn\-inherit changeLevel active\&quot;\&gt;\n                    \&lt;input type\=\&quot;radio\&quot; name\=\&quot;options\&quot; autocomplete\=\&quot;off\&quot; checked\&gt; \{\% trans \'Level\' \%\} \&lt;span class\=\&quot;level\&quot;\&gt;\{\% if awakened \%\}\{\{ card\.max_level_awakened \}\}\{\% else \%\}\{\{ card\.max_level \}\}\{\% endif \%\}\&lt;\/span\&gt;\n                  \&lt;\/label\&gt;\n                \&lt;\/div\&gt;\n                \&lt;br\&gt;\n                \{\% for stat in stats \%\}\n                \&lt;div class\=\&quot;row\&quot; data\-stat\=\&quot;\{\{ stat\.stat \}\}\&quot; data\-levels\=\'\{\{ stat\.javascript_levels\|safe \}\}\'\&gt;\n                  \&lt;div class\=\&quot;col\-xs\-2\&quot;\&gt;\{\{ stat\.name \}\}\&lt;\/div\&gt;\n                  \&lt;div class\=\&quot;col\-xs\-2 text\-right stat\-value\&quot;\&gt;\{\{ stat\.value_max_level \}\}\&lt;\/div\&gt;\n                  \&lt;div class\=\&quot;col\-xs\-8\&quot;\&gt;\n                    \&lt;div class\=\&quot;progress\&quot;\&gt;\n                      \&lt;div class\=\&quot;progress\-bar progress\-bar\-default progress\-bar\-striped\&quot;\n                       role\=\&quot;progressbar\&quot;\n                       style\=\&quot;width\: \{\% localize off \%\}\{\{ stat\.percent_max_level \}\}\{\% endlocalize \%\}\%\;\&quot;\&gt;\n                      \&lt;\/div\&gt;\n                    \&lt;\/div\&gt;\n                  \&lt;\/div\&gt;\n                \&lt;\/div\&gt;</find>
-      <find>evolvable</find>
-      <find>is_evolved</find>
-      <find>awakne</find>
-      <find>a</find>
-      <find>awan</find>
-      <find>awa</find>
-      <find>awake</find>
-      <find>awaken</find>
-      <find>evolvedpercent_max_level</find>
-      <find>awakened</find>
       <find>max</find>
-      <find>add:-1</find>
-      <find>percent_max_level</find>
-      <find>max_level_evolved</find>
-      <find>value_max_level</find>
-      <find>stat</find>
-      <find>card-info</find>
-      <find>student-info</find>
+      <find>subcard_effect</find>
+      <find>card-basic-info</find>
+      <find>skill_affinity</find>
+      <find>ba</find>
+      <find>basic-</find>
+      <find>basic-in</find>
+      <find>basic-info</find>
+      <find>c</find>
+      <find>card-</find>
+      <find>card-s</find>
+      <find>card-st</find>
+      <find>card-sta</find>
+      <find>ca</find>
+      <find>card</find>
+      <find>card-stats</find>
+      <find>.card-buttons</find>
+      <find>.btn-lg</find>
+      <find>.modal-content {</find>
+      <find>table</find>
+      <find>grouph</find>
+      <find>100</find>
+      <find>100%</find>
       <find>card-stat</find>
-      <find>max-wid</find>
-      <find>color</find>
-      <find>share</find>
-      <find>per_line</find>
-      <find>row</find>
-      <find>tab-panel</find>
-      <find>owned</find>
-      <find>col_break</find>
-      <find>fields</find>
+      <find>padding-left</find>
+      <find>btn-lg</find>
     </findStrings>
     <replaceStrings>
       <replace>get_cards</replace>
@@ -186,26 +181,27 @@
         <option value="$PROJECT_DIR$/hoshimori/templates/empty_query.html" />
         <option value="$PROJECT_DIR$/virtual_env/Lib/site-packages/magi/static/js/profile.js" />
         <option value="$PROJECT_DIR$/hoshimori/static/js/profile_account_tabs.js" />
-        <option value="$PROJECT_DIR$/hoshimori/static/js/main.js" />
         <option value="$PROJECT_DIR$/hoshimori/templates/include/card-stats.html" />
         <option value="$PROJECT_DIR$/hoshimori/templates/include/cards-collection.html" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/hoshimori/static/js/cards.js" />
         <option value="$PROJECT_DIR$/hoshimori/model_choices.py" />
         <option value="$PROJECT_DIR$/database_import.py" />
         <option value="$PROJECT_DIR$/hoshimori/templates/include/avatar.html" />
         <option value="$PROJECT_DIR$/virtual_env/Lib/site-packages/magi/views.py" />
         <option value="$PROJECT_DIR$/hoshimori/templates/custom/signup.html" />
         <option value="$PROJECT_DIR$/hoshimori/settings.py" />
-        <option value="$PROJECT_DIR$/hoshimori/templates/items/cardItem.html" />
         <option value="$PROJECT_DIR$/database/characters.csv" />
         <option value="$PROJECT_DIR$/hoshimori/views.py" />
         <option value="$PROJECT_DIR$/hoshimori/templates/items/studentItem.html" />
         <option value="$PROJECT_DIR$/hoshimori/models.py" />
+        <option value="$PROJECT_DIR$/hoshimori/static/js/cards.js" />
+        <option value="$PROJECT_DIR$/hoshimori/static/js/collection.js" />
+        <option value="$PROJECT_DIR$/hoshimori/static/js/main.js" />
+        <option value="$PROJECT_DIR$/hoshimori/forms.py" />
+        <option value="$PROJECT_DIR$/hoshimori/magicollections.py" />
+        <option value="$PROJECT_DIR$/hoshimori/templates/items/cardItem.html" />
         <option value="$PROJECT_DIR$/hoshimori/templates/include/cards-stats.html" />
         <option value="$PROJECT_DIR$/hoshimori/static/less/style.less" />
-        <option value="$PROJECT_DIR$/hoshimori/magicollections.py" />
-        <option value="$PROJECT_DIR$/hoshimori/forms.py" />
       </list>
     </option>
   </component>
@@ -512,11 +508,11 @@
       <recent name="C:\Users\kokon\PycharmProjects\hoshimori_project\hoshimori_project" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\kokon\PycharmProjects\Hoshimori-Project\hoshimori\static\img\subcard_effect" />
       <recent name="C:\Users\kokon\PycharmProjects\Hoshimori-Project\hoshimori\templates\include" />
       <recent name="C:\Users\kokon\PycharmProjects\Hoshimori-Project\hoshimori\templates\items" />
       <recent name="C:\Users\kokon\PycharmProjects\hoshimori_project\hoshimori\templates\include" />
       <recent name="C:\Users\kokon\PycharmProjects\hoshimori_project\hoshimori\templates\items" />
-      <recent name="C:\Users\kokon\PycharmProjects\hoshimori_project\hoshimori" />
     </key>
   </component>
   <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
@@ -960,7 +956,14 @@
       <option name="project" value="LOCAL" />
       <updated>1500795642723</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Add fun css on the homepage. Fix card-stat a little">
+      <created>1500875777061</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1500875777061</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TodoView">
@@ -975,7 +978,7 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
     <layout>
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295099" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32917964" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32502595" sideWeight="0.5133262" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1036,7 +1039,8 @@
     <MESSAGE value="Debugged. Can now properly add, edit, and delete card. Fix user profile page. TODO: Fix card itemview not load after add card button clicked. Force magicircle branch 449f5bbd2914e63a65f0849c2664a80916f7f961. Add partially translated database" />
     <MESSAGE value="Fix cards-stats. Show level scaling. Fix some models, remove overall stats. Fix account filtering" />
     <MESSAGE value="Add nakayoshi requirement fields. Modify import to support new fields. Add Claw Fang as new weapon type choice, add EX as new stage difficulty choice." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add nakayoshi requirement fields. Modify import to support new fields. Add Claw Fang as new weapon type choice, add EX as new stage difficulty choice." />
+    <MESSAGE value="Add fun css on the homepage. Fix card-stat a little" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add fun css on the homepage. Fix card-stat a little" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1050,69 +1054,11 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="119" />
+      <option name="time" value="121" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/virtual_env/Lib/site-packages/MagiCircles-1.0-py2.7.egg-info/PKG-INFO">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="1542" column="17" lean-forward="false" selection-start-line="1542" selection-start-column="17" selection-end-line="1542" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/virtual_env/Lib/site-packages/magi/magicollections.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="795" column="26" lean-forward="false" selection-start-line="795" selection-start-column="26" selection-end-line="795" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hoshimori/templates/include/cards-stats.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="31" lean-forward="true" selection-start-line="5" selection-start-column="31" selection-end-line="5" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hoshimori/templates/items/ownedcardItem.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="33" lean-forward="true" selection-start-line="5" selection-start-column="33" selection-end-line="5" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hoshimori/templates/include/cards-collection.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="10" column="34" lean-forward="true" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="46" column="0" lean-forward="true" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/requirements.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="30" lean-forward="true" selection-start-line="1" selection-start-column="30" selection-end-line="1" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hoshimori/static/js/collection.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="38" lean-forward="true" selection-start-line="13" selection-start-column="38" selection-end-line="13" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hoshimori/templates/items/cardInfo.html" />
     <entry file="file://$PROJECT_DIR$/hoshimori/templates/items/irousvariationItem.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -1176,11 +1122,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hoshimori/static/img/avatar.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/hoshimori/static/img/i_weapon/7.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -1219,10 +1160,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="172">
           <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="37" />
-          <folding>
-            <marker date="1500403249000" expanded="true" signature="19619:19709" ph="SELECT COUNT... magi_activity_likes" />
-            <marker date="1500403249000" expanded="true" signature="21003:21111" ph="SELECT COUNT... magi_userpreferences_following" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1306,14 +1244,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hoshimori/static/js/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="42" column="50" lean-forward="false" selection-start-line="42" selection-start-column="50" selection-end-line="42" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/virtual_env/Lib/site-packages/django/conf/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -1356,44 +1286,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hoshimori/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="404" column="36" lean-forward="true" selection-start-line="404" selection-start-column="36" selection-end-line="404" selection-end-column="36" />
-          <folding>
-            <element signature="e#24#55#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hoshimori/static/js/cards.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="120" column="16" lean-forward="false" selection-start-line="120" selection-start-column="16" selection-end-line="120" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/hoshimori/model_choices.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="239">
           <caret line="110" column="0" lean-forward="true" selection-start-line="110" selection-start-column="0" selection-end-line="110" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hoshimori/static/less/style.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="390" column="17" lean-forward="true" selection-start-line="390" selection-start-column="17" selection-end-line="390" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hoshimori/templates/items/cardItem.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="30" lean-forward="true" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="30" />
           <folding />
         </state>
       </provider>
@@ -1406,32 +1302,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hoshimori/templates/include/cards-stats.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="339" column="19" lean-forward="true" selection-start-line="339" selection-start-column="19" selection-end-line="339" selection-end-column="29" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#div#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#div#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#4;n#div#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#5;n#div#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#6;n#div#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#1;n#div#0;n#div#0;n#div#1;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/hoshimori/static/js/ownedcards.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="24" lean-forward="false" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bower.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="30" lean-forward="true" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
           <folding />
         </state>
       </provider>
@@ -1444,26 +1326,129 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hoshimori/magicollections.py">
+    <entry file="file://$PROJECT_DIR$/hoshimori/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="380" column="44" lean-forward="false" selection-start-line="380" selection-start-column="44" selection-end-line="380" selection-end-column="44" />
-          <folding>
-            <element signature="e#54#105#0" expanded="true" />
-            <marker date="1500875615096" expanded="true" signature="1610:1718" ph="SELECT COUNT... magi_userpreferences_following" />
-            <marker date="1500875615096" expanded="true" signature="1891:2051" ph="SELECT COUNT... magi_userpreferences_following" />
-            <marker date="1500875615096" expanded="true" signature="1971:2035" ph="SELECT id FR... magi_userpreferences" />
-            <marker date="1500875615096" expanded="true" signature="2207:2352" ph="SELECT COUNT... magi_userpreferences_following" />
-            <marker date="1500875615096" expanded="true" signature="2287:2351" ph="SELECT id FR... magi_userpreferences" />
-            <marker date="1500875615096" expanded="true" signature="2391:2471" ph="SELECT COUNT... magi_userpreferences_following" />
-          </folding>
+        <state relative-caret-position="198">
+          <caret line="618" column="6" lean-forward="false" selection-start-line="618" selection-start-column="6" selection-end-line="618" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/virtual_env/Lib/site-packages/magi/static/js/magi_main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="427" column="9" lean-forward="false" selection-start-line="427" selection-start-column="9" selection-end-line="427" selection-end-column="9" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/hoshimori/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="186" column="0" lean-forward="true" selection-start-line="186" selection-start-column="0" selection-end-line="186" selection-end-column="0" />
+        <state relative-caret-position="182">
+          <caret line="154" column="8" lean-forward="false" selection-start-line="154" selection-start-column="8" selection-end-line="154" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hoshimori/static/img/acc_bg_star.gif">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hoshimori/static/img/acc_bg.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hoshimori/static/img/avatar.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hoshimori/static/img/empty.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hoshimori/static/img/game.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hoshimori/static/img/home-site-description-bg.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hoshimori/static/img/hoshimori.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hoshimori/static/js/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="526">
+          <caret line="47" column="32" lean-forward="true" selection-start-line="47" selection-start-column="32" selection-end-line="47" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hoshimori/static/js/cards.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="22" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hoshimori/magicollections.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="305" column="21" lean-forward="true" selection-start-line="305" selection-start-column="21" selection-end-line="305" selection-end-column="21" />
+          <folding>
+            <element signature="e#54#105#0" expanded="true" />
+            <marker date="1500879636985" expanded="true" signature="1610:1718" ph="SELECT COUNT... magi_userpreferences_following" />
+            <marker date="1500879636985" expanded="true" signature="1891:2051" ph="SELECT COUNT... magi_userpreferences_following" />
+            <marker date="1500879636985" expanded="true" signature="1971:2035" ph="SELECT id FR... magi_userpreferences" />
+            <marker date="1500879636985" expanded="true" signature="2207:2352" ph="SELECT COUNT... magi_userpreferences_following" />
+            <marker date="1500879636985" expanded="true" signature="2287:2351" ph="SELECT id FR... magi_userpreferences" />
+            <marker date="1500879636985" expanded="true" signature="2391:2471" ph="SELECT COUNT... magi_userpreferences_following" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hoshimori/static/js/collection.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="20" lean-forward="true" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hoshimori/templates/include/cards-stats.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="43" column="12" lean-forward="true" selection-start-line="43" selection-start-column="12" selection-end-line="43" selection-end-column="12" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#1;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hoshimori/templates/items/cardItem.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="11" column="27" lean-forward="false" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
+          <folding>
+            <element signature="n#style#0;n#a#1;n#div#1;n#div#1;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hoshimori/static/less/style.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="568">
+          <caret line="406" column="21" lean-forward="false" selection-start-line="406" selection-start-column="21" selection-end-line="406" selection-end-column="21" />
           <folding />
         </state>
       </provider>

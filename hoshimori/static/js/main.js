@@ -60,23 +60,3 @@ function reloadOwnedCardsAfterModal(on_profile) {
         })
     }
 }
-
-$(document).ready(function () {
-    $('#freeModal').on('show.bs.modal', function () {
-        $('main [data-toggle="tooltip"]').tooltip('hide');
-        $('main [data-toggle="popover"]').popover('hide');
-        $('main .ownedcard').popover('hide');
-    });
-    $('#freeModal').on('hide.bs.modal', function () {
-        $('#freeModal .ownedcard').popover('hide');
-    });
-    // Dismiss owned cards popover on click anywhere else
-    $('body').on('click', function (e) {
-        if (!$(e.target).hasClass('ownedcard')
-            && !(e.target).closest('.ownedcard')
-            && $(e.target).parents('.popover.in').length === 0
-        ) {
-            $('.ownedcard').popover('hide');
-        }
-    });
-});

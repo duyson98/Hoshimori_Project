@@ -279,8 +279,8 @@ class CardCollection(MagiCollection):
         #         'modal-text': 'true',
         #     },
         # },
-        'i_card_type': {
-            'type': CuteFormType.HTML,
+        'subcard_effect': {
+            'image_folder': 'subcard_effect',
         },
         'i_rarity': {
             'image_folder': 'i_rarity'
@@ -316,7 +316,8 @@ class CardCollection(MagiCollection):
         filter_form = forms.CardFilterForm
         staff_required = False
         default_ordering = 'i_card_type,student,i_rarity'
-        full_width = True
+        per_line = 3
+        col_break = 'lg'
         ajax_pagination_callback = 'updateCards'
         js_files = ['cards']
         no_result_template = 'empty_query'

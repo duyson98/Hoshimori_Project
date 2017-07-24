@@ -300,14 +300,16 @@ h1, h2, h3, h4, h5, h6, .title, .navbar-brand, .btn-lg, .btn-xl {
     }
     .modal-content {
         .card {
-            margin: 0 auto;
             width: auto;
+            max-width: 100%;
             .btn.btn-inherit {
                 background-color: deepskyblue;
                 input {
                     width: 40px;
                 }
             }
+            padding-left: 10px;
+            padding-right: 10px;
         }
 
         .card-art {
@@ -321,6 +323,10 @@ h1, h2, h3, h4, h5, h6, .title, .navbar-brand, .btn-lg, .btn-xl {
             //height: 20px;
             background-color: #ddd;
             border-radius: 4px;
+        }
+
+        table.table.about-table.a-main > tbody > tr > td:nth-child(3) {
+            text-align: right;
         }
     }
 }
@@ -380,7 +386,7 @@ h1, h2, h3, h4, h5, h6, .title, .navbar-brand, .btn-lg, .btn-xl {
 // Card
 
 .card {
-    //text-align: right;
+
     margin: 15px 0;
     text-align: center;
     .card-images {
@@ -396,13 +402,9 @@ h1, h2, h3, h4, h5, h6, .title, .navbar-brand, .btn-lg, .btn-xl {
         width: auto !important;
         margin-bottom: 30px;
     }
-    .btn-grouph {
-        color: white !important;
-        background-color: @gradient1;
-        border-color: @gradient3;
-    }
     .btn-group-lg > .btn, .btn-lg {
         padding: 10px 16px;
+        color: white;
         font-size: 18px;
         line-height: 1.3333333;
         border-radius: 6px;
@@ -446,18 +448,8 @@ h1, h2, h3, h4, h5, h6, .title, .navbar-brand, .btn-lg, .btn-xl {
     }
 }
 
-.card {
-
-}
-
-.card.table.about-table {
-    .about-table {
-        margin: auto;
-        max-width: 768px;
-        td:last-child {
-            text-align: right;
-        }
-    }
+.btn-group-lg > .btn, .btn-lg {
+    background-color: @gradient2;
 }
 
 //.cuteform-modal-button {

@@ -140,15 +140,20 @@ class CardFilterForm(MagiFiltersForm):
     ]
 
     def _evolvable_to_queryset(form, queryset, request, value):
-        if value == '2':
+        if value == '0': # True
             return queryset.filter(i_rarity__in=EVOLVABLE_RARITIES, i_card_type=0)
-        elif value == '3':
+        elif value == '1': # False
             return queryset.exclude(i_rarity__in=EVOLVABLE_RARITIES, i_card_type=0)
         return queryset
 
-    # evolvable = forms.ChoiceField(initial=None, required=False, label=_('Evolvable'))
     evolvable = forms.ChoiceField(choices=BLANK_CHOICE_DASH + list(enumerate([True, False])))
     evolvable_filter = MagiFilter(to_queryset=_evolvable_to_queryset)
+
+    def _subcard_effect_to_queryset(form, queryset, request, value):
+        return queryset.filter(subcard_effect=value)
+
+    subcard_effect = forms.ChoiceField(choices=BLANK_CHOICE_DASH + list(enumerate([True, False])))
+    subcard_effect_filter = MagiFilter(to_queryset=_subcard_effect_to_queryset)
 
     i_card_type = forms.ChoiceField(label="Card Type", choices=BLANK_CHOICE_DASH + CARDTYPE_CHOICES)
 
@@ -158,7 +163,7 @@ class CardFilterForm(MagiFiltersForm):
 
     class Meta:
         model = models.Card
-        fields = ('search', 'student', 'i_card_type', 'i_rarity', 'i_weapon', 'evolvable', 'ordering', 'reverse_order')
+        fields = ('search', 'student', 'i_card_type', 'subcard_effect', 'i_rarity', 'i_weapon', 'evolvable', 'ordering', 'reverse_order')
 
 
 ############################################################
