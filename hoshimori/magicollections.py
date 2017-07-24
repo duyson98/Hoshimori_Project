@@ -321,6 +321,7 @@ class CardCollection(MagiCollection):
         ajax_pagination_callback = 'updateCards'
         js_files = ['cards']
         no_result_template = 'empty_query'
+        show_edit_button = False
 
         def get_queryset(self, queryset, parameters, request):
             from hoshimori.utils import filterCards

@@ -1,27 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b42e218c-a55e-4bf5-9a85-f6d35961b77b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hoshimori/static/img/subcard_effect/0.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hoshimori/static/img/subcard_effect/1.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/static/favicon.ico" afterPath="$PROJECT_DIR$/hoshimori/static/favicon.ico" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/static/img/avatar.png" afterPath="$PROJECT_DIR$/hoshimori/static/img/avatar.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/static/img/favicon.ico" afterPath="$PROJECT_DIR$/hoshimori/static/img/favicon.ico" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/static/img/i_weapon/0.png" afterPath="$PROJECT_DIR$/hoshimori/static/img/i_weapon/0.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/static/img/i_weapon/1.png" afterPath="$PROJECT_DIR$/hoshimori/static/img/i_weapon/1.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/static/img/i_weapon/2.png" afterPath="$PROJECT_DIR$/hoshimori/static/img/i_weapon/2.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/static/img/i_weapon/3.png" afterPath="$PROJECT_DIR$/hoshimori/static/img/i_weapon/3.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/static/img/i_weapon/4.png" afterPath="$PROJECT_DIR$/hoshimori/static/img/i_weapon/4.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/static/img/i_weapon/5.png" afterPath="$PROJECT_DIR$/hoshimori/static/img/i_weapon/5.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/static/img/i_weapon/6.png" afterPath="$PROJECT_DIR$/hoshimori/static/img/i_weapon/6.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/static/img/i_weapon/7.png" afterPath="$PROJECT_DIR$/hoshimori/static/img/i_weapon/7.png" />
+    <list default="true" id="b42e218c-a55e-4bf5-9a85-f6d35961b77b" name="Default" comment="Fix card-stat alignment, fix CardForm, fix CardModel not accepting null name, fix">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hoshimori/static/font/HummingSTD.otf" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/admin.py" afterPath="$PROJECT_DIR$/hoshimori/admin.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/forms.py" afterPath="$PROJECT_DIR$/hoshimori/forms.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/magicollections.py" afterPath="$PROJECT_DIR$/hoshimori/magicollections.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/static/js/main.js" afterPath="$PROJECT_DIR$/hoshimori/static/js/main.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/models.py" afterPath="$PROJECT_DIR$/hoshimori/models.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/static/less/style.less" afterPath="$PROJECT_DIR$/hoshimori/static/less/style.less" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/templates/include/cards-stats.html" afterPath="$PROJECT_DIR$/hoshimori/templates/include/cards-stats.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/templates/items/cardItem.html" afterPath="$PROJECT_DIR$/hoshimori/templates/items/cardItem.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -69,24 +57,20 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="cardItem.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/hoshimori/templates/items/cardItem.html">
+      <file leaf-file-name="magicollections.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/hoshimori/magicollections.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
-              <caret line="11" column="27" lean-forward="false" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
+            <state relative-caret-position="236">
+              <caret line="323" column="20" lean-forward="false" selection-start-line="323" selection-start-column="13" selection-end-line="323" selection-end-column="20" />
               <folding>
-                <element signature="n#style#0;n#a#1;n#div#1;n#div#1;n#!!top" expanded="true" />
+                <element signature="e#54#105#0" expanded="true" />
+                <marker date="1500886057523" expanded="true" signature="1610:1718" ph="SELECT COUNT... magi_userpreferences_following" />
+                <marker date="1500886057523" expanded="true" signature="1891:2051" ph="SELECT COUNT... magi_userpreferences_following" />
+                <marker date="1500886057523" expanded="true" signature="1971:2035" ph="SELECT id FR... magi_userpreferences" />
+                <marker date="1500886057523" expanded="true" signature="2207:2352" ph="SELECT COUNT... magi_userpreferences_following" />
+                <marker date="1500886057523" expanded="true" signature="2287:2351" ph="SELECT id FR... magi_userpreferences" />
+                <marker date="1500886057523" expanded="true" signature="2391:2471" ph="SELECT COUNT... magi_userpreferences_following" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="style.less" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/hoshimori/static/less/style.less">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="568">
-              <caret line="406" column="21" lean-forward="false" selection-start-line="406" selection-start-column="21" selection-end-line="406" selection-end-column="21" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -103,25 +87,11 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>subcard_ef</find>
-      <find>subcard_eff</find>
-      <find>subcard_effec</find>
-      <find>cute</find>
-      <find>max</find>
-      <find>subcard_effect</find>
-      <find>card-basic-info</find>
-      <find>skill_affinity</find>
-      <find>ba</find>
-      <find>basic-</find>
-      <find>basic-in</find>
-      <find>basic-info</find>
-      <find>c</find>
       <find>card-</find>
       <find>card-s</find>
       <find>card-st</find>
       <find>card-sta</find>
       <find>ca</find>
-      <find>card</find>
       <find>card-stats</find>
       <find>.card-buttons</find>
       <find>.btn-lg</find>
@@ -130,9 +100,23 @@
       <find>grouph</find>
       <find>100</find>
       <find>100%</find>
-      <find>card-stat</find>
       <find>padding-left</find>
       <find>btn-lg</find>
+      <find>card-stat</find>
+      <find>adobe</find>
+      <find>rubit</find>
+      <find>jp</find>
+      <find>japan</find>
+      <find>id</find>
+      <find>false</find>
+      <find>cardcollec</find>
+      <find>card</find>
+      <find>japanese</find>
+      <find>student</find>
+      <find>models</find>
+      <find>cache</find>
+      <find>col-</find>
+      <find>edit_bu</find>
     </findStrings>
     <replaceStrings>
       <replace>get_cards</replace>
@@ -174,7 +158,6 @@
         <option value="$PROJECT_DIR$/hoshimori/templates/items/cardInfo.html" />
         <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$PROJECT_DIR$/virtual_env/Lib/site-packages/magi/forms.py" />
-        <option value="$PROJECT_DIR$/hoshimori/admin.py" />
         <option value="$PROJECT_DIR$/hoshimori/utils.py" />
         <option value="$PROJECT_DIR$/hoshimori/templates/items/ownedcardItem.html" />
         <option value="$PROJECT_DIR$/hoshimori/templates/accountsForProfile.html" />
@@ -193,15 +176,16 @@
         <option value="$PROJECT_DIR$/database/characters.csv" />
         <option value="$PROJECT_DIR$/hoshimori/views.py" />
         <option value="$PROJECT_DIR$/hoshimori/templates/items/studentItem.html" />
-        <option value="$PROJECT_DIR$/hoshimori/models.py" />
         <option value="$PROJECT_DIR$/hoshimori/static/js/cards.js" />
         <option value="$PROJECT_DIR$/hoshimori/static/js/collection.js" />
         <option value="$PROJECT_DIR$/hoshimori/static/js/main.js" />
+        <option value="$PROJECT_DIR$/hoshimori/templates/items/cardItem.html" />
+        <option value="$PROJECT_DIR$/hoshimori/static/less/style.less" />
+        <option value="$PROJECT_DIR$/hoshimori/models.py" />
+        <option value="$PROJECT_DIR$/hoshimori/admin.py" />
+        <option value="$PROJECT_DIR$/hoshimori/templates/include/cards-stats.html" />
         <option value="$PROJECT_DIR$/hoshimori/forms.py" />
         <option value="$PROJECT_DIR$/hoshimori/magicollections.py" />
-        <option value="$PROJECT_DIR$/hoshimori/templates/items/cardItem.html" />
-        <option value="$PROJECT_DIR$/hoshimori/templates/include/cards-stats.html" />
-        <option value="$PROJECT_DIR$/hoshimori/static/less/style.less" />
       </list>
     </option>
   </component>
@@ -312,28 +296,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="items" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Hoshimori-Project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Hoshimori-Project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hoshimori" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="include" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -352,121 +314,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ajax" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Hoshimori-Project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Hoshimori-Project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hoshimori" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Hoshimori-Project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Hoshimori-Project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hoshimori" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="less" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Hoshimori-Project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Hoshimori-Project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hoshimori" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Hoshimori-Project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Hoshimori-Project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hoshimori" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="img" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Hoshimori-Project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Hoshimori-Project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hoshimori" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="img" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="i_rarity" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -508,11 +356,11 @@
       <recent name="C:\Users\kokon\PycharmProjects\hoshimori_project\hoshimori_project" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\kokon\PycharmProjects\Hoshimori-Project\hoshimori\static\font" />
       <recent name="C:\Users\kokon\PycharmProjects\Hoshimori-Project\hoshimori\static\img\subcard_effect" />
       <recent name="C:\Users\kokon\PycharmProjects\Hoshimori-Project\hoshimori\templates\include" />
       <recent name="C:\Users\kokon\PycharmProjects\Hoshimori-Project\hoshimori\templates\items" />
       <recent name="C:\Users\kokon\PycharmProjects\hoshimori_project\hoshimori\templates\include" />
-      <recent name="C:\Users\kokon\PycharmProjects\hoshimori_project\hoshimori\templates\items" />
     </key>
   </component>
   <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
@@ -963,7 +811,21 @@
       <option name="project" value="LOCAL" />
       <updated>1500875777061</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Add cuteform for subcard effects, new weapons cuteform, fix some minor card-stats and cardItem stuff. Add some css.">
+      <created>1500883059773</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1500883059773</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Missing file">
+      <created>1500883137892</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1500883137892</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TodoView">
@@ -982,7 +844,7 @@
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32502595" sideWeight="0.5133262" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32502595" sideWeight="0.48827294" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32502595" sideWeight="0.48827294" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3219107" sideWeight="0.47441363" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32502595" sideWeight="0.48667377" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2771855" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -1040,7 +902,9 @@
     <MESSAGE value="Fix cards-stats. Show level scaling. Fix some models, remove overall stats. Fix account filtering" />
     <MESSAGE value="Add nakayoshi requirement fields. Modify import to support new fields. Add Claw Fang as new weapon type choice, add EX as new stage difficulty choice." />
     <MESSAGE value="Add fun css on the homepage. Fix card-stat a little" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add fun css on the homepage. Fix card-stat a little" />
+    <MESSAGE value="Add cuteform for subcard effects, new weapons cuteform, fix some minor card-stats and cardItem stuff. Add some css." />
+    <MESSAGE value="Missing file" />
+    <option name="LAST_COMMIT_MESSAGE" value="Missing file" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1059,32 +923,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/hoshimori/templates/items/irousvariationItem.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="12" column="6" lean-forward="true" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hoshimori/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/ada73ecf/8f3c8a39-cb10-489c-b0f0-6d81ef4e9ba8/main.hoshimori_stage">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/hoshimori/templates/items/cards-stats.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -1326,26 +1164,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hoshimori/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="618" column="6" lean-forward="false" selection-start-line="618" selection-start-column="6" selection-end-line="618" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/virtual_env/Lib/site-packages/magi/static/js/magi_main.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="207">
           <caret line="427" column="9" lean-forward="false" selection-start-line="427" selection-start-column="9" selection-end-line="427" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hoshimori/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="154" column="8" lean-forward="false" selection-start-line="154" selection-start-column="8" selection-end-line="154" selection-end-column="8" />
           <folding />
         </state>
       </provider>
@@ -1401,22 +1223,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hoshimori/magicollections.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="305" column="21" lean-forward="true" selection-start-line="305" selection-start-column="21" selection-end-line="305" selection-end-column="21" />
-          <folding>
-            <element signature="e#54#105#0" expanded="true" />
-            <marker date="1500879636985" expanded="true" signature="1610:1718" ph="SELECT COUNT... magi_userpreferences_following" />
-            <marker date="1500879636985" expanded="true" signature="1891:2051" ph="SELECT COUNT... magi_userpreferences_following" />
-            <marker date="1500879636985" expanded="true" signature="1971:2035" ph="SELECT id FR... magi_userpreferences" />
-            <marker date="1500879636985" expanded="true" signature="2207:2352" ph="SELECT COUNT... magi_userpreferences_following" />
-            <marker date="1500879636985" expanded="true" signature="2287:2351" ph="SELECT id FR... magi_userpreferences" />
-            <marker date="1500879636985" expanded="true" signature="2391:2471" ph="SELECT COUNT... magi_userpreferences_following" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/hoshimori/static/js/collection.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -1425,31 +1231,91 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hoshimori/templates/include/cards-stats.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="43" column="12" lean-forward="true" selection-start-line="43" selection-start-column="12" selection-end-line="43" selection-end-column="12" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#1;n#!!top" expanded="true" />
-          </folding>
-        </state>
+    <entry file="file://$PROJECT_DIR$/hoshimori/static/img/light_orbs/very smal.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/hoshimori/templates/items/cardItem.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="11" column="27" lean-forward="false" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
+        <state relative-caret-position="268">
+          <caret line="19" column="8" lean-forward="true" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="8" />
           <folding>
             <element signature="n#style#0;n#a#1;n#div#1;n#div#1;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="dbDummy://dbtable:/ada73ecf/8f3c8a39-cb10-489c-b0f0-6d81ef4e9ba8/main.auth_user">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hoshimori/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="698" column="29" lean-forward="false" selection-start-line="698" selection-start-column="4" selection-end-line="698" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hoshimori/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/hoshimori/static/less/style.less">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="568">
-          <caret line="406" column="21" lean-forward="false" selection-start-line="406" selection-start-column="21" selection-end-line="406" selection-end-column="21" />
+        <state relative-caret-position="185">
+          <caret line="291" column="23" lean-forward="true" selection-start-line="291" selection-start-column="23" selection-end-line="291" selection-end-column="23" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hoshimori/templates/include/cards-stats.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="355">
+          <caret line="72" column="22" lean-forward="true" selection-start-line="72" selection-start-column="22" selection-end-line="72" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hoshimori/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="82" column="16" lean-forward="false" selection-start-line="82" selection-start-column="16" selection-end-line="95" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hoshimori/magicollections.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="236">
+          <caret line="323" column="20" lean-forward="false" selection-start-line="323" selection-start-column="13" selection-end-line="323" selection-end-column="20" />
+          <folding>
+            <element signature="e#54#105#0" expanded="true" />
+            <marker date="1500886057523" expanded="true" signature="1610:1718" ph="SELECT COUNT... magi_userpreferences_following" />
+            <marker date="1500886057523" expanded="true" signature="1891:2051" ph="SELECT COUNT... magi_userpreferences_following" />
+            <marker date="1500886057523" expanded="true" signature="1971:2035" ph="SELECT id FR... magi_userpreferences" />
+            <marker date="1500886057523" expanded="true" signature="2207:2352" ph="SELECT COUNT... magi_userpreferences_following" />
+            <marker date="1500886057523" expanded="true" signature="2287:2351" ph="SELECT id FR... magi_userpreferences" />
+            <marker date="1500886057523" expanded="true" signature="2391:2471" ph="SELECT COUNT... magi_userpreferences_following" />
+          </folding>
         </state>
       </provider>
     </entry>

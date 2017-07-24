@@ -12,6 +12,11 @@
 @gradient4: #79e098;
 
 @font-face {
+    font-family: 'Humming'; /*a name to be used later*/
+    src: url('/static/font/HummingSTD.otf'); /*URL to font*/
+}
+
+@font-face {
     font-family: "Teko";
     font-style: normal;
     font-weight: 700;
@@ -212,7 +217,7 @@ body.shortcut- {
 
 h1, h2, h3, h4, h5, h6, .title, .navbar-brand, .btn-lg, .btn-xl {
     &:not(.japanese) {
-        font-family: 'Adobe Myungjo Std M', monospace;
+        font-family: 'Humming', monospace;
         font-weight: bold;
         alignment: center;
         color: @darkColor;
@@ -287,6 +292,10 @@ h1, h2, h3, h4, h5, h6, .title, .navbar-brand, .btn-lg, .btn-xl {
         td:last-child {
             text-align: right;
         }
+    }
+    .btn-lg {
+        color: white;
+        background-color: @gradient2;
     }
 }
 

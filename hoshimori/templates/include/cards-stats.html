@@ -60,7 +60,7 @@
                 <br>
                 {% for stat in stats %}
                 <div class="row" data-stat="{{ stat.stat }}" data-levels='{{ stat.javascript_levels|safe }}'>
-                  <div class="col-xs-2">{{ stat.name }}</div>
+                  <div class="col-xs-2" id="{{ stat.name }}">{{ stat.name }}</div>
                   <div class="col-xs-2 text-right stat-value">{{ stat.value_max_level }}</div>
                   <div class="col-xs-8">
                     <div class="progress">

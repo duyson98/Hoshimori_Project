@@ -497,28 +497,31 @@ class Card(MagiModel):
 
     @property
     def stats_percent(self):
-        evolved_choices = [False, True] if self.evolvable else [False]
-        if not self._local_stats:
-            self._local_stats = [(evolved, [{
-                'stat': field,
-                'name': name,
-                'value_max_level': self._value_at_level(field, level=self.max_level, is_evolved=evolved),
-                'percent_max_level': 100,
-                'javascript_levels': str({str(level): {
-                    'value': self._value_at_level(field, level=level, is_evolved=evolved),
-                    'percent': (float(self._value_at_level(field, level=level, is_evolved=evolved,
-                                                     to_string=False)) / float(self._value_at_level(field,
-                                                                                             level=self.max_level,
-                                                                                             is_evolved=self.evolvable))) * 100.0,
-                } for level in range(1, self.max_level + 1)}).replace('\'', '"'),
-            } for (field, name) in [
-                ('hp', string_concat(_('HP'), ' ', _('evolved') if evolved else '')),
-                ('sp', string_concat(_('SP'), ' ', _('evolved') if evolved else '')),
-                ('atk', string_concat(_('ATK'), ' ', _('evolved') if evolved else '')),
-                ('def', string_concat(_('DEF'), ' ', _('evolved') if evolved else '')),
-            ]
-            ]) for evolved in evolved_choices]
-        return self._local_stats
+        try:
+            evolved_choices = [False, True] if self.evolvable else [False]
+            if not self._local_stats:
+                self._local_stats = [(evolved, [{
+                    'stat': field,
+                    'name': name,
+                    'value_max_level': self._value_at_level(field, level=self.max_level, is_evolved=evolved),
+                    'percent_max_level': 100,
+                    'javascript_levels': str({str(level): {
+                        'value': self._value_at_level(field, level=level, is_evolved=evolved),
+                        'percent': (float(self._value_at_level(field, level=level, is_evolved=evolved,
+                                                         to_string=False)) / float(self._value_at_level(field,
+                                                                                                 level=self.max_level,
+                                                                                                 is_evolved=self.evolvable))) * 100.0,
+                    } for level in range(1, self.max_level + 1)}).replace('\'', '"'),
+                } for (field, name) in [
+                    ('hp', string_concat(_('HP'), ' ', _('evolved') if evolved else '')),
+                    ('sp', string_concat(_('SP'), ' ', _('evolved') if evolved else '')),
+                    ('atk', string_concat(_('ATK'), ' ', _('evolved') if evolved else '')),
+                    ('def', string_concat(_('DEF'), ' ', _('evolved') if evolved else '')),
+                ]
+                ]) for evolved in evolved_choices]
+            return self._local_stats
+        except ZeroDivisionError:
+            return None
 
     # Raw values
     @property
@@ -712,7 +715,7 @@ class Card(MagiModel):
         return self._cache_total_owners
 
     def __unicode__(self):
-        if get_language() == 'ja':
+        if self.name is None or get_language() == 'ja':
             return self.japanese_name
         else:
             return self.name

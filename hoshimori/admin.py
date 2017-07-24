@@ -25,11 +25,14 @@ class IrousAdminForm(forms.ModelForm):
 class IrousAdmin(admin.ModelAdmin):
     form = IrousAdminForm
 
+class CardAdmin(admin.ModelAdmin):
+    list_display = ('name', '_cache_totals_last_update','owner',)
+    ordering = ('-_cache_totals_last_update','-id')
 
 admin.site.register(Account)
 admin.site.register(OwnedCard) # Will removed later
 admin.site.register(Student)
-admin.site.register(Card)
+admin.site.register(Card, CardAdmin)
 # admin.site.register(ActionSkillEffect)
 # admin.site.register(ActionSkill)
 admin.site.register(Weapon)

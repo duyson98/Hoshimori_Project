@@ -1,5 +1,3 @@
-import datetime
-
 from django import forms
 from django.db.models import BLANK_CHOICE_DASH
 from django.utils.translation import ugettext_lazy as _, string_concat
@@ -110,14 +108,14 @@ class CardForm(FormSaveOwnerOnCreation):
                   "charge_range",
                   )
         optional_fields = (
-        "i_card_type", "name", "japanese_name", "student", "obtain_method", "special_icon", "special_front",
-        "front_top", "front_bottom", "front_name", "front_rarity", "front_weapon", "transparent", "subcard_effect",
-        "hp_1", "sp_1", "atk_1", "def_1", "hp_50", "sp_50", "atk_50", "def_50", "hp_70", "sp_70", "atk_70", "def_70",
-        "skill_name", "japanese_skill_name", "skill_SP", "skill_range", "i_skill_affinity", "action_skill_effects",
-        "skill_comment", "skill_preview", "action_skill_combo", "evolved_action_skill_combo", "action_skill_damage",
-        "evolved_action_skill_damage", "nakayoshi_title", "japanese_nakayoshi_title", "nakayoshi_skill_effect",
-        "nakayoshi_skill_target", "evolved_nakayoshi_skill_effect", "evolved_nakayoshi_skill_target", "charge_comment",
-        "charge_damage", "charge_hit", "charge_name", "charge_range")
+        "i_card_type", "name", "student", "obtain_method", "special_icon", "special_front", "front_top", "front_bottom",
+        "front_name", "front_rarity", "front_weapon", "transparent", "subcard_effect", "hp_1", "sp_1", "atk_1", "def_1",
+        "hp_50", "sp_50", "atk_50", "def_50", "hp_70", "sp_70", "atk_70", "def_70", "skill_name", "japanese_skill_name",
+        "skill_SP", "skill_range", "i_skill_affinity", "action_skill_effects", "skill_comment", "skill_preview",
+        "action_skill_combo", "evolved_action_skill_combo", "action_skill_damage", "evolved_action_skill_damage",
+        "nakayoshi_title", "japanese_nakayoshi_title", "nakayoshi_skill_effect", "nakayoshi_skill_target",
+        "evolved_nakayoshi_skill_effect", "evolved_nakayoshi_skill_target", "charge_comment", "charge_damage",
+        "charge_hit", "charge_name", "charge_range")
 
 
 class CardFilterForm(MagiFiltersForm):
