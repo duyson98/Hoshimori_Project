@@ -2,12 +2,12 @@
 {% with card=item %}
     {% if page == 1 and forloop.counter0 == 0 %}
         <div id="topcards"></div>{% endif %}
-    <div class="card {{ card.english_weapon }}" data-card-title="{{ card }}" id="card{{ card.id }}">
+    <div class="card {{ card.student.name }}" data-card-title="{{ card }}" id="card{{ card.id }}">
         <div class="title">
             <div class="card-images">
 {#                <a href="{{ card.item_url }}" data-ajax-url="{{ card.ajax_item_url }}" data-ajax-title="{{ card }}">#}
                 <div class="card-icon" style="position:relative">
-                    <img src="{{ card.image_url }}" alt="{{ card.name }}" class="card-image">
+                    <img src="{{ card.image_url }}" alt="{{ card.name }}" class="card-image" height="300px">
                     {% if card.special_icon %}
                         <div class="special-icon" style="position:absolute; top:0px; left:25px;">
                             <img src="{{ card.special_icon_url }}" alt="{{ card.name }}" height="300px">

@@ -464,10 +464,6 @@ class Card(MagiModel):
     def is_subcard(self):
         return self.card_type == 2
 
-    @property
-    def is_evolved(self):
-        return (False, True)
-
     # Parameter
     hp_1 = models.PositiveIntegerField(string_concat(_('HP'), ' (', _('Level 1'), ')'), default=0, null=True)
     sp_1 = models.PositiveIntegerField(string_concat(_('SP'), ' (', _('Level 1'), ')'), default=0, null=True)
@@ -501,6 +497,7 @@ class Card(MagiModel):
 
     @property
     def stats_percent(self):
+        evolved_choices = [False, True] if self.evolvable else [False]
         if not self._local_stats:
             self._local_stats = [(evolved, [{
                 'stat': field,
@@ -509,16 +506,18 @@ class Card(MagiModel):
                 'percent_max_level': 100,
                 'javascript_levels': str({str(level): {
                     'value': self._value_at_level(field, level=level, is_evolved=evolved),
-                    'percent': self._value_at_level(field, level=level, is_evolved=evolved, to_string=False) / 100,
-                } for level in range(1, self.max_level + 1)}).replace(
-                    '\'', '"'),
+                    'percent': (float(self._value_at_level(field, level=level, is_evolved=evolved,
+                                                     to_string=False)) / float(self._value_at_level(field,
+                                                                                             level=self.max_level,
+                                                                                             is_evolved=self.evolvable))) * 100.0,
+                } for level in range(1, self.max_level + 1)}).replace('\'', '"'),
             } for (field, name) in [
                 ('hp', string_concat(_('HP'), ' ', _('evolved') if evolved else '')),
                 ('sp', string_concat(_('SP'), ' ', _('evolved') if evolved else '')),
                 ('atk', string_concat(_('ATK'), ' ', _('evolved') if evolved else '')),
                 ('def', string_concat(_('DEF'), ' ', _('evolved') if evolved else '')),
             ]
-            ]) for evolved in (False, True)]
+            ]) for evolved in evolved_choices]
         return self._local_stats
 
     # Raw values
@@ -531,11 +530,7 @@ class Card(MagiModel):
 
     @property
     def evolvable(self):
-        return (self.i_rarity in EVOLVABLE_RARITIES) and (self.card_type == 0)
-
-    @property
-    def is_evolved(self):
-        return (False, True)
+        return (self.i_rarity in EVOLVABLE_RARITIES) and (self.i_card_type == 0)
 
     # 1-50
     def _para_first_slope(self, fieldname, is_evolved=False):

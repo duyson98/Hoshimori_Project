@@ -20,19 +20,19 @@
 }
 
 @font-face {
-  font-family: 'Nova Square';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Nova Square'), local('NovaSquare'), url(http://fonts.gstatic.com/s/novasquare/v8/YsNHj2Yx5KzHzIjNe-czdI4P5ICox8Kq3LLUNMylGO4.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+    font-family: 'Nova Square';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Nova Square'), local('NovaSquare'), url(http://fonts.gstatic.com/s/novasquare/v8/YsNHj2Yx5KzHzIjNe-czdI4P5ICox8Kq3LLUNMylGO4.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
 }
 
 @font-face {
-  font-family: 'Electrolize';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Electrolize'), local('Electrolize-Regular'), url(http://fonts.gstatic.com/s/electrolize/v5/DDy9sgU2U7S4xAwH5thnJ44P5ICox8Kq3LLUNMylGO4.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+    font-family: 'Electrolize';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Electrolize'), local('Electrolize-Regular'), url(http://fonts.gstatic.com/s/electrolize/v5/DDy9sgU2U7S4xAwH5thnJ44P5ICox8Kq3LLUNMylGO4.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
 }
 
 html {
@@ -95,9 +95,59 @@ html {
         }
     }
     background-image: url("/static/img/mainpage_bg.jpg");
+    background-size: cover; // Make image not resize
     background-attachment: fixed;
     background-position: center top;
     background-repeat: no-repeat;
+
+    #wrapper {
+        background-image: url("/static/img/light_orbs/small.png"),
+        url("/static/img/light_orbs/normal.png"),
+        url("/static/img/light_orbs/big.png");
+        background-attachment: fixed;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: 1;
+        -webkit-animation: wrapper 20s linear infinite;
+        -moz-animation: wrapper 20s linear infinite;
+        -ms-animation: wrapper 20s linear infinite;
+        animation: wrapper 20s linear infinite;
+    }
+    @keyframes wrapper {
+        0% {
+            background-position: 0px 0px, 0px 0px, 0px 0px;
+        }
+        100% {
+            background-position: 0px -1000px, 0px -500px, 0px -300px;
+        }
+    }
+    @-moz-keyframes wrapper {
+        0% {
+            background-position: 0px 0px, 0px 0px, 0px 0px;
+        }
+        100% {
+            background-position: 0px -1000px, 0px -500px, 0px -300px;
+        }
+    }
+    @-webkit-keyframes wrapper {
+        0% {
+            background-position: 0px 0px, 0px 0px, 0px 0px;
+        }
+        100% {
+            background-position: 0px -1000px, 0px -500px, 0px -300px;
+        }
+    }
+    @-ms-keyframes wrapper {
+        0% {
+            background-position: 0px 0px, 0px 0px, 0px 0px;
+        }
+        100% {
+            background-position: 0px -1000px, 0px -500px, 0px -300px;
+        }
+    }
 }
 
 body {
@@ -346,6 +396,17 @@ h1, h2, h3, h4, h5, h6, .title, .navbar-brand, .btn-lg, .btn-xl {
         width: auto !important;
         margin-bottom: 30px;
     }
+    .btn-grouph {
+        color: white !important;
+        background-color: @gradient1;
+        border-color: @gradient3;
+    }
+    .btn-group-lg > .btn, .btn-lg {
+        padding: 10px 16px;
+        font-size: 18px;
+        line-height: 1.3333333;
+        border-radius: 6px;
+    }
 }
 
 .card-icon {
@@ -357,7 +418,7 @@ h1, h2, h3, h4, h5, h6, .title, .navbar-brand, .btn-lg, .btn-xl {
 
 .card-icon:hover {
     .special-icon {
-         opacity: 0;
+        opacity: 0;
     }
 }
 
@@ -370,7 +431,7 @@ h1, h2, h3, h4, h5, h6, .title, .navbar-brand, .btn-lg, .btn-xl {
 
 .card-art:hover {
     .special-front, .front-top, .front-bottom, .front-name, .front-rarity {
-         opacity: 0;
+        opacity: 0;
     }
 }
 
@@ -385,7 +446,11 @@ h1, h2, h3, h4, h5, h6, .title, .navbar-brand, .btn-lg, .btn-xl {
     }
 }
 
-.card-info {
+.card {
+
+}
+
+.card.table.about-table {
     .about-table {
         margin: auto;
         max-width: 768px;
@@ -429,12 +494,12 @@ h1, h2, h3, h4, h5, h6, .title, .navbar-brand, .btn-lg, .btn-xl {
 .card-buttons {
     @buttonsize: 50px;
     font-size: @buttonsize;
-	line-height: @buttonsize;
-	border-bottom-right-radius: 10px;
-	border-bottom-left-radius: 10px;
+    line-height: @buttonsize;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
 }
 
- /* Style the tab */
+/* Style the tab */
 div.tab {
     width: 99.99999%;
     overflow: hidden;
@@ -481,6 +546,7 @@ div.tab button.active {
     padding-left: 100px;
     padding-right: 100px;
 }
+
 .progress-label {
     float: left;
     //margin-left: 30px;
@@ -577,10 +643,10 @@ div.tab button.active {
         h3 {
             color: white;
             font-size: 50px;
-            text-shadow: 0 0 0.2em #66ffff,0 0 0.2em #66ffff,0 0 0.2em #66ffff,0 0 0.2em #66ffff,0 0 0.2em #66ffff,0 0 0.2em #66ffff,0 0 0.2em #66ffff;
+            text-shadow: 0 0 0.2em #66ffff, 0 0 0.2em #66ffff, 0 0 0.2em #66ffff, 0 0 0.2em #66ffff, 0 0 0.2em #66ffff, 0 0 0.2em #66ffff, 0 0 0.2em #66ffff;
         }
         .col-md-8 {
-                width: 50%;
+            width: 50%;
         }
         .col-md-2 {
             width: 20%;

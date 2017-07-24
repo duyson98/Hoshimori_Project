@@ -6,7 +6,7 @@
       {{ student }}
     </h3>">
             <div class="student-wrapper">
-            <img src="{{ student.image_url }}" alt="{{ student }}" class="student-img"></div>
+            <img src="{% if student.image %}{{ student.image_url }}{% else %}{{ student.full_image_url }}{% endif %}" alt="{{ student }}" class="student-img"></div>
         </a>
         <a href="{{ student.item_url }}" data-ajax-url="{{ student.ajax_item_url }}">
             <h3>

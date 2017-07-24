@@ -45,20 +45,20 @@
         {% endif %}
         <br>
         <div class="card-statistics">
-             {% for awakened, stats in card.stats_percent %}
-                <div class="card-art{% if awakened %}-awakened{% endif %}" style="background-image: url('{% if awakened %}{% if card.art_awakened %}{{ card.art_awakened_url }}{% else %}{{ static_url }}img/backgrounds/background1.png{% endif %}{% else %}{% if card.art %}{{ card.art_url }}{% else %}{{ static_url }}img/backgrounds/background0.png{% endif %}{% endif %}');">
-                <div class="cards-stats-inner-inner"{% if awakened and not card.art_awakened %} style="background-image: url('{{ card.transparent_awakened_url }}');"{% elif not awakened and not card.art %} style="background-image: url('{{ card.transparent_url }}');"{% endif %}>
+             {% for evolved, stats in card.stats_percent %}
+                <div class="card-art{% if evolved %}-evolved{% endif %}" style="background-image: url('{% if evolved %}{% if card.art_evolved %}{{ card.art_evolved_url }}{% else %}{{ static_url }}img/backgrounds/background1.png{% endif %}{% else %}{% if card.art %}{{ card.art_url }}{% else %}{{ static_url }}img/backgrounds/background0.png{% endif %}{% endif %}');">
+                <div class="cards-stats-inner-inner"{% if evolved and not card.art_evolved %} style="background-image: url('{{ card.transparent_evolved_url }}');"{% elif not evolved and not card.art %} style="background-image: url('{{ card.transparent_url }}');"{% endif %}>
                   <div class="card-stats-inner">
-                  <div class="card-stats" style="background-image: url('{% if awakened %}{{ card.puchi_awakened_url }}{% else %}{{ card.puchi_url }}{% endif %}');">
+                  <div class="card-stats" style="background-image: url('{% if evolved %}{{ card.puchi_evolved_url }}{% else %}{{ card.puchi_url }}{% endif %}');">
                 <div class="btn-group btn-group-justified" data-toggle="buttons">
                   <label class="btn btn-inherit changeLevel">
                     <input type="radio" name="options" autocomplete="off"> {% trans 'Level' %} <span class="level">1</span>
                   </label>
                   <div class="btn btn-inherit">
-                    {% trans 'Level' %} <input type="number" name="changeLevelNumber" placeholder="??" min="2" max="{% if awakened %}{{ card.max_level_awakened|add:-1 }}{% else %}{{ card.max_level|add:-1 }}{% endif %}">
+                    {% trans 'Level' %} <input type="number" name="changeLevelNumber" placeholder="??" min="2" max="{{ card.max_level|add:-1 }}">
                   </div>
                   <label class="btn btn-inherit changeLevel active">
-                    <input type="radio" name="options" autocomplete="off" checked> {% trans 'Level' %} <span class="level">{% if awakened %}{{ card.max_level_awakened }}{% else %}{{ card.max_level }}{% endif %}</span>
+                    <input type="radio" name="options" autocomplete="off" checked> {% trans 'Level' %} <span class="level">{{ card.max_level }}</span>
                   </label>
                 </div>
                 <br>
@@ -93,14 +93,12 @@
                     <td>{{ card.japanese_name }}</td>
                 </tr>
             {% endif %}
-            <span class="btn-group">
-	  {% include 'include/share.html' with share_url=card.http_item_url share_btn_class=card.english_type|add:" btn-lg" share_sentence=card %}
-	</span>
+            <br>
             {% if card.i_rarity %}
                 <tr>
                     <td><i class="flaticon-star-empty"></i></td>
                     <th>{% trans 'Rarity' %}</th>
-                    <td>{{ card.rarity }}</td>
+                    <td><img src="/static/img/i_rarity/{{ card.i_rarity }}.png"></td>
                 </tr>
             {% endif %}
             {% if card.i_weapon %}
@@ -135,83 +133,6 @@
                     <td><i class="flaticon-perfectlock"></i></td>
                     <th>{% trans 'Obtain Method' %}</th>
                     <td>{{ card.obtain_method }}</td>
-                </tr>
-            {% endif %}
-            {% if card.art_url %}
-                <tr>
-                    <td><i class="flaticon-pictures"></i></td>
-                    <th>{% trans 'Art' %}</th>
-                    <td>
-                        <a href="{{ card.art_url }}" target="_blank">
-                            <img src="{{ card.art_url }}" alt="{% trans 'art' %}">
-                        </a>
-                    </td>
-                </tr>
-            {% endif %}
-            {% if card.front_top_url %}
-                <tr>
-                    <td><i class="flaticon-pictures"></i></td>
-                    <th>{% trans 'Front Top' %}</th>
-                    <td>
-                        <a href="{{ card.front_top_url }}" target="_blank">
-                            <img src="{{ card.front_top_url }}" alt="{% trans 'front_top' %}">
-                        </a>
-                    </td>
-                </tr>
-            {% endif %}
-            {% if card.front_bottom_url %}
-                <tr>
-                    <td><i class="flaticon-pictures"></i></td>
-                    <th>{% trans 'Front Bottom' %}</th>
-                    <td>
-                        <a href="{{ card.front_bottom_url }}" target="_blank">
-                            <img src="{{ card.front_bottom_url }}" alt="{% trans 'front_bottom' %}">
-                        </a>
-                    </td>
-                </tr>
-            {% endif %}
-            {% if card.front_name_url %}
-                <tr>
-                    <td><i class="flaticon-pictures"></i></td>
-                    <th>{% trans 'Front Name' %}</th>
-                    <td>
-                        <a href="{{ card.front_name_url }}" target="_blank">
-                            <img src="{{ card.front_name_url }}" alt="{% trans 'front_name' %}">
-                        </a>
-                    </td>
-                </tr>
-            {% endif %}
-            {% if card.front_rarity_url %}
-                <tr>
-                    <td><i class="flaticon-pictures"></i></td>
-                    <th>{% trans 'Front Rarity' %}</th>
-                    <td>
-                        <a href="{{ card.front_rarity_url }}" target="_blank">
-                            <img src="{{ card.front_rarity_url }}" alt="{% trans 'front_rarity' %}">
-                        </a>
-                    </td>
-                </tr>
-            {% endif %}
-            {% if card.front_weapon_url %}
-                <tr>
-                    <td><i class="flaticon-pictures"></i></td>
-                    <th>{% trans 'Front Weapon' %}</th>
-                    <td>
-                        <a href="{{ card.front_weapon_url }}" target="_blank">
-                            <img src="{{ card.front_weapon_url }}" alt="{% trans 'front_weapon' %}">
-                        </a>
-                    </td>
-                </tr>
-            {% endif %}
-            {% if card.transparent_url %}
-                <tr>
-                    <td><i class="flaticon-pictures"></i></td>
-                    <th>{% trans 'Transparent' %}</th>
-                    <td>
-                        <a href="{{ card.transparent_url }}" target="_blank">
-                            <img src="{{ card.transparent_url }}" alt="{% trans 'transparent' %}">
-                        </a>
-                    </td>
                 </tr>
             {% endif %}
             {% if card.skill_name %}
@@ -392,30 +313,22 @@
         </table>
     <table class="card-basic-info">
       <tr>
-	{% if card.cached_total_owners %}
+
 	<td>
-	  <h4>{% trans 'Scouted by' %}</h4>
+	  <h4>{% trans 'Belongs to' %}</h4>
+    {% if card.cached_total_owners %}
 	  {% with total=card.cached_total_owners %}
-	  {% blocktrans count counter=total %}{{ total }} producer{% plural %}{{ total }} producers{% endblocktrans %}
+	  {% blocktrans count counter=total %}{{ total }} sensei{% plural %}{{ total }} sensei's{% endblocktrans %}
 	  {% endwith %}<br>
 	  <a href="/accounts/?own_card={{ card.id }}" target="_blank">
 	    {% trans 'View all' %}
 	    <i class="flaticon-link fontx0-8"></i>
 	  </a>
+        {% else %}
+        0 sensei's :(
+    {% endif %}
 	</td>
-	{% endif %}
-	{% if card.cached_total_favorites %}
-	<td>
-	  <h4>{% trans 'Favorited by' %}</h4>
-	  {% with total=card.cached_total_favorites %}
-	  {% blocktrans count counter=total %}{{ total }} producer{% plural %}{{ total }} producers{% endblocktrans %}
-	  {% endwith %}<br>
-	  <a href="/accounts/?favorite_card={{ card.id }}" target="_blank">
-	    {% trans 'View all' %}
-	    <i class="flaticon-link fontx0-8"></i>
-	  </a>
-	</td>
-	{% endif %}
+
 	<td>
 	  <h4>{% trans 'Comments' %}</h4>
       <a href="{{ card.item_url }}#disqus_thread" class="btn btn-{{ card.english_type }} btn-lg"{% if current != 'current-card_item' %} target="_blank"{% endif %}>
