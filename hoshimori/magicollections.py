@@ -372,7 +372,7 @@ class OwnedCardCollection(MagiCollection):
     class ListView(MagiCollection.ListView):
         staff_required = False
         default_ordering = '-card__i_rarity,-evolved,card__student'
-        per_line = 6
+        per_line = 4
         page_size = 40
         col_break = 'xs'
         filter_form = forms.OwnedCardFilterForm
