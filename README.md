@@ -1,6 +1,8 @@
-# Hoshimori-Project
+![Hoshimori-Project](http://imgur.com/download/JMpH8Ew)
 
-**[The Battle Girl Highschhool Database and Community](http://hoshimorigakuen.pythonanywhere.com/)**
+# **Hoshimori-Project**
+
+**[The Battle Girl Highschool Database and Community](http://hoshimorigakuen.pythonanywhere.com/)**
 
 ## Get Started
 
