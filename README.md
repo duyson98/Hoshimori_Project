@@ -73,6 +73,10 @@
 
 7. Open your browser to [http://localhost:8000/](http://localhost:8000/) to see the website
 
+### Getting database
+
+You can either get them your own way by extracting game data or crawling from wikis. Or you can use my [crawler](https://github.com/kokonguyen191/Hoshimori-Scrapy) and then process the crawled data with my [database processor](https://github.com/kokonguyen191/Hoshimori-Database-Processor). After that you can just push them onto your server.
+
 ## Developers
 
 * **[Koko191](https://github.com/kokonguyen191)** - Main dev
