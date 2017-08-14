@@ -10,18 +10,6 @@
                         <i class='flaticon-{% if oc.evolved %}checked text-success{% else %}delete text-danger{% endif %}'></i>
                     </td>
                 </tr>
-                {% if oc.level %}
-                    <tr>
-                        <th>{% trans 'Level' %}</th>
-                        <td>{{ oc.level }}</td>
-                    </tr>
-                {% endif %}
-                {% if oc.obtained_date %}
-                    <tr>
-                        <th>{% trans 'Obtained Date' %}</th>
-                        <td>{{ oc.obtained_date }}</td>
-                    </tr>
-                {% endif %}
             </table>
             <div class="text-center">
 {#                {% if oc.is_mine %}#}
@@ -36,8 +24,7 @@
                     </a>
 {#                {% endif %}#}
                 <a href="{{ oc.card.item_url }}"
-                   data-ajax-url="{{ oc.card.ajax_item_url }}" data-ajax-title="{{ oc.card }}"
-                   class="btn btn-{{ oc.card.english_type }}">
+                   data-ajax-url="{{ oc.card.ajax_item_url }}" data-ajax-title="{{ oc.card }}">
                     <i class="flaticon-about"></i>
                     {% trans 'About' %}
                 </a>
@@ -45,5 +32,61 @@
         </div>
         <img src="{{ oc.card.image_url }}" alt="{{ oc.card }}">
     </div>
-    <br>
+    {% if current == 'ownedcard_list' %}
+        <table class="table">
+            {% if ordering %}
+                {% if ordering.0 == 'card__hp_70' or ordering.0 == '-card__hp_70' %}
+                    <tr>
+                        <td><i class="flaticon-scoreup"></i></td>
+                        <th>{% trans 'HP' %}</th>
+                        <td>{% if oc.card.hp_70 %}{{ oc.card.hp_70 }}{% else %}「」{% endif %}</td>
+                    </tr>
+                {% elif ordering.0 == 'card__sp_70' or ordering.0 == '-card__sp_70' %}
+                    <tr>
+                        <td><i class="flaticon-scoreup"></i></td>
+                        <th>{% trans 'SP' %}</th>
+                        <td>{% if oc.card.sp_70 %}{{ oc.card.sp_70 }}{% else %}「」{% endif %}</td>
+                    </tr>
+                {% elif ordering.0 == 'card__atk_70' or ordering.0 == '-card__atk_70' %}
+                    <tr>
+                        <td><i class="flaticon-scoreup"></i></td>
+                        <th>{% trans 'ATK' %}</th>
+                        <td>{% if oc.card.atk_70 %}{{ oc.card.atk_70 }}{% else %}「」{% endif %}</td>
+                    </tr>
+                {% elif ordering.0 == 'card__def_70' or ordering.0 == '-card__def_70' %}
+                    <tr>
+                        <td><i class="flaticon-scoreup"></i></td>
+                        <th>{% trans 'DEF' %}</th>
+                        <td>{% if oc.card.def_70 %}{{ oc.card.def_70 }}{% else %}「」{% endif %}</td>
+                    </tr>
+                {% endif %}
+            {% endif %}
+            {% if oc.card.action_skill_combo %}
+            <tr>
+                <td><i class="flaticon-combo"></i></td>
+                <th>{% trans 'Combo' %}</th>
+                <td>{% if oc.card.evolved_action_skill_combo %}
+                    {{ oc.card.evolved_action_skill_combo }} {% elif oc.card.action_skill_combo %}
+                    {{ oc.card.action_skill_combo }} {% endif %}</td>
+            </tr>
+            {% if oc.card.action_skill_effects %}
+            <tr>
+                <td><i class="flaticon-star"></i></td>
+                <th>{% trans 'Skill Effects' %}</th>
+                <td>{{ oc.card.action_skill_effects }}</td>
+            </tr>
+            {% endif %}
+            {% endif %}
+            {% if oc.card.nakayoshi_skill_effect or oc.card.evolved_nakayoshi_skill_effect %}
+            <tr>
+                <td><i class="flaticon-max-bond"></i></td>
+                <th>{% trans 'Nakayoshi Effects' %}</th>
+                <td>{% if oc.card.evolved_nakayoshi_skill_effect %}
+                    {{ oc.card.evolved_nakayoshi_skill_effect }}{% elif oc.card.nakayoshi_skill_effect %}
+                    {{ oc.card.nakayoshi_skill_effect }}{% endif %}</td>
+            </tr>
+            {% endif %}
+        </table>
+    {% endif %}
 {% endwith %}
+

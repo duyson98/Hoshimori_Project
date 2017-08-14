@@ -1,5 +1,4 @@
 # Create your views here.
-from copy import copy
 
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import get_object_or_404, render
@@ -44,11 +43,11 @@ def addcard(request, card):
 
 def cardcollection(request, card):
     context = web_globalContext(request)
-    collection = copy(CardCollection)
+    collection = CardCollection
     request.GET = request.GET.copy()
     request.GET['collection'] = True
-    collection.ItemView.template = '../include/cards-collection'
-    return item_view(request, context, 'card', collection, pk=card, ajax=True)
+    return item_view(request, context, 'card', collection, item_template='../include/cards-collection', pk=card,
+                     ajax=True)
 
 
 def account_about(request, account):

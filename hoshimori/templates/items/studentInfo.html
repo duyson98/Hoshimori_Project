@@ -255,7 +255,7 @@
                 <th>{% trans 'Comments' %}</th>
                 <td>
                     <a href="{{ student.item_url }}#disqus_thread"
-                       class="btn btn-lg btn-{{ student.english_type|default_if_none:'main' }}"
+                       class="btn btn-lg btn-{{ student.name|default_if_none:'main' }}"
                             {% if current != 'student_item' %} target="_blank"{% endif %}>
                         {% trans 'Comments' %}
                     </a>
@@ -266,7 +266,7 @@
                 <th>{% trans 'Share' %}</th>
                 <td>
 	<span class="btn-group">
-	  {% include 'include/share.html' with share_url=student.http_item_url share_btn_class=student.english_type|add:" btn-lg" share_sentence=student %}
+	  {% include 'include/share.html' with share_url=student.http_item_url share_btn_class=student.name|add:" btn-lg" share_sentence=student %}
 	</span>
                 </td>
             </tr>

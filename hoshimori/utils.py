@@ -39,7 +39,7 @@ def filterCards(queryset, parameters, request):
 
 
 def item_view(request, context, name, collection, pk=None, reverse=None, ajax=False, item=None, extra_filters={},
-              shortcut_url=None, **kwargs):
+              shortcut_url=None, item_template=None, **kwargs):
     """
     Either pk or reverse required.
     """
@@ -64,7 +64,10 @@ def item_view(request, context, name, collection, pk=None, reverse=None, ajax=Fa
     from magi.views_collections import _get_share_image
     context['share_image'] = _get_share_image(context, item_view, item=context['item'])
     context['comments_enabled'] = item_view.comments_enabled
-    context['item_template'] = item_view.template
+    if item_template is None:
+        context['item_template'] = item_view.template
+    else:
+        context['item_template'] = item_template
     if context['item_template'] == 'default':
         context['show_edit_button'] = False
         context['item_fields'] = collection.to_fields(context['item'])

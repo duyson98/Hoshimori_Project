@@ -179,7 +179,7 @@ IGNORE_AFFINITY = 1
 IGNORE_CONFLICTING_AFFINITY = 2
 
 SKILL_AFFINITY_CHOICES = [
-    (DOES_NOT_IGNORE_AFFINITY, ''),
+    (DOES_NOT_IGNORE_AFFINITY, 'None'),
     (IGNORE_AFFINITY, 'Ignore weapon affinity'),
     (IGNORE_CONFLICTING_AFFINITY, 'Ignore conflicting weapon affinity'),
 ]

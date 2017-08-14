@@ -108,25 +108,27 @@ class CardForm(FormSaveOwnerOnCreation):
                   "charge_range",
                   )
         optional_fields = (
-        "i_card_type", "name", "student", "obtain_method", "special_icon", "special_front", "front_top", "front_bottom",
-        "front_name", "front_rarity", "front_weapon", "transparent", "subcard_effect", "hp_1", "sp_1", "atk_1", "def_1",
-        "hp_50", "sp_50", "atk_50", "def_50", "hp_70", "sp_70", "atk_70", "def_70", "skill_name", "japanese_skill_name",
-        "skill_SP", "skill_range", "i_skill_affinity", "action_skill_effects", "skill_comment", "skill_preview",
-        "action_skill_combo", "evolved_action_skill_combo", "action_skill_damage", "evolved_action_skill_damage",
-        "nakayoshi_title", "japanese_nakayoshi_title", "nakayoshi_skill_effect", "nakayoshi_skill_target",
-        "evolved_nakayoshi_skill_effect", "evolved_nakayoshi_skill_target", "charge_comment", "charge_damage",
-        "charge_hit", "charge_name", "charge_range")
+            "i_card_type", "name", "student", "obtain_method", "special_icon", "special_front", "front_top",
+            "front_bottom",
+            "front_name", "front_rarity", "front_weapon", "transparent", "subcard_effect", "hp_1", "sp_1", "atk_1",
+            "def_1",
+            "hp_50", "sp_50", "atk_50", "def_50", "hp_70", "sp_70", "atk_70", "def_70", "skill_name",
+            "japanese_skill_name",
+            "skill_SP", "skill_range", "i_skill_affinity", "action_skill_effects", "skill_comment", "skill_preview",
+            "action_skill_combo", "evolved_action_skill_combo", "action_skill_damage", "evolved_action_skill_damage",
+            "nakayoshi_title", "japanese_nakayoshi_title", "nakayoshi_skill_effect", "nakayoshi_skill_target",
+            "evolved_nakayoshi_skill_effect", "evolved_nakayoshi_skill_target", "charge_comment", "charge_damage",
+            "charge_hit", "charge_name", "charge_range")
 
 
 class CardFilterForm(MagiFiltersForm):
     search_fields = ['_cache_student_name', '_cache_student_japanese_name', 'name', 'japanese_name', 'skill_name',
-                     'japanese_skill_name']
+                     'japanese_skill_name', 'nakayoshi_skill_effect', 'evolved_nakayoshi_skill_effect',
+                     'action_skill_effects']
     ordering_fields = [
         ('id', _('ID')),
-        ('_cache_student_name', string_concat(_('Student'), ' - ', _('Name'))),
-        ('_cache_student_japanese_name', string_concat(_('Student'), ' - ', _('Name'), ' (', t['Japanese'], ')')),
+        ('student__id', _('Student')),
         ('i_rarity', _('Rarity')),
-        ('i_weapon', _('Weapon')),
         ('hp_1', string_concat(_('HP'), ' (', _('Level 1'), ')')),
         ('sp_1', string_concat(_('SP'), ' (', _('Level 1'), ')')),
         ('atk_1', string_concat(_('ATK'), ' (', _('Level 1'), ')')),
@@ -135,12 +137,16 @@ class CardFilterForm(MagiFiltersForm):
         ('sp_50', string_concat(_('SP'), ' (', _('Level 50'), ')')),
         ('atk_50', string_concat(_('ATK'), ' (', _('Level 50'), ')')),
         ('def_50', string_concat(_('DEF'), ' (', _('Level 50'), ')')),
+        ('hp_70', string_concat(_('HP'), ' (', _('Level 70'), ')')),
+        ('sp_70', string_concat(_('SP'), ' (', _('Level 70'), ')')),
+        ('atk_70', string_concat(_('ATK'), ' (', _('Level 70'), ')')),
+        ('def_70', string_concat(_('DEF'), ' (', _('Level 70'), ')')),
     ]
 
     def _evolvable_to_queryset(form, queryset, request, value):
-        if value == '0': # True
+        if value == '0':  # True
             return queryset.filter(i_rarity__in=EVOLVABLE_RARITIES, i_card_type=0)
-        elif value == '1': # False
+        elif value == '1':  # False
             return queryset.exclude(i_rarity__in=EVOLVABLE_RARITIES, i_card_type=0)
         return queryset
 
@@ -155,20 +161,30 @@ class CardFilterForm(MagiFiltersForm):
 
     i_card_type = forms.ChoiceField(label="Card Type", choices=BLANK_CHOICE_DASH + CARDTYPE_CHOICES)
 
+    i_skill_affinity = forms.ChoiceField(label="Skill Affinity", choices=BLANK_CHOICE_DASH + SKILL_AFFINITY_CHOICES)
+
     def __init__(self, *args, **kwargs):
         super(CardFilterForm, self).__init__(*args, **kwargs)
         self.fields['reverse_order'].initial = False
 
     class Meta:
         model = models.Card
-        fields = ('search', 'student', 'i_card_type', 'subcard_effect', 'i_rarity', 'i_weapon', 'evolvable', 'ordering', 'reverse_order')
+        fields = (
+            'search', 'student', 'i_card_type', 'subcard_effect', 'i_rarity', 'i_weapon', 'evolvable',
+            'i_skill_affinity', 'ordering', 'reverse_order')
 
 
 ############################################################
 # Owned Card
 
 class OwnedCardFilterForm(MagiFiltersForm):
-    search_fields = CardFilterForm.search_fields
+    ordering_fields = [
+        ('card__id', _('ID')),
+        ('card__hp_70', _('HP')),
+        ('card__sp_70', _('SP')),
+        ('card__atk_70', _('ATK')),
+        ('card__def_70', _('DEF')),
+    ]
 
     account = forms.IntegerField(widget=forms.HiddenInput, min_value=0, required=True)
 
@@ -176,11 +192,40 @@ class OwnedCardFilterForm(MagiFiltersForm):
         super(OwnedCardFilterForm, self).__init__(*args, **kwargs)
         self.fields['account'].initial = self.request.GET.get('account', 1)
 
+    def _subcard_effect_to_queryset(form, queryset, request, value):
+        return queryset.filter(card__subcard_effect=value)
+
+    subcard_effect = forms.ChoiceField(choices=BLANK_CHOICE_DASH + list(enumerate([True, False])))
+    subcard_effect_filter = MagiFilter(to_queryset=_subcard_effect_to_queryset)
+
+    def _i_rarity_to_queryset(form, queryset, request, value):
+        return queryset.filter(card__i_rarity=value)
+
+    i_rarity = forms.ChoiceField(label="Rarity", choices=BLANK_CHOICE_DASH + RARITY_CHOICES)
+    i_rarity_filter = MagiFilter(to_queryset=_i_rarity_to_queryset)
+    
+    def _i_weapon_to_queryset(form, queryset, request, value):
+        return queryset.filter(card__i_weapon=value)
+
+    i_weapon = forms.ChoiceField(label="Weapon", choices=BLANK_CHOICE_DASH + WEAPON_CHOICES)
+    i_weapon_filter = MagiFilter(to_queryset=_i_weapon_to_queryset)
+
+    def _student_to_queryset(form, queryset, request, value):
+        return queryset.filter(card__student_id=value)
+
+    student_filter = MagiFilter(to_queryset=_student_to_queryset)
+
+    def _i_skill_affinity_to_queryset(form, queryset, request, value):
+        return queryset.filter(card__i_skill_affinity=value)
+
+    i_skill_affinity = forms.ChoiceField(label="Skill Affinity", choices=BLANK_CHOICE_DASH + SKILL_AFFINITY_CHOICES)
+    i_skill_affinity_filter = MagiFilter(to_queryset=_i_skill_affinity_to_queryset)
+
     class Meta:
         model = models.Card
-        fields = ('search', 'i_rarity', 'i_weapon')
-        optional_fields = ('i_rarity')
-
+        fields = (
+            'search', 'student', 'subcard_effect', 'i_rarity', 'i_weapon', 'i_skill_affinity', 'ordering',
+            'reverse_order')
 
 
 class OwnedCardEditForm(AutoForm):

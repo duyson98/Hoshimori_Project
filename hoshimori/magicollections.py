@@ -291,7 +291,6 @@ class CardCollection(MagiCollection):
     }
 
     class ItemView(MagiCollection.ItemView):
-        # template = 'cardInfo'
         ajax_callback = 'updateCardsAndOwnedCards'
         js_files = ['cards', 'collection']
 
@@ -365,6 +364,26 @@ class OwnedCardCollection(MagiCollection):
     icon = 'album'
     navbar_link = False
 
+    filter_cuteform = {
+        # 'student': {
+        #     'image_folder': 'thumb_students',
+        #     'to_cuteform': 'value',
+        #     'extra_settings': {
+        #         'modal': 'true',
+        #         'modal-text': 'true',
+        #     },
+        # },
+        'subcard_effect': {
+            'image_folder': 'subcard_effect',
+        },
+        'i_rarity': {
+            'image_folder': 'i_rarity'
+        },
+        'i_weapon': {
+            'image_folder': 'i_weapon'
+        }
+    }
+
     class ItemView(MagiCollection.ItemView):
         comments_enabled = False
         js_files = ['ownedcards']
@@ -378,7 +397,8 @@ class OwnedCardCollection(MagiCollection):
         filter_form = forms.OwnedCardFilterForm
         js_files = ['ownedcards']
         ajax_pagination_callback = 'updateOwnedCards'
-        no_result_template = 'empty_query'
+        no_result_template = 'owned_empty_query'
+        show_edit_button = False
 
         def foreach_item(self, index, item, context):
             item.is_mine = context['request'].user.id == item.cached_account.owner.id
