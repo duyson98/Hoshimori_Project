@@ -619,7 +619,6 @@ class Card(MagiModel):
     def http_skill_preview_url(self):
         return get_http_image_url_from_path(self.skill_preview)
 
-    # TODO: Use String until properly import
     # action_skill = models.OneToOne('ActionSkill', verbose_name=_('Action Skill'), related_name='skill', null=True,
     #                                  on_delete=models.SET_NULL)
     # evolved_action_skill = models.OneToOne('ActionSkill', verbose_name=_('Evolved Action Skill'),
@@ -636,7 +635,6 @@ class Card(MagiModel):
     japanese_nakayoshi_title = models.CharField(string_concat(_('Passive Skill'), ' (', t['Japanese'], ')'),
                                                 max_length=100, null=True)
 
-    # TODO: Use String until properly import
     # nakayoshi_skills = models.ManyToManyField('Nakayoshi', related_name='card_with_nakayoshi')
     # evolved_nakayoshi_skills = models.ManyToManyField('Nakayoshi', related_name='card_with_nakayoshi_evolved',
     #                                                   null=True, default=None)
@@ -845,12 +843,10 @@ class WeaponUpgrade(MagiModel):
     materials = models.CharField(_('Material'), null=True, max_length=100)
 
     # Skills
-    # TODO
     # weapon_effects = models.ManyToManyField('WeaponEffect', related_name='weapon_with_skills', null=True)
     weapon_effects = models.CharField(_('Weapon Effects'), max_length=100, null=True)
 
     # Subskill
-    # TODO
     # subweapon_effects = models.ManyToManyField('WeaponEffect', related_name='subweapon_with_skills', null=True)
     subweapon_effects = models.CharField(_('Subweapon Effects'), max_length=100, null=True)
 

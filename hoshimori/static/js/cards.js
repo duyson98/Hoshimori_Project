@@ -47,8 +47,6 @@ function handleClickAddCard() {
 //     });
 // }
 
-// Something must be wrong here
-// TODO
 function handleClickInfo() {
     $('.card [data-info-ajax]').unbind('click');
     $('.card [data-info-ajax]').click(function (e) {

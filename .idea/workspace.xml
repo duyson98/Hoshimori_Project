@@ -2,19 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b42e218c-a55e-4bf5-9a85-f6d35961b77b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hoshimori/templates/owned_empty_query.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/revamped_card_database.csv" afterPath="$PROJECT_DIR$/database/revamped_card_database.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/forms.py" afterPath="$PROJECT_DIR$/hoshimori/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/magicollections.py" afterPath="$PROJECT_DIR$/hoshimori/magicollections.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/model_choices.py" afterPath="$PROJECT_DIR$/hoshimori/model_choices.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/static/less/style.less" afterPath="$PROJECT_DIR$/hoshimori/static/less/style.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/templates/accountsForProfile.html" afterPath="$PROJECT_DIR$/hoshimori/templates/accountsForProfile.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/templates/include/cards-stats.html" afterPath="$PROJECT_DIR$/hoshimori/templates/include/cards-stats.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/templates/items/ownedcardItem.html" afterPath="$PROJECT_DIR$/hoshimori/templates/items/ownedcardItem.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/templates/items/studentInfo.html" afterPath="$PROJECT_DIR$/hoshimori/templates/items/studentInfo.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/utils.py" afterPath="$PROJECT_DIR$/hoshimori/utils.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/views.py" afterPath="$PROJECT_DIR$/hoshimori/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/models.py" afterPath="$PROJECT_DIR$/hoshimori/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/static/js/cards.js" afterPath="$PROJECT_DIR$/hoshimori/static/js/cards.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -72,14 +62,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="forms.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/hoshimori/forms.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="168">
-              <caret line="205" column="4" lean-forward="true" selection-start-line="205" selection-start-column="4" selection-end-line="205" selection-end-column="4" />
+              <caret line="205" column="4" lean-forward="false" selection-start-line="205" selection-start-column="4" selection-end-line="205" selection-end-column="4" />
               <folding>
                 <element signature="e#0#24#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/hoshimori/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="266">
+              <caret line="849" column="10" lean-forward="false" selection-start-line="849" selection-start-column="10" selection-end-line="849" selection-end-column="10" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -187,14 +187,12 @@
         <option value="$PROJECT_DIR$/hoshimori/static/js/main.js" />
         <option value="$PROJECT_DIR$/hoshimori/admin.py" />
         <option value="$PROJECT_DIR$/hoshimori_project/settings.py" />
-        <option value="$PROJECT_DIR$/hoshimori/static/js/cards.js" />
         <option value="$PROJECT_DIR$/hoshimori/static/js/profile_account_tabs.js" />
         <option value="$PROJECT_DIR$/hoshimori/templates/accountsForProfile.html" />
         <option value="$PROJECT_DIR$/hoshimori/model_choices.py" />
         <option value="$PROJECT_DIR$/hoshimori/static/js/collection.js" />
         <option value="$PROJECT_DIR$/hoshimori/utils.py" />
         <option value="$PROJECT_DIR$/hoshimori/templates/include/cards-stats.html" />
-        <option value="$PROJECT_DIR$/hoshimori/models.py" />
         <option value="$PROJECT_DIR$/hoshimori/static/less/style.less" />
         <option value="$PROJECT_DIR$/hoshimori/views.py" />
         <option value="$PROJECT_DIR$/hoshimori/templates/items/cardItem.html" />
@@ -202,6 +200,8 @@
         <option value="$PROJECT_DIR$/hoshimori/templates/owned_empty_query.html" />
         <option value="$PROJECT_DIR$/hoshimori/templates/items/ownedcardItem.html" />
         <option value="$PROJECT_DIR$/hoshimori/forms.py" />
+        <option value="$PROJECT_DIR$/hoshimori/static/js/cards.js" />
+        <option value="$PROJECT_DIR$/hoshimori/models.py" />
       </list>
     </option>
   </component>
@@ -712,7 +712,14 @@
       <option name="project" value="LOCAL" />
       <updated>1500890408339</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Fix issue #2. Add some searching criteria for cards, add filtering for owned cards to assist team-building. Add 1 more difficulty choice. Update card database.">
+      <created>1502738997626</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1502738997626</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TodoView">
@@ -793,7 +800,8 @@
     <MESSAGE value="Missing file" />
     <MESSAGE value="Fix card-stat alignment, fix CardForm, fix CardModel not accepting null name, hide card list edit button, add card change monitoring to admin site." />
     <MESSAGE value="Fix missing follow button" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix missing follow button" />
+    <MESSAGE value="Fix issue #2. Add some searching criteria for cards, add filtering for owned cards to assist team-building. Add 1 more difficulty choice. Update card database." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix issue #2. Add some searching criteria for cards, add filtering for owned cards to assist team-building. Add 1 more difficulty choice. Update card database." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1073,14 +1081,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hoshimori/static/js/cards.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="122" column="51" lean-forward="true" selection-start-line="122" selection-start-column="51" selection-end-line="122" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/hoshimori/static/less/style.less">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="55">
@@ -1129,14 +1129,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hoshimori/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="310" column="0" lean-forward="true" selection-start-line="310" selection-start-column="0" selection-end-line="310" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/hoshimori/magicollections.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -1161,13 +1153,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/hoshimori/static/js/cards.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="49" column="25" lean-forward="false" selection-start-line="49" selection-start-column="25" selection-end-line="49" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/hoshimori/forms.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
-          <caret line="205" column="4" lean-forward="true" selection-start-line="205" selection-start-column="4" selection-end-line="205" selection-end-column="4" />
+          <caret line="205" column="4" lean-forward="false" selection-start-line="205" selection-start-column="4" selection-end-line="205" selection-end-column="4" />
           <folding>
             <element signature="e#0#24#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hoshimori/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="849" column="10" lean-forward="false" selection-start-line="849" selection-start-column="10" selection-end-line="849" selection-end-column="10" />
+          <folding />
         </state>
       </provider>
     </entry>
