@@ -126,7 +126,7 @@
                 <tr>
                     <td><i class="flaticon-perfectlock"></i></td>
                     <th>{% trans 'Obtain Method' %}</th>
-                    <td>{{ card.obtain_method }}</td>
+                    <td>{{ card.obtain_method|linebreaks }}</td>
                 </tr>
             {% endif %}
             {% if card.skill_name %}
@@ -154,14 +154,14 @@
                 <tr>
                     <td><i class="flaticon-skill"></i></td>
                     <th>{% trans 'Skill Range' %}</th>
-                    <td>{{ range.skill_range }}</td>
+                    <td>{{ range.skill_range|linebreaks  }}</td>
                 </tr>
             {% endif %}
             {% if card.skill_comment %}
                 <tr>
                     <td><i class="flaticon-skill"></i></td>
                     <th>{% trans 'Skill Comment' %}</th>
-                    <td>{{ card.skill_comment }}</td>
+                    <td>{{ card.skill_comment|linebreaks  }}</td>
                 </tr>
             {% endif %}
             {% if card.skill_preview_url %}
@@ -179,7 +179,7 @@
                 <tr>
                     <td><i class="flaticon-skill"></i></td>
                     <th>{% trans 'Action Skill Effects' %}</th>
-                    <td>{{ card.action_skill_effects }}</td>
+                    <td>{{ card.action_skill_effects|linebreaks  }}</td>
                 </tr>
             {% endif %}
             {% if card.i_skill_affinity %}
@@ -189,14 +189,14 @@
                     <td>{{ card.skill_affinity }}</td>
                 </tr>
             {% endif %}
-            {% if card.action_skill_damage %}
+            {% if card.action_skill_damage|linebreaks  %}
                 <tr>
                     <td><i class="flaticon-skill"></i></td>
                     <th>{% trans 'Action Skill Damage' %}</th>
                     <td>{{ card.action_skill_damage }}</td>
                 </tr>
             {% endif %}
-            {% if card.evolved_action_skill_damage %}
+            {% if card.evolved_action_skill_damage|linebreaks  %}
                 <tr>
                     <td><i class="flaticon-skill"></i></td>
                     <th>{% trans 'Action Skill Damage' %} ({% t 'Evolved' %})</th>
@@ -231,14 +231,14 @@
                     <td>{{ card.japanese_nakayoshi_title }}</td>
                 </tr>
             {% endif %}
-            {% if card.nakayoshi_skill_effect %}
+            {% if card.nakayoshi_skill_effect|linebreaks  %}
                 <tr>
                     <td><i class="flaticon-max-bond"></i></td>
                     <th>{% trans 'Nakayoshi Skill Effect' %}</th>
                     <td>{{ card.nakayoshi_skill_effect }}</td>
                 </tr>
             {% endif %}
-            {% if card.evolved_nakayoshi_skill_effect %}
+            {% if card.evolved_nakayoshi_skill_effect|linebreaks  %}
                 <tr>
                     <td><i class="flaticon-max-bond"></i></td>
                     <th>{% trans 'Nakayoshi Skill Effect' %} ({% t 'Evolved' %})</th>
@@ -287,7 +287,7 @@
                     <td>{{ card.charge_range }}</td>
                 </tr>
             {% endif %}
-            {% if card.charge_comment %}
+            {% if card.charge_comment|linebreaks  %}
                 <tr>
                     <td><i class="flaticon-times"></i></td>
                     <th>{% trans 'Charge Comment' %}</th>

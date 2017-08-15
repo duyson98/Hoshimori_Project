@@ -118,11 +118,9 @@ CORS_ORIGIN_ALLOW_ALL = True
 CORS_URLS_REGEX = r'^/api/.*$'
 
 LOGIN_REDIRECT_URL = '/'
-LOG_EMAIL = 'emails-log@schoolido.lu'
-PASSWORD_EMAIL = 'password@schoolido.lu'
-AWS_SES_RETURN_PATH = 'contact@schoolido.lu'
-
-FAVORITE_CHARACTERS = []
+LOG_EMAIL = 'kokonguyen191@gmail.com'
+PASSWORD_EMAIL = 'kokonguyen191@gmail.com'
+AWS_SES_RETURN_PATH = 'kokonguyen191@gmail.com'
 
 MAX_WIDTH = 1200
 MAX_HEIGHT = 1200

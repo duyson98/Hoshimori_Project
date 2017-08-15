@@ -1,5 +1,6 @@
 {% load i18n %}
 {% with card=item %}
+    {% if current != 'card_item' and current != 'card_item_ajax' %}
     {% if page == 1 and forloop.counter0 == 0 %}
         <div id="topcards"></div>{% endif %}
     <div class="card {{ card.student.name }}" data-card-title="{{ card }}" id="card{{ card.id }}">
@@ -40,6 +41,7 @@
             {% endif %}
         </div>
     </div>
+    {% endif %}
     {% if current != 'card_list' and current != 'card_list_ajax' and current != 'addcard_ajax' and current != 'favoritecard_ajax' %}
         {% if collection %}
             {% include 'include/cards-collection.html' %}

@@ -18,7 +18,7 @@ function loadCards(pane, account) {
             pane.html('<div class="padding20"><div class="alert alert-warning">' + gettext('Nothing here. Maybe you could help and get this player to add some cards?') + '</div></div>');
         } else {
             pane.html(data);
-            updateOwnedCards();
+            hoverUpdateOwnedCards();
         }
     });
 }
@@ -77,6 +77,6 @@ $(document).ready(function () {
         var pane = $(target_name);
         onTabChanged(target_name, pane);
     });
-    reloadOwnedCardsAfterModal();
+    hoverReloadOwnedCardsAfterModal();
     //levelUpButtons();
 });

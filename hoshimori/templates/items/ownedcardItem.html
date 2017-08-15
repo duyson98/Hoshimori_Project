@@ -10,19 +10,25 @@
                         <i class='flaticon-{% if oc.evolved %}checked text-success{% else %}delete text-danger{% endif %}'></i>
                     </td>
                 </tr>
+                <tr>
+                    <th>{% trans 'Level' %}</th>
+                    <td>
+                        {{ oc.level }}
+                    </td>
+                </tr>
             </table>
             <div class="text-center">
-{#                {% if oc.is_mine %}#}
-                    <a href="/ownedcards/edit/{{ oc.id }}/"
-                       data-ajax-title="{% trans 'Edit' %} {% trans 'Card' %}"
-                       data-ajax-url="/ajax/ownedcards/edit/{{ oc.id }}/{% if collection %}?collection{% endif %}"
-                       data-ajax-handle-form="true" data-ajax-modal-size="md"
-                       data-ajax-modal-after-form-size="lg"
-                       class="btn btn-{{ oc.card.english_weapon }}">
-                        <i class="flaticon-edit"></i>
-                        {% trans 'Edit' %} {% trans 'Card' %}
-                    </a>
-{#                {% endif %}#}
+                {#                {% if oc.is_mine %}#}
+                <a href="/ownedcards/edit/{{ oc.id }}/"
+                   data-ajax-title="{% trans 'Edit' %} {% trans 'Card' %}"
+                   data-ajax-url="/ajax/ownedcards/edit/{{ oc.id }}/{% if collection %}?collection{% endif %}"
+                   data-ajax-handle-form="true" data-ajax-modal-size="md"
+                   data-ajax-modal-after-form-size="lg"
+                   class="btn btn-{{ oc.card.english_weapon }}">
+                    <i class="flaticon-edit"></i>
+                    {% trans 'Edit' %} {% trans 'Card' %}
+                </a>
+                {#                {% endif %}#}
                 <a href="{{ oc.card.item_url }}"
                    data-ajax-url="{{ oc.card.ajax_item_url }}" data-ajax-title="{{ oc.card }}">
                     <i class="flaticon-about"></i>
@@ -39,52 +45,76 @@
                     <tr>
                         <td><i class="flaticon-scoreup"></i></td>
                         <th>{% trans 'HP' %}</th>
-                        <td>{% if oc.card.hp_70 %}{{ oc.card.hp_70 }}{% else %}「」{% endif %}</td>
+                        <th>{{ oc.card.hp_70 }}</th>
                     </tr>
                 {% elif ordering.0 == 'card__sp_70' or ordering.0 == '-card__sp_70' %}
                     <tr>
                         <td><i class="flaticon-scoreup"></i></td>
                         <th>{% trans 'SP' %}</th>
-                        <td>{% if oc.card.sp_70 %}{{ oc.card.sp_70 }}{% else %}「」{% endif %}</td>
+                        <th>{{ oc.card.sp_70 }}</th>
                     </tr>
                 {% elif ordering.0 == 'card__atk_70' or ordering.0 == '-card__atk_70' %}
                     <tr>
                         <td><i class="flaticon-scoreup"></i></td>
                         <th>{% trans 'ATK' %}</th>
-                        <td>{% if oc.card.atk_70 %}{{ oc.card.atk_70 }}{% else %}「」{% endif %}</td>
+                        <th>{{ oc.card.atk_70 }}</th>
                     </tr>
                 {% elif ordering.0 == 'card__def_70' or ordering.0 == '-card__def_70' %}
                     <tr>
                         <td><i class="flaticon-scoreup"></i></td>
                         <th>{% trans 'DEF' %}</th>
-                        <td>{% if oc.card.def_70 %}{{ oc.card.def_70 }}{% else %}「」{% endif %}</td>
+                        <th>{{ oc.card.def_70 }}</th>
+                    </tr>
+                {% elif ordering.0 == '_cache_hp' or ordering.0 == '-_cache_hp' %}
+                    <tr>
+                        <td><i class="flaticon-scoreup"></i></td>
+                        <th>{% trans 'HP' %}</th>
+                        <th>{{ oc.owned_hp }}</th>
+                    </tr>
+                {% elif ordering.0 == '_cache_sp' or ordering.0 == '-_cache_sp' %}
+                    <tr>
+                        <td><i class="flaticon-scoreup"></i></td>
+                        <th>{% trans 'SP' %}</th>
+                        <th>{{ oc.owned_sp }}</th>
+                    </tr>
+                {% elif ordering.0 == '_cache_atk' or ordering.0 == '-_cache_atk' %}
+                    <tr>
+                        <td><i class="flaticon-scoreup"></i></td>
+                        <th>{% trans 'ATK' %}</th>
+                        <th>{{ oc.owned_atk }}</th>
+                    </tr>
+                {% elif ordering.0 == '_cache_def' or ordering.0 == '-_cache_def' %}
+                    <tr>
+                        <td><i class="flaticon-scoreup"></i></td>
+                        <th>{% trans 'DEF' %}</th>
+                        <th>{{ oc.owned_def }}</th>
                     </tr>
                 {% endif %}
             {% endif %}
             {% if oc.card.action_skill_combo %}
-            <tr>
-                <td><i class="flaticon-combo"></i></td>
-                <th>{% trans 'Combo' %}</th>
-                <td>{% if oc.card.evolved_action_skill_combo %}
-                    {{ oc.card.evolved_action_skill_combo }} {% elif oc.card.action_skill_combo %}
-                    {{ oc.card.action_skill_combo }} {% endif %}</td>
-            </tr>
-            {% if oc.card.action_skill_effects %}
-            <tr>
-                <td><i class="flaticon-star"></i></td>
-                <th>{% trans 'Skill Effects' %}</th>
-                <td>{{ oc.card.action_skill_effects }}</td>
-            </tr>
-            {% endif %}
+                <tr>
+                    <td><i class="flaticon-combo"></i></td>
+                    <th>{% trans 'Combo' %}</th>
+                    <td>{% if oc.card.evolved_action_skill_combo %}
+                        {{ oc.card.evolved_action_skill_combo }} {% elif oc.card.action_skill_combo %}
+                        {{ oc.card.action_skill_combo }} {% endif %}</td>
+                </tr>
+                {% if oc.card.action_skill_effects %}
+                    <tr>
+                        <td><i class="flaticon-star"></i></td>
+                        <th>{% trans 'Skill Effects' %}</th>
+                        <td>{{ oc.card.action_skill_effects|linebreaks }}</td>
+                    </tr>
+                {% endif %}
             {% endif %}
             {% if oc.card.nakayoshi_skill_effect or oc.card.evolved_nakayoshi_skill_effect %}
-            <tr>
-                <td><i class="flaticon-max-bond"></i></td>
-                <th>{% trans 'Nakayoshi Effects' %}</th>
-                <td>{% if oc.card.evolved_nakayoshi_skill_effect %}
-                    {{ oc.card.evolved_nakayoshi_skill_effect }}{% elif oc.card.nakayoshi_skill_effect %}
-                    {{ oc.card.nakayoshi_skill_effect }}{% endif %}</td>
-            </tr>
+                <tr>
+                    <td><i class="flaticon-max-bond"></i></td>
+                    <th>{% trans 'Nakayoshi Effects' %}</th>
+                    <td>{% if oc.card.evolved_nakayoshi_skill_effect %}
+                        {{ oc.card.evolved_nakayoshi_skill_effect|linebreaks }}{% elif oc.card.nakayoshi_skill_effect %}
+                        {{ oc.card.nakayoshi_skill_effect|linebreaks }}{% endif %}</td>
+                </tr>
             {% endif %}
         </table>
     {% endif %}

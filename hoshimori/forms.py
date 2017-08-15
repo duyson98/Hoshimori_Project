@@ -178,12 +178,19 @@ class CardFilterForm(MagiFiltersForm):
 # Owned Card
 
 class OwnedCardFilterForm(MagiFiltersForm):
+    def __init__(self, *args, **kwargs):
+        super(OwnedCardFilterForm, self).__init__(*args, **kwargs)
+
     ordering_fields = [
-        ('card__id', _('ID')),
-        ('card__hp_70', _('HP')),
-        ('card__sp_70', _('SP')),
-        ('card__atk_70', _('ATK')),
-        ('card__def_70', _('DEF')),
+        ('card__id', _('Card ID')),
+        ('card__hp_70', string_concat(_('HP'), ' (', _('Level 70'), ')')),
+        ('card__sp_70', string_concat(_('SP'), ' (', _('Level 70'), ')')),
+        ('card__atk_70', string_concat(_('ATK'), ' (', _('Level 70'), ')')),
+        ('card__def_70', string_concat(_('DEF'), ' (', _('Level 70'), ')')),
+        ('_cache_hp', _('HP')),
+        ('_cache_sp', _('SP')),
+        ('_cache_atk', _('ATK')),
+        ('_cache_def', _('DEF')),
     ]
 
     account = forms.IntegerField(widget=forms.HiddenInput, min_value=0, required=True)
@@ -203,7 +210,7 @@ class OwnedCardFilterForm(MagiFiltersForm):
 
     i_rarity = forms.ChoiceField(label="Rarity", choices=BLANK_CHOICE_DASH + RARITY_CHOICES)
     i_rarity_filter = MagiFilter(to_queryset=_i_rarity_to_queryset)
-    
+
     def _i_weapon_to_queryset(form, queryset, request, value):
         return queryset.filter(card__i_weapon=value)
 
@@ -232,16 +239,19 @@ class OwnedCardEditForm(AutoForm):
     def __init__(self, *args, **kwargs):
         super(OwnedCardEditForm, self).__init__(*args, **kwargs)
         self.card = self.instance.card
+        if not self.card.evolvable:
+            del self.fields['evolved']
 
     def save(self, commit=False):
         instance = super(OwnedCardEditForm, self).save(commit=False)
+        instance.update_cache_stats()
         if commit:
             instance.save()
         return instance
 
     class Meta:
         model = models.OwnedCard
-        fields = ('evolved',)
+        fields = ('level', 'evolved',)
 
 
 ############################################################

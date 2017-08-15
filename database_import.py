@@ -104,9 +104,8 @@ def irous_import_data():
         id = 0
         for row in reader:
             if row[0] != 'species':  # ignore header row
-                id += 1
                 _, created = IrousVariation.objects.get_or_create(
-                    id=id,
+                    id=row[5],
                     species_id=row[0],
                     japanese_name=row[1],
                     name=row[2],

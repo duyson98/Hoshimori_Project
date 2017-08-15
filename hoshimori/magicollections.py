@@ -301,7 +301,8 @@ class CardCollection(MagiCollection):
                 if context['collection']:
                     request.user.all_accounts = request.user.accounts.all().prefetch_related(
                         Prefetch('ownedcards',
-                                 queryset=OwnedCard.objects.filter(card_id=context['item'].id).order_by('-card__i_rarity', 'card__student_id'), to_attr='all_owned'),
+                                 queryset=OwnedCard.objects.filter(card_id=context['item'].id).order_by(
+                                     '-card__i_rarity', 'card__student_id'), to_attr='all_owned'),
                     )
                     # Set values to avoid using select_related since we already have them
                     for account in request.user.all_accounts:
@@ -400,8 +401,9 @@ class OwnedCardCollection(MagiCollection):
         no_result_template = 'owned_empty_query'
         show_edit_button = False
 
-        def foreach_item(self, index, item, context):
+        def foreach_items(self, index, item, context):
             item.is_mine = context['request'].user.id == item.cached_account.owner.id
+            item.stats = item.cached_stats
 
         def check_permissions(self, request, context):
             super(OwnedCardCollection.ListView, self).check_permissions(request, context)

@@ -6,6 +6,7 @@ import os
 
 from django.conf import settings as django_settings
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.validators import MaxValueValidator
 from django.db import models
 from django.utils import timezone
 from django.utils.deconstruct import deconstructible
@@ -42,9 +43,10 @@ class uploadItem(object):
 
 
 def getAccountLeaderboard(account):
-    if not account.level:
+    if not account.story_progress:
         return None
-    return Account.objects.filter(level__gt=account.level).values('level').distinct().count() + 1
+    return Account.objects.filter(story_progress__gt=account.story_progress).values(
+        'story_progress').distinct().count() + 1
 
 
 ############################################################
@@ -235,9 +237,13 @@ class Account(MagiModel):
     creation = models.DateTimeField(_('Join Date'), auto_now_add=True)
     start_date = models.DateField(null=True, verbose_name=_('Start Date'),
                                   help_text=_('When you started playing with this account.'))
-    level = models.PositiveIntegerField(_('Level'), null=True, db_index=True)
+    story_progress = models.PositiveIntegerField(_('Story Progress'), help_text=_('Which episode have you cleared?'),
+                                                 null=True, db_index=True, validators=[
+            MaxValueValidator(django_settings.LATEST_EPISODE)
+        ])
     nickname = models.CharField(_('Nickname'), max_length=100)
-    game_id = models.CharField(_('Game ID'), max_length=8)
+    game_id = models.CharField(_('Game ID'), help_text=_('You can find it in-game. It is a series of 8 characters.'),
+                               max_length=8)
     device = models.CharField(_('Device'), max_length=150)
     i_os = models.PositiveIntegerField(_('Operating System'), choices=OS_CHOICES, default=0)
 
@@ -508,9 +514,8 @@ class Card(MagiModel):
                     'javascript_levels': str({str(level): {
                         'value': self._value_at_level(field, level=level, is_evolved=evolved),
                         'percent': (float(self._value_at_level(field, level=level, is_evolved=evolved,
-                                                         to_string=False)) / float(self._value_at_level(field,
-                                                                                                 level=self.max_level,
-                                                                                                 is_evolved=self.evolvable))) * 100.0,
+                                                               to_string=False)) / django_settings.MAX_STATS.get(
+                            field + '_max')) * 100.0,
                     } for level in range(1, self.max_level + 1)}).replace('\'', '"'),
                 } for (field, name) in [
                     ('hp', string_concat(_('HP'), ' ', _('evolved') if evolved else '')),
@@ -1081,6 +1086,7 @@ class OwnedCard(MagiModel):
     account = models.ForeignKey(Account, related_name='ownedcards', on_delete=models.CASCADE)
     card = models.ForeignKey(Card, related_name='owned', on_delete=models.CASCADE)
 
+    level = models.PositiveIntegerField(_('Level'), default=50, null=True)
     evolved = models.BooleanField(_('Evolved'), default=False)
 
     # Cache account + owner
@@ -1110,6 +1116,39 @@ class OwnedCard(MagiModel):
             }),
         })
 
+    _cache_hp = models.PositiveIntegerField(_('HP'), default=0, null=True)
+    _cache_sp = models.PositiveIntegerField(_('SP'), default=0, null=True)
+    _cache_atk = models.PositiveIntegerField(_('ATK'), default=0, null=True)
+    _cache_def = models.PositiveIntegerField(_('DEF'), default=0, null=True)
+
+    def owned_hp(self):
+        return self._cache_hp
+    def owned_sp(self):
+        return self._cache_sp
+    def owned_atk(self):
+        return self._cache_atk
+    def owned_def(self):
+        return self._cache_def
+
+    def update_cache_stats(self):
+        self._cache_hp = self.card._value_at_level(fieldname="hp", level=self.level,is_evolved=self.evolved)
+        self._cache_sp = self.card._value_at_level(fieldname="sp", level=self.level, is_evolved=self.evolved)
+        self._cache_atk = self.card._value_at_level(fieldname="atk", level=self.level, is_evolved=self.evolved)
+        self._cache_def = self.card._value_at_level(fieldname="def", level=self.level, is_evolved=self.evolved)
+
+    def force_cache_stats(self):
+        self.update_cache_stats()
+        self.save()
+
+    @property
+    def cached_stats(self):
+        return AttrDict({
+            'hp': self._cache_hp,
+            'sp': self._cache_sp,
+            'atk': self._cache_atk,
+            'def': self._cache_def,
+        })
+
     @property
     def owner(self):
         return self.cached_account.owner
@@ -1117,6 +1156,11 @@ class OwnedCard(MagiModel):
     @property
     def owner_id(self):
         return self.cached_account.owner.id
+
+    def force_max(self):
+        self.evolved = self.card.evolvable
+        self.level = self.card.max_level
+        self.save()
 
     def __unicode__(self):
         return u'#{} {}'.format(self.id, self.card.name)

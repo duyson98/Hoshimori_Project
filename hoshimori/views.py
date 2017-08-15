@@ -31,7 +31,8 @@ def addcard(request, card):
         queryset = filterCards(Card.objects.all(), {}, request)
     card = get_object_or_404(queryset, pk=card)
     account = get_object_or_404(Account, pk=request.POST.get('account', None), owner=request.user)
-    OwnedCard.objects.create(card=card, account=account)
+    OwnedCard.objects.create(card=card, account=account, evolved=card.evolvable, level=card.max_level)
+    OwnedCard.objects.get(card=card, account=account).force_cache_stats()
     if not collection:
         card.total_owned += 1
     if collection:

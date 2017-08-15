@@ -53,3 +53,7 @@ ENABLED_PAGES['account_about'] = {
 
 ON_USER_EDITED = utils.onUserEdited
 ON_PREFERENCES_EDITED = utils.onPreferencesEdited
+
+
+FAVORITE_CHARACTERS = django_settings.FAVORITE_CHARACTERS
+LATEST_EPISODE = django_settings.LATEST_EPISODE
