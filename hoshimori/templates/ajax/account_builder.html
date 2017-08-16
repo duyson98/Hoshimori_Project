@@ -1,0 +1,124 @@
+{% load tools %}
+{% load i18n %}
+<div class="builder-container-{{ account.id }}">
+    <div class="builder-content-container">
+        <div class="leader">
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                    <div class="card card-builder" data-card-role="main"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card card-builder" data-card-role="sub"></div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-builder" data-card-role="sub"></div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-builder" data-card-role="sub"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 main-2">
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-4">
+                        <div class="card card-builder" data-card-role="main"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card card-builder" data-card-role="sub"></div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card card-builder" data-card-role="sub"></div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card card-builder" data-card-role="sub"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 main-3">
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-4">
+                        <div class="card card-builder" data-card-role="main"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card card-builder" data-card-role="sub"></div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card card-builder" data-card-role="sub"></div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card card-builder" data-card-role="sub"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="result-{{ account.id }}">
+        <div class="row">
+            <div class="col-md-3" data-position="left">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>HP</th>
+                        <th>SP</th>
+                        <th>ATK</th>
+                        <th>DEF</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="hp"></td>
+                        <td class="sp"></td>
+                        <td class="atk"></td>
+                        <td class="def"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-6" data-position="center">
+            </div>
+            <div class="col-md-3" data-position="right">
+            </div>
+        </div>
+    </div>
+    <div class="card-pool">
+        <div class="row">
+            {% for oc in ownedcards %}
+                {% if forloop.counter0 != 0 and forloop.counter0|mod:4 %}
+                    </div>
+                    <div class="row items">
+                {% endif %}
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-block"
+                             data-card-id="{{ oc.card.id }}" data-card-chara="{{ oc.card.student.id }}"
+                             data-weapon="{{ oc.card.english_weapon }}" data-evolved="{{ oc.evolved }}"
+                             data-stats="{{ oc.cached_stats }}" data-nakayoshi-name="{{ oc.card.nakayoshi_title }}"
+                             data-nakayoshi-jpn-name="{{ oc.card.japanese_nakayoshi_title }}"
+                             data-nakayoshi-effect="{% if oc.evolved %} {{ oc.card.nakayoshi_skill_effect }}
+                                 {% else %}{{ oc.card.evolved_nakayoshi_skill_effect }} {% endif %}"
+                             data-nakayoshi-target="{% if oc.evolved %} {{ oc.card.nakayoshi_skill_target }}
+                                 {% else %}{{ oc.card.evolved_nakayoshi_skill_target }} {% endif %}"
+                             data-skill-name="{{ oc.card.skill_title }}"
+                             data-skill-jpn-name="{{ oc.card.japanese_skill_title }}"
+                             data-skill-combo="{% if oc.evolved %} {{ oc.card.action_skill_combo }}
+                                 {% else %}{{ oc.card.evolved_action_skill_combo }} {% endif %}"
+                             data-skill-sp="{{ oc.card.skill_SP }}"
+                             data-skill-effect="{{ oc.card.action_skill_effects }}"
+                             data-skill-affinity="{{ oc.card.skill_affinity }}">
+                            <img class="card-img-bottom" src="{{ oc.card.image_url }}" alt="Card image cap">
+                            <div class="card-title"><h6>{{ oc.card.name }}</h6>
+                                {{ oc.card.japanese_name }}</div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+    </div>
+</div>

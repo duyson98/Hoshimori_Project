@@ -11,7 +11,6 @@ from hoshimori.utils import item_view, filterCards
 
 def globalContext(request):
     context = web_globalContext(request)
-    context['something'] = 'something'
     return context
 
 
@@ -53,5 +52,12 @@ def cardcollection(request, card):
 
 def account_about(request, account):
     context = ajaxContext(request)
-    context['account'] = get_object_or_404(Account.objects.select_related('starter'), pk=account)
+    context['account'] = get_object_or_404(Account.objects.all(), pk=account)
     return render(request, 'ajax/account_about.html', context)
+
+
+def account_builder(request, account):
+    context = ajaxContext(request)
+    context['account'] = get_object_or_404(Account.objects.all(), pk=account)
+    context['ownedcards'] = OwnedCard.objects.filter(account=account)
+    return render(request, 'ajax/account_builder.html', context)

@@ -10,6 +10,16 @@ function loadAbout(pane, account) {
     });
 }
 
+function loadBuilder(pane, account) {
+    pane.html('<i class="flaticon-loading"></i>');
+    $.get('/ajax/account_builder/' + account.data('account-id') + '/', function (data) {
+        pane.html(data);
+        loadToolTips();
+        ajaxModals();
+        functionLoaders(account.data('account-id'));
+    });
+}
+
 function loadCards(pane, account) {
     pane.html('<i class="flaticon-loading"></i>');
     var account_id = account.data('account-id');
@@ -31,6 +41,8 @@ function onTabChanged(target_name, pane) {
             loadCards(pane, account);
         } else if (target_name.match(/About$/)) {
             loadAbout(pane, account);
+        } else if (target_name.match(/Builder$/)) {
+            loadBuilder(pane, account);
         }
     }
 }

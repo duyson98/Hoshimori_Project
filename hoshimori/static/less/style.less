@@ -565,15 +565,19 @@ div.tab button.active {
     height: 20px;
     border-radius: 4px;
 }
+
 #hp {
     background-color: #47B33B;
 }
+
 #sp {
     background-color: #CA45DF;
 }
+
 #atk {
     background-color: #D22C30;
 }
+
 #def {
     background-color: #3884D2;
 }
@@ -680,7 +684,7 @@ div.tab button.active {
     background-size: cover;
 
     .btn-secondary {
-        display:none;
+        display: none;
     }
 
     .item-container {
@@ -832,5 +836,31 @@ div.tab button.active {
                 background-color: white;
             }
         }
+    }
+}
+
+.builder-content-container {
+    .card {
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        border: solid 1px black;
+        height: 150px;
+        width: 150px;
+    }
+    .leader {
+        .card {
+            height: 250px;
+            width: 250px;
+        }
+    }
+    img {
+        width: 100%;
+    }
+}
+
+.card-pool {
+    div[data-invalid-card] {
+        filter: grayscale(80%) brightness(50%);
     }
 }

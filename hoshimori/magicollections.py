@@ -18,7 +18,7 @@ class UserCollection(_UserCollection):
     icon = 'heart'
 
     class ItemView(MagiCollection.ItemView):
-        js_files = ['profile', 'profile_account_tabs', 'cards']
+        js_files = ['profile', 'profile_account_tabs', 'cards', 'builder']
         template = 'profile'
         comments_enabled = False
         show_edit_button = False
