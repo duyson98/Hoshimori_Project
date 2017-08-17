@@ -399,6 +399,7 @@ h1, h2, h3, h4, h5, h6, .title, .navbar-brand, .btn-lg, .btn-xl {
     margin: 15px 0;
     text-align: center;
     .card-images {
+        position: relative;
         overflow: hidden;
         border-top-right-radius: 10px;
         border-top-left-radius: 10px;
@@ -421,13 +422,18 @@ h1, h2, h3, h4, h5, h6, .title, .navbar-brand, .btn-lg, .btn-xl {
 }
 
 .card-icon {
-    .special-icon {
-        opacity: 1;
-        transition: opacity 0.75s;
-    }
+    z-index: 1;
+    position: absolute;
 }
 
-.card-icon:hover {
+.special-icon {
+    position: absolute;
+    z-index: 2;
+    opacity: 1;
+    transition: opacity 0.75s;
+}
+
+.card-images:hover {
     .special-icon {
         opacity: 0;
     }
