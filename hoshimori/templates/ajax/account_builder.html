@@ -1,124 +1,279 @@
 {% load tools %}
 {% load i18n %}
 <div class="builder-container-{{ account.id }}">
-    <div class="builder-content-container">
-        <div class="leader">
-            <div class="row">
-                <div class="col-md-4 col-md-offset-4">
-                    <div class="card card-builder" data-card-role="main"></div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="card card-builder" data-card-role="sub"></div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card card-builder" data-card-role="sub"></div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card card-builder" data-card-role="sub"></div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 main-2">
-                <div class="row">
-                    <div class="col-md-4 col-md-offset-4">
-                        <div class="card card-builder" data-card-role="main"></div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="card card-builder" data-card-role="sub"></div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card card-builder" data-card-role="sub"></div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card card-builder" data-card-role="sub"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 main-3">
-                <div class="row">
-                    <div class="col-md-4 col-md-offset-4">
-                        <div class="card card-builder" data-card-role="main"></div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="card card-builder" data-card-role="sub"></div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card card-builder" data-card-role="sub"></div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card card-builder" data-card-role="sub"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="result-{{ account.id }}">
-        <div class="row">
-            <div class="col-md-3" data-position="left">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>HP</th>
-                        <th>SP</th>
-                        <th>ATK</th>
-                        <th>DEF</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td class="hp"></td>
-                        <td class="sp"></td>
-                        <td class="atk"></td>
-                        <td class="def"></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-md-6" data-position="center">
-            </div>
-            <div class="col-md-3" data-position="right">
-            </div>
-        </div>
-    </div>
-    <div class="card-pool">
-        <div class="row">
-            {% for oc in ownedcards %}
-                {% if forloop.counter0 != 0 and forloop.counter0|mod:4 %}
-                    </div>
-                    <div class="row items">
-                {% endif %}
-                <div class="col-md-3">
-                    <div class="card">
-                        <div class="card-block"
-                             data-card-id="{{ oc.card.id }}" data-card-chara="{{ oc.card.student.id }}"
-                             data-weapon="{{ oc.card.english_weapon }}" data-evolved="{{ oc.evolved }}"
-                             data-stats="{{ oc.cached_stats }}" data-nakayoshi-name="{{ oc.card.nakayoshi_title }}"
-                             data-nakayoshi-jpn-name="{{ oc.card.japanese_nakayoshi_title }}"
-                             data-nakayoshi-effect="{% if oc.evolved %} {{ oc.card.nakayoshi_skill_effect }}
-                                 {% else %}{{ oc.card.evolved_nakayoshi_skill_effect }} {% endif %}"
-                             data-nakayoshi-target="{% if oc.evolved %} {{ oc.card.nakayoshi_skill_target }}
-                                 {% else %}{{ oc.card.evolved_nakayoshi_skill_target }} {% endif %}"
-                             data-skill-name="{{ oc.card.skill_title }}"
-                             data-skill-jpn-name="{{ oc.card.japanese_skill_title }}"
-                             data-skill-combo="{% if oc.evolved %} {{ oc.card.action_skill_combo }}
-                                 {% else %}{{ oc.card.evolved_action_skill_combo }} {% endif %}"
-                             data-skill-sp="{{ oc.card.skill_SP }}"
-                             data-skill-effect="{{ oc.card.action_skill_effects }}"
-                             data-skill-affinity="{{ oc.card.skill_affinity }}">
-                            <img class="card-img-bottom" src="{{ oc.card.image_url }}" alt="Card image cap">
-                            <div class="card-title"><h6>{{ oc.card.name }}</h6>
-                                {{ oc.card.japanese_name }}</div>
+    <div class="row">
+        <div class="col-md-7">
+            <div class="builder-content-container">
+                <div class="leader">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card card-builder" data-card-role="main"></div>
+                        </div>
+                        <div class="col-md-8">
+                            <span class="col-md-4">
+                                <div class="card card-builder" data-card-role="sub"></div>
+                            </span>
+                            <span class="col-md-4">
+                                <div class="card card-builder" data-card-role="sub"></div>
+                            </span>
+                            <span class="col-md-4">
+                                <div class="card card-builder" data-card-role="sub"></div>
+                            </span>
+                        </div>
+                        <div class="clear-button">
+                            <button type="button" class="btn">Clear</button>
                         </div>
                     </div>
                 </div>
-            {% endfor %}
+                <div class="partners">
+                    <div class="partner-1">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="card card-builder" data-card-role="main"></div>
+                            </div>
+                            <div class="col-md-8">
+                            <span class="col-md-4">
+                                <div class="card card-builder" data-card-role="sub"></div>
+                            </span>
+                                <span class="col-md-4">
+                                <div class="card card-builder" data-card-role="sub"></div>
+                            </span>
+                                <span class="col-md-4">
+                                <div class="card card-builder" data-card-role="sub"></div>
+                            </span>
+                            </div>
+                            <div class="clear-button">
+                                <button type="button" class="btn">Clear</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="partner-2">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="card card-builder" data-card-role="main"></div>
+                            </div>
+                            <div class="col-md-8">
+                            <span class="col-md-4">
+                                <div class="card card-builder" data-card-role="sub"></div>
+                            </span>
+                                <span class="col-md-4">
+                                <div class="card card-builder" data-card-role="sub"></div>
+                            </span>
+                                <span class="col-md-4">
+                                <div class="card card-builder" data-card-role="sub"></div>
+                            </span>
+                            </div>
+                            <div class="clear-button">
+                                <button type="button" class="btn">Clear</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <div class="result-{{ account.id }}">
+                <div class="invalid-deck">
+                    <h3>Invalid deck. Please add a leader.</h3>
+                </div>
+                <div class="results">
+                    <div class="container-fluid">
+                        <div class="results-main">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h4>Leader</h4>
+                                    <div class="row">
+                                        <div class="col-md-4 stats">
+                                            <table class="table">
+                                                <tr>
+                                                    <th colspan="4" style="text-align: center">Stats</th>
+                                                </tr>
+                                                <tr>
+                                                    <td class="stat-name"><strong>HP</strong></td>
+                                                    <td class="results-hp"></td>
+                                                    <td class="stat-name"><strong>SP</strong></td>
+                                                    <td class="results-sp"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="stat-name"><strong>ATK</strong></td>
+                                                    <td class="results-atk"></td>
+                                                    <td class="stat-name"><strong>DEF</strong></td>
+                                                    <td class="results-def"></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div class="col-md-8 nakayoshi">
+                                            <table class="table">
+                                                <tr>
+                                                    <th class="nakayoshi-name" colspan="2"></th>
+                                                </tr>
+                                                <tr>
+                                                    <td class="column-title"><strong>Targets</strong></td>
+                                                    <td class="nakayoshi-target"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="column-title"><strong>Effects</strong></td>
+                                                    <td class="nakayoshi-effect"></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <table class="table skills"></table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="results-partner-1">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h4>Main 1</h4>
+                                    <div class="row">
+                                        <div class="col-md-4 stats">
+                                            <table class="table">
+                                                <tr>
+                                                    <th colspan="4" style="text-align: center">Stats</th>
+                                                </tr>
+                                                <tr>
+                                                    <td class="stat-name"><strong>HP</strong></td>
+                                                    <td class="results-hp"></td>
+                                                    <td class="stat-name"><strong>SP</strong></td>
+                                                    <td class="results-sp"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="stat-name"><strong>ATK</strong></td>
+                                                    <td class="results-atk"></td>
+                                                    <td class="stat-name"><strong>DEF</strong></td>
+                                                    <td class="results-def"></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div class="col-md-8 nakayoshi">
+                                            <table class="table">
+                                                <tr>
+                                                    <th class="nakayoshi-name" colspan="2"></th>
+                                                </tr>
+                                                <tr>
+                                                    <td class="column-title"><strong>Targets</strong></td>
+                                                    <td class="nakayoshi-target"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="column-title"><strong>Effects</strong></td>
+                                                    <td class="nakayoshi-effect"></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <table class="table skills"></table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="results-partner-2">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h4>Main 2</h4>
+                                    <div class="row">
+                                        <div class="col-md-4 stats">
+                                            <table class="table">
+                                                <tr>
+                                                    <th colspan="4" style="text-align: center">Stats</th>
+                                                </tr>
+                                                <tr>
+                                                    <td class="stat-name"><strong>HP</strong></td>
+                                                    <td class="results-hp"></td>
+                                                    <td class="stat-name"><strong>SP</strong></td>
+                                                    <td class="results-sp"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="stat-name"><strong>ATK</strong></td>
+                                                    <td class="results-atk"></td>
+                                                    <td class="stat-name"><strong>DEF</strong></td>
+                                                    <td class="results-def"></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div class="col-md-8 nakayoshi">
+                                            <table class="table">
+                                                <tr>
+                                                    <th class="nakayoshi-name" colspan="2"></th>
+                                                </tr>
+                                                <tr>
+                                                    <td class="column-title"><strong>Targets</strong></td>
+                                                    <td class="nakayoshi-target"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="column-title"><strong>Effects</strong></td>
+                                                    <td class="nakayoshi-effect"></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <table class="table skills"></table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+        <div class="card-pool-filter">
+        <table class="table">
+            <tr>
+                <td><h4>Filters</h4></td>
+                <td><div class="clear-filters-button">
+                    <button type="button" class="btn">Clear filters</button>
+                </div>
+                </td>
+            </tr>
+        </table>
+            <div class="card-pool-filter-container">
+                {% for weapon in weapontypes %}
+                    <span class="weapon-icon" data-weapon="{{ weapon }}">
+                        <img src="//localhost:8000/static/img/i_weapon/{{ weapon }}.png">
+                    </span>
+                {% endfor %}
+            </div>
+        </div>
+            <div class="card-pool-container"
+                 style=" overflow-y: scroll; overflow-x: hidden; padding-bottom: 300%; position: relative; ">
+            <h4>Card Pool</h4>
+                <div class="card-pool">
+                    <div class="row">
+                        {% for oc in ownedcards %}
+                            {% if forloop.counter0 != 0 and forloop.counter0|mod:3 %}
+                                </div>
+                                <div class="row">
+                            {% endif %}
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-block" data-card-id="{{ oc.card.id }}"
+                                         data-card-chara="{{ oc.card.student.id }}"
+                                         data-i-weapon="{{ oc.card.i_weapon }}"
+                                         data-weapon="{{ oc.card.english_weapon }}" data-evolved="{{ oc.evolved }}"
+                                         data-subcard-effect="{{ oc.card.subcard_effect }}" data-hp="{{ oc.owned_hp }}"
+                                         data-sp="{{ oc.owned_sp }}" data-atk="{{ oc.owned_atk }}"
+                                         data-def="{{ oc.owned_def }}"
+                                         data-nakayoshi-jpn-name="{{ oc.card.japanese_nakayoshi_title }}"
+                                         data-nakayoshi-effect="{% if oc.evolved %}{{ oc.card.evolved_nakayoshi_skill_effect }}{% else %}{{ oc.card.nakayoshi_skill_effect }}{% endif %}"
+                                         data-nakayoshi-target="{% if oc.evolved %}{{ oc.card.evolved_nakayoshi_skill_target }}{% else %}{{ oc.card.nakayoshi_skill_target }}{% endif %}"
+                                         data-skill-jpn-name="{{ oc.card.japanese_skill_name }}"
+                                         data-skill-combo="{% if oc.evolved %}{{ oc.card.evolved_action_skill_combo }}{% else %}{{ oc.card.action_skill_combo }}{% endif %}"
+                                         data-skill-sp="{{ oc.card.skill_SP }}"
+                                         data-skill-effect="{{ oc.card.action_skill_effects }}"
+                                         data-skill-affinity="{{ oc.card.skill_affinity }}">
+                                    <div class="icon">
+                                        <img class="card-img-bottom" src="{{ oc.card.image_url }}">
+    {#                                    <img class="rarity-icon"#}
+    {#                                         src="//localhost:8000/static/img/i_rarity/{{ oc.card.i_rarity }}{% if oc.evolved %}_alt{% endif %}.png">#}
+                                        <img class="weapon-icon"
+                                             src="//localhost:8000/static/img/i_weapon/{{ oc.card.i_weapon }}.png">
+                                    </div>
+                                    <div class="card-title"><h6>{{ oc.card.name }}</h6>
+                                        {{ oc.card.japanese_name }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

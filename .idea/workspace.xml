@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b42e218c-a55e-4bf5-9a85-f6d35961b77b" name="Default" comment="One click add card">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hoshimori/static/js/builder.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hoshimori/templates/ajax/account_builder.html" />
+    <list default="true" id="b42e218c-a55e-4bf5-9a85-f6d35961b77b" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/magicollections.py" afterPath="$PROJECT_DIR$/hoshimori/magicollections.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/raw.py" afterPath="$PROJECT_DIR$/hoshimori/raw.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/settings.py" afterPath="$PROJECT_DIR$/hoshimori/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/static/js/profile_account_tabs.js" afterPath="$PROJECT_DIR$/hoshimori/static/js/profile_account_tabs.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/static/js/builder.js" afterPath="$PROJECT_DIR$/hoshimori/static/js/builder.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/static/less/style.less" afterPath="$PROJECT_DIR$/hoshimori/static/less/style.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/templates/accountsForProfile.html" afterPath="$PROJECT_DIR$/hoshimori/templates/accountsForProfile.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/templates/ajax/account_about.html" afterPath="$PROJECT_DIR$/hoshimori/templates/ajax/account_about.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/templates/ajax/account_builder.html" afterPath="$PROJECT_DIR$/hoshimori/templates/ajax/account_builder.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/views.py" afterPath="$PROJECT_DIR$/hoshimori/views.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -62,7 +56,56 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf>
+      <file leaf-file-name="builder.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/hoshimori/static/js/builder.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="284">
+              <caret line="311" column="13" lean-forward="true" selection-start-line="311" selection-start-column="13" selection-end-line="311" selection-end-column="13" />
+              <folding>
+                <element signature="e#604#982#0" expanded="false" />
+                <element signature="e#1052#3419#0" expanded="false" />
+                <element signature="e#3463#5223#0" expanded="false" />
+                <element signature="e#11056#12042#0" expanded="false" />
+                <element signature="e#12082#12286#0" expanded="false" />
+                <element signature="e#12453#13353#0" expanded="false" />
+                <element signature="e#12567#12686#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="account_builder.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hoshimori/templates/ajax/account_builder.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="245">
+              <caret line="219" column="52" lean-forward="false" selection-start-line="219" selection-start-column="32" selection-end-line="219" selection-end-column="52" />
+              <folding>
+                <element signature="n#style#0;n#th#0;n#tr#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#th#0;n#tr#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#th#0;n#tr#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
+                <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
+                <marker date="1503001925368" expanded="false" signature="4106:6580" ph="..." />
+                <marker date="1503001925368" expanded="false" signature="7022:9496" ph="..." />
+                <marker date="1503001925368" expanded="false" signature="9938:12412" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="style.less" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hoshimori/static/less/style.less">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="267">
+              <caret line="910" column="23" lean-forward="true" selection-start-line="910" selection-start-column="23" selection-end-line="910" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -75,45 +118,38 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>spercent</find>
-      <find>statpercent</find>
-      <find>stat_percent</find>
-      <find>stats_percent</find>
-      <find>card-statistics</find>
-      <find>level</find>
-      <find>md-3</find>
-      <find>md-</find>
-      <find>weapon</find>
-      <find>nakayo</find>
-      <find>effect</find>
-      <find>nakayoshi</find>
+      <find>overflow</find>
+      <find>owned_hp</find>
+      <find>overflow-y: scroll; overflow-x: hidden; padding-bottom: 75%; position: relative;</find>
+      <find>_cache</find>
+      <find>col-md-7 nakayoshi</find>
+      <find>stats-table</find>
+      <find>passive</find>
+      <find>h2</find>
+      <find>skills</find>
+      <find>stats</find>
       <find>leader</find>
-      <find>card</find>
-      <find>card-img-bottom</find>
-      <find>slot.</find>
-      <find>&lt;div class=&quot;row&quot;&gt;</find>
-      <find>l</find>
-      <find>load</find>
-      <find>loadc</find>
-      <find>id</find>
-      <find>pool</find>
-      <find>profile-account</find>
-      <find>a</find>
-      <find>account</find>
-      <find>account-about</find>
-      <find>chacter</find>
-      <find>invalid-card</find>
-      <find>invalid</find>
-      <find>console.l</find>
+      <find>partner_1</find>
+      <find>weapon</find>
+      <find>i_weapon</find>
+      <find>img</find>
+      <find>special-icon</find>
+      <find>i</find>
+      <find>Danger</find>
+      <find>card-p</find>
+      <find>btn-danger</find>
+      <find>padding</find>
+      <find>btn-dan</find>
+      <find>data</find>
+      <find>functionLoaders</find>
+      <find>i_rarity</find>
+      <find>functionLoaders</find>
+      <find>card-pool-filter</find>
+      <find>table</find>
+      <find>btn</find>
+      <find>append</find>
     </findStrings>
     <replaceStrings>
-      <replace>get_cards</replace>
-      <replace>.EditView.</replace>
-      <replace>c/art/special/{}</replace>
-      <replace>46</replace>
-      <replace>i_card_type</replace>
-      <replace>card</replace>
-      <replace>front_top</replace>
       <replace>front_bottom</replace>
       <replace>front_name</replace>
       <replace>front_rarity</replace>
@@ -125,7 +161,6 @@
       <replace>70</replace>
       <replace>action</replace>
       <replace>weapon</replace>
-      <replace>def</replace>
       <replace>student</replace>
       <replace>i_left_it_on</replace>
       <replace>card-3</replace>
@@ -137,6 +172,14 @@
       <replace>card card-builder</replace>
       <replace>invalid</replace>
       <replace>invalid-card</replace>
+      <replace>def</replace>
+      <replace>owned</replace>
+      <replace>col-md-8 nakayoshi</replace>
+      <replace>h4</replace>
+      <replace>table</replace>
+      <replace>partner_1</replace>
+      <replace>partner_2</replace>
+      <replace>Clear</replace>
     </replaceStrings>
     <dirStrings>
       <dir>C:\Users\kokon\PycharmProjects\Hoshimori-Project\env\Lib</dir>
@@ -200,8 +243,8 @@
         <option value="$PROJECT_DIR$/hoshimori/templates/items/cardItem.html" />
         <option value="$PROJECT_DIR$/hoshimori/settings.py" />
         <option value="$PROJECT_DIR$/hoshimori/magicollections.py" />
-        <option value="$PROJECT_DIR$/hoshimori/views.py" />
         <option value="$PROJECT_DIR$/hoshimori/static/js/profile_account_tabs.js" />
+        <option value="$PROJECT_DIR$/hoshimori/views.py" />
         <option value="$PROJECT_DIR$/hoshimori/templates/ajax/account_builder.html" />
         <option value="$PROJECT_DIR$/hoshimori/static/less/style.less" />
         <option value="$PROJECT_DIR$/hoshimori/static/js/builder.js" />
@@ -239,70 +282,6 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="Hoshimori-Project">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="Hoshimori-Project">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="hoshimori">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="Hoshimori-Project">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="hoshimori">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="templates">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="Hoshimori-Project">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="hoshimori">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="static">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -399,6 +378,88 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="Hoshimori-Project">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="Hoshimori-Project">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="hoshimori">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="Hoshimori-Project">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="hoshimori">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="templates">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="Hoshimori-Project">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="hoshimori">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="templates">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="items">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="Hoshimori-Project">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="database">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -410,21 +471,22 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="two.files.diff.last.used.folder" value="$PROJECT_DIR$/../hoshimori_project_bak_3/hoshimori" />
     <property name="SearchEverywhereHistoryKey" value="signup.h&#9;FILE&#9;file://C:/Users/kokon/PycharmProjects/Hoshimori-Project/virtual_env/Lib/site-packages/magi/templates/pages/signup.html" />
+    <property name="jsx.switch.disabled" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\kokon\PycharmProjects\Hoshimori-Project\hoshimori\static\img\i_rarity" />
+      <recent name="C:\Users\kokon\PycharmProjects\Hoshimori-Project\hoshimori\templates\ajax" />
+      <recent name="C:\Users\kokon\PycharmProjects\Hoshimori-Project\hoshimori\templates" />
+      <recent name="C:\Users\kokon\PycharmProjects\Hoshimori-Project\hoshimori\management" />
+      <recent name="C:\Users\kokon\PycharmProjects\Hoshimori-Project\database" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\kokon\PycharmProjects\Hoshimori-Project\hoshimori\templates\ajax" />
       <recent name="C:\Users\kokon\PycharmProjects\Hoshimori-Project\hoshimori\templates\pages" />
       <recent name="C:\Users\kokon\PycharmProjects\Hoshimori-Project\hoshimori\templates\items" />
       <recent name="C:\Users\kokon\PycharmProjects\Hoshimori-Project\hoshimori\static\img\light_orbs" />
       <recent name="C:\Users\kokon\PycharmProjects\Hoshimori-Project\hoshimori\templates\." />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\kokon\PycharmProjects\Hoshimori-Project\hoshimori\templates\ajax" />
-      <recent name="C:\Users\kokon\PycharmProjects\Hoshimori-Project\hoshimori\templates" />
-      <recent name="C:\Users\kokon\PycharmProjects\Hoshimori-Project\hoshimori\management" />
-      <recent name="C:\Users\kokon\PycharmProjects\Hoshimori-Project\database" />
-      <recent name="C:\Users\kokon\PycharmProjects\Hoshimori-Project\hoshimori\templates\include" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -809,7 +871,14 @@
       <option name="project" value="LOCAL" />
       <updated>1502883098300</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Deck builder prototype">
+      <created>1502919916568</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1502919916568</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TodoView">
@@ -826,16 +895,16 @@
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32917964" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32502595" sideWeight="0.5133262" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32917964" sideWeight="0.4978678" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32502595" sideWeight="0.47974414" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3219107" sideWeight="0.4717484" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32917964" sideWeight="0.4978678" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32502595" sideWeight="0.48667377" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30277187" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30597016" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2489339" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3281412" sideWeight="0.48773986" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35501066" sideWeight="0.4978678" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35501066" sideWeight="0.4978678" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="manage.py@hoshimori_project" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3219107" sideWeight="0.5282516" order="6" side_tool="true" content_ui="tabs" />
@@ -894,10 +963,18 @@
     <MESSAGE value="Remove TODO" />
     <MESSAGE value="Large update with overhauled ownedcard model and card adding feature, add some fun jquery, add generated settings, update card database" />
     <MESSAGE value="One click add card" />
-    <option name="LAST_COMMIT_MESSAGE" value="One click add card" />
+    <MESSAGE value="Deck builder prototype" />
+    <option name="LAST_COMMIT_MESSAGE" value="Deck builder prototype" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="django-line">
+          <url>file://$PROJECT_DIR$/hoshimori/templates/ajax/account_builder.html</url>
+          <line>72</line>
+          <option name="timeStamp" value="239" />
+        </line-breakpoint>
+      </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
@@ -908,69 +985,11 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="232" />
+      <option name="time" value="246" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="dbDummy://dbtable:/ada73ecf/8f3c8a39-cb10-489c-b0f0-6d81ef4e9ba8/main.hoshimori_account">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hoshimori/templates/items/accountItem.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="65" lean-forward="false" selection-start-line="8" selection-start-column="65" selection-end-line="8" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hoshimori_project/local_settings.py" />
-    <entry file="file://$PROJECT_DIR$/database/irous_species.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="10" lean-forward="true" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/irous.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="64" column="0" lean-forward="true" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/ada73ecf/8f3c8a39-cb10-489c-b0f0-6d81ef4e9ba8/main.hoshimori_irous">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/ada73ecf/8f3c8a39-cb10-489c-b0f0-6d81ef4e9ba8/main.hoshimori_irousvariation">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/hoshimori/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1023,13 +1042,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hoshimori/django_translated.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="6" column="2" lean-forward="true" selection-start-line="6" selection-start-column="2" selection-end-line="6" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/virtual_env/Lib/site-packages/magi/static/js/magi_main.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="243">
@@ -1041,13 +1053,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="227">
           <caret line="279" column="15" lean-forward="false" selection-start-line="279" selection-start-column="8" selection-end-line="279" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/revamped_card_database.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="3091" column="0" lean-forward="true" selection-start-line="3091" selection-start-column="0" selection-end-line="3091" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1079,34 +1084,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="11" column="33" lean-forward="true" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hoshimori/templates/items/ownedcardItem.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="43" column="54" lean-forward="false" selection-start-line="43" selection-start-column="54" selection-end-line="43" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hoshimori/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="182" column="0" lean-forward="true" selection-start-line="182" selection-start-column="0" selection-end-line="182" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/stage_database.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="62560">
-          <caret line="3680" column="32" lean-forward="true" selection-start-line="3680" selection-start-column="32" selection-end-line="3680" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hoshimori/templates/include/cards-stats.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="25" lean-forward="false" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
         </state>
       </provider>
     </entry>
@@ -1145,14 +1122,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hoshimori/templates/ajax/batch_add.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="17" lean-forward="false" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/hoshimori/templates/ajax/batch_add.html" />
     <entry file="dbDummy://dbtable:/ada73ecf/8f3c8a39-cb10-489c-b0f0-6d81ef4e9ba8/main.hoshimori_stage">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
@@ -1169,7 +1139,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1177,7 +1146,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="34" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1189,23 +1157,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hoshimori/templates/items/cardItem.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="67" column="14" lean-forward="true" selection-start-line="67" selection-start-column="14" selection-end-line="67" selection-end-column="14" />
-          <folding>
-            <element signature="n#style#0;n#a#3;n#div#1;n#div#1;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/hoshimori/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="316">
           <caret line="56" column="22" lean-forward="true" selection-start-line="56" selection-start-column="22" selection-end-line="56" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#51#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1213,22 +1168,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="18" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hoshimori/magicollections.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1151">
-          <caret line="414" column="36" lean-forward="false" selection-start-line="414" selection-start-column="26" selection-end-line="414" selection-end-column="36" />
-          <folding>
-            <marker date="1502897737319" expanded="true" signature="1621:1729" ph="SELECT COUNT... magi_userpreferences_following" />
-            <marker date="1502897737319" expanded="true" signature="1902:2062" ph="SELECT COUNT... magi_userpreferences_following" />
-            <marker date="1502897737319" expanded="true" signature="1982:2046" ph="SELECT id FR... magi_userpreferences" />
-            <marker date="1502897737319" expanded="true" signature="2218:2363" ph="SELECT COUNT... magi_userpreferences_following" />
-            <marker date="1502897737319" expanded="true" signature="2298:2362" ph="SELECT id FR... magi_userpreferences" />
-            <marker date="1502897737319" expanded="true" signature="2402:2482" ph="SELECT COUNT... magi_userpreferences_following" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1236,23 +1175,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="276">
           <caret line="136" column="20" lean-forward="false" selection-start-line="136" selection-start-column="20" selection-end-line="136" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hoshimori/model_choices.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="196" column="19" lean-forward="false" selection-start-line="196" selection-start-column="0" selection-end-line="196" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hoshimori/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="634" column="30" lean-forward="false" selection-start-line="634" selection-start-column="4" selection-end-line="634" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1260,7 +1182,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="11" column="41" lean-forward="true" selection-start-line="11" selection-start-column="41" selection-end-line="11" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1272,43 +1193,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hoshimori/static/js/profile_account_tabs.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="24" lean-forward="true" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/hoshimori/static/js/ownedcards.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hoshimori/static/js/builder.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="416">
-          <caret line="89" column="39" lean-forward="true" selection-start-line="89" selection-start-column="39" selection-end-line="89" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hoshimori/templates/ajax/account_builder.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="110" column="41" lean-forward="true" selection-start-line="110" selection-start-column="41" selection-end-line="110" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hoshimori/static/less/style.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="503">
-          <caret line="862" column="20" lean-forward="true" selection-start-line="862" selection-start-column="20" selection-end-line="862" selection-end-column="25" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1320,12 +1208,188 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/hoshimori/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#32#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/stage_database.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="38" lean-forward="false" selection-start-line="7" selection-start-column="38" selection-end-line="7" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/revamped_card_database.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="22" lean-forward="true" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hoshimori/magicollections.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="556" column="33" lean-forward="true" selection-start-line="556" selection-start-column="33" selection-end-line="556" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hoshimori/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-5093">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#24#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hoshimori/django_translated.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="6" column="2" lean-forward="true" selection-start-line="6" selection-start-column="2" selection-end-line="6" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hoshimori/templates/items/ownedcardItem.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="66" column="25" lean-forward="true" selection-start-line="66" selection-start-column="25" selection-end-line="66" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hoshimori/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="1143" column="20" lean-forward="false" selection-start-line="1143" selection-start-column="8" selection-end-line="1143" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hoshimori/templates/include/cards-stats.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="237">
+          <caret line="45" column="46" lean-forward="false" selection-start-line="45" selection-start-column="46" selection-end-line="45" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hoshimori/static/img/i_weapon/0.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hoshimori/templates/items/cardItem.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="46" column="29" lean-forward="false" selection-start-line="46" selection-start-column="29" selection-end-line="46" selection-end-column="29" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#a#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#a#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hoshimori/templates/items/studentItem.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="24" column="44" lean-forward="false" selection-start-line="24" selection-start-column="44" selection-end-line="24" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hoshimori/static/img/i_rarity/2.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hoshimori/static/img/i_rarity/1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hoshimori/static/img/i_rarity/3.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hoshimori/static/uploaded/c/art/special/Card_fr_Extra.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hoshimori/model_choices.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="344">
+          <caret line="220" column="0" lean-forward="true" selection-start-line="220" selection-start-column="0" selection-end-line="220" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/hoshimori/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="762">
-          <caret line="61" column="42" lean-forward="false" selection-start-line="61" selection-start-column="42" selection-end-line="61" selection-end-column="42" />
+        <state relative-caret-position="466">
+          <caret line="62" column="34" lean-forward="false" selection-start-line="62" selection-start-column="34" selection-end-line="62" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hoshimori/static/js/profile_account_tabs.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="18" column="16" lean-forward="true" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hoshimori/static/less/style.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="267">
+          <caret line="910" column="23" lean-forward="true" selection-start-line="910" selection-start-column="23" selection-end-line="910" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hoshimori/templates/ajax/account_builder.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="219" column="52" lean-forward="false" selection-start-line="219" selection-start-column="32" selection-end-line="219" selection-end-column="52" />
           <folding>
-            <element signature="e#27#78#0" expanded="true" />
+            <element signature="n#style#0;n#th#0;n#tr#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#th#0;n#tr#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#th#0;n#tr#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <marker date="1503001925368" expanded="false" signature="4106:6580" ph="..." />
+            <marker date="1503001925368" expanded="false" signature="7022:9496" ph="..." />
+            <marker date="1503001925368" expanded="false" signature="9938:12412" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hoshimori/static/js/builder.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="284">
+          <caret line="311" column="13" lean-forward="true" selection-start-line="311" selection-start-column="13" selection-end-line="311" selection-end-column="13" />
+          <folding>
+            <element signature="e#604#982#0" expanded="false" />
+            <element signature="e#1052#3419#0" expanded="false" />
+            <element signature="e#3463#5223#0" expanded="false" />
+            <element signature="e#11056#12042#0" expanded="false" />
+            <element signature="e#12082#12286#0" expanded="false" />
+            <element signature="e#12453#13353#0" expanded="false" />
+            <element signature="e#12567#12686#0" expanded="false" />
           </folding>
         </state>
       </provider>

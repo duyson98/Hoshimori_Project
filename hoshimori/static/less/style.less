@@ -839,28 +839,94 @@ div.tab button.active {
     }
 }
 
+.builder-content-container, .card-pool {
+    .icon {
+        position: relative;
+    }
+    .weapon-icon {
+        width: 25%;
+        position: absolute;
+        bottom: -1%;
+        left: -1%;
+    }
+    .rarity-icon {
+        width: 25%;
+        position: absolute;
+        top: -1%;
+        left: -1%;
+    }
+}
+
 .builder-content-container {
     .card {
-        margin-left: auto;
-        margin-right: auto;
-        text-align: center;
         border: solid 1px black;
-        height: 150px;
-        width: 150px;
+        padding: 0 0 100% 0;
+        position: relative;
     }
-    .leader {
-        .card {
-            height: 250px;
-            width: 250px;
-        }
+    .partners .card {
+        width: 85%;
+        padding-bottom: 85%;
     }
     img {
         width: 100%;
     }
+    .card-block {
+        position: absolute;
+    }
+    .clear-button .btn {
+        background-color: steelblue;
+    }
+}
+
+.results {
+    td {
+        padding: 5px;
+    }
+    .stats-table {
+        width: 100%;
+    }
+    .nakayoshi {
+        .nakayoshi-name {
+            text-align: center;
+            width: 100%;
+        }
+        .column-title {
+            width: 15%;
+            text-align: left;
+        }
+    }
+    .stats, .nakayoshi {
+        text-align: right;
+        color: black;
+        .stat-name {
+            text-align: left;
+        }
+    }
+}
+
+.card-pool-filter {
+    span[data-on] {
+        filter: grayscale(100%) brightness(50%);
+    }
+    padding-bottom: 5%;
 }
 
 .card-pool {
+    position: absolute;
+
     div[data-invalid-card] {
-        filter: grayscale(80%) brightness(50%);
+        filter: grayscale(50%) brightness(30%);
+    }
+
+    div[data-selected-card] {
+        filter: grayscale(100%) brightness(100%);
+    }
+
+    img {
+        width: 100%;
+    }
+
+    .card-title {
+        font-size: 10px;
     }
 }

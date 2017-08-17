@@ -60,4 +60,5 @@ def account_builder(request, account):
     context = ajaxContext(request)
     context['account'] = get_object_or_404(Account.objects.all(), pk=account)
     context['ownedcards'] = OwnedCard.objects.filter(account=account)
+    context['weapontypes'] = WEAPON_DICT
     return render(request, 'ajax/account_builder.html', context)
