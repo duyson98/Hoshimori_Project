@@ -34,14 +34,18 @@
     </div>
     <ul class="nav nav-tabs">
       {% for name, localized, icon in account_tabs %}
-      <li{% if account.show == name %} class="active"{% endif %}><a href="#account{{ account.id }}{{ name }}" data-toggle="tab">
-          {% if name == "Builder" %}
-      <i class="flaticon-developer"></i>
-          {% else %}
-	  <i class="flaticon-{{ icon }}"></i>
-          {% endif %}
-	  <span class="hidden-xs">{% trans localized %}</span>
-      </a></li>
+          <li{% if account.show == name %} class="active"{% endif %}>
+              <a {% if name != "Builder" or user.is_authenticated %}href="#account{{ account.id }}{{ name }}"
+                 {% else %}data-trigger="hover" title="{% trans 'Log in to use this feature' %}" data-placement="bottom"
+                 data-toggle="tooltip" {% endif %} data-toggle="tab">
+                  {% if name == "Builder" %}
+                      <i class="flaticon-developer"></i>
+                  {% else %}
+                      <i class="flaticon-{{ icon }}"></i>
+                  {% endif %}
+                  <span class="hidden-xs">{% trans localized %}</span>
+              </a>
+          </li>
       {% endfor %}
     </ul>
   </div>
