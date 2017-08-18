@@ -1,7 +1,7 @@
 {% load i18n %}
 {% load tools %}
 {% with student=item %}
-    <div class="student-info">
+    <div class="student-info id-{{ student.id }}">
         <br><br>
         <p class="text-center">
             <img src="{{ student.full_image_url }}" alt="{{ student.name }}" class="student-image">
@@ -234,7 +234,7 @@
                     <td><i class="flaticon-profile"></i></td>
                     <th>{% trans 'CV' %}</th>
                     <td>
-                        {% if student.romaji_CV %}{{ student.romaji_CV }}<br>{% endif %}
+                        {% if student.romaji_CV %}<a class="CV" href="https://en.wikipedia.org/wiki/{{ student.CV_western_name }}">{{ student.romaji_CV }}</a><br>{% endif %}
                         {{ student.CV }}
                     </td>
                 </tr>

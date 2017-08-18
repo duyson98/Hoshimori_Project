@@ -56,6 +56,7 @@ class Student(MagiModel):
     collection_name = 'student'
 
     name = models.CharField(_('Name'), max_length=100, unique=True)
+
     japanese_name = models.CharField(string_concat(_('Name'), ' (', t['Japanese'], ')'), max_length=100, unique=True)
     unlock = models.CharField(_('Unlock at'), max_length=100, null=True)
 
@@ -127,6 +128,10 @@ class Student(MagiModel):
     CV = models.CharField(string_concat(_('CV'), ' (', t['Japanese'], ')'), help_text='In Japanese characters.',
                           max_length=100, null=True)
     romaji_CV = models.CharField(_('CV'), help_text='In romaji.', max_length=100, null=True)
+
+    @property
+    def CV_western_name(self):
+        return " ".join(self.romaji_CV.split()[::-1])
 
     # Images
     image = models.ImageField(_('Image'), upload_to=uploadItem('s'))
@@ -937,52 +942,29 @@ class Stage(MagiModel):
     owner = models.ForeignKey(User, related_name='added_stages')
 
     name = models.CharField(_('Stage'), max_length=50)
-    part = models.CharField(_('Part'), null=True, max_length=50)
     episode = models.PositiveIntegerField(_('Episode'), null=True)
     number = models.PositiveIntegerField(_('Stage number'), null=True)
-
-    # Materials
-    materials = models.CharField('Material', null=True, max_length=100)
-
-    def get_drops(self):
-        return self.materials.split(chr(10))
+    part = models.CharField(_('Part'), null=True, max_length=50)
+    chapter = models.CharField(_('Chapter'), null=True, max_length=50)
 
     # Irous
     small_irous = models.ManyToManyField('IrousVariation', related_name='stage_with_small_irous', null=True)
     large_irous = models.ManyToManyField('IrousVariation', related_name='stage_with_large_irous', null=True)
-
-    def get_small_irous(self):
-        return self.small_irous.all()
-
-    def get_large_irous(self):
-        return self.large_irous.all()
-
-    easy_stage = models.OneToOneField('StageDifficulty', related_name='easy_difficulty', null=True)
-    normal_stage = models.OneToOneField('StageDifficulty', related_name='normal_difficulty', null=True)
-    hard_stage = models.OneToOneField('StageDifficulty', related_name='hard_difficulty', null=True)
 
     def __unicode__(self):
         return '{} - {}'.format(self.episode, self.number)
 
     @property
     def next_stage(self):
-        # If last stage
         try:
-            if self.number == 4:
-                return Stage.objects.get(episode=self.episode + 1, number=1)
-            else:
-                return Stage.objects.get(episode=self.episode, number=self.number + 1)
+            return Stage.objects.get(id=self.id + 1)
         except ObjectDoesNotExist:
             return None
 
     @property
     def prev_stage(self):
         try:
-            # If first stage
-            if self.number == 1:
-                return Stage.objects.get(episode=self.episode - 1, number=4)
-            else:
-                return Stage.objects.get(episode=self.episode, number=self.number - 1)
+            return Stage.objects.get(id=self.id - 1)
         except ObjectDoesNotExist:
             return None
 
@@ -994,27 +976,24 @@ class StageDifficulty(MagiModel):
     collection_name = 'stage_dificulty'
     collection_plural_name = 'stage_dificulties'
 
+    stage = models.ForeignKey('Stage', related_name='stage_with_difficulty', null=True, on_delete=models.SET_NULL)
+
     difficulty = models.PositiveIntegerField(_('Difficulty'), null=True, choices=DIFFICULTY_CHOICES)
+
+    def english_difficulty(self):
+        return DIFFICULTY_DICT[self.difficulty]
+
     level = models.PositiveIntegerField(_('Level'), null=True)
 
     exp = models.PositiveIntegerField(_('EXP'), null=True)
     coins = models.PositiveIntegerField(_('Coins'), null=True)
     cheerpoints = models.PositiveIntegerField(_('Cheerpoints'), null=True)
 
-    objectives = models.CharField(_('Objectives'), max_length=200, null=True)
+    drops = models.CharField(_('Drops'), max_length=200, null=True)
+    objectives = models.CharField(_('Objectives'), max_length=400, null=True)
 
     def get_objectives(self):
         return self.objectives.split(chr(10))
-
-    # def stage(self):
-    #     if self.easy_difficulty is not None:
-    #         return self.easy_difficulty
-    #     if self.difficulty == NORMAL and self.normal_difficulty is not None:
-    #         return self.normal_difficulty
-    #     if self.difficulty == HARD and self.hard_difficulty is not None:
-    #         return self.hard_difficulty
-    #     else:
-    #         return None
 
     def __unicode__(self):
         # if self.stage():
@@ -1123,15 +1102,18 @@ class OwnedCard(MagiModel):
 
     def owned_hp(self):
         return self._cache_hp
+
     def owned_sp(self):
         return self._cache_sp
+
     def owned_atk(self):
         return self._cache_atk
+
     def owned_def(self):
         return self._cache_def
 
     def update_cache_stats(self):
-        self._cache_hp = self.card._value_at_level(fieldname="hp", level=self.level,is_evolved=self.evolved)
+        self._cache_hp = self.card._value_at_level(fieldname="hp", level=self.level, is_evolved=self.evolved)
         self._cache_sp = self.card._value_at_level(fieldname="sp", level=self.level, is_evolved=self.evolved)
         self._cache_atk = self.card._value_at_level(fieldname="atk", level=self.level, is_evolved=self.evolved)
         self._cache_def = self.card._value_at_level(fieldname="def", level=self.level, is_evolved=self.evolved)

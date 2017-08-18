@@ -45,6 +45,238 @@ html {
     .magicircles(@mainColor, @secondaryColor);
 }
 
+// Character colors
+.id-1 {
+    a {
+        color: #F08080;
+    }
+    .btn {
+        background-color: #F08080
+    }
+}
+
+// Miki
+.id-2 {
+    a {
+        color: #32CD32;
+    }
+    .btn {
+        background-color: #32CD32
+    }
+}
+
+// Subaru
+.id-3 {
+    a {
+        color: #AFEEEE;
+    }
+    .btn {
+        background-color: #AFEEEE
+    }
+}
+
+// Haruka
+.id-4 {
+    a {
+        color: #ffc423;
+    }
+    .btn {
+        background-color: #ffc423
+    }
+}
+
+// Nozomi
+.id-5 {
+    a {
+        color: #ff9623;
+    }
+    .btn {
+        background-color: #ff9623
+    }
+}
+
+// Yuri
+.id-6 {
+    a {
+        color: #ADFF2F;
+    }
+    .btn {
+        background-color: #ADFF2F
+    }
+}
+
+// Kurumi
+.id-7 {
+    a {
+        color: #DB7093;
+    }
+    .btn {
+        background-color: #DB7093
+    }
+}
+
+// Anko
+.id-8 {
+    a {
+        color: #DA70D6;
+    }
+    .btn {
+        background-color: #DA70D6
+    }
+}
+
+// Renge
+.id-9 {
+    a {
+        color: #6495ED;
+    }
+    .btn {
+        background-color: #6495ED
+    }
+}
+
+// Asuha
+.id-10 {
+    a {
+        color: #DEB887;
+    }
+    .btn {
+        background-color: #DEB887
+    }
+}
+
+// Sakura
+.id-11 {
+    a {
+        color: #f8ff2a;
+    }
+    .btn {
+        background-color: #f8ff2a
+    }
+}
+
+// Hinata
+.id-12 {
+    a {
+        color: #DDA0DD;
+    }
+    .btn {
+        background-color: #DDA0DD
+    }
+}
+
+// Kaede
+.id-13 {
+    a {
+        color: #FFF8DC;
+    }
+    .btn {
+        background-color: #FFF8DC
+    }
+}
+
+// Michelle
+.id-14 {
+    a {
+        color: #E0FFFF;
+    }
+    .btn {
+        background-color: #E0FFFF
+    }
+}
+
+// Kokomi
+.id-15 {
+    a {
+        color: #FFC0CB;
+    }
+    .btn {
+        background-color: #FFC0CB
+    }
+}
+
+// Urara
+.id-16 {
+    a {
+        color: #3CB371;
+    }
+    .btn {
+        background-color: #3CB371
+    }
+}
+
+// Sadone
+.id-17 {
+    a {
+        color: #EEE8AA;
+    }
+    .btn {
+        background-color: #EEE8AA
+    }
+}
+
+// Kanon
+.id-18 {
+    a {
+        color: #5F9EA0;
+    }
+    .btn {
+        background-color: #5F9EA0
+    }
+}
+
+// Shiho
+.id-19 {
+    a {
+        color: #b22222;
+    }
+    .btn {
+        background-color: #b22222
+    }
+}
+
+// Misaki
+.id-101 {
+    a {
+        color: #f5f5f5;
+    }
+    .btn {
+        background-color: #f5f5f5
+    }
+}
+
+// Mari
+.id-102 {
+    a {
+        color: #4169e1;
+    }
+    .btn {
+        background-color: #4169e1
+    }
+}
+
+// Icchan
+.id-103 {
+    a {
+        color: #cd5c5c;
+    }
+    .btn {
+        background-color: #cd5c5c
+    }
+}
+
+// Fuuchan
+.id-104 {
+    a {
+        color: #6495ED;
+    }
+    .btn {
+        background-color: #6495ED
+    }
+}
+
+// Loliazu
+
 // Main page
 
 .current-activity_list {
@@ -282,7 +514,7 @@ h1, h2, h3, h4, h5, h6, .title, .navbar-brand, .btn-lg, .btn-xl {
     }
 }
 
-.student-info {
+.student-info, .modal-content.student-info {
     .btn-group .btn {
         margin: 45px 0px;
     }
@@ -295,7 +527,10 @@ h1, h2, h3, h4, h5, h6, .title, .navbar-brand, .btn-lg, .btn-xl {
     }
     .btn-lg {
         color: white;
-        background-color: @gradient2;
+        text-shadow: 0 0 3px #000000;
+    }
+    .CV {
+        color: @mainColor;
     }
 }
 
@@ -319,6 +554,9 @@ h1, h2, h3, h4, h5, h6, .title, .navbar-brand, .btn-lg, .btn-xl {
             }
             padding-left: 10px;
             padding-right: 10px;
+            .view-all {
+                color: @mainColor;
+            }
         }
 
         .card-art {
@@ -343,39 +581,17 @@ h1, h2, h3, h4, h5, h6, .title, .navbar-brand, .btn-lg, .btn-xl {
 // Card item page
 
 .current-card_item {
-    div.card.Sword {
-        display: none;
-    }
-    div.card.Spear {
-        display: none;
-    }
-    div.card.Hammer {
-        display: none;
-    }
-    div.card.Gun {
-        display: none;
-    }
-    div.card.Rod {
-        display: none;
-    }
-    div.card.Gunblade {
-        display: none;
-    }
-    div.card.Twin.Barrett {
-        display: none;
-    }
-    div.card.Claw.Fang {
-        display: none;
-    }
     .card {
-        margin: 0 auto;
         width: auto;
+        max-width: 100%;
         .btn.btn-inherit {
             background-color: deepskyblue;
             input {
                 width: 40px;
             }
         }
+        padding-left: 10px;
+        padding-right: 10px;
     }
 
     .card-art {
@@ -390,16 +606,42 @@ h1, h2, h3, h4, h5, h6, .title, .navbar-brand, .btn-lg, .btn-xl {
         background-color: #ddd;
         border-radius: 4px;
     }
+
+    table.table.about-table.a-main > tbody > tr > td:nth-child(3) {
+        text-align: right;
+    }
+    //.card {
+    //    margin: 0 auto;
+    //    width: auto;
+    //    .btn.btn-inherit {
+    //        background-color: deepskyblue;
+    //        input {
+    //            width: 40px;
+    //        }
+    //    }
+    //}
+    //
+    //.card-art {
+    //    background-image: none !important;
+    //}
+    //
+    //.progress-bar {
+    //    display: block;
+    //    float: left;
+    //    //width: 50%;
+    //    //height: 20px;
+    //    background-color: #ddd;
+    //    border-radius: 4px;
+    //}
 }
 
 // Card
 
 .card {
-
     margin: 15px 0;
     text-align: center;
     .card-images {
-        overflow: hidden;
+        position: relative;
         border-top-right-radius: 10px;
         border-top-left-radius: 10px;
     }
@@ -418,16 +660,29 @@ h1, h2, h3, h4, h5, h6, .title, .navbar-brand, .btn-lg, .btn-xl {
         line-height: 1.3333333;
         border-radius: 6px;
     }
-}
-
-.card-icon {
-    .special-icon {
-        opacity: 1;
-        transition: opacity 0.75s;
+    .btn {
+        color: white;
+        text-shadow: 0 0 3px #000000;
+    }
+    .view-all {
+        color: @mainColor;
     }
 }
 
-.card-icon:hover {
+.card-icon {
+    z-index: 1;
+}
+
+.special-icon {
+    position: absolute;
+    top: 0;
+    left: 6.66%;
+    z-index: 2;
+    opacity: 1;
+    transition: opacity 0.75s;
+}
+
+.card-images:hover {
     .special-icon {
         opacity: 0;
     }
@@ -457,25 +712,23 @@ h1, h2, h3, h4, h5, h6, .title, .navbar-brand, .btn-lg, .btn-xl {
     }
 }
 
-.btn-group-lg > .btn, .btn-lg {
-    background-color: @gradient2;
+.cuteform-modal-button {
+    background-color: @transparent;
+    color: black;
+    border: 0;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+    line-height: 10px;
+    width: auto;
+    .cuteform-elt {
+        text-shadow: 0 0 3px #000000;
+        font-size: smaller;
+        border: 0;
+        padding: 0;
+        margin: 0;
+    }
 }
-
-//.cuteform-modal-button {
-//    background-color: @transparent;
-//    color: black;
-//    border: 0;
-//    box-shadow: none;
-//    padding: 0;
-//    margin: 0;
-//    line-height: 10px;
-//    width: auto;
-//    .cuteform-elt {
-//        border: 0;
-//        padding: 0;
-//        margin: 0;
-//    }
-//}
 
 .card-title {
     //background-color: deepskyblue;
@@ -498,6 +751,14 @@ h1, h2, h3, h4, h5, h6, .title, .navbar-brand, .btn-lg, .btn-xl {
     line-height: @buttonsize;
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
+    text-shadow: 0 0 5px #000000;
+    text-decoration: none;
+}
+
+.card .card-buttons form {
+    font-size: 0.5em;
+    display: inline-block;
+    line-height: 1em;
 }
 
 /* Style the tab */
@@ -565,15 +826,19 @@ div.tab button.active {
     height: 20px;
     border-radius: 4px;
 }
+
 #hp {
     background-color: #47B33B;
 }
+
 #sp {
     background-color: #CA45DF;
 }
+
 #atk {
     background-color: #D22C30;
 }
+
 #def {
     background-color: #3884D2;
 }
@@ -606,7 +871,12 @@ div.tab button.active {
     .well:hover {
         background-image: url("/static/img/stage_border.png"), url("/static/img/stage_effect.gif");
     }
+    .modal-header {
+        display: none;
+    }
 }
+
+// Stage item page
 
 .stage {
     padding: 30px 0;
@@ -622,17 +892,92 @@ div.tab button.active {
 
 .stage-data {
     text-align: center;
+    button {
+        background: linear-gradient(180deg, @gradient4, @gradient3)
+    }
+    .misc .row {
+        display: table;
+        [class*="col-"] {
+            float: none;
+            display: table-cell;
+            vertical-align: middle;
+        }
+    }
+    img {
+        display: block;
+        margin: auto;
+    }
     .about-table {
         margin: auto;
         max-width: 768px;
     }
+    .bottom-column {
+        float: none;
+        display: table-cell;
+        vertical-align: bottom;
+    }
+    .difficulties h3 {
+        text-transform: uppercase;
+        color: black;
+        -webkit-text-fill-color: white;
+        -webkit-text-stroke-width: 2px;
+        text-align: left;
+        margin-left: 10%;
+    }
+    .reward-title img {
+        width: 50%;
+    }
+    .reward-value {
+        text-align: left;
+        font-weight: bold;
+    }
+    .Easy, .Normal, .Hard, .EX {
+        border: 5px dashed;
+        border-radius: 10px;
+    }
+    .Easy {
+        border-color: #FFE600;
+        background-color: rgba(249, 199, 0, 0.1);
+        -webkit-text-stroke-color: #DA8203;
+    }
+    .Normal {
+        border-color: #00D086;
+        background-color: rgba(3, 255, 151, 0.1);
+        -webkit-text-stroke-color: #148F49;
+    }
+    .Hard {
+        border-color: #B0078A;
+        background-color: rgba(140, 30, 200, 0.1);
+        -webkit-text-stroke-color: #8E1B78;
+    }
+    .EX {
+        border-color: #770909;
+        background-color: rgba(249, 0, 0, 0.1);
+        -webkit-text-stroke-color: #8B0E0E;
+    }
+    .irous {
+        td {
+            height: 150px;
+            vertical-align: middle;
+            font-size: 18px;
+            img {
+                max-width: 100%;
+                max-height: 100%;
+            }
+        }
+    }
+}
+
+// Irous item page
+.irousinfo .icon img {
+    display: block;
+    margin: auto;
 }
 
 // Student list page
 
 .current-student_list {
     .student-wrapper {
-        overflow: hidden;
         img.student-img:hover {
             opacity: .6;
             transform: scale(1.15);
@@ -641,11 +986,139 @@ div.tab button.active {
             transition: all 0.2s ease-out;
         }
     }
+    .row {
+        display: table;
+        [class*="col-"] {
+            float: none;
+            display: table-cell;
+            vertical-align: bottom;
+        }
+    }
 }
 
 // Leaderboard
 
 .current-account_list {
+    .banner-0 {
+        background-color: #a9a9a9;
+        background-blend-mode: luminosity;
+    }
+    // Evina
+    .banner-1 {
+        background-color: #F08080;
+        background-blend-mode: luminosity;
+    }
+    // Miki
+    .banner-2 {
+        background-color: #32CD32;
+        background-blend-mode: luminosity;
+    }
+    // Subaru
+    .banner-3 {
+        background-color: #AFEEEE;
+        background-blend-mode: luminosity;
+    }
+    // Haruka
+    .banner-4 {
+        background-color: #ffc423;
+        background-blend-mode: luminosity;
+    }
+    // Nozomi
+    .banner-5 {
+        background-color: #ff9623;
+        background-blend-mode: luminosity;
+    }
+    // Yuri
+    .banner-6 {
+        background-color: #ADFF2F;
+        background-blend-mode: luminosity;
+    }
+    // Kurumi
+    .banner-7 {
+        background-color: #DB7093;
+        background-blend-mode: luminosity;
+    }
+    // Anko
+    .banner-8 {
+        background-color: #DA70D6;
+        background-blend-mode: luminosity;
+    }
+    // Renge
+    .banner-9 {
+        background-color: #6495ED;
+        background-blend-mode: luminosity;
+    }
+    // Asuha
+    .banner-10 {
+        background-color: #DEB887;
+        background-blend-mode: luminosity;
+    }
+    // Sakura
+    .banner-11 {
+        background-color: #f8ff2a;
+        background-blend-mode: luminosity;
+    }
+    // Hinata
+    .banner-12 {
+        background-color: #DDA0DD;
+        background-blend-mode: luminosity;
+    }
+    // Kaede
+    .banner-13 {
+        background-color: #FFF8DC;
+        background-blend-mode: luminosity;
+    }
+    // Michelle
+    .banner-14 {
+        background-color: #E0FFFF;
+        background-blend-mode: luminosity;
+    }
+    // Kokomi
+    .banner-15 {
+        background-color: #FFC0CB;
+        background-blend-mode: luminosity;
+    }
+    // Urara
+    .banner-16 {
+        background-color: #3CB371;
+        background-blend-mode: luminosity;
+    }
+    // Sadone
+    .banner-17 {
+        background-color: #EEE8AA;
+        background-blend-mode: luminosity;
+    }
+    // Kanon
+    .banner-18 {
+        background-color: #5F9EA0;
+        background-blend-mode: luminosity;
+    }
+    // Shiho
+    .banner-19 {
+        background-color: #b22222;
+        background-blend-mode: luminosity;
+    }
+    // Misaki
+    .banner-101 {
+        background-color: #f5f5f5;
+        background-blend-mode: luminosity;
+    }
+    // Mari
+    .banner-102 {
+        background-color: #4169e1;
+        background-blend-mode: luminosity;
+    }
+    // Icchan
+    .banner-103 {
+        background-color: #cd5c5c;
+        background-blend-mode: luminosity;
+    }
+    // Fuuchan
+    .banner-104 {
+        background-color: #6495ED;
+        background-blend-mode: luminosity;
+    }
+    // Loliazu
     .well {
         background-image: url("/static/img/acc_bg.png");
         background-repeat: repeat;
@@ -655,18 +1128,11 @@ div.tab button.active {
         h3 {
             color: white;
             font-size: 50px;
-            text-shadow: 0 0 0.2em #66ffff, 0 0 0.2em #66ffff, 0 0 0.2em #66ffff, 0 0 0.2em #66ffff, 0 0 0.2em #66ffff, 0 0 0.2em #66ffff, 0 0 0.2em #66ffff;
-        }
-        .col-md-8 {
-            width: 50%;
-        }
-        .col-md-2 {
-            width: 20%;
+            text-shadow: 2px 2px 3px @darkColor;
         }
     }
     .well:hover {
         background-image: url("/static/img/acc_bg_star.gif");
-        background-repeat: repeat;
     }
 }
 
@@ -680,7 +1146,7 @@ div.tab button.active {
     background-size: cover;
 
     .btn-secondary {
-        display:none;
+        display: none;
     }
 
     .item-container {
@@ -832,5 +1298,108 @@ div.tab button.active {
                 background-color: white;
             }
         }
+    }
+}
+
+.builder-content-container, .card-pool {
+    .icon {
+        position: relative;
+    }
+    .weapon-icon {
+        width: 25%;
+        position: absolute;
+        bottom: -1%;
+        left: -1%;
+    }
+    .rarity-icon {
+        width: 25%;
+        position: absolute;
+        top: -1%;
+        left: -1%;
+    }
+}
+
+.builder-content-container {
+    .card {
+        padding: 0 0 100% 0;
+        position: relative;
+        background: url('/static/img/iconframe.png') no-repeat;
+        background-size: contain;
+        background-color: white;
+        border: 0;
+    }
+    .partners .card {
+        width: 85%;
+        padding-bottom: 85%;
+    }
+    img {
+        width: 100%;
+    }
+    .card-block {
+        position: absolute;
+    }
+    .clear-button .btn {
+        background: linear-gradient(80deg, @gradient2, @gradient1)
+    }
+    .row {
+        background: url('/static/img/deckconnection.png') no-repeat;
+        background-size: cover;
+    }
+}
+
+.results {
+    td {
+        padding: 5px;
+    }
+    .stats-table {
+        width: 100%;
+    }
+    .nakayoshi {
+        .nakayoshi-name {
+            text-align: center;
+            width: 100%;
+        }
+        .column-title {
+            width: 15%;
+            text-align: left;
+        }
+    }
+    .stats, .nakayoshi {
+        text-align: right;
+        color: black;
+        .stat-name {
+            text-align: left;
+        }
+    }
+}
+
+.card-pool-filter {
+    span[data-on] {
+        filter: grayscale(100%) brightness(50%);
+    }
+    padding-bottom: 5%;
+    .clear-filters-button .btn {
+        background: linear-gradient(80deg, @gradient2, @gradient1)
+    }
+}
+
+.card-pool {
+    position: absolute;
+    width: 100%;
+
+    div[data-invalid-card] {
+        filter: grayscale(50%) brightness(30%);
+    }
+
+    div[data-selected-card] {
+        filter: grayscale(100%) brightness(100%);
+    }
+
+    img {
+        width: 100%;
+    }
+
+    .card-title {
+        font-size: 10px;
     }
 }

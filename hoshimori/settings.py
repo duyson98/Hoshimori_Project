@@ -51,6 +51,14 @@ ENABLED_PAGES['account_about'] = {
     ],
 }
 
+ENABLED_PAGES['account_builder'] = {
+    'ajax': True,
+    'navbar_link': False,
+    'url_variables': [
+        ('account', '\d+'),
+    ],
+}
+
 ON_USER_EDITED = utils.onUserEdited
 ON_PREFERENCES_EDITED = utils.onPreferencesEdited
 

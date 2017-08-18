@@ -2,7 +2,7 @@
 {% load tools %}
 {% load l10n %}
 <div id="cardstat{{ card.id }}"></div>
-<div class="card {{ card.student.name }}">
+<div class="card id-{{ card.student.id }}">
   <br><br>
         <p class="text-center">
         <div class="card-art" style="position:relative; width:300px; height:394px; margin:0 auto;">
@@ -314,7 +314,7 @@
                       {% blocktrans count counter=total %}{{ total }} sensei{% plural %}{{ total }} sensei's
                       {% endblocktrans %}
                   {% endwith %}<br>
-                  <a href="/accounts/?own_card={{ card.id }}" target="_blank">
+                  <a class="view-all" href="/accounts/?own_card={{ card.id }}" target="_blank">
                       {% trans 'View all' %}
                       <i class="flaticon-link fontx0-8"></i>
                   </a>
@@ -324,7 +324,7 @@
           </td>
           <td>
               <h4>{% trans 'Comments' %}</h4>
-              <a href="{{ card.item_url }}#disqus_thread" class="btn btn-{{ card.student.name }} btn-lg"
+              <a href="{{ card.item_url }}#disqus_thread" class="btn btn-id-{{ card.student.id }} btn-lg"
                       {% if current != 'current-card_item' %} target="_blank"{% endif %}>
                   <i class="flaticon-comments"></i> {% trans 'Comments' %}
               </a>
@@ -332,7 +332,7 @@
           <td>
               <h4>{% trans 'Share' %}</h4>
               <span class="btn-grouph">
-	    {% include 'include/share.html' with share_url=card.http_item_url share_btn_class=card.student.name|add:' btn-lg' share_sentence=card %}
+	    {% include 'include/share.html' with share_url=card.http_item_url share_btn_class=card.student.id|add:' btn-lg' share_sentence=card %}
 	  </span>
           </td>
       </tr>

@@ -10,6 +10,17 @@ function loadAbout(pane, account) {
     });
 }
 
+function loadBuilder(pane, account) {
+    pane.html('<i class="flaticon-loading"></i>');
+    $.get('/ajax/account_builder/' + account.data('account-id') + '/', function (data) {
+        pane.html(data);
+        loadToolTips();
+        ajaxModals();
+        functionLoaders(account.data('account-id'));
+    });
+    alert('This is a very intensive feature which may cause your computer to freeze up.\nLoading 500 cards may take up to a minute or two.\nPlease wait patiently.');
+}
+
 function loadCards(pane, account) {
     pane.html('<i class="flaticon-loading"></i>');
     var account_id = account.data('account-id');
@@ -31,6 +42,8 @@ function onTabChanged(target_name, pane) {
             loadCards(pane, account);
         } else if (target_name.match(/About$/)) {
             loadAbout(pane, account);
+        } else if (target_name.match(/Builder$/)) {
+            loadBuilder(pane, account);
         }
     }
 }
