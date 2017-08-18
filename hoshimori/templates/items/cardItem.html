@@ -3,7 +3,7 @@
     {% if current != 'card_item' and current != 'card_item_ajax' %}
         {% if page == 1 and forloop.counter0 == 0 %}
             <div id="topcards"></div>{% endif %}
-        <div class="card {{ card.student.name }}" data-card-title="{{ card }}" id="card{{ card.id }}">
+        <div class="card id-{{ card.student.id }}" data-card-title="{{ card }}" id="card{{ card.id }}">
             <div class="title">
                 <div class="card-images">
                     <a href="{{ card.item_url }}" data-ajax-url="{{ card.ajax_item_url }}" data-ajax-title="{{ card }}">
@@ -33,6 +33,7 @@
                               action="/ajax/addcard/{{ card.id }}/">
                             {% csrf_token %}
                             <small>{% trans 'Add to' %}:</small>
+                        <br>
                             <select name="account" class="account-select form-control">
                                 {% for account in user.all_accounts %}
                                     <option value="{{ account.id }}">{{ account }}</option>

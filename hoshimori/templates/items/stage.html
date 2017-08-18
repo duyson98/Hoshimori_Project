@@ -1,4 +1,5 @@
 {% load magi_tags %}
+{% load tools %}
 {% with stage=item %}
     <div class="stage-data">
         <div class="stage-title">
@@ -7,105 +8,87 @@
         </div>
         <br>
         <br>
-        <div class="stage-table">
-            <table class="table table-striped">
-                <tbody>
-                <tr>
-                    <th>Difficulty</th>
-                    <td>Easy</td>
-                    <td>Normal</td>
-                    <td>Hard</td>
-                </tr>
-                <tr>
-                    <th>Level</th>
-                    <td>{{ stage.easy_stage.level }}</td>
-                    <td>{{ stage.normal_stage.level }}</td>
-                    <td>{{ stage.hard_stage.level }}</td>
-                </tr>
-                <tr>
-                    <th>EXP</th>
-                    <td>{{ stage.easy_stage.exp }}</td>
-                    <td>{{ stage.normal_stage.exp }}</td>
-                    <td>{{ stage.hard_stage.exp }}</td>
-                </tr>
-                <tr>
-                    <th>Coins</th>
-                    <td>{{ stage.easy_stage.coins }}</td>
-                    <td>{{ stage.normal_stage.coins }}</td>
-                    <td>{{ stage.hard_stage.coins }}</td>
-                </tr>
-                <tr>
-                    <th>Cheerpoints</th>
-                    <td>{{ stage.easy_stage.cheerpoints }}</td>
-                    <td>{{ stage.normal_stage.cheerpoints }}</td>
-                    <td>{{ stage.hard_stage.cheerpoints }}</td>
-                </tr>
-                <tr>
-                    <th>Objectives</th>
-                    <td>{% for objective in stage.easy_stage.get_objectives %}
-                        {{ objective }}
-                        <br>
-                    {% endfor %}</td>
-                    <td>{% for objective in stage.normal_stage.get_objectives %}
-                        {{ objective }}
-                        <br>
-                    {% endfor %}</td>
-                    <td>{% for objective in stage.hard_stage.get_objectives %}
-                        {{ objective }}
-                        <br>
-                    {% endfor %}</td>
-                </tr>
-                </tbody>
-            </table>
+        <div class="nav-buttons">
+            <div class="row">
+                <div class="col-md-6"> {% if stage.prev_stage %}<a {% if current == 'stage_item_ajax' %}data-ajax-url="{{ stage.prev_stage.ajax_item_url }}" {% endif %}href="{{ stage.prev_stage.item_url }}">
+                    <button type="button prev" class="btn btn-primary btn-lg pull-left">Previous stage</button>
+                </a> {% endif %} </div>
+                <div class="col-md-6"> {% if stage.next_stage %}<a {% if current == 'stage_item_ajax' %}data-ajax-url="{{ stage.next_stage.ajax_item_url }}" {% endif %}href="{{ stage.next_stage.item_url }}">
+                    <button type="button next" class="btn btn-primary btn-lg pull-right">Next stage</button>
+                </a> {% endif %} </div>
+            </div>
         </div>
-        <div class="stage-drops">
-            <h3>Item drops: </h3>
-            {% for drop in stage.get_drops %}
+        <br>
+        <br>
+        <div class="difficulties">
+            {% for diff in stage.stage_with_difficulty.all %}
+                <div class="{{ diff.english_difficulty }}">
+                    <div class="row info">
+                        <div class="col-md-4"><h3>{{ diff.english_difficulty }}</h3></div>
+                        <div class="col-md-8"><h4>Level {{ diff.level }}</h4></div>
+                    </div>
+                    <div class="row misc">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-2">
+                            <div class="row">
+                                <div class="col-md-6 reward-title">
+                                    <img src="/static/img/battle/exp.png" alt="EXP">
+                                </div>
+                                <div class="col-md-6 reward-value">
+                                    {{ diff.exp }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 reward-title">
+                                    <img src="/static/img/battle/coin.png" alt="Coins">
+                                </div>
+                                <div class="col-md-6 reward-value">
+                                    {{ diff.coins }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 reward-title">
+                                    <img src="/static/img/battle/cheerpoint.png" alt="Cheerpoints">
+                                </div>
+                                <div class="col-md-6 reward-value">
+                                    {{ diff.cheerpoints }}</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <img src="/static/img/battle/box.png" style="width: 15%;" alt="Drops">
+                            {{ diff.drops|linebreaks }}</div>
+                        <div class="col-md-1"></div>
+                        <div class="col-md-5" align="left"><h5>Mission</h5>
+                            {{ diff.objectives|linebreaks }}</div>
+                    </div>
+                </div>
                 <br>
-                {{ drop }}
             {% endfor %}
         </div>
-        <div class="stage-irousu">
-            <table style="width:75%;" align="center">
-                <tbody>
-                <tr>
-                    <th><h3 style="text-align: left">Small Irous</h3></th>
-                    <th><h3 style="text-align: right">Large Irous</h3></th>
-                </tr>
-                <tr>
-                    <td style="vertical-align:top; text-align: left">
-                        {% for small_irous in stage.get_small_irous %}
-                            <a href="{{ small_irous.item_url }}">
-                                <table style="width: 100%">
-                                    <tr>
-                                        <td>{{ small_irous }}</td>
-                                        <td style="text-align: right"><img src="{{ small_irous.image_url }}" alt="{{ small_irous }}"
-                                                 height="100px">
-                                        </td>
-                                    </tr>
-                                </table>
-                            </a>
-                            <br>
-                        {% endfor %}
-                    </td>
-                    <td style="vertical-align:top; text-align: right">
-                        {% for large_irous in stage.get_large_irous %}
-                            <a href="{{ large_irous.item_url }}">
-                                <table style="width: 100%">
-                                    <tr>
-                                        <td><img src="{{ large_irous.image_url }}" alt="{{ large_irous }}"
-                                                 height="100px">
-                                        </td>
-                                        <td style="text-align: right">{{ large_irous }}</td>
-                                    </tr>
-                                </table>
-                            </a>
-                            <br>
-                        {% endfor %}
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+        <div class="row irous">
+            <div class="col-md-6 stage-irous-container">
+                <h4>Small Irous</h4>
+                <table class="table">
+                    {% for small in stage.small_irous.all %}
+                        <tr>
+                            <td><a href="{{ small.item_url }}" target="_blank"> <img src="{{ small.image_url }}"> </a>
+                            </td>
+                            <td> {{ small }} </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <div class="col-md-6 large-irous-container">
+                <h4>Large Irous</h4>
+                <table class="table">
+                    {% for large in stage.large_irous.all %}
+                        <tr>
+                            <td> {{ large }} </td>
+                            <td><a href="{{ large.item_url }}" target="_blank"><img src="{{ large.image_url }}"></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
         </div>
     </div>
+
 {% endwith %}

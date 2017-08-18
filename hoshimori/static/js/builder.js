@@ -4,14 +4,16 @@
 
 var functionLoaders = function (account) {
 
+    var cards_data = JSON.parse(ownedcards_values[account]);
+
     // Card updates
     var next_empty = null;
-
     var current_mains = $('.builder-container-' + account + ' [data-card-role="main"]');
     var current_subs = $('.builder-container-' + account + ' [data-card-role="sub"]');
     var leader = $('.builder-container-' + account + ' .leader');
     var partner_1 = $('.builder-container-' + account + ' .partner-1');
     var partner_2 = $('.builder-container-' + account + ' .partner-2');
+    var current_cards = {};
     var results = $('.result-' + account);
 
     var update_next_empty = function () {
@@ -28,58 +30,67 @@ var functionLoaders = function (account) {
             next_empty = null;
         }
     };
-    update_next_empty();
 
-    var update_valid = function (removed) {
+    var update_valid = function () {
         if (next_empty !== null) {
-            var char_0 = current_mains.eq(0).children().data('card-chara');
-            var char_1 = current_mains.eq(1).children().data('card-chara');
-            var char_2 = current_mains.eq(2).children().data('card-chara');
+            var char_0 = current_mains.eq(0).children().data('chara');
+            var char_1 = current_mains.eq(1).children().data('chara');
+            var char_2 = current_mains.eq(2).children().data('chara');
             var blocked = {}; // Map to store invalid-card cards
 
             current_mains.each(function () {
-                blocked[$(this).children().eq(0).data('card-id')] = true;
+                blocked[$(this).children().eq(0).data('id')] = true;
             });
             current_subs.each(function () {
-                blocked[$(this).children().eq(0).data('card-id')] = true;
+                blocked[$(this).children().eq(0).data('id')] = true;
             });
             // If next card is main
 
             if (next_empty.data("card-role") === "main") {
                 $('.builder-container-' + account + ' .card-pool .card-block').each(function () {
-                    if (blocked[$(this).data('card-id')]
-                        || $(this).data('card-chara') === char_0
-                        || $(this).data('card-chara') === char_1
-                        || $(this).data('card-chara') === char_2) {
+                    if (blocked[$(this).data('id')]
+                        || $(this).data('chara') === char_0
+                        || $(this).data('chara') === char_1
+                        || $(this).data('chara') === char_2) {
                         $(this).attr("data-invalid-card", true);
                     } else {
                         $(this).removeAttr("data-invalid-card");
                         $(this).removeData("invalid-card");
                     }
 
-                    if ($(this).data('card-id') === removed) {
+                    if (!current_cards[$(this).data('id')]) {
                         $(this).removeAttr("data-selected-card");
                         $(this).removeData("selected-card");
+                    } else {
+                        $(this).attr("data-selected-card", true);
                     }
                 });
             } else {
                 $('.builder-container-' + account + ' .card-block').each(function () {
-                    if (blocked[$(this).data('card-id')]) {
+                    if (blocked[$(this).data('id')]) {
                         $(this).attr("data-invalid-card", true);
                     } else {
                         $(this).removeAttr("data-invalid-card");
                         $(this).removeData("invalid-card");
                     }
 
-                    if ($(this).data('card-id') === removed) {
+                    if (!current_cards[$(this).data('id')]) {
                         $(this).removeAttr("data-selected-card");
                         $(this).removeData("selected-card");
+                    } else {
+                        $(this).attr("data-selected-card", true);
                     }
                 });
             }
         } else {
             $('.builder-container-' + account + ' .card-block').each(function () {
                 $(this).attr("data-invalid-card", true);
+                if (!current_cards[$(this).data('id')]) {
+                    $(this).removeAttr("data-selected-card");
+                    $(this).removeData("selected-card");
+                } else {
+                    $(this).attr("data-selected-card", true);
+                }
             });
         }
     };
@@ -87,7 +98,7 @@ var functionLoaders = function (account) {
     var get_result = function (position) {
         var main = position.find('[data-card-role="main"] .card-block');
         var subs = position.find('[data-card-role="sub"] .card-block');
-        var weapon = main.data('weapon');
+        var i_weapon = main.data('i-weapon');
 
         var hp = main.data('hp');
         var sp = main.data('sp');
@@ -103,7 +114,7 @@ var functionLoaders = function (account) {
 
         subs.each(function () {
             // Only add skills with same weapon type
-            if (weapon === $(this).data('weapon')) {
+            if (i_weapon === $(this).data('i-weapon')) {
                 skills[$(this).data('skill-jpn-name')] = {
                     combo: $(this).data('skill-combo'),
                     sp: $(this).data('skill-sp'),
@@ -201,27 +212,33 @@ var functionLoaders = function (account) {
             }
         }
     };
-    update_result();
 
     var push_card = function (card) {
         // Find next empty slot
         if (next_empty !== null && !card.data('invalid-card')) {
+
             var clone_data = card.clone();
             clone_data.children()[1].remove();
+            var dict = cards_data[card.data('id')];
+            for (var key in dict) {
+                clone_data.data(key, dict[key]);
+            }
+
             next_empty.html(clone_data);
+
+            current_cards[card.data('id')] = true;
             update_next_empty();
             update_valid();
-            card.attr('data-selected-card', true);
         } else if (card.data('selected-card')) {
             // If this is a selected card, remove it from the slots
             current_mains.each(function () {
-                if (card.data('card-id') === $(this).children().eq(0).data('card-id')) {
+                if (card.data('id') === $(this).children().eq(0).data('id')) {
                     remove_card($(this));
                     return false;
                 }
             });
             current_subs.each(function () {
-                if (card.data('card-id') === $(this).children().eq(0).data('card-id')) {
+                if (card.data('id') === $(this).children().eq(0).data('id')) {
                     remove_card($(this));
                     return false;
                 }
@@ -230,10 +247,10 @@ var functionLoaders = function (account) {
         update_result();
     };
     var remove_card = function (slot) { // e.g. slot = $('#sub-12')
-        var removed = slot.children().eq(0).data('card-id');
+        delete current_cards[slot.children().eq(0).data('id')];
         slot.html("");
         update_next_empty();
-        update_valid(removed);
+        update_valid();
         update_result();
     };
 
@@ -263,13 +280,14 @@ var functionLoaders = function (account) {
         // Add rows first
         for (var i = 0; i < Math.ceil(clone_cards.length / 3); ++i) {
             pool.append('<div class="row">');
-
         }
         // Then add cards
         var rows = pool.find('.row');
         for (var j = 0; j < clone_cards.length; ++j) {
             rows[Math.floor(j / 3)].append(clone_cards[j][0]);
         }
+        update_next_empty();
+        update_valid();
     };
 
     var toggle_filter = function (weapon) {
@@ -322,5 +340,10 @@ var functionLoaders = function (account) {
             reloader();
         });
     });
+
+    // Initialization
+    update_next_empty();
+    update_result();
+    filter();
     reloader();
 };

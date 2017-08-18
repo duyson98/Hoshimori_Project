@@ -1,6 +1,7 @@
 {% load i18n %}
 <script>
   var ownedcards_to_reload = [];
+  var ownedcards_values = {};
 </script>
 {% for account in profile_user.all_accounts %}
 <div class="profile-account" data-account-id="{{ account.id }}">

@@ -516,6 +516,7 @@ class StageCollection(MagiCollection):
 
     class ListView(MagiCollection.ListView):
         filter_form = forms.StageFilterForm
+        hide_sidebar = True #TODO
         per_line = 4
         page_size = 20
         staff_required = False
@@ -549,6 +550,14 @@ class IrousVariationCollection(MagiCollection):
 
     class ItemView(MagiCollection.ItemView):
         template = 'irousvariation'
+
+        def extra_context(self, context):
+            irous_variation = context['item']
+            irous_species = irous_variation.species
+            context['weak'] = irous_species.weak
+            context['strong'] = irous_species.strong
+            context['guard'] = irous_species.guard
+
 
     class ListView(MagiCollection.ListView):
         filter_form = forms.IrousVariationFilterForm

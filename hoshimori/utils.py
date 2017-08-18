@@ -72,3 +72,12 @@ def item_view(request, context, name, collection, pk=None, reverse=None, ajax=Fa
         context['include_template'] = 'items/{}'.format(context['item_template'])
         return render(request, 'ajax.html', context)
     return render(request, 'collections/item_view.html', context)
+
+
+
+
+
+
+
+
+

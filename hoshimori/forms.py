@@ -288,22 +288,10 @@ class WeaponFilterForm(MagiFiltersForm):
 # Stage
 
 class StageFilterForm(MagiFiltersForm):
-    search_fields = ['name', 'materials']
+    search_fields = ['name', 'small_irous']
 
     ordering_fields = [
-        ('episode', _('ID')),
-        ('easy_stage__level', _('Easy Level')),
-        ('easy_stage__exp', _('Easy EXP')),
-        ('easy_stage__coins', _('Easy Coins')),
-        ('easy_stage__cheerpoints', _('Easy Cheerpoints')),
-        ('normal_stage__level', _('Normal Level')),
-        ('normal_stage__exp', _('Normal EXP')),
-        ('normal_stage__coins', _('Normal Coins')),
-        ('normal_stage__cheerpoints', _('Normal Cheerpoints')),
-        ('hard_stage__level', _('Hard Level')),
-        ('hard_stage__exp', _('Hard EXP')),
-        ('hard_stage__coins', _('Hard Coins')),
-        ('hard_stage__cheerpoints', _('Hard Cheerpoints')),
+        ('id', _('ID')),
     ]
 
     def __init__(self, *args, **kwargs):
@@ -312,7 +300,7 @@ class StageFilterForm(MagiFiltersForm):
 
     class Meta:
         model = models.Stage
-        fields = ('search', 'part')
+        fields = ('search', )
 
 
 ############################################################

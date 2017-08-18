@@ -213,27 +213,38 @@
             </div>
         </div>
         <div class="col-md-5">
-        <div class="card-pool-filter">
-        <table class="table">
-            <tr>
-                <td><h4>Filters</h4></td>
-                <td><div class="clear-filters-button">
-                    <button type="button" class="btn">Clear filters</button>
-                </div>
-                </td>
-            </tr>
-        </table>
-            <div class="card-pool-filter-container">
-                {% for weapon in weapontypes %}
-                    <span class="weapon-icon" data-weapon="{{ weapon }}">
+            <div class="card-pool-filter">
+                <table class="table">
+                    <tr>
+                        <td><h4>Filters</h4></td>
+                        <td rowspan="2">
+                            <div class="clear-filters-button">
+                                <button type="button" class="btn">Clear filters</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p class="text-warning">
+                                Refrain from using this if you have a lot of cards!
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+                <div class="card-pool-filter-container">
+                    {% for weapon in weapontypes %}
+                        <span class="weapon-icon" data-weapon="{{ weapon }}">
                         <img src="//localhost:8000/static/img/i_weapon/{{ weapon }}.png">
                     </span>
-                {% endfor %}
+                    {% endfor %}
+                </div>
             </div>
-        </div>
             <div class="card-pool-container"
                  style=" overflow-y: scroll; overflow-x: hidden; padding-bottom: 300%; position: relative; ">
-            <h4>Card Pool</h4>
+                <h4>Card Pool</h4>
+                <script type="text/javascript">
+                    ownedcards_values[{{ account.id }}] = '{{ jsonoc|escapejs }}';
+                </script>
                 <div class="card-pool">
                     <div class="row">
                         {% for oc in ownedcards %}
@@ -243,30 +254,17 @@
                             {% endif %}
                             <div class="col-md-4">
                                 <div class="card">
-                                    <div class="card-block" data-card-id="{{ oc.card.id }}"
-                                         data-card-chara="{{ oc.card.student.id }}"
-                                         data-i-weapon="{{ oc.card.i_weapon }}"
-                                         data-weapon="{{ oc.card.english_weapon }}" data-evolved="{{ oc.evolved }}"
-                                         data-subcard-effect="{{ oc.card.subcard_effect }}" data-hp="{{ oc.owned_hp }}"
-                                         data-sp="{{ oc.owned_sp }}" data-atk="{{ oc.owned_atk }}"
-                                         data-def="{{ oc.owned_def }}"
-                                         data-nakayoshi-jpn-name="{{ oc.card.japanese_nakayoshi_title }}"
-                                         data-nakayoshi-effect="{% if oc.evolved %}{{ oc.card.evolved_nakayoshi_skill_effect }}{% else %}{{ oc.card.nakayoshi_skill_effect }}{% endif %}"
-                                         data-nakayoshi-target="{% if oc.evolved %}{{ oc.card.evolved_nakayoshi_skill_target }}{% else %}{{ oc.card.nakayoshi_skill_target }}{% endif %}"
-                                         data-skill-jpn-name="{{ oc.card.japanese_skill_name }}"
-                                         data-skill-combo="{% if oc.evolved %}{{ oc.card.evolved_action_skill_combo }}{% else %}{{ oc.card.action_skill_combo }}{% endif %}"
-                                         data-skill-sp="{{ oc.card.skill_SP }}"
-                                         data-skill-effect="{{ oc.card.action_skill_effects }}"
-                                         data-skill-affinity="{{ oc.card.skill_affinity }}">
-                                    <div class="icon">
-                                        <img class="card-img-bottom" src="{{ oc.card.image_url }}">
-    {#                                    <img class="rarity-icon"#}
-    {#                                         src="//localhost:8000/static/img/i_rarity/{{ oc.card.i_rarity }}{% if oc.evolved %}_alt{% endif %}.png">#}
-                                        <img class="weapon-icon"
-                                             src="//localhost:8000/static/img/i_weapon/{{ oc.card.i_weapon }}.png">
-                                    </div>
-                                    <div class="card-title"><h6>{{ oc.card.name }}</h6>
-                                        {{ oc.card.japanese_name }}</div>
+                                    <div class="card-block" data-i-weapon="{{ oc.card.i_weapon }}"
+                                         data-id="{{ oc.card.id }}" data-chara="{{ oc.card.student.id }}">
+                                        <div class="icon">
+                                            <img class="card-img-bottom" src="{{ oc.card.image_url }}">
+                                            {#                                        <img class="rarity-icon"#}
+                                            {#                                             src="//localhost:8000/static/img/i_rarity/{{ oc.card.i_rarity }}{% if oc.evolved %}_alt{% endif %}.png">#}
+                                            <img class="weapon-icon"
+                                                 src="//localhost:8000/static/img/i_weapon/{{ oc.card.i_weapon }}.png">
+                                        </div>
+                                        <div class="card-title"><h6>{{ oc.card.name }}</h6>
+                                            {{ oc.card.japanese_name }}</div>
                                     </div>
                                 </div>
                             </div>

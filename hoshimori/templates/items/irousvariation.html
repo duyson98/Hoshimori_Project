@@ -1,10 +1,12 @@
 {% load magi_tags %}
 {% with irousvariation=item %}
     <div class="irousinfo">
-        <br>
-        <img src="{{ irousvariation.image_url }}" alt="{{ irousvariation }}">
+        <div class="icon">
+            <img src="{{ irousvariation.image_url }}" alt="{{ irousvariation }}">
+        </div>
         <div class="irousdetails">
-            <div class="irousname"><h3>Irous name: {{ irousvariation.name }}</h3>
+            <div class="irousname">
+                <h3>Irous name: {{ irousvariation.name }}</h3>
                 Japanese name: {{ irousvariation.japanese_name }}
             </div>
             <div class="affinity">
@@ -19,15 +21,17 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td>{{ irousvariation.species.weak }}</td>
-                        <td>{{ irousvariation.species.strong }}</td>
-                        <td>{{ irousvariation.species.guard }}</td>
+                        <td>{% for weap in weak %}<a href="/cards/?i_weapon={{ weap }}" target="_blank"> <img
+                                src="/static/img/i_weapon/{{ weap }}.png"> </a> {% endfor %} </td>
+                        <td>{% for weap in strong %}<a href="/cards/?i_weapon={{ weap }}" target="_blank"> <img
+                                src="/static/img/i_weapon/{{ weap }}.png"> </a> {% endfor %} </td>
+                        <td>{% for weap in guard %}<a href="/cards/?i_weapon={{ weap }}" target="_blank"> <img
+                                src="/static/img/i_weapon/{{ weap }}.png"> </a> {% endfor %} </td>
                     </tr>
                     </tbody>
                 </table>
             </div>
             <div class="species">
-
                 <h3>Is a
                     {% if irousvariation.is_large_irous %}
                         large
@@ -35,7 +39,7 @@
                         small
                     {% endif %}
                     variation of the
-                    <a href="/irousvariations/?species={{ irousvariation.species_id }}" target="_blank">
+                    <a href="/irousvariations/?species={{ irousvariation.species_id }}">
                         <b>
                             {% if irousvariation.species.name != 11 %}
                                 {{ irousvariation.species.english_name }}

@@ -18,6 +18,7 @@ function loadBuilder(pane, account) {
         ajaxModals();
         functionLoaders(account.data('account-id'));
     });
+    alert('This is a very intensive feature which may cause your computer to freeze up.\nLoading 500 cards may take up to a minute or two.\nPlease wait patiently.');
 }
 
 function loadCards(pane, account) {

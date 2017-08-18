@@ -121,7 +121,7 @@ irous_import_data()
 # Stage
 
 def stage_import_data():
-    with open('database\stage_database.csv') as f:
+    with open('database/outputStages.csv') as f:
         reader = csv.reader(f)
         id = 0
         for row in reader:
@@ -133,50 +133,15 @@ def stage_import_data():
                         id=id,
                         owner_id=1,
                         name=row[0],
-                        part=row[1],
-                        episode=row[2],
-                        number=row[3],
-                        materials=row[21],
-                        easy_stage_id=id * 3 - 2,
-                        normal_stage_id=id * 3 - 1,
-                        hard_stage_id=id * 3,
-                    )
-
-                    # Add difficulty
-                    # Easy
-                    _, created = StageDifficulty.objects.get_or_create(
-                        id=id * 3 - 2,
-                        difficulty=EASY,
-                        level=row[4],
-                        exp=row[5],
-                        coins=row[6],
-                        cheerpoints=row[7],
-                        objectives=row[8],
-                    )
-                    # Normal
-                    _, created = StageDifficulty.objects.get_or_create(
-                        id=id * 3 - 1,
-                        difficulty=NORMAL,
-                        level=row[9],
-                        exp=row[10],
-                        coins=row[11],
-                        cheerpoints=row[12],
-                        objectives=row[13]
-                    )
-                    # Hard
-                    _, created = StageDifficulty.objects.get_or_create(
-                        id=id * 3,
-                        difficulty=HARD,
-                        level=row[14],
-                        exp=row[15],
-                        coins=row[16],
-                        cheerpoints=row[17],
-                        objectives=row[18]
+                        episode=row[1],
+                        number=row[2],
+                        part=row[3],
+                        chapter=row[4],
                     )
 
                     # Add Irouss
-                    small_irous = row[19]
-                    large_irous = row[20]
+                    small_irous = row[5]
+                    large_irous = row[6]
 
                     # Split 'em up and add small irouss
                     for irous in small_irous.split(','):
@@ -199,6 +164,36 @@ stage_import_data()
 
 
 ###########################################################
+# StageDifficulty
+
+def stage_difficulties_import_data():
+    with open('database/outputDifficulties.csv') as f:
+        reader = csv.reader(f)
+        id = 0
+        for row in reader:
+            if row[0] != 'episode':  # ignore header row
+                id += 1
+                # Add difficulty if not added
+                filtered = StageDifficulty.objects.filter(stage__episode=row[0], stage__number=row[1],
+                                                          difficulty=row[3])
+                if filtered.__len__() == 0:  # if not added
+                    _, created = StageDifficulty.objects.get_or_create(
+                        id=id,
+                        stage_id=Stage.objects.filter(episode=row[0], number=row[1])[0].id,
+                        difficulty=row[3],
+                        level=row[4],
+                        exp=row[5],
+                        coins=row[6],
+                        cheerpoints=row[7],
+                        drops=row[8],
+                        objectives=row[9],
+                    )
+
+
+stage_difficulties_import_data()
+
+
+###########################################################
 # Card
 
 def card_import_data():
@@ -206,7 +201,7 @@ def card_import_data():
         reader = csv.reader(f)
         for row in reader:
             if row[0] != 'id':  # ignore header row
-                if Card.objects.filter(name=row[3]).__len__() == 0:
+                if Card.objects.filter(name=row[3]).__len__() == 0:  # If card is not added
                     _, created = Card.objects.get_or_create(
                         id=row[0],
                         owner_id=row[1],

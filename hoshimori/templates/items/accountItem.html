@@ -2,12 +2,12 @@
 {% load magi_tags %}
 {% with account=item %}
 <br>
-<div class="well">
+<div class="well hvr-sweep-to-left banner-{% if account.owner.preferences.favorite_character1 %}{{ account.owner.preferences.favorite_character1 }}{% else %}0{% endif %}">
   <a href="{{ account.owner.item_url }}">
     <div class="row">
       <div class="col-md-2">{% include 'include/avatar.html' with av_user=account.owner av_size=30 av_image_size=100 %}</div>
       <div class="col-md-8"><h3>{{ account.nickname }}</h3></div>
-      <div class="col-md-2"><h3 class="text-right">{% trans 'Ep.' %} {{ account.story_progress }}</h3></div>
+      <div class="col-md-2"><h3 class="text-right">{% trans 'Ep.' %} {% if account.story_progress %}{{ account.story_progress }}{% else %}???{% endif %}</h3></div>
     </div>
   </a>
 </div>

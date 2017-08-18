@@ -59,6 +59,28 @@ def account_about(request, account):
 def account_builder(request, account):
     context = ajaxContext(request)
     context['account'] = get_object_or_404(Account.objects.all(), pk=account)
-    context['ownedcards'] = OwnedCard.objects.filter(account=account)
+    context['ownedcards'] = OwnedCard.objects.filter(account=account).order_by("-card__id")
+    import json
+    oc_dict = {}
+    for oc in context['ownedcards']:
+        card = oc.card
+        oc_dict[card.id] = {
+            "card-chara": card.student.id,
+            "evolved": oc.evolved,
+            "subcard-effect": card.subcard_effect,
+            "hp": oc._cache_hp,
+            "sp": oc._cache_sp,
+            "atk": oc._cache_atk,
+            "def": oc._cache_def,
+            "nakayoshi-jpn-name": card.japanese_nakayoshi_title,
+            "nakayoshi-effect": card.evolved_nakayoshi_skill_effect if oc.evolved else card.nakayoshi_skill_effect,
+            "nakayoshi-target": card.evolved_nakayoshi_skill_target if oc.evolved else card.nakayoshi_skill_target,
+            "skill-jpn-name": card.japanese_skill_name,
+            "skill-combo": card.evolved_action_skill_combo if oc.evolved else card.action_skill_combo,
+            "skill-sp": card.skill_SP,
+            "skill-effect": card.action_skill_effects,
+            "skill-affinity": card.skill_affinity,
+        }
+    context['jsonoc'] = json.dumps(oc_dict)
     context['weapontypes'] = WEAPON_DICT
     return render(request, 'ajax/account_builder.html', context)
