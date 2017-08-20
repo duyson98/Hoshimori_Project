@@ -477,7 +477,7 @@ h1, h2, h3, h4, h5, h6, .title, .navbar-brand, .btn-lg, .btn-xl {
     height: auto;
     position: relative;
     text-align: center;
-    max-width: 545px;
+    //max-width: 545px;
     //&:hover, &:focus {
     //    color: white;
     //}
@@ -547,9 +547,9 @@ h1, h2, h3, h4, h5, h6, .title, .navbar-brand, .btn-lg, .btn-xl {
             width: auto;
             max-width: 100%;
             .btn.btn-inherit {
-                background-color: deepskyblue;
                 input {
                     width: 40px;
+                    color: black;
                 }
             }
             padding-left: 10px;
@@ -575,6 +575,10 @@ h1, h2, h3, h4, h5, h6, .title, .navbar-brand, .btn-lg, .btn-xl {
         table.table.about-table.a-main > tbody > tr > td:nth-child(3) {
             text-align: right;
         }
+
+        h2 {
+            text-align: left;
+        }
     }
 }
 
@@ -585,9 +589,9 @@ h1, h2, h3, h4, h5, h6, .title, .navbar-brand, .btn-lg, .btn-xl {
         width: auto;
         max-width: 100%;
         .btn.btn-inherit {
-            background-color: deepskyblue;
             input {
                 width: 40px;
+                color: black;
             }
         }
         padding-left: 10px;
@@ -609,6 +613,10 @@ h1, h2, h3, h4, h5, h6, .title, .navbar-brand, .btn-lg, .btn-xl {
 
     table.table.about-table.a-main > tbody > tr > td:nth-child(3) {
         text-align: right;
+    }
+
+    h2 {
+        text-align: left;
     }
     //.card {
     //    margin: 0 auto;
@@ -999,126 +1007,6 @@ div.tab button.active {
 // Leaderboard
 
 .current-account_list {
-    .banner-0 {
-        background-color: #a9a9a9;
-        background-blend-mode: luminosity;
-    }
-    // Evina
-    .banner-1 {
-        background-color: #F08080;
-        background-blend-mode: luminosity;
-    }
-    // Miki
-    .banner-2 {
-        background-color: #32CD32;
-        background-blend-mode: luminosity;
-    }
-    // Subaru
-    .banner-3 {
-        background-color: #AFEEEE;
-        background-blend-mode: luminosity;
-    }
-    // Haruka
-    .banner-4 {
-        background-color: #ffc423;
-        background-blend-mode: luminosity;
-    }
-    // Nozomi
-    .banner-5 {
-        background-color: #ff9623;
-        background-blend-mode: luminosity;
-    }
-    // Yuri
-    .banner-6 {
-        background-color: #ADFF2F;
-        background-blend-mode: luminosity;
-    }
-    // Kurumi
-    .banner-7 {
-        background-color: #DB7093;
-        background-blend-mode: luminosity;
-    }
-    // Anko
-    .banner-8 {
-        background-color: #DA70D6;
-        background-blend-mode: luminosity;
-    }
-    // Renge
-    .banner-9 {
-        background-color: #6495ED;
-        background-blend-mode: luminosity;
-    }
-    // Asuha
-    .banner-10 {
-        background-color: #DEB887;
-        background-blend-mode: luminosity;
-    }
-    // Sakura
-    .banner-11 {
-        background-color: #f8ff2a;
-        background-blend-mode: luminosity;
-    }
-    // Hinata
-    .banner-12 {
-        background-color: #DDA0DD;
-        background-blend-mode: luminosity;
-    }
-    // Kaede
-    .banner-13 {
-        background-color: #FFF8DC;
-        background-blend-mode: luminosity;
-    }
-    // Michelle
-    .banner-14 {
-        background-color: #E0FFFF;
-        background-blend-mode: luminosity;
-    }
-    // Kokomi
-    .banner-15 {
-        background-color: #FFC0CB;
-        background-blend-mode: luminosity;
-    }
-    // Urara
-    .banner-16 {
-        background-color: #3CB371;
-        background-blend-mode: luminosity;
-    }
-    // Sadone
-    .banner-17 {
-        background-color: #EEE8AA;
-        background-blend-mode: luminosity;
-    }
-    // Kanon
-    .banner-18 {
-        background-color: #5F9EA0;
-        background-blend-mode: luminosity;
-    }
-    // Shiho
-    .banner-19 {
-        background-color: #b22222;
-        background-blend-mode: luminosity;
-    }
-    // Misaki
-    .banner-101 {
-        background-color: #f5f5f5;
-        background-blend-mode: luminosity;
-    }
-    // Mari
-    .banner-102 {
-        background-color: #4169e1;
-        background-blend-mode: luminosity;
-    }
-    // Icchan
-    .banner-103 {
-        background-color: #cd5c5c;
-        background-blend-mode: luminosity;
-    }
-    // Fuuchan
-    .banner-104 {
-        background-color: #6495ED;
-        background-blend-mode: luminosity;
-    }
-    // Loliazu
     .well {
         background-image: url("/static/img/acc_bg.png");
         background-repeat: repeat;
@@ -1145,6 +1033,10 @@ div.tab button.active {
     background-repeat: no-repeat;
     background-size: cover;
 
+    .btn.btn-link.btn-sm {
+      color: @darkColor;
+    }
+
     .btn-secondary {
         display: none;
     }
@@ -1152,8 +1044,26 @@ div.tab button.active {
     .item-container {
         background-color: white;
 
+        .jumbotron p {
+            font-size: 17px;
+            font-weight: bold;
+            color: @darkColor;
+        }
+
+        .btn.btn-lg.btn-main {
+            text-shadow: 0 0 5px #545454;
+        }
+
+        .btn.btn-main img {
+            filter: drop-shadow(0px 0px 4px #545454);
+        }
+
+        .profile-tabs a{
+            text-shadow: 0 0 5px #545454;
+        }
+
         #profile.jumbotron.jumbotron-main {
-            background-image: url("/static/img/acc_bg_star.gif");
+            background-image: url("/static/img/acc_bg.png");
         }
 
         .profile-level {
@@ -1175,28 +1085,52 @@ div.tab button.active {
         }
     }
 
-    div.col-xs-2 {
-        margin-right: 25px;
+    //div.col-xs-2 {
+    //    margin-right: 25px;
+    //}
+
+    .modal-content {
+        input {
+            width: 40px;
+            color: black;
+        }
+        .progress-bar {
+            width: 554px;
+            display: block;
+            float: left;
+            //width: 50%;
+            //height: 20px;
+            background-color: #ddd;
+            border-radius: 4px;
+        }
+
+        table.table.about-table.a-main > tbody > tr > td:nth-child(3) {
+            text-align: right;
+        }
+
+        h2 {
+            text-align: left;
+        }
     }
 }
 
 .profile-account {
     margin-bottom: 30px;
     .profile-header {
-        background-color: deepskyblue;
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
         padding: 20px
     }
     .profile-level {
         font-size: 30px;
+        text-shadow: 0 0 5px #545454;
     }
     .nickname {
         font-size: 40px;
+        text-shadow: 0 0 5px #545454;
     }
-    .btn {
-        float: right;
-        padding: 6px 12px;
+    .game-id {
+        text-shadow: 0 0 5px #545454;
     }
     .tab-content {
         border: 1px solid deepskyblue;
@@ -1211,6 +1145,8 @@ div.tab button.active {
         }
     }
     .btn {
+        float: right;
+        padding: 6px 12px;
         background-color: #0e75ff;
         border-color: #046fff;
         color: white;
@@ -1220,11 +1156,115 @@ div.tab button.active {
         background-color: #005dda;
         border-color: #0054c6;
     }
+
+    div.col-xs-3 {
+        height: 218px;
+    }
 }
 
 // Filter cute form
 
 .current-student_list {
+    h3 {
+        text-shadow: 0 0 3px @darkColor;
+    }
+
+    .student-0 {
+        color: #a9a9a9;
+    }
+    // Evina
+    .student-1 {
+        color: #F08080;
+    }
+    // Miki
+    .student-2 {
+        color: #32CD32;
+    }
+    // Subaru
+    .student-3 {
+        color: #AFEEEE;
+    }
+    // Haruka
+    .student-4 {
+        color: #ffc423;
+    }
+    // Nozomi
+    .student-5 {
+        color: #ff9623;
+    }
+    // Yuri
+    .student-6 {
+        color: #ADFF2F;
+    }
+    // Kurumi
+    .student-7 {
+        color: #DB7093;
+    }
+    // Anko
+    .student-8 {
+        color: #DA70D6;
+    }
+    // Renge
+    .student-9 {
+        color: #6495ED;
+    }
+    // Asuha
+    .student-10 {
+        color: #DEB887;
+    }
+    // Sakura
+    .student-11 {
+        color: #f8ff2a;
+    }
+    // Hinata
+    .student-12 {
+        color: #DDA0DD;
+    }
+    // Kaede
+    .student-13 {
+        color: #FFF8DC;
+    }
+    // Michelle
+    .student-14 {
+        color: #E0FFFF;
+    }
+    // Kokomi
+    .student-15 {
+        color: #FFC0CB;
+    }
+    // Urara
+    .student-16 {
+        color: #3CB371;
+    }
+    // Sadone
+    .student-17 {
+        color: #EEE8AA;
+    }
+    // Kanon
+    .student-18 {
+        color: #5F9EA0;
+    }
+    // Shiho
+    .student-19 {
+        color: #b22222;
+    }
+    // Misaki
+    .student-101 {
+        color: #f5f5f5;
+    }
+    // Mari
+    .student-102 {
+        color: #4169e1;
+    }
+    // Icchan
+    .student-103 {
+        color: #cd5c5c;
+    }
+    // Fuuchan
+    .student-104 {
+        color: #6495ED;
+    }
+    // Loliazu
     #id_i_star_sign + .cuteform {
         .cuteform-elt:not([data-cuteform-val=""]) {
             background-color: fade(white, 80%);
@@ -1409,3 +1449,124 @@ div.tab button.active {
         font-size: 10px;
     }
 }
+
+.banner-0 {
+    background-color: #a9a9a9;
+    background-blend-mode: luminosity;
+}
+// Evina
+.banner-1 {
+    background-color: #F08080;
+    background-blend-mode: luminosity;
+}
+// Miki
+.banner-2 {
+    background-color: #32CD32;
+    background-blend-mode: luminosity;
+}
+// Subaru
+.banner-3 {
+    background-color: #AFEEEE;
+    background-blend-mode: luminosity;
+}
+// Haruka
+.banner-4 {
+    background-color: #ffc423;
+    background-blend-mode: luminosity;
+}
+// Nozomi
+.banner-5 {
+    background-color: #ff9623;
+    background-blend-mode: luminosity;
+}
+// Yuri
+.banner-6 {
+    background-color: #ADFF2F;
+    background-blend-mode: luminosity;
+}
+// Kurumi
+.banner-7 {
+    background-color: #DB7093;
+    background-blend-mode: luminosity;
+}
+// Anko
+.banner-8 {
+    background-color: #DA70D6;
+    background-blend-mode: luminosity;
+}
+// Renge
+.banner-9 {
+    background-color: #6495ED;
+    background-blend-mode: luminosity;
+}
+// Asuha
+.banner-10 {
+    background-color: #DEB887;
+    background-blend-mode: luminosity;
+}
+// Sakura
+.banner-11 {
+    background-color: #f8ff2a;
+    background-blend-mode: luminosity;
+}
+// Hinata
+.banner-12 {
+    background-color: #DDA0DD;
+    background-blend-mode: luminosity;
+}
+// Kaede
+.banner-13 {
+    background-color: #FFF8DC;
+    background-blend-mode: luminosity;
+}
+// Michelle
+.banner-14 {
+    background-color: #E0FFFF;
+    background-blend-mode: luminosity;
+}
+// Kokomi
+.banner-15 {
+    background-color: #FFC0CB;
+    background-blend-mode: luminosity;
+}
+// Urara
+.banner-16 {
+    background-color: #3CB371;
+    background-blend-mode: luminosity;
+}
+// Sadone
+.banner-17 {
+    background-color: #EEE8AA;
+    background-blend-mode: luminosity;
+}
+// Kanon
+.banner-18 {
+    background-color: #5F9EA0;
+    background-blend-mode: luminosity;
+}
+// Shiho
+.banner-19 {
+    background-color: #b22222;
+    background-blend-mode: luminosity;
+}
+// Misaki
+.banner-101 {
+    background-color: #f5f5f5;
+    background-blend-mode: luminosity;
+}
+// Mari
+.banner-102 {
+    background-color: #4169e1;
+    background-blend-mode: luminosity;
+}
+// Icchan
+.banner-103 {
+    background-color: #cd5c5c;
+    background-blend-mode: luminosity;
+}
+// Fuuchan
+.banner-104 {
+    background-color: #6495ED;
+    background-blend-mode: luminosity;
+}
+// Loliazu
