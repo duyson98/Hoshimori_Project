@@ -63,6 +63,7 @@
     ```shell
     python manage.py makemigrations hoshimori
     python manage.py migrate
+    python manage.py generate_settings
     ```
 
 6. Launch the server:

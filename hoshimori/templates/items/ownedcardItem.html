@@ -18,17 +18,17 @@
                 </tr>
             </table>
             <div class="text-center">
-                {#                {% if oc.is_mine %}#}
-                <a href="/ownedcards/edit/{{ oc.id }}/"
-                   data-ajax-title="{% trans 'Edit' %} {% trans 'Card' %}"
-                   data-ajax-url="/ajax/ownedcards/edit/{{ oc.id }}/{% if collection %}?collection{% endif %}"
-                   data-ajax-handle-form="true" data-ajax-modal-size="md"
-                   data-ajax-modal-after-form-size="lg"
-                   class="btn btn-{{ oc.card.english_weapon }}">
-                    <i class="flaticon-edit"></i>
-                    {% trans 'Edit' %} {% trans 'Card' %}
-                </a>
-                {#                {% endif %}#}
+                {% if user.is_staff or oc.owner_id == user.id %}
+                    <a href="/ownedcards/edit/{{ oc.id }}/"
+                       data-ajax-title="{% trans 'Edit' %} {% trans 'Card' %}"
+                       data-ajax-url="/ajax/ownedcards/edit/{{ oc.id }}/{% if collection %}?collection{% endif %}"
+                       data-ajax-handle-form="true" data-ajax-modal-size="md"
+                       data-ajax-modal-after-form-size="lg"
+                       class="btn btn-{{ oc.card.english_weapon }}">
+                        <i class="flaticon-edit"></i>
+                        {% trans 'Edit' %} {% trans 'Card' %}
+                    </a>
+                {% endif %}
                 <a href="{{ oc.card.item_url }}"
                    data-ajax-url="{{ oc.card.ajax_item_url }}" data-ajax-title="{{ oc.card }}">
                     <i class="flaticon-about"></i>

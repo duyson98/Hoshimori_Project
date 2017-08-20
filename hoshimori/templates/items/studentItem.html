@@ -10,7 +10,9 @@
         </a>
         <a href="{{ student.item_url }}" data-ajax-url="{{ student.ajax_item_url }}">
             <h3>
-                {{ student }}
+                <div class="student-{{ student.id }}">
+                    {{ student }}
+                </div>
             </h3>
         </a>
         {% if user.staff %}
