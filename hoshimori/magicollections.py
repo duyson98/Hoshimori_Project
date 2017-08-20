@@ -19,7 +19,7 @@ class UserCollection(_UserCollection):
 
     class ItemView(MagiCollection.ItemView):
         js_files = ['profile', 'profile_account_tabs', 'cards', 'builder']
-        template = 'profile'
+        template = 'customProfile'
         comments_enabled = False
         show_edit_button = False
         ajax = False
@@ -167,7 +167,6 @@ class UserCollection(_UserCollection):
 # Account
 # Override
 
-
 class AccountCollection(_AccountCollection):
     class ListView(_AccountCollection.ListView):
         distinct = True
@@ -203,8 +202,15 @@ class AccountCollection(_AccountCollection):
 
     class AddView(_AccountCollection.AddView):
         back_to_list_button = False
-
         js_files = getattr(_AccountCollection.AddView, 'js_files', []) + ['mod_account']
+        otherbuttons_template = 'include/advancedButton'
+
+        def form_class(self, request, context):
+            formClass = forms.AccountFormSimple
+            if 'advanced' in request.GET:
+                formClass = forms.AccountFormAdvanced
+                context['advanced'] = True
+            return formClass
 
     class EditView(_AccountCollection.EditView):
         js_files = getattr(_AccountCollection.AddView, 'js_files', []) + ['mod_account']

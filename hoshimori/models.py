@@ -269,16 +269,16 @@ class Account(MagiModel):
 
     owner = models.ForeignKey(User, related_name='accounts')
     creation = models.DateTimeField(_('Join Date'), auto_now_add=True)
+    nickname = models.CharField(_('Nickname'), max_length=100)
+    game_id = models.CharField(_('Game ID'), help_text=_('You can find it in-game. It is a series of 8 characters.'),
+                               max_length=8, null=True)
     start_date = models.DateField(null=True, verbose_name=_('Start Date'),
                                   help_text=_('When you started playing with this account.'))
     story_progress = models.PositiveIntegerField(_('Story Progress'), help_text=_('Which episode have you cleared?'),
                                                  null=True, db_index=True, validators=[
             MaxValueValidator(django_settings.LATEST_EPISODE)
         ])
-    nickname = models.CharField(_('Nickname'), max_length=100)
-    game_id = models.CharField(_('Game ID'), help_text=_('You can find it in-game. It is a series of 8 characters.'),
-                               max_length=8)
-    device = models.CharField(_('Device'), max_length=150)
+    device = models.CharField(_('Device'), max_length=150, null=True)
     i_os = models.PositiveIntegerField(_('Operating System'), choices=OS_CHOICES, default=0)
 
     @property
@@ -292,7 +292,7 @@ class Account(MagiModel):
         else:
             return None
 
-    i_player_type = models.PositiveIntegerField(_('Player type'), choices=PLAYERTYPE_CHOICES, default=0)
+    i_player_type = models.PositiveIntegerField(_('Player type'), choices=PLAYERTYPE_CHOICES, default=0, help_text=_('Do you buy gems?'))
 
     @property
     def player_type(self):

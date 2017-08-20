@@ -335,7 +335,17 @@ var functionLoaders = function (account) {
     /* Assign filtering */
     $('.builder-container-' + account + ' .card-pool-filter-container span').each(function () {
         $(this).on("click", function () {
-            toggle_filter($(this));
+            if (event.altKey) { // Reverse filter
+                var current_weap = $(this).data('weapon');
+                $('.builder-container-' + account + ' .card-pool-filter-container span').each(function () {
+                    if (($(this).data('weapon') !== current_weap && !$(this).data('on'))
+                        || ($(this).data('weapon') === current_weap && $(this).data('on'))) {
+                        toggle_filter($(this));
+                    }
+                });
+            } else {
+                toggle_filter($(this));
+            }
             filter();
             reloader();
         });

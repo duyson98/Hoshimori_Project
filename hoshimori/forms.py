@@ -3,6 +3,7 @@ from django.db.models import BLANK_CHOICE_DASH, Q
 from django.utils.translation import ugettext_lazy as _, string_concat
 from magi.forms import MagiFiltersForm, AutoForm, MagiFilter
 from django.conf import settings as django_settings
+from magi.forms import AccountForm as _AccountForm
 
 from hoshimori import models
 from hoshimori.django_translated import t
@@ -18,9 +19,21 @@ class FormSaveOwnerOnCreation(AutoForm):
             instance.save()
         return instance
 
-
 ############################################################
 # Account
+
+class AccountFormSimple(_AccountForm):
+    class Meta:
+        model = models.Account
+        fields = ('game_id', 'nickname', 'story_progress')
+        optional_fields = ('game_id', 'story_progress')
+
+class AccountFormAdvanced(_AccountForm):
+    class Meta:
+        model = models.Account
+        fields = ('game_id', 'nickname', 'story_progress', 'start_date', 'device', 'i_os', 'i_player_type')
+        optional_fields = ('game_id', 'story_progress', 'start_date', 'device', 'i_os', 'i_player_type')
+        date_fields = ('start_date',)
 
 class AccountFilterForm(MagiFiltersForm):
     search_fields = ['owner', 'nickname', 'game_id', 'device']
@@ -30,8 +43,8 @@ class AccountFilterForm(MagiFiltersForm):
 
     def _favorite_student_to_queryset(form, queryset, request, value):
         return queryset.filter(Q(owner__preferences__favorite_character1=value)
-                                   | Q(owner__preferences__favorite_character2=value)
-                                   | Q(owner__preferences__favorite_character3=value))
+                               | Q(owner__preferences__favorite_character2=value)
+                               | Q(owner__preferences__favorite_character3=value))
 
     favorite_student = forms.ChoiceField(choices=BLANK_CHOICE_DASH + [(id, full_name) for (id, full_name, image) in
                                                                       getattr(django_settings, 'FAVORITE_CHARACTERS',
@@ -45,7 +58,7 @@ class AccountFilterForm(MagiFiltersForm):
 
     class Meta:
         model = models.Account
-        fields = ('search', 'game_id', 'favorite_student', 'i_os', 'i_player_type', )
+        fields = ('search', 'game_id', 'favorite_student', 'i_os', 'i_player_type',)
 
 
 ############################################################
@@ -197,7 +210,8 @@ class OwnedCardFilterForm(MagiFiltersForm):
     def __init__(self, *args, **kwargs):
         super(OwnedCardFilterForm, self).__init__(*args, **kwargs)
 
-    search_fields = ['card__name', 'card__japanese_name', 'card__skill_name', 'card__japanese_skill_name', 'card__nakayoshi_skill_effect', 'card__evolved_nakayoshi_skill_effect',
+    search_fields = ['card__name', 'card__japanese_name', 'card__skill_name', 'card__japanese_skill_name',
+                     'card__nakayoshi_skill_effect', 'card__evolved_nakayoshi_skill_effect',
                      'card__action_skill_effects']
 
     ordering_fields = [

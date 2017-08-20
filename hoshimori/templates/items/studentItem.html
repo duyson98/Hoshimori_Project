@@ -8,12 +8,8 @@
             <div class="student-wrapper">
             <img src="{% if student.image %}{{ student.image_url }}{% else %}{{ student.full_image_url }}{% endif %}" alt="{{ student }}" class="student-img"></div>
         </a>
-        <a href="{{ student.item_url }}" data-ajax-url="{{ student.ajax_item_url }}">
-            <h3>
-                <div class="student-{{ student.id }}">
-                    {{ student }}
-                </div>
-            </h3>
+        <a class="id-{{ student.id }}" href="{{ student.item_url }}" data-ajax-url="{{ student.ajax_item_url }}">
+            <h3>{{ student }}</h3>
         </a>
         {% if user.staff %}
             <a href="/students/t/{{ student.id }}/">{% trans 'Edit' %} {% trans 'student' %}</a>

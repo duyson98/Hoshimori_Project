@@ -22,14 +22,32 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='student',
             name='mini_body',
-            field=models.ImageField(default=0, upload_to=hoshimori.models.uploadItem(b's'), verbose_name='Chibi'),
+            field=models.ImageField(default='', upload_to=hoshimori.models.uploadItem(b's'), verbose_name='Chibi'),
             preserve_default=False,
         ),
         migrations.AddField(
             model_name='student',
             name='mini_icon',
-            field=models.ImageField(default=0, upload_to=hoshimori.models.uploadItem(b's'), verbose_name='Chibi Icon'),
+            field=models.ImageField(default='', upload_to=hoshimori.models.uploadItem(b's'), verbose_name='Chibi Icon'),
             preserve_default=False,
+        ),
+        migrations.AlterField(
+            model_name='account',
+            name='device',
+            field=models.CharField(max_length=150, null=True, verbose_name='Device'),
+            preserve_default=True,
+        ),
+        migrations.AlterField(
+            model_name='account',
+            name='game_id',
+            field=models.CharField(help_text='You can find it in-game. It is a series of 8 characters.', max_length=8, null=True, verbose_name='Game ID'),
+            preserve_default=True,
+        ),
+        migrations.AlterField(
+            model_name='account',
+            name='i_player_type',
+            field=models.PositiveIntegerField(default=0, help_text='Do you buy gems?', verbose_name='Player type', choices=[(0, b'Free-to-play'), (1, b'Pay-to-win'), (2, b'FTP PTW Hybrid')]),
+            preserve_default=True,
         ),
         migrations.AlterField(
             model_name='account',

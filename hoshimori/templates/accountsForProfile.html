@@ -4,9 +4,9 @@
   var ownedcards_values = {};
 </script>
 {% for account in profile_user.all_accounts %}
-<div class="profile-account" data-account-id="{{ account.id }}">
-  <div id="profile-header-banner" class="profile-header banner-{% if account.owner.preferences.favorite_character1 %}{{ account.owner.preferences.favorite_character1 }}{% else %}0{% endif %}" style="background-image: url('{% if account.center_id and account.cached_center.card.art %}{{ account.cached_center.card.art_url }}{% else %}{{ static_url }}img/backgrounds/background1.png{% endif %}');">
-    <div class="profile-header-character" style="background-image: {% if account.center_id and not account.cached_center.card.art %}url('{{ account.cached_center.card.transparent_url }}'){% else %}none{% endif %};"><div class="profile-level">
+<div class="profile-account id-{% if profile_user.preferences.favorite_character1 %}{{ profile_user.preferences.favorite_character1 }}{% else %}0{% endif %}" data-account-id="{{ account.id }}">
+  <div id="profile-header-banner" class="profile-header">
+    <div class="profile-header-character"><div class="profile-level">
       <span class="level"><span class="prefix">Ep.&nbsp;</span>{{ account.story_progress|default_if_none:'??' }}</span>
       {% if account.cached_leaderboard %}
       <span class="leaderboard">
@@ -28,7 +28,7 @@
 	<i class="flaticon-edit"></i> {% trans 'Edit' %} {% trans 'Account' %}
       </a>
       {% else %}
-      <a href="/reports/add/account/?id={{ account.id }}" class="a-nodifference">
+      <a href="/reports/add/account/?id={{ account.id }}" class="a-nodifference report">
 	<i class="flaticon-fingers"></i> {% trans 'Report' %}
       </a>
       {% endif %}
