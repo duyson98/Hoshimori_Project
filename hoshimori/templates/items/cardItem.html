@@ -20,27 +20,15 @@
             </div>
             <br>
             <div class="card-buttons">
+            <div class="control-bottons">
                 <a href="{% if current == 'card_item' and not collection %}#cardstat{{ card.id }}{% else %}{{ card.item_url }}{% endif %}"
                    data-toggle="tooltip" data-trigger="hover" title="{% trans 'Card Info' %}" data-placement="bottom"
                    data-delay="0"
                    {% if current != 'card_item' %}data-info-ajax="/ajax/cardstat/{{ card.id }}/"{% endif %}
                    {% if current == 'card_item' %}class="page-scroll"{% endif %}><i class="flaticon-about"></i></a>
                 <a href="#" class="info-loader" style="display: none;"><i class="flaticon-loading"></i></a>
+
                 {% if not card.total_owned %}
-                    {% if user.is_authenticated and user.all_accounts|length != 0 %}
-                        <form class="form-add-card {% if user.all_accounts|length == 1 %}hidden{% endif %}"
-                              method="post"
-                              action="/ajax/addcard/{{ card.id }}/">
-                            {% csrf_token %}
-                            <small>{% trans 'Add to' %}:</small>
-                        <br>
-                            <select name="account" class="account-select form-control">
-                                {% for account in user.all_accounts %}
-                                    <option value="{{ account.id }}">{{ account }}</option>
-                                {% endfor %}
-                            </select>
-                        </form>
-                    {% endif %}
                     <a href="{% if user.is_authenticated and user.all_accounts|length != 0 %}#addCard{% elif user.is_authenticated %}/accounts/add/?next={{ card.item_url }}&next_title=
                     {{ card }}{% else %}/signup/?next={{ card.item_url }}&next_title={{ card }}{% endif %}"
                        data-toggle="tooltip" data-trigger="hover" title="{% trans 'Add this card to your collection' %}"
@@ -58,16 +46,29 @@
                        title="{% trans 'Your cards' %}" data-placement="bottom" class="total-button-wrapper"><span
                             class="total-button">x{{ card.total_owned }}</span></a>
                 {% endif %}
-                {% if user.is_authenticated and all_accounts|length != 0 %}
-                    <form class="form-favorite-card hidden" action="/ajax/favoritecard/{{ card.id }}/" method="post">
-                        {% csrf_token %}
-                    </form>
-                {% endif %}
+
                 {% if user.is_staff %}
                     <a href="/cards/edit/{{ card.id }}/" data-toggle="tooltip" data-trigger="hover"
                        title="Staff - {% trans 'Edit' %} {% trans 'Card' %}" data-placement="bottom"><i
                             class="flaticon-edit"></i></a>
                 {% endif %}
+            </div>
+            {% if not card.total_owned and user.is_authenticated and user.all_accounts|length != 0 %}
+                <div class="select-account">
+                    <form class="form-add-card {% if user.all_accounts|length == 1 %}hidden{% endif %}"
+                          method="post"
+                          action="/ajax/addcard/{{ card.id }}/">
+                        {% csrf_token %}
+                        <small>{% trans 'Add to' %}:</small>
+                    <br>
+                        <select name="account" class="account-select form-control">
+                            {% for account in user.all_accounts %}
+                                <option value="{{ account.id }}">{{ account }}</option>
+                            {% endfor %}
+                        </select>
+                    </form>
+                </div>
+            {% endif %}
             </div>
         </div>
     {% endif %}

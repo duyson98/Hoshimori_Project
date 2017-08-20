@@ -9,6 +9,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.validators import MaxValueValidator
 from django.db import models
 from django.utils import timezone
+from django.db.models import Q
 from django.utils.deconstruct import deconstructible
 from django.utils.translation import ugettext_lazy as _, string_concat, get_language
 from magi.item_model import MagiModel, get_image_url_from_path, get_http_image_url_from_path
@@ -144,6 +145,28 @@ class Student(MagiModel):
     def http_image_url(self):
         return get_http_image_url_from_path(self.image)
 
+    # Images
+    mini_body = models.ImageField(_('Chibi'), upload_to=uploadItem('s'))
+
+    @property
+    def mini_body_url(self):
+        return get_image_url_from_path(self.mini_body)
+
+    @property
+    def http_mini_body(self):
+        return get_http_image_url_from_path(self.mini_body)
+
+    # Images
+    mini_icon = models.ImageField(_('Chibi Icon'), upload_to=uploadItem('s'))
+
+    @property
+    def mini_icon_url(self):
+        return get_image_url_from_path(self.mini_icon)
+
+    @property
+    def http_mini_icon_url(self):
+        return get_http_image_url_from_path(self.mini_icon)
+
     # Full body images
     full_image = models.ImageField(_('Full Body Image'), upload_to=uploadItem('s/full'), null=True)
 
@@ -208,11 +231,17 @@ class Student(MagiModel):
     # Cache totals
     _cache_totals_days = 2
     _cache_totals_last_update = models.DateTimeField(null=True)
+    _cache_total_senseis = models.PositiveIntegerField(null=True)
     _cache_total_cards = models.PositiveIntegerField(null=True)
 
     def update_cache_totals(self):
         self._cache_totals_last_update = timezone.now()
         self._cache_total_cards = Card.objects.filter(student=self).count()
+        self._cache_total_fans = User.objects.filter(
+            Q(preferences__favorite_character1=self.id)
+            | Q(preferences__favorite_character2=self.id)
+            | Q(preferences__favorite_character3=self.id)
+        ).count()
 
     def force_cache_totals(self):
         self.update_cache_totals()
@@ -976,7 +1005,7 @@ class StageDifficulty(MagiModel):
     collection_name = 'stage_dificulty'
     collection_plural_name = 'stage_dificulties'
 
-    stage = models.ForeignKey('Stage', related_name='stage_with_difficulty', null=True, on_delete=models.SET_NULL)
+    stage = models.ForeignKey('Stage', related_name='stage_with_difficulty', null=True)
 
     difficulty = models.PositiveIntegerField(_('Difficulty'), null=True, choices=DIFFICULTY_CHOICES)
 

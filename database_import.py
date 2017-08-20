@@ -70,6 +70,8 @@ def character_import_data():
                     introduction_2=row[39],
                     owner_id=1,
                     id=row[41],
+                    mini_body=row[42],
+                    mini_icon=row[43],
                 )
 
 
