@@ -485,6 +485,21 @@ h1, h2, h3, h4, h5, h6, .title, .navbar-brand, .btn-lg, .btn-xl {
             opacity: 0;
         }
     }
+    .modal-body {
+        .card-art {
+            background-image: none !important;
+            margin: 0 -15px;
+            .special-front, .front-top, .front-bottom, .front-name, .front-rarity {
+                opacity: 1;
+                transition: opacity 0.75s;
+            }
+        }
+        .card-art:hover {
+            .special-front, .front-top, .front-bottom, .front-name, .front-rarity {
+                opacity: 0;
+            }
+        }
+    }
 
     .card-buttons {
         @buttonsize: 50px;
@@ -551,22 +566,26 @@ h1, h2, h3, h4, h5, h6, .title, .navbar-brand, .btn-lg, .btn-xl {
     h2 {
         text-align: left;
     }
+}
 
-    #hp {
-        background-color: #47B33B;
-    }
+#hp {
+    background-color: #47B33B;
+}
 
-    #sp {
-        background-color: #CA45DF;
-    }
+#sp {
+    background-color: #CA45DF;
+}
 
-    #atk {
-        background-color: #D22C30;
-    }
+#atk {
+    background-color: #D22C30;
+}
 
-    #def {
-        background-color: #3884D2;
-    }
+#def {
+    background-color: #3884D2;
+}
+
+.evolved-True {
+    filter: contrast(150%);
 }
 
 //////////////////////////////////////////////////////////

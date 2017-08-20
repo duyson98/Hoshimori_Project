@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b42e218c-a55e-4bf5-9a85-f6d35961b77b" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/templates/items/customProfile.html" afterPath="$PROJECT_DIR$/hoshimori/templates/items/customProfile.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoshimori/static/less/style.less" afterPath="$PROJECT_DIR$/hoshimori/static/less/style.less" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -53,7 +53,38 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="style.less" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/hoshimori/static/less/style.less">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="375">
+              <caret line="587" column="27" lean-forward="false" selection-start-line="587" selection-start-column="27" selection-end-line="587" selection-end-column="27" />
+              <folding>
+                <element signature="e#19927#21084#0" expanded="false" />
+                <element signature="e#21183#22148#0" expanded="false" />
+                <element signature="e#28408#29486#0" expanded="false" />
+                <element signature="e#29575#31891#0" expanded="false" />
+                <element signature="e#32468#32760#0" expanded="false" />
+                <element signature="e#32784#33378#0" expanded="false" />
+                <element signature="e#33424#34116#0" expanded="false" />
+                <element signature="e#34139#34459#0" expanded="false" />
+                <element signature="e#34483#34801#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cards-stats.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hoshimori/templates/include/cards-stats.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="236">
+              <caret line="47" column="43" lean-forward="true" selection-start-line="47" selection-start-column="43" selection-end-line="47" selection-end-column="64" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -66,9 +97,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>user</find>
-      <find>blend</find>
-      <find>jump</find>
       <find>jum</find>
       <find>id</find>
       <find>id-10</find>
@@ -96,6 +124,9 @@
       <find>h4</find>
       <find>webkit</find>
       <find>report</find>
+      <find>card-art</find>
+      <find>hp</find>
+      <find>evolved</find>
     </findStrings>
     <replaceStrings>
       <replace>md-4</replace>
@@ -194,8 +225,8 @@
         <option value="$PROJECT_DIR$/hoshimori/static/js/builder.js" />
         <option value="$PROJECT_DIR$/hoshimori/templates/ajax/account_builder.html" />
         <option value="$PROJECT_DIR$/hoshimori/templates/accountsForProfile.html" />
-        <option value="$PROJECT_DIR$/hoshimori/static/less/style.less" />
         <option value="$PROJECT_DIR$/hoshimori/templates/items/customProfile.html" />
+        <option value="$PROJECT_DIR$/hoshimori/static/less/style.less" />
       </list>
     </option>
   </component>
@@ -283,28 +314,6 @@
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
             <PATH_ELEMENT USER_OBJECT="templates">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="Hoshimori-Project">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="hoshimori">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="templates">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="items">
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
@@ -432,7 +441,7 @@
     <property name="nodejs_interpreter_path" value="D:/Program Files/nodejs/node" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="two.files.diff.last.used.folder" value="$PROJECT_DIR$/../hoshimori_project_bak_3/hoshimori" />
-    <property name="SearchEverywhereHistoryKey" value="builder&#9;FILE&#9;file://C:/Users/kokon/PycharmProjects/Hoshimori-Project/hoshimori/templates/ajax/account_builder.html&#10;buil&#9;FILE&#9;file://C:/Users/kokon/PycharmProjects/Hoshimori-Project/hoshimori/static/js/builder.js&#10;custom&#9;FILE&#9;file://C:/Users/kokon/PycharmProjects/Hoshimori-Project/hoshimori/templates/items/customProfile.html&#10;main.js&#9;FILE&#9;file://C:/Users/kokon/PycharmProjects/Hoshimori-Project/hoshimori/static/js/main.js&#10;style&#9;FILE&#9;file://C:/Users/kokon/PycharmProjects/Hoshimori-Project/hoshimori/static/less/style.less&#10;redire&#9;FILE&#9;file://C:/Users/kokon/PycharmProjects/Hoshimori-Project/hoshimori/static/js/redirectEnter.js&#10;mod_acc&#9;FILE&#9;file://C:/Users/kokon/PycharmProjects/Hoshimori-Project/hoshimori/static/js/mod_account.js&#10;less&#9;FILE&#9;file://C:/Users/kokon/PycharmProjects/Hoshimori-Project/hoshimori/static/less/style.less&#10;signup.h&#9;FILE&#9;file://C:/Users/kokon/PycharmProjects/Hoshimori-Project/virtual_env/Lib/site-packages/magi/templates/pages/signup.html" />
+    <property name="SearchEverywhereHistoryKey" value="style&#9;FILE&#9;file://C:/Users/kokon/PycharmProjects/Hoshimori-Project/hoshimori/static/less/style.less&#10;builder&#9;FILE&#9;file://C:/Users/kokon/PycharmProjects/Hoshimori-Project/hoshimori/templates/ajax/account_builder.html&#10;buil&#9;FILE&#9;file://C:/Users/kokon/PycharmProjects/Hoshimori-Project/hoshimori/static/js/builder.js&#10;custom&#9;FILE&#9;file://C:/Users/kokon/PycharmProjects/Hoshimori-Project/hoshimori/templates/items/customProfile.html&#10;main.js&#9;FILE&#9;file://C:/Users/kokon/PycharmProjects/Hoshimori-Project/hoshimori/static/js/main.js&#10;redire&#9;FILE&#9;file://C:/Users/kokon/PycharmProjects/Hoshimori-Project/hoshimori/static/js/redirectEnter.js&#10;mod_acc&#9;FILE&#9;file://C:/Users/kokon/PycharmProjects/Hoshimori-Project/hoshimori/static/js/mod_account.js&#10;less&#9;FILE&#9;file://C:/Users/kokon/PycharmProjects/Hoshimori-Project/hoshimori/static/less/style.less&#10;signup.h&#9;FILE&#9;file://C:/Users/kokon/PycharmProjects/Hoshimori-Project/virtual_env/Lib/site-packages/magi/templates/pages/signup.html" />
     <property name="jsx.switch.disabled" value="true" />
     <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
     <property name="run.code.analysis.last.selected.profile" value="aDefault" />
@@ -884,7 +893,14 @@
       <option name="project" value="LOCAL" />
       <updated>1503230565505</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Minor fix">
+      <created>1503230721580</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1503230721580</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TodoView">
@@ -906,7 +922,7 @@
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3219107" sideWeight="0.45682302" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32917964" sideWeight="0.4978678" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32502595" sideWeight="0.48667377" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30916846" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30916846" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2489339" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3281412" sideWeight="0.48773986" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -988,7 +1004,9 @@
     <MESSAGE value="Another large update. Brush up UI, deck builder finalized. Chagne stage and stage difficulty models. Update database." />
     <MESSAGE value="Minor changes, reformat CSS, edit some background files" />
     <MESSAGE value="More minor CSS changes, add advanced account form, add exclusion filter in deck builder, add custom profile template" />
-    <option name="LAST_COMMIT_MESSAGE" value="More minor CSS changes, add advanced account form, add exclusion filter in deck builder, add custom profile template" />
+    <MESSAGE value="Minor fix" />
+    <MESSAGE value="Even more minor fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Even more minor fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1260,14 +1278,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hoshimori/templates/include/cards-stats.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="45" column="38" lean-forward="false" selection-start-line="45" selection-start-column="38" selection-end-line="45" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/hoshimori/management/commands/generate_settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -1428,22 +1438,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hoshimori/static/less/style.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="162" column="240" lean-forward="false" selection-start-line="162" selection-start-column="240" selection-end-line="162" selection-end-column="240" />
-          <folding>
-            <marker date="1503230411313" expanded="false" signature="27948:29026" ph="{...}" />
-            <marker date="1503230411313" expanded="false" signature="29115:31431" ph="{...}" />
-            <marker date="1503230411313" expanded="false" signature="32008:32300" ph="{...}" />
-            <marker date="1503230411313" expanded="false" signature="32324:32918" ph="{...}" />
-            <marker date="1503230411313" expanded="false" signature="32964:33656" ph="{...}" />
-            <marker date="1503230411313" expanded="false" signature="33679:33999" ph="{...}" />
-            <marker date="1503230411313" expanded="false" signature="34023:34341" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/hoshimori/static/js/builder.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="118">
@@ -1457,6 +1451,32 @@
         <state relative-caret-position="270">
           <caret line="40" column="19" lean-forward="true" selection-start-line="40" selection-start-column="19" selection-end-line="40" selection-end-column="19" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hoshimori/templates/include/cards-stats.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="236">
+          <caret line="47" column="43" lean-forward="true" selection-start-line="47" selection-start-column="43" selection-end-line="47" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hoshimori/static/less/style.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="587" column="27" lean-forward="false" selection-start-line="587" selection-start-column="27" selection-end-line="587" selection-end-column="27" />
+          <folding>
+            <element signature="e#19927#21084#0" expanded="false" />
+            <element signature="e#21183#22148#0" expanded="false" />
+            <element signature="e#28408#29486#0" expanded="false" />
+            <element signature="e#29575#31891#0" expanded="false" />
+            <element signature="e#32468#32760#0" expanded="false" />
+            <element signature="e#32784#33378#0" expanded="false" />
+            <element signature="e#33424#34116#0" expanded="false" />
+            <element signature="e#34139#34459#0" expanded="false" />
+            <element signature="e#34483#34801#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
