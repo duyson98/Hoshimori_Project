@@ -2,7 +2,7 @@
 {% load magi_tags %}
 {% with account=item %}
 <br>
-<div class="well hvr-sweep-to-left banner-{% if account.owner.preferences.favorite_character1 %}{{ account.owner.preferences.favorite_character1 }}{% else %}0{% endif %}">
+<div class="well banner-{% if account.owner.preferences.favorite_character1 %}{{ account.owner.preferences.favorite_character1 }}{% else %}0{% endif %}">
   <a href="{{ account.owner.item_url }}">
     <div class="row">
       <div class="col-md-2">{% include 'include/avatar.html' with av_user=account.owner av_size=30 av_image_size=100 %}</div>

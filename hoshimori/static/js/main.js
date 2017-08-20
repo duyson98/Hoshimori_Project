@@ -136,29 +136,3 @@ function hoverReloadOwnedCardsAfterModal(on_profile) {
         })
     }
 }
-
-$(document).ready(function(){
-    var color = getComputedStyle(document.getElementById("profile-header-banner"), null).getPropertyValue("background-color");
-
-    var colorList = ["rgb(169, 169, 169)","rgb(240, 128, 128)","rgb(50, 205, 50)","rgb(175, 238, 238)","rgb(255, 196, 35)",
-        "rgb(255, 150, 35)","rgb(173, 255, 47)","rgb(219, 112, 147)","rgb(218, 112, 214)","rgb(100, 149, 237)","rgb(222, 184, 135)",
-        "rgb(248, 255, 42)","rgb(221, 160, 221)","rgb(255, 248, 220)","rgb(224, 255, 255)","rgb(255, 192, 203)","rgb(60, 179, 113)",
-        "rgb(238, 232, 170)","rgb(95, 158, 160)","rgb(178, 34, 34)","rgb(245, 245, 245)","rgb(65, 105, 225)","rgb(205, 92, 92)","rgb(100, 149, 237)"];
-    for (var i = 0; i < colorList.length; i++) {
-        if (color === colorList[i]) {
-            if (i === 20)
-                i = 101;
-            else if (i === 21)
-                i = 102;
-            else if (i === 22)
-                i = 103;
-            else if (i === 23)
-                i = 104;
-            $(".current-user_item div#profile.jumbotron.jumbotron-main").addClass("banner-"+i);
-            $(".current-user_item a.btn.btn-lg.btn-main").css({"background-color": color, "border-color": "black"});
-            $(".current-user_item a.btn.btn-main").css({"background-color": color, "border-color": "black"});
-            $(".current-user_item div.profile-tabs td").css({"background-color": color, "border-color": "black"});
-            break;
-        }
-    }
-});

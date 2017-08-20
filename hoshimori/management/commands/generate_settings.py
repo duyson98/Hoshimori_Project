@@ -13,7 +13,7 @@ def generate_settings():
     favorite_characters = [(
         student.pk,
         student.name,
-        student.image_url,
+        student.mini_icon_url,
     ) for student in all_students]
 
     print 'Get max stats'
