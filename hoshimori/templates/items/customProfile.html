@@ -37,7 +37,7 @@
 	    <div class="description to-markdown">{% if profile_user.preferences.description %}{{ profile_user.preferences.description }}{% endif %}</div>
 	    {% if not is_me %}
 	    {% if 'report' in all_enabled and reportable %}
-	    <a href="{{ profile_user.report_url }}" target="_blank" class="btn btn-link btn-sm report"><i class="flaticon-fingers"></i> {{ profile_user.report_sentence }}</a>
+	    <a href="{{ profile_user.report_url }}" target="_blank" class="btn btn-link btn-sm"><i class="flaticon-fingers"></i> {{ profile_user.report_sentence }}</a>
 	    {% endif %}
 	    {% if user.is_superuser %}
 	    <a href="{{ profile_user.edit_url }}" class="btn btn-link btn-sm staff-only"><i class="flaticon-edit"></i> {{ profile_user.edit_sentence }}</a><br>
