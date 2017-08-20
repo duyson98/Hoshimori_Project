@@ -355,34 +355,34 @@ html {
     }
     @keyframes wrapper {
         0% {
-            background-position: 0px 0px, 0px 0px, 0px 0px;
+            background-position: 0 0, 0 0, 0 0;
         }
         100% {
-            background-position: 0px -1000px, 0px -500px, 0px -300px;
+            background-position: 0 -1000px, 0 -500px, 0 -300px;
         }
     }
     @-moz-keyframes wrapper {
         0% {
-            background-position: 0px 0px, 0px 0px, 0px 0px;
+            background-position: 0 0, 0 0, 0 0;
         }
         100% {
-            background-position: 0px -1000px, 0px -500px, 0px -300px;
+            background-position: 0 -1000px, 0 -500px, 0 -300px;
         }
     }
     @-webkit-keyframes wrapper {
         0% {
-            background-position: 0px 0px, 0px 0px, 0px 0px;
+            background-position: 0 0, 0 0, 0 0;
         }
         100% {
-            background-position: 0px -1000px, 0px -500px, 0px -300px;
+            background-position: 0 -1000px, 0 -500px, 0 -300px;
         }
     }
     @-ms-keyframes wrapper {
         0% {
-            background-position: 0px 0px, 0px 0px, 0px 0px;
+            background-position: 0 0, 0 0, 0 0;
         }
         100% {
-            background-position: 0px -1000px, 0px -500px, 0px -300px;
+            background-position: 0 -1000px, 0 -500px, 0 -300px;
         }
     }
 }
@@ -514,9 +514,9 @@ h1, h2, h3, h4, h5, h6, .title, .navbar-brand, .btn-lg, .btn-xl {
     }
 }
 
-.student-info, .modal-content.student-info {
+.student-info, .student-info {
     .btn-group .btn {
-        margin: 45px 0px;
+        margin: 45px 0;
     }
     .about-table {
         margin: auto;
@@ -529,14 +529,14 @@ h1, h2, h3, h4, h5, h6, .title, .navbar-brand, .btn-lg, .btn-xl {
         color: white;
         text-shadow: 0 0 3px #000000;
     }
-    .CV {
-        color: @mainColor;
+    .all-cards, .CV {
+        color: @secondaryColor !important;
     }
 }
 
 // Card list page
 
-.current-card_list {
+.current-card_list, .current-ownedcard_list, .current-user_item {
     .collection-page-wrapper {
         max-width: 1170px;
         margin: auto;
@@ -660,7 +660,7 @@ h1, h2, h3, h4, h5, h6, .title, .navbar-brand, .btn-lg, .btn-xl {
         line-height: 1.3333333;
         border-radius: 6px;
     }
-    .btn {
+    .card-basic-info .btn {
         color: white;
         text-shadow: 0 0 3px #000000;
     }
@@ -723,10 +723,11 @@ h1, h2, h3, h4, h5, h6, .title, .navbar-brand, .btn-lg, .btn-xl {
     width: auto;
     .cuteform-elt {
         text-shadow: 0 0 3px #000000;
-        font-size: smaller;
         border: 0;
         padding: 0;
         margin: 0;
+        text-align: center;
+        word-wrap: break-word;
     }
 }
 
@@ -1174,10 +1175,6 @@ div.tab button.active {
             color: @darkColor;
         }
     }
-
-    div.col-xs-2 {
-        margin-right: 25px;
-    }
 }
 
 .profile-account {
@@ -1225,7 +1222,7 @@ div.tab button.active {
 // Filter cute form
 
 .current-student_list {
-    #id_i_star_sign + .cuteform {
+    #id_i_school_year + .cuteform, #id_i_star_sign + .cuteform {
         .cuteform-elt:not([data-cuteform-val=""]) {
             background-color: fade(white, 80%);
             border-radius: 8px;
@@ -1236,6 +1233,11 @@ div.tab button.active {
             }
         }
     }
+
+    #id_i_school_year + .cuteform .cuteform-elt:not([data-cuteform-val=""]) {
+        width: 35px;
+    }
+
     .modal-body {
         img.cuteform-elt:not(:first-child) {
             width: 100px;
@@ -1244,7 +1246,7 @@ div.tab button.active {
     }
 }
 
-.current-card_list {
+.current-card_list, .current-ownedcard_list {
     #id_i_rarity + .cuteform {
         .cuteform-elt:not([data-cuteform-val=""]) {
             border-radius: 8px;
@@ -1266,8 +1268,8 @@ div.tab button.active {
     }
     .modal-body {
         img.cuteform-elt:not(:first-child) {
-            width: 201px;
-            height: 320px;
+            width: 140px;
+            height: 160px;
             border-radius: 0;
         }
     }
@@ -1299,6 +1301,14 @@ div.tab button.active {
             }
         }
     }
+}
+
+// Owned card and deck builder
+
+.ownedcard img {
+    display: block;
+    margin: auto;
+    padding: 5px 0 5px 0;
 }
 
 .builder-content-container, .card-pool {

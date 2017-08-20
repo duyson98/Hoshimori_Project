@@ -16,7 +16,7 @@
         <table class="table about-table a-main">
             {% if student.introduction_1 and student.introduction_2 %}
                 <tr>
-                    <td><i class="flaticon-comments"></i></td>
+                    <td><img src="{{ student.mini_body_url }}"></td>
                     <th>{% trans 'Introductions' %}</th>
                     <td>
                         {% if student.introduction_1 %}
@@ -46,7 +46,7 @@
                     <td>
                         {{ student.cached_total_cards }}
                         {% trans 'Cards' %}<br>
-                        <a href="/cards/?student={{ student.id }}" target="_blank">
+                        <a class="all-cards" href="/cards/?student={{ student.id }}" target="_blank">
                             {% trans 'View all' %}
                             <i class="flaticon-link fontx0-8"></i>
                         </a>
@@ -123,7 +123,7 @@
             {% endif %}
             {% if student.phrase_1 or student.phrase_1 %}
                 <tr>
-                    <td><i class="flaticon-comments"></i></td>
+                    <td><img src="{{ student.mini_icon_url }}"></td>
                     <th>{% trans 'Catch phrases' %}</th>
                     <td>
                         {% if student.phrase_1 %}
@@ -234,7 +234,12 @@
                     <td><i class="flaticon-profile"></i></td>
                     <th>{% trans 'CV' %}</th>
                     <td>
-                        {% if student.romaji_CV %}<a class="CV" href="https://en.wikipedia.org/wiki/{{ student.CV_western_name }}">{{ student.romaji_CV }}</a><br>{% endif %}
+                        {% if student.romaji_CV %}
+                            <a class="CV"
+                               href="https://en.wikipedia.org/wiki/{{ student.CV_western_name }}">
+                                {{ student.romaji_CV }}
+                            <i class="flaticon-link fontx0-8"></i>
+                            </a><br>{% endif %}
                         {{ student.CV }}
                     </td>
                 </tr>

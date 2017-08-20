@@ -173,12 +173,28 @@ class AccountCollection(_AccountCollection):
         distinct = True
         default_ordering = '-id'
         filter_form = forms.AccountFilterForm
+        js_files = getattr(_AccountCollection.ListView, 'js_files', []) + ['redirectEnter']
 
         filter_cuteform = {
+            'favorite_student': {
+                'image_folder': 'puchitto',
+                'extra_settings': {
+                    'modal': 'true',
+                },
+            },
             'i_os': {
                 'image_folder': 'os_logos'
             },
         }
+
+        def extra_context(self, context):
+            request = context['request']
+            context['favorite_characters'] = getattr(django_settings, 'FAVORITE_CHARACTERS', [])
+            if 'favorite_character' in request.GET and request.GET['favorite_character']:
+                context['favorite_character'] = Student.objects.get(id=request.GET['favorite_character'])
+            if 'own_card' in request.GET and request.GET['own_card']:
+                context['own_card'] = Card.objects.get(id=request.GET['own_card'])
+            return context
 
         def get_queryset(self, queryset, parameters, request):
             if 'own_card' in parameters and parameters['own_card']:
@@ -205,14 +221,9 @@ class StudentCollection(MagiCollection):
     icon = 'idolized'
 
     filter_cuteform = {
-        # 'i_school_year': {
-        #     'image_folder': 'i_school_year',
-        #     'to_cuteform': 'value',
-        #     'extra_settings': {
-        #         'modal': 'true',
-        #         'modal-text': 'true',
-        #     },
-        # },
+        'i_school_year': {
+            'image_folder': 'i_school_year',
+        },
         'i_blood_type': {
             'type': CuteFormType.HTML,
         },
@@ -271,14 +282,12 @@ class CardCollection(MagiCollection):
     reportable = False
 
     filter_cuteform = {
-        # 'student': {
-        #     'image_folder': 'thumb_students',
-        #     'to_cuteform': 'value',
-        #     'extra_settings': {
-        #         'modal': 'true',
-        #         'modal-text': 'true',
-        #     },
-        # },
+        'student': {
+            'image_folder': 'puchitto',
+            'extra_settings': {
+                'modal': 'true',
+            },
+        },
         'subcard_effect': {
             'image_folder': 'subcard_effect',
         },
@@ -319,7 +328,7 @@ class CardCollection(MagiCollection):
         per_line = 3
         col_break = 'lg'
         ajax_pagination_callback = 'updateCards'
-        js_files = ['cards']
+        js_files = ['cards', 'redirectEnter']
         no_result_template = 'empty_query'
         show_edit_button = False
 
@@ -366,14 +375,12 @@ class OwnedCardCollection(MagiCollection):
     navbar_link = False
 
     filter_cuteform = {
-        # 'student': {
-        #     'image_folder': 'thumb_students',
-        #     'to_cuteform': 'value',
-        #     'extra_settings': {
-        #         'modal': 'true',
-        #         'modal-text': 'true',
-        #     },
-        # },
+        'student': {
+            'image_folder': 'puchitto',
+            'extra_settings': {
+                'modal': 'true',
+            },
+        },
         'subcard_effect': {
             'image_folder': 'subcard_effect',
         },
@@ -396,7 +403,7 @@ class OwnedCardCollection(MagiCollection):
         page_size = 40
         col_break = 'xs'
         filter_form = forms.OwnedCardFilterForm
-        js_files = ['ownedcards']
+        js_files = ['ownedcards', 'redirectEnter']
         ajax_pagination_callback = 'updateOwnedCards'
         no_result_template = 'owned_empty_query'
         show_edit_button = False

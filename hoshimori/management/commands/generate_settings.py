@@ -9,7 +9,7 @@ from hoshimori.model_choices import *
 
 def generate_settings():
     print 'Get the characters'
-    all_students = models.Student.objects.all().order_by('name')
+    all_students = models.Student.objects.all().order_by('id')
     favorite_characters = [(
         student.pk,
         student.name,
